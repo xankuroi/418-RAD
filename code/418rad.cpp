@@ -1,7 +1,10 @@
 #include <iostream>
 #include <fstream>
+
 #include <string>
 #include <vector>
+#include <bitset>
+
 #include <cstdlib>
 
 #include "bsp.h"
@@ -10,7 +13,7 @@ static BSP::BSP g_bsp;
 
 
 int main(int argc, char** argv) {
-    if (argc != 2) {
+    if (argc < 2) {
         std::cerr << "Invalid arguments." << std::endl;
         return 1;
     }
@@ -26,39 +29,22 @@ int main(int argc, char** argv) {
         return 1;
     }
     
-    int i = 0;
-    for (const BSP::LightSample& sample : g_bsp.get_lightsamples()) {
-        std::cout << "Sample " << i << ": ("
-            << static_cast<int>(sample.r) << ", "
-            << static_cast<int>(sample.g) << ", "
-            << static_cast<int>(sample.b) << ") * 2^"
-            << static_cast<int>(sample.exp) << std::endl;
-            
-        i++;
-    }
-    
-    i = 0;
-    for (const BSP::Face& face : g_bsp.get_faces()) {
-        std::cout << "Face " << i << ":" << std::endl;
+    for (BSP::Face& face : g_bsp.get_faces()) {
+        face.set_average_lighting(BSP::LightSample {255, 0, 0, 0});
         
-        for (const BSP::Edge& edge : face.get_edges()) {
-            const BSP::Vec3& vertex1 = edge.vertex1;
-            const BSP::Vec3& vertex2 = edge.vertex2;
-            
-            std::cout << "    ("
-                << vertex1.x << ", "
-                << vertex1.y << ", "
-                << vertex1.z << ") -> ("
-                << vertex2.x << ", "
-                << vertex2.y << ", "
-                << vertex2.z << ")"
-                << std::endl;
+        for (BSP::LightSample& lightSample : face.get_lightsamples()) {
+            lightSample.r = 255;
+            lightSample.g = 0;
+            lightSample.b = 0;
+            lightSample.exp = 0;
         }
-        
-        i++;
     }
     
-    // g_bsp.print_lump_offsets();
+    g_bsp.set_fullbright(false);
+    
+    g_bsp.write("out.bsp");
+    
+    std::cout << "Wrote to file \"out.bsp\"." << std::endl;
     
     return 0;
 }

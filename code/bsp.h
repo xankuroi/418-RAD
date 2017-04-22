@@ -4,10 +4,12 @@
 #include <cstdint>
 #include <cstdlib>
 
+#include <string>
+
 #include <vector>
 #include <unordered_set>
 #include <unordered_map>
-#include <string>
+
 #include <fstream>
 
 namespace BSP {
@@ -142,11 +144,42 @@ namespace BSP {
         int32_t lightOffset;
         float area;
         int32_t lightmapTextureMinsInLuxels[2];
-        int32_t lightmapTexturesSizeInLuxels[2];
+        int32_t lightmapTextureSizeInLuxels[2];
         int32_t origFace;
         uint16_t numPrims;
         uint16_t firstPrimID;
         uint32_t smoothingGroups;
+    };
+    
+    enum EmitType {
+        EMIT_SURFACE,
+        EMIT_POINT,
+        EMIT_SPOTLIGHT,
+        EMIT_SKYLIGHT,
+        EMIT_QUAKELIGHT,
+        EMIT_SKYAMBIENT,
+    };
+    
+    static_assert(EMIT_SURFACE == 0, "EmitType miscount!");
+    static_assert(EMIT_SKYAMBIENT == 5, "EmitType miscount!");
+    
+    struct DWorldLight {
+        Vec3 origin;
+        Vec3 intensity;
+        Vec3 normal;
+        int32_t cluster;
+        EmitType type;
+        int32_t style;
+        float stopdot;
+        float stopdot2;
+        float exponent;
+        float radius;
+        float constantAtten;
+        float linearAtten;
+        float quadraticAtten;
+        int32_t flags;
+        int32_t texinfo;
+        int32_t owner;
     };
     
     struct LightSample {
@@ -170,21 +203,67 @@ namespace BSP {
     
     class BSP;
     
+    class Light {
+        private:
+            Vec3 m_coords;
+            
+        public:
+            double r;
+            double g;
+            double b;
+            double brightness;
+            
+            Light(const std::unordered_map<std::string, std::string>& entity);
+            
+            const Vec3& get_coords(void) const;
+    };
+    
     class Face {
         private:
             DFace m_faceData;
             DPlane m_planeData;
             
             std::vector<Edge> m_edges;
+            std::vector<LightSample> m_lightSamples;
+            
+            LightSample m_avgLightSample;
+            
+            void load_edges(
+                const DFace& faceData,
+                const std::vector<Vec3>& vertices,
+                const std::vector<DEdge>& dEdges,
+                const std::vector<int32_t>& surfEdges
+            );
+            void load_lightsamples(const std::vector<LightSample>& samples);
             
         public:
-            Face(const BSP& bsp, const DFace& faceData);
+            Face(
+                const BSP& bsp,
+                const DFace& faceData,
+                const std::vector<LightSample>& lightSamples
+            );
             
+            const DFace& get_data(void) const;
             const std::vector<Edge>& get_edges(void) const;
+            const std::vector<uint8_t> get_styles(void) const;
+            
+            int32_t get_lightmap_width(void) const;
+            int32_t get_lightmap_height(void) const;
+            
+            std::vector<LightSample>& get_lightsamples(void);
+            
+            LightSample get_average_lighting(void) const;
+            void set_average_lighting(const LightSample& sample);
+            
+            void set_lightlump_offset(int32_t offset);
     };
     
     class BSP {
-        friend Face::Face(const BSP&, const DFace&);
+        friend Face::Face(
+            const BSP&,
+            const DFace&,
+            const std::vector<LightSample>&
+        );
         
         private:
             Header m_header;
@@ -194,40 +273,83 @@ namespace BSP {
             std::vector<int32_t> m_surfEdges;
             std::vector<DPlane> m_planes;
             std::vector<Face> m_faces;
-            std::vector<LightSample> m_lightSamples;
-            std::vector<LightSample> m_hdrLightSamples;
             
-            std::unordered_map<int, std::vector<uint8_t>> m_extra;
+            std::string m_entData;
+            std::vector<Light> m_lights;
+            
+            std::unordered_map<int, std::vector<uint8_t>> m_extras;
             
             std::unordered_set<int> m_loadedLumps;
             
+            bool m_fullbright;
+            
             void init(std::ifstream& file);
             
-            template<typename T>
+            template<typename Container>
             void load_lump(
                 std::ifstream& file,
                 const LumpType lumpID,
-                std::vector<T>& dest
+                Container& dest
             );
             
+            void load_lights(const std::string& entData);
             void load_extras(std::ifstream& file);
+            
+            template<typename Container>
+            void save_lump(
+                std::ofstream& file,
+                const LumpType lumpID,
+                Container& src,
+                std::unordered_map<int, std::ofstream::off_type>& offsets,
+                std::unordered_map<int, size_t>& sizes
+            );
+            
+            void save_faces(
+                std::ofstream& file,
+                std::unordered_map<int, std::ofstream::off_type>& offsets,
+                std::unordered_map<int, size_t>& sizes
+            );
+            
+            void save_extras(
+                std::ofstream& file, 
+                std::unordered_map<int, std::ofstream::off_type>& offsets,
+                std::unordered_map<int, size_t>& sizes
+            );
             
         public:
             BSP();
             BSP(const std::string& filename);
             BSP(std::ifstream& file);
             
-            const std::vector<Face>& get_faces(void) const;
+            int get_format_version(void) const;
             
-            std::vector<LightSample>& get_lightsamples(void);
-            std::vector<LightSample>& get_hdr_lightsamples(void);
+            std::vector<Face>& get_faces(void);
+            const std::vector<Light>& get_lights(void);
             
-            void print_lump_offsets(void);
+            const std::unordered_map<int, std::vector<uint8_t>>&
+            get_extras(void) const;
+            
+            bool is_fullbright(void) const;
+            void set_fullbright(bool fullbright);
+            
+            void write(const std::string& filename);
+            void write(std::ofstream& file);
     };
     
     class InvalidBSP : public std::runtime_error {
         public:
             InvalidBSP(const std::string& what) : std::runtime_error(what) {}
+    };
+    
+    class EntityParser {
+        private:
+            int m_index;
+            std::string m_entData;
+            
+        public:
+            EntityParser(const std::string& entData);
+            
+            std::unordered_map<std::string, std::string> next_ent(void);
     };
 }
 
