@@ -20,8 +20,8 @@ examinebsp: examinebsp.o bsp.o
 	g++ examinebsp.o bsp.o -Wall -Wextra -Wfatal-errors -std=c++11 -o examinebsp -g
 
 clean:
-	-rm *.o
-	-rm *.exe
-	-rm 418RAD
-	-rm comparelumps
-	-rm examinebsp
+	-rm -f *.o
+	-rm -f *.exe
+	-rm -f 418RAD
+	-rm -f comparelumps
+	-rm -f examinebsp
