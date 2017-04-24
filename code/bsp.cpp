@@ -118,8 +118,6 @@ namespace BSP {
         file.seekg(offset);
         file.read(reinterpret_cast<char*>(dest.data()), lumpSize);
         
-        // std::cout << "Loaded " << lumpSize << " bytes from lump " << lumpID << std::endl;
-        
         m_loadedLumps.insert(lumpID);
     }
     
@@ -154,8 +152,6 @@ namespace BSP {
                 continue;
             }
             
-            // std::cout << "Loading extra lump " << lumpID << std::endl;
-            
             m_extraLumps[lumpID] = std::unique_ptr<std::vector<uint8_t>>(
                 new std::vector<uint8_t>
             );
@@ -165,18 +161,6 @@ namespace BSP {
                 static_cast<LumpType>(lumpID),
                 *m_extraLumps[lumpID]
             );
-            
-            // std::ifstream::off_type offset = lump.fileOffset;
-            // size_t lumpSize = lump.fileLen;
-            
-            // m_extraLumps[lumpID] = std::vector<uint8_t>(lumpSize);
-            // std::vector<uint8_t>& extraBuffer = m_extraLumps[lumpID];
-            
-            // file.seekg(offset);
-            // file.read(
-                // reinterpret_cast<char*>(extraBuffer.data()),
-                // lumpSize
-            // );
         }
     }
     
@@ -322,11 +306,6 @@ namespace BSP {
             offsets, sizes
         );
         
-        // save_lump(
-            // file, LUMP_WORLDLIGHTS_HDR, m_worldLights,
-            // offsets, sizes
-        // );
-        
         if (!is_fullbright()) {
             save_lights(file, offsets, sizes);
             
@@ -409,8 +388,6 @@ namespace BSP {
         
         file.write(reinterpret_cast<const char*>(src.data()), size);
         
-        // std::cout << "Saved " << size << " bytes to lump " << lumpID << std::endl;
-        
         // TODO: Remove this. (Or do we need to remove it...?)
         if (!isExtraLump) {
             m_extraLumps.erase(lumpID);
@@ -432,7 +409,6 @@ namespace BSP {
                 
                 face.set_lightlump_offset(lightSamples.size());
                 
-                // std::cout << face.get_lightsamples().size() << std::endl;
                 for (LightSample& lightSample : face.get_lightsamples()) {
                     lightSamples.push_back(lightSample);
                 }
@@ -492,9 +468,6 @@ namespace BSP {
             std::unique_ptr<std::vector<uint8_t>>
         >;
         
-        // std::cout << "Saving " << m_extraLumps.size() << " extra lumps..."
-            // << std::endl;
-            
         for (const Pair& pair : m_extraLumps) {
             LumpType lumpID = static_cast<LumpType>(pair.first);
             const std::unique_ptr<std::vector<uint8_t>>& pData = pair.second;
@@ -731,25 +704,16 @@ namespace BSP {
             return;
         }
         
+        assert(samples.size() > 1);
         assert(samples.size() >= numSamples + 1);
         assert(samples.size() - sampleOffset >= numSamples);
         
         std::vector<LightSample>::const_iterator lightSampleStart
-            = samples.begin() + sampleOffset - 1;
+            = samples.begin() + sampleOffset;
             
-        assert(samples.size() > 1);
-        
-        LightSample avgLighting = samples.at(sampleOffset - 1);
-        
-        set_average_lighting(avgLighting);
-        
-        lightSampleStart++;
+        set_average_lighting(lightSampleStart[-1]);
         
         m_lightSamples.assign(lightSampleStart, lightSampleStart + numSamples);
-        
-        // for (size_t i=sampleOffset; i<sampleOffset+numSamples; i++) {
-            // m_lightSamples.push_back(samples.at(i));
-        // }
         
         assert(m_lightSamples.size() == numSamples);
     }

@@ -50,13 +50,17 @@ int main(int argc, char** argv) {
         
         int i = 0;
         for (BSP::LightSample& lightSample : face.get_lightsamples()) {
-            uint8_t r = random_color();
-            uint8_t g = random_color();
-            uint8_t b = random_color();
+            // uint8_t r = random_color();
+            // uint8_t g = random_color();
+            // uint8_t b = random_color();
             
             // uint8_t r = 255 * (i % 2);
             // uint8_t g = 255 * (i % 2);
             // uint8_t b = 255 * (i % 2);
+            
+            uint8_t r = 1;
+            uint8_t g = 1;
+            uint8_t b = 1;
             
             sumR += r;
             sumG += g;

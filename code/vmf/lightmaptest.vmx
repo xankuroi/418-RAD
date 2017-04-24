@@ -2,7 +2,7 @@ versioninfo
 {
 	"editorversion" "400"
 	"editorbuild" "6412"
-	"mapversion" "26"
+	"mapversion" "32"
 	"formatversion" "100"
 	"prefab" "0"
 }
@@ -26,7 +26,7 @@ viewsettings
 world
 {
 	"id" "1"
-	"mapversion" "26"
+	"mapversion" "32"
 	"classname" "worldspawn"
 	"detailmaterial" "detail/detailsprites"
 	"detailvbsp" "detail.vbsp"
@@ -527,7 +527,7 @@ entity
 			"uaxis" "[0 -1 0 -256] 0.25"
 			"vaxis" "[0 0 -1 256] 0.25"
 			"rotation" "0"
-			"lightmapscale" "16"
+			"lightmapscale" "1"
 			"smoothing_groups" "0"
 		}
 		side
@@ -582,7 +582,7 @@ entity
 {
 	"id" "38"
 	"classname" "light"
-	"_light" "255 0 0 100"
+	"_light" "255 0 0 1000"
 	"_lightHDR" "-1 -1 -1 1"
 	"_lightscaleHDR" "1"
 	"_quadratic_attn" "1"
@@ -599,7 +599,7 @@ entity
 {
 	"id" "48"
 	"classname" "light"
-	"_light" "0 0 255 100"
+	"_light" "0 0 255 1000"
 	"_lightHDR" "-1 -1 -1 1"
 	"_lightscaleHDR" "1"
 	"_quadratic_attn" "1"
@@ -649,7 +649,7 @@ entity
 			"uaxis" "[0 1 0 -256] 0.25"
 			"vaxis" "[0 0 -1 256] 0.25"
 			"rotation" "0"
-			"lightmapscale" "16"
+			"lightmapscale" "1"
 			"smoothing_groups" "0"
 		}
 		side
@@ -734,30 +734,13 @@ entity
 		"logicalpos" "[0 0]"
 	}
 }
-entity
-{
-	"id" "307"
-	"classname" "light"
-	"_light" "0 127 255 255"
-	"_lightHDR" "-1 -1 -1 1"
-	"_lightscaleHDR" "1"
-	"_quadratic_attn" "1"
-	"origin" "512 512 256"
-	editor
-	{
-		"color" "220 30 220"
-		"visgroupshown" "1"
-		"visgroupautoshown" "1"
-		"logicalpos" "[0 4000]"
-	}
-}
 cameras
 {
 	"activecamera" "0"
 	camera
 	{
-		"position" "[552.78 479.759 295.928]"
-		"look" "[176.687 819.218 -330.468]"
+		"position" "[510.424 146.737 373.108]"
+		"look" "[513.778 860.924 0.311249]"
 	}
 }
 cordon
