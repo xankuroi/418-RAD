@@ -85,17 +85,17 @@ int main(int argc, char** argv) {
             << static_cast<int>(avgLighting.b) << ") * 2^"
             << static_cast<int>(avgLighting.exp) << std::endl;
             
-        std::cout << "    Light Samples:" << std::endl;
+        // std::cout << "    Light Samples:" << std::endl;
         
-        j = 0;
-        for (BSP::LightSample& lightSample : face.get_lightsamples()) {
-            std::cout << "        Sample " << j << ": ("
-                << static_cast<int>(lightSample.r) << ", "
-                << static_cast<int>(lightSample.g) << ", "
-                << static_cast<int>(lightSample.b) << ") * 2^"
-                << static_cast<int>(lightSample.exp) << std::endl;
-            j++;
-        }
+        // j = 0;
+        // for (BSP::LightSample& lightSample : face.get_lightsamples()) {
+            // std::cout << "        Sample " << j << ": ("
+                // << static_cast<int>(lightSample.r) << ", "
+                // << static_cast<int>(lightSample.g) << ", "
+                // << static_cast<int>(lightSample.b) << ") * 2^"
+                // << static_cast<int>(lightSample.exp) << std::endl;
+            // j++;
+        // }
         
         i++;
     }
@@ -113,7 +113,47 @@ int main(int argc, char** argv) {
         std::cout << "    r: " << light.r << std::endl;
         std::cout << "    g: " << light.g << std::endl;
         std::cout << "    b: " << light.b << std::endl;
-        std::cout << "    brightness: " << light.brightness << std::endl;
+        
+        i++;
+    }
+    
+    // std::cout << "Ent Data: " << std::endl;
+    // std::cout << g_bsp.get_entdata() << std::endl;
+    
+    std::cout << "World Lights: " << std::endl;
+    
+    i = 0;
+    for (const BSP::DWorldLight& worldLight : g_bsp.get_worldlights()) {
+        std::cout << "    World Light " << i << ":" << std::endl;
+        
+        std::cout << "        origin: ("
+            << worldLight.origin.x << ", "
+            << worldLight.origin.y << ", "
+            << worldLight.origin.z << ")" << std::endl;
+            
+        std::cout << "        intensity: ("
+            << worldLight.intensity.x << ", "
+            << worldLight.intensity.y << ", "
+            << worldLight.intensity.z << ")" << std::endl;
+            
+        std::cout << "        normal: ("
+            << worldLight.normal.x << ", "
+            << worldLight.normal.y << ", "
+            << worldLight.normal.z << ")" << std::endl;
+            
+        std::cout << "        cluster: " << worldLight.cluster << std::endl;
+        std::cout << "        type: " << worldLight.type << std::endl;
+        std::cout << "        style: " << worldLight.style << std::endl;
+        std::cout << "        stopdot: " << worldLight.stopdot << std::endl;
+        std::cout << "        stopdot2: " << worldLight.stopdot2 << std::endl;
+        std::cout << "        exponent: " << worldLight.exponent << std::endl;
+        std::cout << "        radius: " << worldLight.radius << std::endl;
+        std::cout << "        const: " << worldLight.constantAtten << std::endl;
+        std::cout << "        lin: " << worldLight.linearAtten << std::endl;
+        std::cout << "        quad: " << worldLight.quadraticAtten << std::endl;
+        std::cout << "        flags: " << worldLight.flags << std::endl;
+        std::cout << "        texinfo: " << worldLight.texinfo << std::endl;
+        std::cout << "        owner: " << worldLight.owner << std::endl;
         
         i++;
     }

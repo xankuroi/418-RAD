@@ -2,31 +2,25 @@ versioninfo
 {
 	"editorversion" "400"
 	"editorbuild" "6412"
-	"mapversion" "27"
+	"mapversion" "15"
 	"formatversion" "100"
 	"prefab" "0"
 }
 visgroups
 {
-	visgroup
-	{
-		"name" "Cactus"
-		"visgroupid" "9"
-		"color" "82 251 168"
-	}
 }
 viewsettings
 {
 	"bSnapToGrid" "1"
 	"bShowGrid" "1"
 	"bShowLogicalGrid" "0"
-	"nGridSpacing" "16"
+	"nGridSpacing" "64"
 	"bShow3DGrid" "0"
 }
 world
 {
 	"id" "1"
-	"mapversion" "27"
+	"mapversion" "15"
 	"classname" "worldspawn"
 	"detailmaterial" "detail/detailsprites"
 	"detailvbsp" "detail.vbsp"
@@ -40,7 +34,7 @@ world
 		{
 			"id" "1"
 			"plane" "(0 1024 0) (1024 1024 0) (1024 0 0)"
-			"material" "DEV/DEV_MEASUREGENERIC01B"
+			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[1 0 0 0] 0.25"
 			"vaxis" "[0 -1 0 0] 0.25"
 			"rotation" "0"
@@ -160,7 +154,7 @@ world
 		{
 			"id" "14"
 			"plane" "(1024 0 512) (0 0 512) (0 0 0)"
-			"material" "DEV/DEV_MEASUREWALL01A"
+			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[1 0 0 0] 0.25"
 			"vaxis" "[0 0 -1 0] 0.25"
 			"rotation" "0"
@@ -247,7 +241,7 @@ world
 		{
 			"id" "25"
 			"plane" "(1024 1024 0) (0 1024 0) (0 1024 512)"
-			"material" "DEV/DEV_MEASUREWALL01A"
+			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[1 0 0 0] 0.25"
 			"vaxis" "[0 0 -1 0] 0.25"
 			"rotation" "0"
@@ -323,7 +317,7 @@ world
 		{
 			"id" "43"
 			"plane" "(0 1024 0) (0 -6.10352e-005 0) (0 -6.10352e-005 512)"
-			"material" "DEV/DEV_MEASUREWALL01A"
+			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[0 1 0 0] 0.25"
 			"vaxis" "[0 0 -1 0] 0.25"
 			"rotation" "0"
@@ -431,7 +425,7 @@ world
 		{
 			"id" "65"
 			"plane" "(0 0 512) (1024 0 512) (1024 1024 512)"
-			"material" "DEV/DEV_MEASUREGENERIC01B"
+			"material" "TOOLS/TOOLSNODRAW"
 			"uaxis" "[1 0 0 0] 0.25"
 			"vaxis" "[0 -1 0 0] 0.25"
 			"rotation" "0"
@@ -582,7 +576,7 @@ entity
 {
 	"id" "38"
 	"classname" "light"
-	"_light" "255 0 0 100"
+	"_light" "255 0 0 1000"
 	"_lightHDR" "-1 -1 -1 1"
 	"_lightscaleHDR" "1"
 	"_quadratic_attn" "1"
@@ -599,7 +593,7 @@ entity
 {
 	"id" "48"
 	"classname" "light"
-	"_light" "0 0 255 100"
+	"_light" "0 0 255 1000"
 	"_lightHDR" "-1 -1 -1 1"
 	"_lightscaleHDR" "1"
 	"_quadratic_attn" "1"
@@ -700,64 +694,13 @@ entity
 		"logicalpos" "[0 3500]"
 	}
 }
-entity
-{
-	"id" "98"
-	"classname" "info_player_start"
-	"angles" "0 0 0"
-	"origin" "128 128 1"
-	editor
-	{
-		"color" "0 255 0"
-		"visgroupshown" "1"
-		"visgroupautoshown" "1"
-		"logicalpos" "[0 0]"
-	}
-}
-entity
-{
-	"id" "139"
-	"classname" "prop_static"
-	"angles" "0 0 0"
-	"fademindist" "-1"
-	"fadescale" "1"
-	"model" "models/props_st/red_cactus01.mdl"
-	"skin" "0"
-	"solid" "6"
-	"origin" "512 512 2.56475"
-	editor
-	{
-		"color" "255 255 0"
-		"visgroupid" "9"
-		"visgroupshown" "1"
-		"visgroupautoshown" "1"
-		"logicalpos" "[0 0]"
-	}
-}
-entity
-{
-	"id" "307"
-	"classname" "light"
-	"_light" "64 128 255 255"
-	"_lightHDR" "-1 -1 -1 1"
-	"_lightscaleHDR" "1"
-	"_quadratic_attn" "1"
-	"origin" "512 512 256"
-	editor
-	{
-		"color" "220 30 220"
-		"visgroupshown" "1"
-		"visgroupautoshown" "1"
-		"logicalpos" "[0 4000]"
-	}
-}
 cameras
 {
 	"activecamera" "0"
 	camera
 	{
-		"position" "[552.78 479.759 295.928]"
-		"look" "[176.687 819.218 -330.468]"
+		"position" "[272.496 311.697 110.624]"
+		"look" "[1047.98 504.056 213.916]"
 	}
 }
 cordon

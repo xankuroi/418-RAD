@@ -3,12 +3,15 @@
 #include <fstream>
 
 #include <string>
-#include <cstring>
-#include <cassert>
 
 #include <vector>
 #include <unordered_set>
 #include <unordered_map>
+#include <memory>
+
+#include <cstring>
+#include <cassert>
+#include <cmath>
 
 #include "bsp.h"
 
@@ -60,7 +63,12 @@ namespace BSP {
         load_lump(file, LUMP_SURFEDGES, m_surfEdges);
         
         std::vector<DFace> dfaces;
-        load_lump(file, LUMP_FACES, dfaces);
+        load_lump(file, LUMP_FACES_HDR, dfaces);
+        
+        // The Faces HDR lump can be empty...
+        if (dfaces.size() == 0) {
+            load_lump(file, LUMP_FACES, dfaces);
+        }
         
         std::vector<LightSample> lightSamples;
         
@@ -74,12 +82,20 @@ namespace BSP {
             );
         }
         
+        load_lump(file, LUMP_LEAVES, m_leaves);
+        
         std::vector<char> entData;
         load_lump(file, LUMP_ENTITIES, entData);
         
         m_entData.assign(entData.begin(), entData.end());
         
         load_lights(m_entData);
+        
+        if (!is_fullbright()) {
+            load_lump(file, LUMP_WORLDLIGHTS_HDR, m_worldLights);
+        }
+        
+        load_gamelumps(file);
         
         load_extras(file);
     }
@@ -102,6 +118,8 @@ namespace BSP {
         file.seekg(offset);
         file.read(reinterpret_cast<char*>(dest.data()), lumpSize);
         
+        // std::cout << "Loaded " << lumpSize << " bytes from lump " << lumpID << std::endl;
+        
         m_loadedLumps.insert(lumpID);
     }
     
@@ -123,7 +141,7 @@ namespace BSP {
     }
     
     void BSP::load_extras(std::ifstream& file) {
-        for (int lumpID=0; lumpID<HEADER_LUMPS; lumpID++) {
+        for (unsigned int lumpID=0; lumpID<HEADER_LUMPS; lumpID++) {
             if (m_loadedLumps.find(lumpID) != m_loadedLumps.end()) {
                 // Lump was previously loaded; ignore
                 continue;
@@ -136,17 +154,87 @@ namespace BSP {
                 continue;
             }
             
-            std::ifstream::off_type offset = lump.fileOffset;
-            size_t lumpSize = lump.fileLen;
+            // std::cout << "Loading extra lump " << lumpID << std::endl;
             
-            m_extras[lumpID] = std::vector<uint8_t>(lumpSize);
-            std::vector<uint8_t>& extraBuffer = m_extras[lumpID];
-            
-            file.seekg(offset);
-            file.read(
-                reinterpret_cast<char*>(extraBuffer.data()),
-                lumpSize
+            m_extraLumps[lumpID] = std::unique_ptr<std::vector<uint8_t>>(
+                new std::vector<uint8_t>
             );
+            
+            load_lump(
+                file,
+                static_cast<LumpType>(lumpID),
+                *m_extraLumps[lumpID]
+            );
+            
+            // std::ifstream::off_type offset = lump.fileOffset;
+            // size_t lumpSize = lump.fileLen;
+            
+            // m_extraLumps[lumpID] = std::vector<uint8_t>(lumpSize);
+            // std::vector<uint8_t>& extraBuffer = m_extraLumps[lumpID];
+            
+            // file.seekg(offset);
+            // file.read(
+                // reinterpret_cast<char*>(extraBuffer.data()),
+                // lumpSize
+            // );
+        }
+    }
+    
+    template<typename Container>
+    void BSP::load_single_gamelump(
+            std::ifstream& file,
+            const GameLump& gameLump,
+            Container& dest
+        ) {
+        
+        std::ifstream::off_type offset = gameLump.fileOffset;
+        size_t lumpSize = gameLump.fileLen;
+        size_t numElems = lumpSize / sizeof(typename Container::value_type);
+        
+        dest.resize(numElems);
+        
+        file.seekg(offset);
+        file.read(reinterpret_cast<char*>(dest.data()), lumpSize);
+    }
+    
+    void BSP::load_gamelumps(std::ifstream& file) {
+        std::vector<uint8_t> gameLumpData;
+        load_lump(file, LUMP_GAME_LUMP, gameLumpData);
+        
+        GameLumpHeader& gameLumpHeader = *reinterpret_cast<GameLumpHeader*>(
+            gameLumpData.data()
+        );
+        
+        int32_t lumpCount = gameLumpHeader.lumpCount;
+        
+        GameLump* pGameLumps = reinterpret_cast<GameLump*>(
+            &gameLumpHeader.firstGameLump
+        );
+        
+        for (int i=0; i<lumpCount; i++) {
+            GameLump& gameLump = pGameLumps[i];
+            
+            switch (gameLump.id) {
+                // case GAMELUMP_STATIC_PROPS: {
+                    // std::vector<>
+                    
+                    // break;
+                // }
+                default: {
+                    m_extraGameLumps[gameLump.id]
+                        = std::unique_ptr<std::vector<uint8_t>>(
+                            new std::vector<uint8_t>
+                        );
+                        
+                    load_single_gamelump(
+                        file,
+                        gameLump,
+                        *m_extraGameLumps[gameLump.id]
+                    );
+                }
+            }
+            
+            m_gameLumps[gameLump.id] = gameLump;
         }
     }
     
@@ -154,12 +242,24 @@ namespace BSP {
         return m_header.version;
     }
     
+    const Header& BSP::get_header(void) const {
+        return m_header;
+    }
+    
     std::vector<Face>& BSP::get_faces(void) {
         return m_faces;
     }
     
-    const std::vector<Light>& BSP::get_lights(void) {
+    const std::vector<Light>& BSP::get_lights(void) const {
         return m_lights;
+    }
+    
+    const std::vector<DWorldLight>& BSP::get_worldlights(void) const {
+        return m_worldLights;
+    }
+    
+    const std::string& BSP::get_entdata(void) {
+        return m_entData;
     }
     
     bool BSP::is_fullbright(void) const {
@@ -209,7 +309,12 @@ namespace BSP {
         
         save_faces(file, offsets, sizes);
         
-        std::vector<char> entData;
+        save_lump(
+            file, LUMP_LEAVES, m_leaves,
+            offsets, sizes
+        );
+        
+        std::vector<char> entData(m_entData.size());
         entData.assign(m_entData.begin(), m_entData.end());
         
         save_lump(
@@ -217,10 +322,58 @@ namespace BSP {
             offsets, sizes
         );
         
+        // save_lump(
+            // file, LUMP_WORLDLIGHTS_HDR, m_worldLights,
+            // offsets, sizes
+        // );
+        
+        if (!is_fullbright()) {
+            save_lights(file, offsets, sizes);
+            
+            // Temp hack for ambient lighting
+            size_t numLeaves = m_leaves.size();
+            
+            std::vector<DLeafAmbientLighting> ambientLighting(numLeaves);
+            
+            for (DLeafAmbientLighting& ambient : ambientLighting) {
+                for (LightSample& sample : ambient.cube.color) {
+                    sample.r = 0;
+                    sample.g = 255;
+                    sample.b = 0;
+                    sample.exp = 0;
+                }
+                
+                ambient.x = 128;
+                ambient.y = 128;
+                ambient.z = 128;
+            }
+            
+            save_lump(
+                file, LUMP_LEAF_AMBIENT_LIGHTING_HDR, ambientLighting,
+                offsets, sizes
+            );
+            
+            std::vector<DLeafAmbientIndex> ambientIndices(numLeaves);
+            
+            int i = 0;
+            for (DLeafAmbientIndex& ambientIndex : ambientIndices) {
+                ambientIndex.ambientSampleCount = 1;
+                ambientIndex.firstAmbientSample = i;
+                i++;
+            }
+            
+            save_lump(
+                file, LUMP_LEAF_AMBIENT_INDEX_HDR, ambientIndices,
+                offsets, sizes
+            );
+        }
+        
+        save_gamelumps(file, offsets, sizes);
+        
         save_extras(file, offsets, sizes);
         
         /* Lump offset and size fixup */
-        for (int i=0; i<HEADER_LUMPS; i++) {
+        for (unsigned int i=0; i<HEADER_LUMPS; i++) {
             if (offsets.find(i) == offsets.end()) {
                 // Unused lump; ignore
                 assert(sizes.find(i) == sizes.end());
@@ -242,9 +395,10 @@ namespace BSP {
     void BSP::save_lump(
             std::ofstream& file,
             const LumpType lumpID,
-            Container& src,
+            const Container& src,
             std::unordered_map<int, std::ofstream::off_type>& offsets,
-            std::unordered_map<int, size_t>& sizes
+            std::unordered_map<int, size_t>& sizes,
+            bool isExtraLump
             ) {
             
         size_t size = src.size();
@@ -253,7 +407,14 @@ namespace BSP {
         offsets[lumpID] = file.tellp();
         sizes[lumpID] = size;
         
-        file.write(reinterpret_cast<char*>(src.data()), size);
+        file.write(reinterpret_cast<const char*>(src.data()), size);
+        
+        // std::cout << "Saved " << size << " bytes to lump " << lumpID << std::endl;
+        
+        // TODO: Remove this. (Or do we need to remove it...?)
+        if (!isExtraLump) {
+            m_extraLumps.erase(lumpID);
+        }
     }
     
     void BSP::save_faces(
@@ -271,6 +432,7 @@ namespace BSP {
                 
                 face.set_lightlump_offset(lightSamples.size());
                 
+                // std::cout << face.get_lightsamples().size() << std::endl;
                 for (LightSample& lightSample : face.get_lightsamples()) {
                     lightSamples.push_back(lightSample);
                 }
@@ -294,6 +456,29 @@ namespace BSP {
             file, LUMP_FACES, dfaces,
             offsets, sizes
         );
+        
+        save_lump(
+            file, LUMP_FACES_HDR, dfaces,
+            offsets, sizes
+        );
+    }
+    
+    void BSP::save_lights(
+            std::ofstream& file,
+            std::unordered_map<int, std::ofstream::off_type>& offsets,
+            std::unordered_map<int, size_t>& sizes
+            ) {
+        
+        std::vector<DWorldLight> worldLights;
+        
+        for (const Light& light : get_lights()) {
+            worldLights.push_back(light.to_worldlight());
+        }
+        
+        save_lump(
+            file, LUMP_WORLDLIGHTS_HDR, worldLights,
+            offsets, sizes
+        );
     }
     
     void BSP::save_extras(
@@ -302,17 +487,87 @@ namespace BSP {
             std::unordered_map<int, size_t>& sizes
             ) {
             
-        for (std::pair<int, std::vector<uint8_t>> pair : m_extras) {
+        using Pair = std::pair<
+            const int,
+            std::unique_ptr<std::vector<uint8_t>>
+        >;
+        
+        // std::cout << "Saving " << m_extraLumps.size() << " extra lumps..."
+            // << std::endl;
+            
+        for (const Pair& pair : m_extraLumps) {
+            LumpType lumpID = static_cast<LumpType>(pair.first);
+            const std::unique_ptr<std::vector<uint8_t>>& pData = pair.second;
+            
+            assert(m_extraLumps.find(lumpID) != m_extraLumps.end());
+            assert(pData);
+            
             save_lump(
-                file, static_cast<LumpType>(pair.first), pair.second,
-                offsets, sizes
+                file, lumpID, *pData,
+                offsets, sizes,
+                true    // This is an extra lump.
             );
         }
     }
     
-    const std::unordered_map<int, std::vector<uint8_t>>&
+    void BSP::save_gamelumps(
+            std::ofstream& file,
+            std::unordered_map<int, std::ofstream::off_type>& offsets,
+            std::unordered_map<int, size_t>& sizes
+            ) {
+            
+        using Pair = std::pair<
+            const int32_t,
+            std::unique_ptr<std::vector<uint8_t>>
+        >;
+        
+        for (const Pair& pair : m_extraGameLumps) {
+            int32_t gameLumpID = pair.first;
+            const std::vector<uint8_t>& gameLumpData = *pair.second;
+            
+            save_single_gamelump(file, gameLumpID, gameLumpData);
+        }
+        
+        int32_t gameLumpCount = m_gameLumps.size();
+        
+        size_t size = sizeof(int32_t) + gameLumpCount * sizeof(GameLump);
+        
+        offsets[LUMP_GAME_LUMP] = file.tellp();
+        sizes[LUMP_GAME_LUMP] = size;
+        
+        file.write(reinterpret_cast<char*>(&gameLumpCount), sizeof(int32_t));
+        
+        for (const std::pair<int32_t, GameLump>& pair : m_gameLumps) {
+            const GameLump& gameLump = pair.second;
+            file.write(
+                reinterpret_cast<const char*>(&gameLump),
+                sizeof(GameLump)
+            );
+        }
+    }
+    
+    template<typename Container>
+    void BSP::save_single_gamelump(
+            std::ofstream& file,
+            int32_t gameLumpID,
+            const Container& src
+            ) {
+            
+        std::ofstream::off_type offset = file.tellp();
+        
+        size_t size = src.size();
+        size *= sizeof(typename Container::value_type);
+        
+        GameLump& gameLump = m_gameLumps[gameLumpID];
+        gameLump.fileOffset = offset;
+        gameLump.fileLen = size;
+        
+        file.write(reinterpret_cast<const char*>(src.data()), size);
+    }
+    
+    const std::unordered_map<int, std::unique_ptr<std::vector<uint8_t>>>&
     BSP::get_extras(void) const{
-        return m_extras;
+        return m_extraLumps;
     }
     
     
@@ -355,7 +610,10 @@ namespace BSP {
             m_index++;
         }
         
-        assert(entStr != "" || m_index >= m_entData.size() && entStart == -1);
+        assert(
+            entStr != ""
+                || (m_index >= m_entData.size() && entStart == -1)
+        );
         
         Ent nextEnt;
         
@@ -366,7 +624,7 @@ namespace BSP {
         std::string key = "";
         int fieldStart = -1;
         
-        for (int i=0; i<entStr.size(); i++) {
+        for (size_t i=0; i<entStr.size(); i++) {
             char c = entStr[i];
             
             if (c == '"') {
@@ -412,7 +670,7 @@ namespace BSP {
             m_faceData(faceData),
             m_planeData(bsp.m_planes[faceData.planeNum]),
             m_lightSamples(get_lightmap_width() * get_lightmap_height()),
-            m_avgLightSample{0, 0, 0, 0} {
+            m_avgLightSample {0, 0, 0, 0} {
             
         const std::vector<Vec3>& vertices = bsp.m_vertices;
         const std::vector<DEdge>& dEdges = bsp.m_edges;
@@ -465,20 +723,33 @@ namespace BSP {
         int32_t width = get_lightmap_width();
         int32_t height = get_lightmap_height();
         
-        int numSamples = width * height;
-        int sampleOffset = m_faceData.lightOffset / sizeof(LightSample);
+        size_t numSamples = width * height;
+        size_t sampleOffset = m_faceData.lightOffset / sizeof(LightSample);
+        
+        // This face has no lighting.
+        if (sampleOffset == 0) {
+            return;
+        }
         
         assert(samples.size() >= numSamples + 1);
         assert(samples.size() - sampleOffset >= numSamples);
         
         std::vector<LightSample>::const_iterator lightSampleStart
-            = samples.begin() + sampleOffset;
+            = samples.begin() + sampleOffset - 1;
             
         assert(samples.size() > 1);
-        set_average_lighting(lightSampleStart[-1]);
         
-        m_lightSamples.reserve(numSamples);
+        LightSample avgLighting = samples.at(sampleOffset - 1);
+        
+        set_average_lighting(avgLighting);
+        
+        lightSampleStart++;
+        
         m_lightSamples.assign(lightSampleStart, lightSampleStart + numSamples);
+        
+        // for (size_t i=sampleOffset; i<sampleOffset+numSamples; i++) {
+            // m_lightSamples.push_back(samples.at(i));
+        // }
         
         assert(m_lightSamples.size() == numSamples);
     }
@@ -499,6 +770,14 @@ namespace BSP {
         }
         
         return styles;
+    }
+    
+    void Face::set_styles(const std::vector<uint8_t>& styles) {
+        assert(styles.size() == 4);
+        
+        for (int i=0; i<4; i++) {
+            m_faceData.styles[i] = styles[i];
+        }
     }
     
     int32_t Face::get_lightmap_width(void) const {
@@ -562,6 +841,18 @@ namespace BSP {
         return Vec3 {x, y, z};
     }
     
+    static inline double linear_from_encoded(double encoded) {
+        return pow(encoded / 255.0, GAMMA) * 255.0;
+    }
+    
+    static inline double encoded_from_linear(double linear) {
+        return pow(linear / 255.0, INV_GAMMA) * 255.0;
+    }
+    
+    static inline double attenuate(double x, double c, double l, double q) {
+        return c + l * x + q * x * x;
+    }
+    
     Light::Light(const std::unordered_map<std::string, std::string>& entity) :
             m_coords(vec3_from_str(entity.at("origin"))) {
             
@@ -582,10 +873,45 @@ namespace BSP {
         b = convert_str<double>(s);
         
         std::getline(stream, s, ' ');
-        brightness = convert_str<double>(s);
+        double brightness = convert_str<double>(s) / 255.0;
+        
+        r = linear_from_encoded(r) * brightness;
+        g = linear_from_encoded(g) * brightness;
+        b = linear_from_encoded(b) * brightness;
+        
+        double attenuation = attenuate(100.0, 0.0, 0.0, 1.0);
+        
+        r *= attenuation;
+        g *= attenuation;
+        b *= attenuation;
     }
     
     const Vec3& Light::get_coords(void) const {
         return m_coords;
+    }
+    
+    DWorldLight Light::to_worldlight(void) const {
+        return DWorldLight {
+            get_coords(),
+            Vec3 {
+                static_cast<float>(r / 255.0),
+                static_cast<float>(g / 255.0),
+                static_cast<float>(b / 255.0),
+            },
+            Vec3 {1.0, 0.0, 0.0},
+            0,
+            EMIT_POINT,
+            0x0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0x0,
+            0,
+            0,
+        };
     }
 }
