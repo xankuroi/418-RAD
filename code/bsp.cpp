@@ -378,8 +378,8 @@ namespace BSP {
             
             Lump& lump = m_header.lumps[i];
             
-            lump.fileOffset = offsets[i];
-            lump.fileLen = sizes[i];
+            lump.fileOffset = static_cast<int32_t>(offsets[i]);
+            lump.fileLen = static_cast<int32_t>(sizes[i]);
         }
         
         // Write the fixed lump offsets and sizes.
@@ -426,17 +426,19 @@ namespace BSP {
             if (!is_fullbright()) {
                 lightSamples.push_back(face.get_average_lighting());
                 
-                face.set_lightlump_offset(lightSamples.size());
+                face.set_lightlump_offset(
+                    static_cast<int32_t>(lightSamples.size())
+                );
                 
                 for (LightSample& lightSample : face.get_lightsamples()) {
                     lightSamples.push_back(lightSample);
                 }
             }
             
-            face.set_texdata_index(dTexDatas.size());
+            face.set_texdata_index(static_cast<int32_t>(dTexDatas.size()));
             dTexDatas.push_back(face.get_texdata());
             
-            face.set_texinfo_index(texInfos.size());
+            face.set_texinfo_index(static_cast<int32_t>(texInfos.size()));
             texInfos.push_back(face.get_texinfo());
             
             dFaces.push_back(face.get_data());
@@ -529,7 +531,7 @@ namespace BSP {
             save_single_gamelump(file, gameLumpID, gameLumpData);
         }
         
-        int32_t gameLumpCount = m_gameLumps.size();
+        int32_t gameLumpCount = static_cast<int32_t>(m_gameLumps.size());
         
         size_t size = sizeof(int32_t) + gameLumpCount * sizeof(GameLump);
         
@@ -560,8 +562,8 @@ namespace BSP {
         size *= sizeof(typename Container::value_type);
         
         GameLump& gameLump = m_gameLumps[gameLumpID];
-        gameLump.fileOffset = offset;
-        gameLump.fileLen = size;
+        gameLump.fileOffset = static_cast<int32_t>(offset);
+        gameLump.fileLen = static_cast<int32_t>(size);
         
         file.write(reinterpret_cast<const char*>(src.data()), size);
     }
@@ -581,7 +583,7 @@ namespace BSP {
         m_entData(entData) {}
         
     Entity EntityParser::next_ent(void) {
-        int entStart = -1;
+        size_t entStart = -1;
         std::string entStr = "";
         
         while (m_index < m_entData.size()) {
@@ -595,7 +597,7 @@ namespace BSP {
                     
                 case '}':
                     assert(entStart != -1);
-                    int count = m_index - entStart - 1;
+                    size_t count = m_index - entStart - 1;
                     entStr = m_entData.substr(entStart + 1, count);
                     break;
             }
@@ -620,7 +622,7 @@ namespace BSP {
         }
         
         std::string key = "";
-        int fieldStart = -1;
+        size_t fieldStart = -1;
         
         for (size_t i=0; i<entStr.size(); i++) {
             char c = entStr[i];
@@ -630,7 +632,7 @@ namespace BSP {
                     fieldStart = i;
                 }
                 else {
-                    int count = i - fieldStart - 1;
+                    size_t count = i - fieldStart - 1;
                     std::string field = entStr.substr(
                         fieldStart + 1,
                         count
@@ -881,7 +883,7 @@ namespace BSP {
      ***************/
      
     template<typename T>
-    static inline float convert_str(const std::string& str) {
+    static inline T convert_str(const std::string& str) {
         T result;
         
         std::stringstream converter;

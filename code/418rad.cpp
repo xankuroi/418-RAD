@@ -81,9 +81,9 @@ int main(int argc, char** argv) {
              * prevent this face (and its direct neighbors) from intersecting 
              * with it when we do our line-of-sight tests.
              */
-            samplePos.x += EPSILON * faceNorm.x;
-            samplePos.y += EPSILON * faceNorm.y;
-            samplePos.z += EPSILON * faceNorm.z;
+            samplePos.x += static_cast<float>(EPSILON * faceNorm.x);
+            samplePos.y += static_cast<float>(EPSILON * faceNorm.y);
+            samplePos.z += static_cast<float>(EPSILON * faceNorm.z);
             
             BSP::LightSample& lightSample = samples.at(i);
             
@@ -314,10 +314,10 @@ int main(int argc, char** argv) {
                 // << static_cast<int>(lightSample.b) << ") * 2^"
                 // << static_cast<int>(lightSample.exp) << std::endl;
         }
-        
-        uint32_t avgR = sumR / numSamples;
-        uint32_t avgG = sumG / numSamples;
-        uint32_t avgB = sumB / numSamples;
+
+        uint32_t avgR = static_cast<uint32_t>(sumR / numSamples);
+        uint32_t avgG = static_cast<uint32_t>(sumG / numSamples);
+        uint32_t avgB = static_cast<uint32_t>(sumB / numSamples);
         uint32_t avgExp = 0;
         
         while (avgR > 255 || avgG > 255 || avgB > 255) {
