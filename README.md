@@ -1,6 +1,13 @@
 # GPU-Accelerated Source Engine Radiosity Compilation
 **Ryan Lam (rwl) and Lucy Tan (jltan)**
 
+## CHECKPOINT
+Most of the time up to this point was spent reverse-engineering the BSP format that the Source Engine uses. Since that needs to be completed before we progress, we haven't done much else, so we're about a week behind our initially proposed schedule. The main challenge has been to figure out how to decode and encode the file format so that the engine will recognize the file for what it is and render accordingly.
+
+What remains is actually implementing and parallelizing the radiosity algorithm. We should be able to do it within the time left.
+
+Please see the [new schedule](#new-schedule) for an updated schedule.
+
 ## SUMMARY
 We are going to use GPUs to accelerate the Source Engine’s radiosity compilation.
 
@@ -25,7 +32,18 @@ Ideally, our radiosity compilation tool will be significantly faster than Valve�
 As most computer games, including Source Engine games, happen to be for Windows, we thought this would be the best operating system to be running on. The GTX 1080 is a relatively common GPU for a game maker to have available to them, so that’s why we’re testing on them..
 
 ## SCHEDULE
+### Original Schedule
 - Week 1: Familiarize self with the engine and the format
 - Week 2: Begin porting to GPU
 - Week 3: Finish moving to GPU
 - Week 4: Optimize, make graphs
+
+### Completed Tasks
+- As of April 25th: file format mostly backwards-engineered
+
+### New Schedule
+- April 29th: Finish with BSP (rwl), Put down a basic radiosity function (jltan)
+- May 3rd: Parallelization of radiosity (both)
+- May 7th: Further optimizations (both)
+- May 11th: Finalize Program, Complete Project Presentation (both)
+- May 12th: Project Presentation and Final Write Up (both)
