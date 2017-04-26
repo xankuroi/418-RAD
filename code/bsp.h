@@ -13,6 +13,8 @@
 
 #include <fstream>
 
+#include <gmtl/Matrix.h>
+
 namespace BSP {
     inline constexpr uint32_t make_id(
             uint32_t a, uint32_t b, uint32_t c, uint32_t d
@@ -25,10 +27,17 @@ namespace BSP {
     const size_t MAX_MAP_PLANES = 65536;
     const size_t MAX_MAP_EDGES = 256000;
     const size_t MAX_MAP_SURFEDGES = 512000;
+    const size_t MAX_MAP_TEXINFO = 12288;
+    const size_t MAX_MAP_TEXDATA = 2048;
+    const size_t MAX_MAP_TEXDATA_STRING_DATA = 256000;
+    const size_t TEXTURE_NAME_LENGTH = 128;
     
     /* Standard Gamma-correction constants */
     const double GAMMA = 2.2;
     const double INV_GAMMA = 1.0 / GAMMA;
+    
+    /* Arbitrary "small" value */
+    const double EPSILON = 1e-3;
     
     enum LumpType {
         LUMP_ENTITIES,
@@ -125,14 +134,15 @@ namespace BSP {
         int32_t mapRevision;
     };
     
+    template<typename T>
     struct Vec3 {
-        float x;
-        float y;
-        float z;
+        T x;
+        T y;
+        T z;
     };
     
     struct DPlane {
-        Vec3 normal;
+        Vec3<float> normal;
         float dist;
         int32_t type;
     };
@@ -160,6 +170,50 @@ namespace BSP {
         uint16_t numPrims;
         uint16_t firstPrimID;
         uint32_t smoothingGroups;
+    };
+    
+    enum TexInfoFlag {
+        SURF_LIGHT = 0x1,
+        SURF_SKY2D = 0x2,
+        SURF_SKY = 0x4,
+        SURF_WARP = 0x8,
+        SURF_TRANS = 0x10,
+        SURF_NOPORTAL = 0x20,
+        SURF_TRIGGER = 0x40,
+        SURF_NODRAW = 0x80,
+        SURF_HINT = 0x100,
+        SURF_SKIP = 0x200,
+        SURF_NOLIGHT = 0x400,
+        SURF_BUMPLIGHT = 0x800,
+        SURF_NOSHADOWS = 0x1000,
+        SURF_NODECALS = 0x2000,
+        SURF_NOCHOP = 0x4000,
+        SURF_HITBOX = 0x8000,
+    };
+    
+    struct TexInfo {
+        float textureVecs[2][4];
+        float lightmapVecs[2][4];
+        int32_t flags;
+        int32_t texData;
+    };
+    
+    struct DTexData {
+        Vec3<float> reflectivity;
+        int32_t nameStringTableID;
+        int32_t width;
+        int32_t height;
+        int32_t view_width;
+        int32_t view_height;
+    };
+    
+    struct DModel {
+        Vec3<float> mins;
+        Vec3<float> maxs;
+        Vec3<float> origin;
+        int32_t headNode;
+        int32_t firstFace;
+        int32_t numFaces;
     };
     
     enum LeafContents {
@@ -226,9 +280,9 @@ namespace BSP {
     static_assert(EMIT_SKYAMBIENT == 5, "EmitType miscount!");
     
     struct DWorldLight {
-        Vec3 origin;
-        Vec3 intensity;
-        Vec3 normal;
+        Vec3<float> origin;
+        Vec3<float> intensity;
+        Vec3<float> normal;
         int32_t cluster;
         EmitType type;
         int32_t style;
@@ -285,39 +339,68 @@ namespace BSP {
         GameLump firstGameLump;
     };
     
-    struct TexInfo {
-        float textureVecs[2][4];
-        float lightmapVecs[2][4];
-        int32_t flags;
-        int32_t texdata;
-    };
-    
     struct Edge {
-        Vec3 vertex1;
-        Vec3 vertex2;
+        Vec3<float> vertex1;
+        Vec3<float> vertex2;
     };
     
     class BSP;
     
+    class Entity {
+        private:
+            std::unordered_map<std::string, std::string> m_data;
+            
+        public:
+            Entity();
+            
+            const std::string& get(const std::string& key) const;
+            const std::string& get(
+                const std::string& key,
+                const std::string& defaultVal
+            ) const;
+            
+            bool has_key(const std::string& key) const;
+            
+            void set(const std::string& key, const std::string& value);
+            
+            size_t size(void) const;
+    };
+    
     class Light {
         private:
-            Vec3 m_coords;
+            Vec3<float> m_coords;
             
         public:
             double r;
             double g;
             double b;
             
-            Light(const std::unordered_map<std::string, std::string>& entity);
+            double c;
+            double l;
+            double q;
             
-            const Vec3& get_coords(void) const;
+            EmitType emitType;
+            
+            Light(const Entity& entity);
+            
+            inline double attenuate(double distance) const {
+                return c + l * distance + q * distance * distance;
+            };
+            
+            const Vec3<float>& get_coords(void) const;
             DWorldLight to_worldlight(void) const;
     };
     
     class Face {
         private:
+            static size_t s_faceCount;
+            
             DFace m_faceData;
             DPlane m_planeData;
+            TexInfo m_texInfo;
+            DTexData m_texData;
+            
+            gmtl::Matrix<double, 3, 3> m_Ainv;
             
             std::vector<Edge> m_edges;
             std::vector<LightSample> m_lightSamples;
@@ -326,20 +409,34 @@ namespace BSP {
             
             void load_edges(
                 const DFace& faceData,
-                const std::vector<Vec3>& vertices,
+                const std::vector<Vec3<float>>& vertices,
                 const std::vector<DEdge>& dEdges,
                 const std::vector<int32_t>& surfEdges
             );
+            
             void load_lightsamples(const std::vector<LightSample>& samples);
             
+            void precalculate_st_xyz_matrix(void);
+            
         public:
+            const size_t id;
+            
             Face(
                 const BSP& bsp,
                 const DFace& faceData,
-                const std::vector<LightSample>& lightSamples
+                const std::vector<LightSample>& lightSamples,
+                const std::vector<TexInfo>& texInfos,
+                const std::vector<DTexData>& dTexDatas
             );
             
+            const TexInfo& get_texinfo(void) const;
+            const DTexData& get_texdata(void) const;
             const DFace& get_data(void) const;
+            const DPlane& get_planedata(void) const;
+            
+            void set_texinfo_index(int16_t index);
+            void set_texdata_index(int32_t index);
+            
             const std::vector<Edge>& get_edges(void) const;
             
             const std::vector<uint8_t> get_styles(void) const;
@@ -354,22 +451,27 @@ namespace BSP {
             void set_average_lighting(const LightSample& sample);
             
             void set_lightlump_offset(int32_t offset);
+            
+            Vec3<float> xyz_from_lightmap_st(float s, float t) const;
     };
     
     class BSP {
         friend Face::Face(
             const BSP&,
             const DFace&,
-            const std::vector<LightSample>&
+            const std::vector<LightSample>&,
+            const std::vector<TexInfo>&,
+            const std::vector<DTexData>&
         );
         
         private:
             Header m_header;
             
-            std::vector<Vec3> m_vertices;
+            std::vector<DModel> m_models;
+            std::vector<DPlane> m_planes;
+            std::vector<Vec3<float>> m_vertices;
             std::vector<DEdge> m_edges;
             std::vector<int32_t> m_surfEdges;
-            std::vector<DPlane> m_planes;
             std::vector<Face> m_faces;
             std::vector<DLeaf> m_leaves;
             std::vector<DWorldLight> m_worldLights;
@@ -377,12 +479,9 @@ namespace BSP {
             std::string m_entData;
             std::vector<Light> m_lights;
             
-            std::unordered_map<int, std::unique_ptr<std::vector<uint8_t>>> 
-                m_extraLumps;
-                
-            std::unordered_map<int32_t, std::unique_ptr<std::vector<uint8_t>>> 
-                m_extraGameLumps;
-                
+            std::unordered_map<int, std::vector<uint8_t>> m_extraLumps;
+            std::unordered_map<int32_t, std::vector<uint8_t>> m_extraGameLumps;
+            
             std::unordered_set<int> m_loadedLumps;
             
             std::unordered_map<int32_t, GameLump> m_gameLumps;
@@ -460,6 +559,8 @@ namespace BSP {
             
             const Header& get_header(void) const;
             
+            const std::vector<DModel>& get_models(void) const;
+            
             std::vector<Face>& get_faces(void);
             const std::vector<Light>& get_lights(void) const;
             
@@ -467,10 +568,9 @@ namespace BSP {
             
             const std::string& get_entdata(void);
             
-            const std::unordered_map<
-                int, std::unique_ptr<std::vector<uint8_t>>
-            >& get_extras(void) const;
-            
+            const std::unordered_map<int, std::vector<uint8_t>>&
+                get_extras(void) const;
+                
             bool is_fullbright(void) const;
             void set_fullbright(bool fullbright);
             
@@ -491,7 +591,7 @@ namespace BSP {
         public:
             EntityParser(const std::string& entData);
             
-            std::unordered_map<std::string, std::string> next_ent(void);
+            Entity next_ent(void);
     };
 }
 

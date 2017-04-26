@@ -6,6 +6,7 @@
 #include <bitset>
 
 #include <cstdlib>
+#include <cassert>
 
 #include "bsp.h"
 
@@ -37,8 +38,8 @@ int main(int argc, char** argv) {
         std::cout << "Face " << i << ":" << std::endl;
         
         for (const BSP::Edge& edge : face.get_edges()) {
-            const BSP::Vec3& vertex1 = edge.vertex1;
-            const BSP::Vec3& vertex2 = edge.vertex2;
+            const BSP::Vec3<float>& vertex1 = edge.vertex1;
+            const BSP::Vec3<float>& vertex2 = edge.vertex2;
             
             std::cout << "    ("
                 << vertex1.x << ", "
@@ -97,6 +98,120 @@ int main(int argc, char** argv) {
             // j++;
         // }
         
+        std::cout << "    Light Sample Coords:" << std::endl;
+        
+        for (size_t i=0; i<lightSamples.size(); i++) {
+            double s = static_cast<double>(i % face.get_lightmap_width());
+            double t = static_cast<double>(i / face.get_lightmap_width());
+            
+            BSP::Vec3<float> pos = face.xyz_from_lightmap_st(s, t);
+            
+            std::cout << "        Sample " << i << ": <"
+                << pos.x << ", "
+                << pos.y << ", "
+                << pos.z << ">" << std::endl;
+            j++;
+        }
+        
+        const BSP::TexInfo& texInfo = face.get_texinfo();
+        const BSP::DTexData& texData = face.get_texdata();
+        const BSP::DPlane& planeData = face.get_planedata();
+        
+        std::cout << "    Face Normal: <"
+            << planeData.normal.x << ", "
+            << planeData.normal.y << ", "
+            << planeData.normal.z << ">"
+            << std::endl;
+            
+        std::cout << "    Plane Distance: " << planeData.dist << std::endl;
+        
+        std::cout << "    Lightmap Mins: "
+            << faceData.lightmapTextureMinsInLuxels[0] << ", "
+            << faceData.lightmapTextureMinsInLuxels[1] << std::endl;
+            
+        std::cout << "    Lightmap S vector: <"
+            << texInfo.lightmapVecs[0][0] << ", "
+            << texInfo.lightmapVecs[0][1] << ", "
+            << texInfo.lightmapVecs[0][2] << ", "
+            << texInfo.lightmapVecs[0][3] << ">"
+            << std::endl;
+            
+        std::cout << "    Lightmap T vector: <"
+            << texInfo.lightmapVecs[1][0] << ", "
+            << texInfo.lightmapVecs[1][1] << ", "
+            << texInfo.lightmapVecs[1][2] << ", "
+            << texInfo.lightmapVecs[1][3] << ">"
+            << std::endl;
+            
+        /**/
+        
+        BSP::Vec3<float> cross {
+            texInfo.lightmapVecs[1][1] * texInfo.lightmapVecs[0][2] - texInfo.lightmapVecs[1][2] * texInfo.lightmapVecs[0][1],
+            texInfo.lightmapVecs[1][2] * texInfo.lightmapVecs[0][0] - texInfo.lightmapVecs[1][0] * texInfo.lightmapVecs[0][2],
+            texInfo.lightmapVecs[1][0] * texInfo.lightmapVecs[0][1] - texInfo.lightmapVecs[1][1] * texInfo.lightmapVecs[0][0],
+        };
+        
+        std::cout << "    ST Cross: <"
+            << cross.x << ", "
+            << cross.y << ", "
+            << cross.z << ">" << std::endl;
+            
+        float det = -(
+            planeData.normal.x * cross.x +
+            planeData.normal.y * cross.y +
+            planeData.normal.z * cross.z
+        );
+        
+        std::cout << "    ST Determinant: " << det << std::endl;
+        
+        assert(((det < 0) ? -det : det) >= 1e-20);
+        
+        BSP::Vec3<float> invS {
+            (planeData.normal.z * texInfo.lightmapVecs[1][1] - planeData.normal.y * texInfo.lightmapVecs[1][2]) / det,
+            (planeData.normal.x * texInfo.lightmapVecs[1][2] - planeData.normal.z * texInfo.lightmapVecs[1][0]) / det,
+            (planeData.normal.y * texInfo.lightmapVecs[1][0] - planeData.normal.x * texInfo.lightmapVecs[1][1]) / det,
+        };
+        
+        BSP::Vec3<float> invT {
+            (planeData.normal.y * texInfo.lightmapVecs[0][2] - planeData.normal.z * texInfo.lightmapVecs[0][1]) / det,
+            (planeData.normal.z * texInfo.lightmapVecs[0][0] - planeData.normal.x * texInfo.lightmapVecs[0][2]) / det,
+            (planeData.normal.x * texInfo.lightmapVecs[0][1] - planeData.normal.y * texInfo.lightmapVecs[1][1]) / det,
+        };
+        
+        BSP::Vec3<float> luxelOrigin {
+            -(planeData.dist * cross.x) / det,
+            -(planeData.dist * cross.y) / det,
+            -(planeData.dist * cross.z) / det,
+        };
+        
+        luxelOrigin.x = luxelOrigin.x + texInfo.lightmapVecs[0][3] * invS.x;
+        luxelOrigin.y = luxelOrigin.y + texInfo.lightmapVecs[0][3] * invS.y;
+        luxelOrigin.z = luxelOrigin.z + texInfo.lightmapVecs[0][3] * invS.z;
+        
+        luxelOrigin.x = luxelOrigin.x + texInfo.lightmapVecs[1][3] * invT.x;
+        luxelOrigin.y = luxelOrigin.y + texInfo.lightmapVecs[1][3] * invT.y;
+        luxelOrigin.z = luxelOrigin.z + texInfo.lightmapVecs[1][3] * invT.z;
+        
+        std::cout << "    Inverted S: <"
+            << invS.x << ", "
+            << invS.y << ", "
+            << invS.z << ">" << std::endl;
+            
+        std::cout << "    Inverted T: <"
+            << invT.x << ", "
+            << invT.y << ", "
+            << invT.z << ">" << std::endl;
+            
+        std::cout << "    Luxel Origin: <"
+            << luxelOrigin.x << ", "
+            << luxelOrigin.y << ", "
+            << luxelOrigin.z << ">" << std::endl;
+            
+        /**/
+        
+        std::cout << "    Texture Width: " << texData.width << std::endl;
+        std::cout << "    Texture Height: " << texData.height << std::endl;
+        
         i++;
     }
     
@@ -104,7 +219,7 @@ int main(int argc, char** argv) {
     for (const BSP::Light& light : g_bsp.get_lights()) {
         std::cout << "Light " << i << ":" << std::endl;
         
-        const BSP::Vec3& pos = light.get_coords();
+        const BSP::Vec3<float>& pos = light.get_coords();
         std::cout << "    pos: ("
             << pos.x << ", "
             << pos.y << ", "

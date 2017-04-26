@@ -6967,3 +6967,2112 @@ Level flags = 0
 Total triangle count: 176
 Writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
 0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (4760 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 23 texinfos to 11
+Reduced 3 texdatas to 3 (67 bytes to 67)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   6 portalclusters
+  12 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 36
+Average clusters visible: 6
+Building PAS...
+Average clusters audible: 6
+visdatasize:64  compressed from 96
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (4760 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 23 texinfos to 11
+Reduced 3 texdatas to 3 (67 bytes to 67)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (4760 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 23 texinfos to 8
+Reduced 2 texdatas to 2 (41 bytes to 41)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (4760 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 23 texinfos to 8
+Reduced 2 texdatas to 2 (41 bytes to 41)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (4760 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 25 texinfos to 13
+Reduced 3 texdatas to 3 (67 bytes to 67)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (4760 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 25 texinfos to 13
+Reduced 3 texdatas to 3 (67 bytes to 67)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (4760 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 25 texinfos to 13
+Reduced 3 texdatas to 3 (67 bytes to 67)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+[Reading texlights from 'lights.rad']
+[48 texlights parsed from 'lights.rad']
+
+Loading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+37 faces
+29965 square feet [4315023.00 square inches]
+0 Displacements
+0 Square Feet [0.00 Square Inches]
+37 patches before subdivision
+3483 patches after subdivision
+2 direct lights
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10transfers 353053, max 239
+transfer lists:   2.7 megs
+0...1...2...3...4...5...6...7...8...9...10	Bounce #1 added RGB(16310, 0, 3211)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #2 added RGB(5657, 0, 153)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #3 added RGB(2040, 0, 7)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #4 added RGB(746, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #5 added RGB(275, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #6 added RGB(102, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #7 added RGB(38, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #8 added RGB(14, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #9 added RGB(5, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #10 added RGB(2, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #11 added RGB(1, 0, 0)
+Build Patch/Sample Hash Table(s).....Done<0.0008 sec>
+0...1...2...3...4...5...6...7...8...9...10FinalLightFace Done
+0 of 0 (0% of) surface lights went in leaf ambient cubes.
+0...1...2...3...4...5...6...7...8...9...10Writing leaf ambient...done
+Ready to Finish
+
+Object names       Objects/Maxobjs  Memory / Maxmem  Fullness 
+------------       ---------------  ---------------  -------- 
+models                   1/1024           48/49152    ( 0.1%) 
+brushes                 12/8192          144/98304    ( 0.1%) 
+brushsides              84/65536         672/524288   ( 0.1%) 
+planes                 104/65536        2080/1310720  ( 0.2%) 
+vertexes                89/65536        1068/786432   ( 0.1%) 
+nodes                    6/65536         192/2097152  ( 0.0%) 
+texinfos                13/12288         936/884736   ( 0.1%) 
+texdata                  3/2048           96/65536    ( 0.1%) 
+dispinfos                0/0               0/0        ( 0.0%) 
+disp_verts               0/0               0/0        ( 0.0%) 
+disp_tris                0/0               0/0        ( 0.0%) 
+disp_lmsamples           0/0               0/0        ( 0.0%) 
+faces                   37/65536        2072/3670016  ( 0.1%) 
+hdr faces               37/65536        2072/3670016  ( 0.1%) 
+origfaces               13/65536         728/3670016  ( 0.0%) 
+leaves                   8/65536         256/2097152  ( 0.0%) 
+leaffaces               37/65536          74/131072   ( 0.1%) 
+leafbrushes             12/65536          24/131072   ( 0.0%) 
+areas                    2/256            16/2048     ( 0.8%) 
+surfedges              216/512000        864/2048000  ( 0.0%) 
+edges                  135/256000        540/1024000  ( 0.1%) 
+LDR worldlights          0/8192            0/720896   ( 0.0%) 
+HDR worldlights          2/8192          176/720896   ( 0.0%) 
+leafwaterdata            0/32768           0/393216   ( 0.0%) 
+waterstrips              4/32768          40/327680   ( 0.0%) 
+waterverts               0/65536           0/786432   ( 0.0%) 
+waterindices            48/65536          96/131072   ( 0.1%) 
+cubemapsamples           0/1024            0/16384    ( 0.0%) 
+overlays                 0/512             0/180224   ( 0.0%) 
+LDR lightdata         [variable]           0/0        ( 0.0%) 
+HDR lightdata         [variable]       74288/0        ( 0.0%) 
+visdata               [variable]          14/16777216 ( 0.0%) 
+entdata               [variable]         673/393216   ( 0.2%) 
+LDR ambient table        8/65536          32/262144   ( 0.0%) 
+HDR ambient table        8/65536          32/262144   ( 0.0%) 
+LDR leaf ambient         8/65536         224/1835008  ( 0.0%) 
+HDR leaf ambient        16/65536         448/1835008  ( 0.0%) 
+occluders                0/0               0/0        ( 0.0%) 
+occluder polygons        0/0               0/0        ( 0.0%) 
+occluder vert ind        0/0               0/0        ( 0.0%) 
+detail props          [variable]           1/12       ( 8.3%) 
+static props          [variable]           1/206      ( 0.5%) 
+pakfile               [variable]      105679/0        ( 0.0%) 
+physics               [variable]        4760/4194304  ( 0.1%) 
+physics terrain       [variable]           2/1048576  ( 0.0%) 
+
+Level flags = 0
+
+Total triangle count: 90
+Writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+[Reading texlights from 'lights.rad']
+[48 texlights parsed from 'lights.rad']
+
+Loading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+37 faces
+29965 square feet [4315023.00 square inches]
+0 Displacements
+0 Square Feet [0.00 Square Inches]
+37 patches before subdivision
+3483 patches after subdivision
+2 direct lights
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10transfers 353053, max 239
+transfer lists:   2.7 megs
+0...1...2...3...4...5...6...7...8...9...10	Bounce #1 added RGB(16310, 0, 3211)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #2 added RGB(5657, 0, 153)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #3 added RGB(2040, 0, 7)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #4 added RGB(746, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #5 added RGB(275, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #6 added RGB(102, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #7 added RGB(38, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #8 added RGB(14, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #9 added RGB(5, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #10 added RGB(2, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #11 added RGB(1, 0, 0)
+Build Patch/Sample Hash Table(s).....Done<0.0015 sec>
+0...1...2...3...4...5...6...7...8...9...10FinalLightFace Done
+0 of 0 (0% of) surface lights went in leaf ambient cubes.
+0...1...2...3...4...5...6...7...8...9...10Writing leaf ambient...done
+Ready to Finish
+
+Object names       Objects/Maxobjs  Memory / Maxmem  Fullness 
+------------       ---------------  ---------------  -------- 
+models                   1/1024           48/49152    ( 0.1%) 
+brushes                 12/8192          144/98304    ( 0.1%) 
+brushsides              84/65536         672/524288   ( 0.1%) 
+planes                 104/65536        2080/1310720  ( 0.2%) 
+vertexes                89/65536        1068/786432   ( 0.1%) 
+nodes                    6/65536         192/2097152  ( 0.0%) 
+texinfos                13/12288         936/884736   ( 0.1%) 
+texdata                  3/2048           96/65536    ( 0.1%) 
+dispinfos                0/0               0/0        ( 0.0%) 
+disp_verts               0/0               0/0        ( 0.0%) 
+disp_tris                0/0               0/0        ( 0.0%) 
+disp_lmsamples           0/0               0/0        ( 0.0%) 
+faces                   37/65536        2072/3670016  ( 0.1%) 
+hdr faces               37/65536        2072/3670016  ( 0.1%) 
+origfaces               13/65536         728/3670016  ( 0.0%) 
+leaves                   8/65536         256/2097152  ( 0.0%) 
+leaffaces               37/65536          74/131072   ( 0.1%) 
+leafbrushes             12/65536          24/131072   ( 0.0%) 
+areas                    2/256            16/2048     ( 0.8%) 
+surfedges              216/512000        864/2048000  ( 0.0%) 
+edges                  135/256000        540/1024000  ( 0.1%) 
+LDR worldlights          0/8192            0/720896   ( 0.0%) 
+HDR worldlights          2/8192          176/720896   ( 0.0%) 
+leafwaterdata            0/32768           0/393216   ( 0.0%) 
+waterstrips              4/32768          40/327680   ( 0.0%) 
+waterverts               0/65536           0/786432   ( 0.0%) 
+waterindices            48/65536          96/131072   ( 0.1%) 
+cubemapsamples           0/1024            0/16384    ( 0.0%) 
+overlays                 0/512             0/180224   ( 0.0%) 
+LDR lightdata         [variable]           0/0        ( 0.0%) 
+HDR lightdata         [variable]       74288/0        ( 0.0%) 
+visdata               [variable]          14/16777216 ( 0.0%) 
+entdata               [variable]         673/393216   ( 0.2%) 
+LDR ambient table        8/65536          32/262144   ( 0.0%) 
+HDR ambient table        8/65536          32/262144   ( 0.0%) 
+LDR leaf ambient         8/65536         224/1835008  ( 0.0%) 
+HDR leaf ambient        16/65536         448/1835008  ( 0.0%) 
+occluders                0/0               0/0        ( 0.0%) 
+occluder polygons        0/0               0/0        ( 0.0%) 
+occluder vert ind        0/0               0/0        ( 0.0%) 
+detail props          [variable]           1/12       ( 8.3%) 
+static props          [variable]           1/206      ( 0.5%) 
+pakfile               [variable]      105679/0        ( 0.0%) 
+physics               [variable]        4760/4194304  ( 0.1%) 
+physics terrain       [variable]           2/1048576  ( 0.0%) 
+
+Level flags = 0
+
+Total triangle count: 90
+Writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (4760 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 20 texinfos to 8
+Reduced 2 texdatas to 2 (41 bytes to 41)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (2800 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 8 texinfos to 2
+Reduced 2 texdatas to 2 (41 bytes to 41)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (2800 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 13 texinfos to 7
+Reduced 3 texdatas to 3 (67 bytes to 67)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+1 second elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (2800 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 13 texinfos to 7
+Reduced 3 texdatas to 3 (67 bytes to 67)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+1 second elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (2800 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 13 texinfos to 7
+Reduced 3 texdatas to 3 (67 bytes to 67)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+1 second elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (4760 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 25 texinfos to 13
+Reduced 3 texdatas to 3 (67 bytes to 67)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+1 second elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (4760 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 25 texinfos to 13
+Reduced 3 texdatas to 3 (67 bytes to 67)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+1 second elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (2736 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 8 texinfos to 2
+Reduced 2 texdatas to 2 (41 bytes to 41)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+1 second elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (2736 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 7 texinfos to 2
+Reduced 2 texdatas to 2 (41 bytes to 41)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (2736 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 8 texinfos to 3
+Reduced 2 texdatas to 2 (41 bytes to 41)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (2736 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 8 texinfos to 2
+Reduced 2 texdatas to 2 (41 bytes to 41)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (2736 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 8 texinfos to 2
+Reduced 2 texdatas to 2 (41 bytes to 41)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (2736 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 8 texinfos to 2
+Reduced 2 texdatas to 2 (41 bytes to 41)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   6 portalclusters
+  12 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 36
+Average clusters visible: 6
+Building PAS...
+Average clusters audible: 6
+visdatasize:64  compressed from 96
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (4760 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 25 texinfos to 13
+Reduced 3 texdatas to 3 (67 bytes to 67)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (4696 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 20 texinfos to 8
+Reduced 2 texdatas to 2 (41 bytes to 41)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (4760 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 25 texinfos to 13
+Reduced 3 texdatas to 3 (67 bytes to 67)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (4760 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 25 texinfos to 13
+Reduced 3 texdatas to 3 (67 bytes to 67)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (4760 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 25 texinfos to 13
+Reduced 3 texdatas to 3 (67 bytes to 67)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+[Reading texlights from 'lights.rad']
+[48 texlights parsed from 'lights.rad']
+
+Loading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+37 faces
+29965 square feet [4315022.00 square inches]
+0 Displacements
+0 Square Feet [0.00 Square Inches]
+37 patches before subdivision
+3483 patches after subdivision
+3 direct lights
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10transfers 353040, max 239
+transfer lists:   2.7 megs
+0...1...2...3...4...5...6...7...8...9...10	Bounce #1 added RGB(16128, 6915, 3194)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #2 added RGB(5593, 987, 152)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #3 added RGB(2017, 143, 7)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #4 added RGB(737, 21, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #5 added RGB(272, 3, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #6 added RGB(101, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #7 added RGB(37, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #8 added RGB(14, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #9 added RGB(5, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #10 added RGB(2, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #11 added RGB(1, 0, 0)
+Build Patch/Sample Hash Table(s).....Done<0.0016 sec>
+0...1...2...3...4...5...6...7...8...9...10FinalLightFace Done
+0 of 0 (0% of) surface lights went in leaf ambient cubes.
+0...1...2...3...4...5...6...7...8...9...10Writing leaf ambient...done
+Ready to Finish
+
+Object names       Objects/Maxobjs  Memory / Maxmem  Fullness 
+------------       ---------------  ---------------  -------- 
+models                   1/1024           48/49152    ( 0.1%) 
+brushes                 12/8192          144/98304    ( 0.1%) 
+brushsides              84/65536         672/524288   ( 0.1%) 
+planes                 104/65536        2080/1310720  ( 0.2%) 
+vertexes                89/65536        1068/786432   ( 0.1%) 
+nodes                    6/65536         192/2097152  ( 0.0%) 
+texinfos                13/12288         936/884736   ( 0.1%) 
+texdata                  3/2048           96/65536    ( 0.1%) 
+dispinfos                0/0               0/0        ( 0.0%) 
+disp_verts               0/0               0/0        ( 0.0%) 
+disp_tris                0/0               0/0        ( 0.0%) 
+disp_lmsamples           0/0               0/0        ( 0.0%) 
+faces                   37/65536        2072/3670016  ( 0.1%) 
+hdr faces               37/65536        2072/3670016  ( 0.1%) 
+origfaces               13/65536         728/3670016  ( 0.0%) 
+leaves                   8/65536         256/2097152  ( 0.0%) 
+leaffaces               37/65536          74/131072   ( 0.1%) 
+leafbrushes             12/65536          24/131072   ( 0.0%) 
+areas                    2/256            16/2048     ( 0.8%) 
+surfedges              216/512000        864/2048000  ( 0.0%) 
+edges                  135/256000        540/1024000  ( 0.1%) 
+LDR worldlights          0/8192            0/720896   ( 0.0%) 
+HDR worldlights          3/8192          264/720896   ( 0.0%) 
+leafwaterdata            0/32768           0/393216   ( 0.0%) 
+waterstrips              4/32768          40/327680   ( 0.0%) 
+waterverts               0/65536           0/786432   ( 0.0%) 
+waterindices            48/65536          96/131072   ( 0.1%) 
+cubemapsamples           0/1024            0/16384    ( 0.0%) 
+overlays                 0/512             0/180224   ( 0.0%) 
+LDR lightdata         [variable]           0/0        ( 0.0%) 
+HDR lightdata         [variable]       74204/0        ( 0.0%) 
+visdata               [variable]          14/16777216 ( 0.0%) 
+entdata               [variable]         829/393216   ( 0.2%) 
+LDR ambient table        8/65536          32/262144   ( 0.0%) 
+HDR ambient table        8/65536          32/262144   ( 0.0%) 
+LDR leaf ambient         8/65536         224/1835008  ( 0.0%) 
+HDR leaf ambient        16/65536         448/1835008  ( 0.0%) 
+occluders                0/0               0/0        ( 0.0%) 
+occluder polygons        0/0               0/0        ( 0.0%) 
+occluder vert ind        0/0               0/0        ( 0.0%) 
+detail props          [variable]           1/12       ( 8.3%) 
+static props          [variable]           1/206      ( 0.5%) 
+pakfile               [variable]      105679/0        ( 0.0%) 
+physics               [variable]        4760/4194304  ( 0.1%) 
+physics terrain       [variable]           2/1048576  ( 0.0%) 
+
+Level flags = 0
+
+Total triangle count: 90
+Writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (4760 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 25 texinfos to 13
+Reduced 3 texdatas to 3 (67 bytes to 67)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+[Reading texlights from 'lights.rad']
+[48 texlights parsed from 'lights.rad']
+
+Loading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+37 faces
+29965 square feet [4315022.00 square inches]
+0 Displacements
+0 Square Feet [0.00 Square Inches]
+37 patches before subdivision
+3483 patches after subdivision
+3 direct lights
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10transfers 353040, max 239
+transfer lists:   2.7 megs
+0...1...2...3...4...5...6...7...8...9...10	Bounce #1 added RGB(8081, 3459, 1597)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #2 added RGB(2803, 494, 76)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #3 added RGB(1011, 72, 4)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #4 added RGB(370, 10, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #5 added RGB(136, 2, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #6 added RGB(50, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #7 added RGB(19, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #8 added RGB(7, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #9 added RGB(3, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #10 added RGB(1, 0, 0)
+Build Patch/Sample Hash Table(s).....Done<0.0009 sec>
+0...1...2...3...4...5...6...7...8...9...10FinalLightFace Done
+0 of 0 (0% of) surface lights went in leaf ambient cubes.
+0...1...2...3...4...5...6...7...8...9...10Writing leaf ambient...done
+Ready to Finish
+
+Object names       Objects/Maxobjs  Memory / Maxmem  Fullness 
+------------       ---------------  ---------------  -------- 
+models                   1/1024           48/49152    ( 0.1%) 
+brushes                 12/8192          144/98304    ( 0.1%) 
+brushsides              84/65536         672/524288   ( 0.1%) 
+planes                 104/65536        2080/1310720  ( 0.2%) 
+vertexes                89/65536        1068/786432   ( 0.1%) 
+nodes                    6/65536         192/2097152  ( 0.0%) 
+texinfos                13/12288         936/884736   ( 0.1%) 
+texdata                  3/2048           96/65536    ( 0.1%) 
+dispinfos                0/0               0/0        ( 0.0%) 
+disp_verts               0/0               0/0        ( 0.0%) 
+disp_tris                0/0               0/0        ( 0.0%) 
+disp_lmsamples           0/0               0/0        ( 0.0%) 
+faces                   37/65536        2072/3670016  ( 0.1%) 
+hdr faces               37/65536        2072/3670016  ( 0.1%) 
+origfaces               13/65536         728/3670016  ( 0.0%) 
+leaves                   8/65536         256/2097152  ( 0.0%) 
+leaffaces               37/65536          74/131072   ( 0.1%) 
+leafbrushes             12/65536          24/131072   ( 0.0%) 
+areas                    2/256            16/2048     ( 0.8%) 
+surfedges              216/512000        864/2048000  ( 0.0%) 
+edges                  135/256000        540/1024000  ( 0.1%) 
+LDR worldlights          0/8192            0/720896   ( 0.0%) 
+HDR worldlights          3/8192          264/720896   ( 0.0%) 
+leafwaterdata            0/32768           0/393216   ( 0.0%) 
+waterstrips              4/32768          40/327680   ( 0.0%) 
+waterverts               0/65536           0/786432   ( 0.0%) 
+waterindices            48/65536          96/131072   ( 0.1%) 
+cubemapsamples           0/1024            0/16384    ( 0.0%) 
+overlays                 0/512             0/180224   ( 0.0%) 
+LDR lightdata         [variable]           0/0        ( 0.0%) 
+HDR lightdata         [variable]       74204/0        ( 0.0%) 
+visdata               [variable]          14/16777216 ( 0.0%) 
+entdata               [variable]         826/393216   ( 0.2%) 
+LDR ambient table        8/65536          32/262144   ( 0.0%) 
+HDR ambient table        8/65536          32/262144   ( 0.0%) 
+LDR leaf ambient         8/65536         224/1835008  ( 0.0%) 
+HDR leaf ambient        16/65536         448/1835008  ( 0.0%) 
+occluders                0/0               0/0        ( 0.0%) 
+occluder polygons        0/0               0/0        ( 0.0%) 
+occluder vert ind        0/0               0/0        ( 0.0%) 
+detail props          [variable]           1/12       ( 8.3%) 
+static props          [variable]           1/206      ( 0.5%) 
+pakfile               [variable]      105679/0        ( 0.0%) 
+physics               [variable]        4760/4194304  ( 0.1%) 
+physics terrain       [variable]           2/1048576  ( 0.0%) 
+
+Level flags = 0
+
+Total triangle count: 90
+Writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (2408 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 10 texinfos to 6
+Reduced 3 texdatas to 3 (67 bytes to 67)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+Error opening c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp! (Check for write enable)
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (4760 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 25 texinfos to 13
+Reduced 3 texdatas to 3 (67 bytes to 67)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+[Reading texlights from 'lights.rad']
+[48 texlights parsed from 'lights.rad']
+
+Loading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+37 faces
+29965 square feet [4315022.00 square inches]
+0 Displacements
+0 Square Feet [0.00 Square Inches]
+37 patches before subdivision
+3483 patches after subdivision
+3 direct lights
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10transfers 353040, max 239
+transfer lists:   2.7 megs
+0...1...2...3...4...5...6...7...8...9...10	Bounce #1 added RGB(8081, 3459, 1597)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #2 added RGB(2803, 494, 76)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #3 added RGB(1011, 72, 4)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #4 added RGB(370, 10, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #5 added RGB(136, 2, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #6 added RGB(50, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #7 added RGB(19, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #8 added RGB(7, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #9 added RGB(3, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #10 added RGB(1, 0, 0)
+Build Patch/Sample Hash Table(s).....Done<0.0008 sec>
+0...1...2...3...4...5...6...7...8...9...10FinalLightFace Done
+0 of 0 (0% of) surface lights went in leaf ambient cubes.
+0...1...2...3...4...5...6...7...8...9...10Writing leaf ambient...done
+Ready to Finish
+
+Object names       Objects/Maxobjs  Memory / Maxmem  Fullness 
+------------       ---------------  ---------------  -------- 
+models                   1/1024           48/49152    ( 0.1%) 
+brushes                 12/8192          144/98304    ( 0.1%) 
+brushsides              84/65536         672/524288   ( 0.1%) 
+planes                 104/65536        2080/1310720  ( 0.2%) 
+vertexes                89/65536        1068/786432   ( 0.1%) 
+nodes                    6/65536         192/2097152  ( 0.0%) 
+texinfos                13/12288         936/884736   ( 0.1%) 
+texdata                  3/2048           96/65536    ( 0.1%) 
+dispinfos                0/0               0/0        ( 0.0%) 
+disp_verts               0/0               0/0        ( 0.0%) 
+disp_tris                0/0               0/0        ( 0.0%) 
+disp_lmsamples           0/0               0/0        ( 0.0%) 
+faces                   37/65536        2072/3670016  ( 0.1%) 
+hdr faces               37/65536        2072/3670016  ( 0.1%) 
+origfaces               13/65536         728/3670016  ( 0.0%) 
+leaves                   8/65536         256/2097152  ( 0.0%) 
+leaffaces               37/65536          74/131072   ( 0.1%) 
+leafbrushes             12/65536          24/131072   ( 0.0%) 
+areas                    2/256            16/2048     ( 0.8%) 
+surfedges              216/512000        864/2048000  ( 0.0%) 
+edges                  135/256000        540/1024000  ( 0.1%) 
+LDR worldlights          0/8192            0/720896   ( 0.0%) 
+HDR worldlights          3/8192          264/720896   ( 0.0%) 
+leafwaterdata            0/32768           0/393216   ( 0.0%) 
+waterstrips              4/32768          40/327680   ( 0.0%) 
+waterverts               0/65536           0/786432   ( 0.0%) 
+waterindices            48/65536          96/131072   ( 0.1%) 
+cubemapsamples           0/1024            0/16384    ( 0.0%) 
+overlays                 0/512             0/180224   ( 0.0%) 
+LDR lightdata         [variable]           0/0        ( 0.0%) 
+HDR lightdata         [variable]       74204/0        ( 0.0%) 
+visdata               [variable]          14/16777216 ( 0.0%) 
+entdata               [variable]         826/393216   ( 0.2%) 
+LDR ambient table        8/65536          32/262144   ( 0.0%) 
+HDR ambient table        8/65536          32/262144   ( 0.0%) 
+LDR leaf ambient         8/65536         224/1835008  ( 0.0%) 
+HDR leaf ambient        16/65536         448/1835008  ( 0.0%) 
+occluders                0/0               0/0        ( 0.0%) 
+occluder polygons        0/0               0/0        ( 0.0%) 
+occluder vert ind        0/0               0/0        ( 0.0%) 
+detail props          [variable]           1/12       ( 8.3%) 
+static props          [variable]           1/206      ( 0.5%) 
+pakfile               [variable]      105679/0        ( 0.0%) 
+physics               [variable]        4760/4194304  ( 0.1%) 
+physics terrain       [variable]           2/1048576  ( 0.0%) 
+
+Level flags = 0
+
+Total triangle count: 90
+Writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (5536 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 28 texinfos to 15
+Reduced 4 texdatas to 4 (92 bytes to 92)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (5536 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 28 texinfos to 15
+Reduced 4 texdatas to 4 (92 bytes to 92)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+[Reading texlights from 'lights.rad']
+[48 texlights parsed from 'lights.rad']
+
+Loading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+45 faces
+30667 square feet [4416186.00 square inches]
+0 Displacements
+0 Square Feet [0.00 Square Inches]
+45 patches before subdivision
+3731 patches after subdivision
+3 direct lights
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10transfers 373279, max 236
+transfer lists:   2.8 megs
+0...1...2...3...4...5...6...7...8...9...10	Bounce #1 added RGB(8654, 3625, 1646)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #2 added RGB(3009, 517, 76)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #3 added RGB(1102, 75, 3)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #4 added RGB(409, 11, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #5 added RGB(154, 2, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #6 added RGB(58, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #7 added RGB(22, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #8 added RGB(8, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #9 added RGB(3, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #10 added RGB(1, 0, 0)
+0...1...2...3...4...5...6...7...8...9...10	Bounce #11 added RGB(0, 0, 0)
+Build Patch/Sample Hash Table(s).....Done<0.0011 sec>
+0...1...2...3...4...5...6...7...8...9...10FinalLightFace Done
+0 of 0 (0% of) surface lights went in leaf ambient cubes.
+0...1...2...3...4...5...6...7...8...9...10Writing leaf ambient...done
+Ready to Finish
+
+Object names       Objects/Maxobjs  Memory / Maxmem  Fullness 
+------------       ---------------  ---------------  -------- 
+models                   1/1024           48/49152    ( 0.1%) 
+brushes                 13/8192          156/98304    ( 0.2%) 
+brushsides             100/65536         800/524288   ( 0.2%) 
+planes                 128/65536        2560/1310720  ( 0.2%) 
+vertexes               105/65536        1260/786432   ( 0.2%) 
+nodes                    6/65536         192/2097152  ( 0.0%) 
+texinfos                15/12288        1080/884736   ( 0.1%) 
+texdata                  4/2048          128/65536    ( 0.2%) 
+dispinfos                0/0               0/0        ( 0.0%) 
+disp_verts               0/0               0/0        ( 0.0%) 
+disp_tris                0/0               0/0        ( 0.0%) 
+disp_lmsamples           0/0               0/0        ( 0.0%) 
+faces                   45/65536        2520/3670016  ( 0.1%) 
+hdr faces               45/65536        2520/3670016  ( 0.1%) 
+origfaces               21/65536        1176/3670016  ( 0.0%) 
+leaves                   8/65536         256/2097152  ( 0.0%) 
+leaffaces               45/65536          90/131072   ( 0.1%) 
+leafbrushes             13/65536          26/131072   ( 0.0%) 
+areas                    2/256            16/2048     ( 0.8%) 
+surfedges              280/512000       1120/2048000  ( 0.1%) 
+edges                  183/256000        732/1024000  ( 0.1%) 
+LDR worldlights          0/8192            0/720896   ( 0.0%) 
+HDR worldlights          3/8192          264/720896   ( 0.0%) 
+leafwaterdata            0/32768           0/393216   ( 0.0%) 
+waterstrips              4/32768          40/327680   ( 0.0%) 
+waterverts               0/65536           0/786432   ( 0.0%) 
+waterindices            48/65536          96/131072   ( 0.1%) 
+cubemapsamples           0/1024            0/16384    ( 0.0%) 
+overlays                 0/512             0/180224   ( 0.0%) 
+LDR lightdata         [variable]           0/0        ( 0.0%) 
+HDR lightdata         [variable]       77404/0        ( 0.0%) 
+visdata               [variable]          14/16777216 ( 0.0%) 
+entdata               [variable]         826/393216   ( 0.2%) 
+LDR ambient table        8/65536          32/262144   ( 0.0%) 
+HDR ambient table        8/65536          32/262144   ( 0.0%) 
+LDR leaf ambient         8/65536         224/1835008  ( 0.0%) 
+HDR leaf ambient        16/65536         448/1835008  ( 0.0%) 
+occluders                0/0               0/0        ( 0.0%) 
+occluder polygons        0/0               0/0        ( 0.0%) 
+occluder vert ind        0/0               0/0        ( 0.0%) 
+detail props          [variable]           1/12       ( 8.3%) 
+static props          [variable]           1/206      ( 0.5%) 
+pakfile               [variable]      105679/0        ( 0.0%) 
+physics               [variable]        5536/4194304  ( 0.1%) 
+physics terrain       [variable]           2/1048576  ( 0.0%) 
+
+Level flags = 0
+
+Total triangle count: 106
+Writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed
+
+
+
+[Reading texlights from 'lights.rad']
+[48 texlights parsed from 'lights.rad']
+
+Loading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+45 faces
+30667 square feet [4416186.00 square inches]
+0 Displacements
+0 Square Feet [0.00 Square Inches]
+3 direct lights
+0...1...2...3...4...5...6...7...8...9...10Build Patch/Sample Hash Table(s).....Done<0.0014 sec>
+0...1...2...3...4...5...6...7...8...9...10FinalLightFace Done
+0 of 0 (0% of) surface lights went in leaf ambient cubes.
+0...1...2...3...4...5...6...7...8...9...10Writing leaf ambient...done
+Ready to Finish
+
+Object names       Objects/Maxobjs  Memory / Maxmem  Fullness 
+------------       ---------------  ---------------  -------- 
+models                   1/1024           48/49152    ( 0.1%) 
+brushes                 13/8192          156/98304    ( 0.2%) 
+brushsides             100/65536         800/524288   ( 0.2%) 
+planes                 128/65536        2560/1310720  ( 0.2%) 
+vertexes               105/65536        1260/786432   ( 0.2%) 
+nodes                    6/65536         192/2097152  ( 0.0%) 
+texinfos                15/12288        1080/884736   ( 0.1%) 
+texdata                  4/2048          128/65536    ( 0.2%) 
+dispinfos                0/0               0/0        ( 0.0%) 
+disp_verts               0/0               0/0        ( 0.0%) 
+disp_tris                0/0               0/0        ( 0.0%) 
+disp_lmsamples           0/0               0/0        ( 0.0%) 
+faces                   45/65536        2520/3670016  ( 0.1%) 
+hdr faces               45/65536        2520/3670016  ( 0.1%) 
+origfaces               21/65536        1176/3670016  ( 0.0%) 
+leaves                   8/65536         256/2097152  ( 0.0%) 
+leaffaces               45/65536          90/131072   ( 0.1%) 
+leafbrushes             13/65536          26/131072   ( 0.0%) 
+areas                    2/256            16/2048     ( 0.8%) 
+surfedges              280/512000       1120/2048000  ( 0.1%) 
+edges                  183/256000        732/1024000  ( 0.1%) 
+LDR worldlights          0/8192            0/720896   ( 0.0%) 
+HDR worldlights          3/8192          264/720896   ( 0.0%) 
+leafwaterdata            0/32768           0/393216   ( 0.0%) 
+waterstrips              4/32768          40/327680   ( 0.0%) 
+waterverts               0/65536           0/786432   ( 0.0%) 
+waterindices            48/65536          96/131072   ( 0.1%) 
+cubemapsamples           0/1024            0/16384    ( 0.0%) 
+overlays                 0/512             0/180224   ( 0.0%) 
+LDR lightdata         [variable]           0/0        ( 0.0%) 
+HDR lightdata         [variable]       77404/0        ( 0.0%) 
+visdata               [variable]          14/16777216 ( 0.0%) 
+entdata               [variable]         826/393216   ( 0.2%) 
+LDR ambient table        8/65536          32/262144   ( 0.0%) 
+HDR ambient table        8/65536          32/262144   ( 0.0%) 
+LDR leaf ambient         8/65536         224/1835008  ( 0.0%) 
+HDR leaf ambient        16/65536         448/1835008  ( 0.0%) 
+occluders                0/0               0/0        ( 0.0%) 
+occluder polygons        0/0               0/0        ( 0.0%) 
+occluder vert ind        0/0               0/0        ( 0.0%) 
+detail props          [variable]           1/12       ( 8.3%) 
+static props          [variable]           1/206      ( 0.5%) 
+pakfile               [variable]      105679/0        ( 0.0%) 
+physics               [variable]        5536/4194304  ( 0.1%) 
+physics terrain       [variable]           2/1048576  ( 0.0%) 
+
+Level flags = 0
+
+Total triangle count: 106
+Writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest.bsp
+0 seconds elapsed

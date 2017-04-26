@@ -8,10 +8,15 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <memory>
+#include <limits>
+#include <algorithm>
 
 #include <cstring>
 #include <cassert>
 #include <cmath>
+
+#include <gmtl/Matrix.h>
+#include <gmtl/MatrixOps.h>
 
 #include "bsp.h"
 
@@ -57,17 +62,18 @@ namespace BSP {
         
         set_fullbright(m_header.lumps[LUMP_LIGHTING_HDR].fileLen == 0);
         
+        load_lump(file, LUMP_MODELS, m_models);
         load_lump(file, LUMP_PLANES, m_planes);
         load_lump(file, LUMP_VERTICES, m_vertices);
         load_lump(file, LUMP_EDGES, m_edges);
         load_lump(file, LUMP_SURFEDGES, m_surfEdges);
         
-        std::vector<DFace> dfaces;
-        load_lump(file, LUMP_FACES_HDR, dfaces);
+        std::vector<DFace> dFaces;
+        load_lump(file, LUMP_FACES_HDR, dFaces);
         
         // The Faces HDR lump can be empty...
-        if (dfaces.size() == 0) {
-            load_lump(file, LUMP_FACES, dfaces);
+        if (dFaces.size() == 0) {
+            load_lump(file, LUMP_FACES, dFaces);
         }
         
         std::vector<LightSample> lightSamples;
@@ -76,9 +82,15 @@ namespace BSP {
             load_lump(file, LUMP_LIGHTING_HDR, lightSamples);
         }
         
-        for (const DFace& faceData : dfaces) {
+        std::vector<TexInfo> texInfos;
+        load_lump(file, LUMP_TEXINFO, texInfos);
+        
+        std::vector<DTexData> dTexDatas;
+        load_lump(file, LUMP_TEXDATA, dTexDatas);
+        
+        for (const DFace& faceData : dFaces) {
             m_faces.push_back(
-                Face(*this, faceData, lightSamples)
+                Face(*this, faceData, lightSamples, texInfos, dTexDatas)
             );
         }
         
@@ -124,12 +136,12 @@ namespace BSP {
     void BSP::load_lights(const std::string& entData) {
         EntityParser entParser(entData);
         
-        std::unordered_map<std::string, std::string> entity;
+        Entity entity;
         
         while ((entity = entParser.next_ent()).size() > 0) {
-            assert(entity.find("classname") != entity.end());
+            assert(entity.has_key("classname"));
             
-            const std::string& classname = entity["classname"];
+            const std::string& classname = entity.get("classname");
             
             if (classname == "light"
                     || classname == "light_spot") {
@@ -152,15 +164,11 @@ namespace BSP {
                 continue;
             }
             
-            m_extraLumps[lumpID] = std::unique_ptr<std::vector<uint8_t>>(
-                new std::vector<uint8_t>
-            );
+            std::vector<uint8_t> extraLumpData;
             
-            load_lump(
-                file,
-                static_cast<LumpType>(lumpID),
-                *m_extraLumps[lumpID]
-            );
+            load_lump(file, static_cast<LumpType>(lumpID), extraLumpData);
+            
+            m_extraLumps[lumpID] = std::move(extraLumpData);
         }
     }
     
@@ -205,16 +213,16 @@ namespace BSP {
                     // break;
                 // }
                 default: {
-                    m_extraGameLumps[gameLump.id]
-                        = std::unique_ptr<std::vector<uint8_t>>(
-                            new std::vector<uint8_t>
-                        );
-                        
+                    std::vector<uint8_t> extraGameLumpData;
+                    
                     load_single_gamelump(
                         file,
                         gameLump,
-                        *m_extraGameLumps[gameLump.id]
+                        extraGameLumpData
                     );
+                    
+                    m_extraGameLumps[gameLump.id]
+                        = std::move(extraGameLumpData);
                 }
             }
             
@@ -228,6 +236,10 @@ namespace BSP {
     
     const Header& BSP::get_header(void) const {
         return m_header;
+    }
+    
+    const std::vector<DModel>& BSP::get_models(void) const {
+        return m_models;
     }
     
     std::vector<Face>& BSP::get_faces(void) {
@@ -272,6 +284,16 @@ namespace BSP {
         std::unordered_map<int, size_t> sizes;
         
         save_lump(
+            file, LUMP_MODELS, m_models,
+            offsets, sizes
+        );
+        
+        save_lump(
+            file, LUMP_PLANES, m_planes,
+            offsets, sizes
+        );
+        
+        save_lump(
             file, LUMP_VERTICES, m_vertices,
             offsets, sizes
         );
@@ -283,11 +305,6 @@ namespace BSP {
         
         save_lump(
             file, LUMP_SURFEDGES, m_surfEdges,
-            offsets, sizes
-        );
-        
-        save_lump(
-            file, LUMP_PLANES, m_planes,
             offsets, sizes
         );
         
@@ -401,7 +418,9 @@ namespace BSP {
             ) {
             
         std::vector<LightSample> lightSamples;
-        std::vector<DFace> dfaces;
+        std::vector<DTexData> dTexDatas;
+        std::vector<TexInfo> texInfos;
+        std::vector<DFace> dFaces;
         
         for (Face& face : m_faces) {
             if (!is_fullbright()) {
@@ -414,7 +433,13 @@ namespace BSP {
                 }
             }
             
-            dfaces.push_back(face.get_data());
+            face.set_texdata_index(dTexDatas.size());
+            dTexDatas.push_back(face.get_texdata());
+            
+            face.set_texinfo_index(texInfos.size());
+            texInfos.push_back(face.get_texinfo());
+            
+            dFaces.push_back(face.get_data());
         }
         
         if (!is_fullbright()) {
@@ -429,12 +454,22 @@ namespace BSP {
         }
         
         save_lump(
-            file, LUMP_FACES, dfaces,
+            file, LUMP_TEXINFO, texInfos,
             offsets, sizes
         );
         
         save_lump(
-            file, LUMP_FACES_HDR, dfaces,
+            file, LUMP_TEXDATA, dTexDatas,
+            offsets, sizes
+        );
+        
+        save_lump(
+            file, LUMP_FACES, dFaces,
+            offsets, sizes
+        );
+        
+        save_lump(
+            file, LUMP_FACES_HDR, dFaces,
             offsets, sizes
         );
     }
@@ -463,20 +498,16 @@ namespace BSP {
             std::unordered_map<int, size_t>& sizes
             ) {
             
-        using Pair = std::pair<
-            const int,
-            std::unique_ptr<std::vector<uint8_t>>
-        >;
+        using Pair = std::pair<int, std::vector<uint8_t>>;
         
         for (const Pair& pair : m_extraLumps) {
             LumpType lumpID = static_cast<LumpType>(pair.first);
-            const std::unique_ptr<std::vector<uint8_t>>& pData = pair.second;
+            const std::vector<uint8_t>& lumpData = pair.second;
             
             assert(m_extraLumps.find(lumpID) != m_extraLumps.end());
-            assert(pData);
             
             save_lump(
-                file, lumpID, *pData,
+                file, lumpID, lumpData,
                 offsets, sizes,
                 true    // This is an extra lump.
             );
@@ -489,14 +520,11 @@ namespace BSP {
             std::unordered_map<int, size_t>& sizes
             ) {
             
-        using Pair = std::pair<
-            const int32_t,
-            std::unique_ptr<std::vector<uint8_t>>
-        >;
+        using Pair = std::pair<int32_t, std::vector<uint8_t>>;
         
         for (const Pair& pair : m_extraGameLumps) {
             int32_t gameLumpID = pair.first;
-            const std::vector<uint8_t>& gameLumpData = *pair.second;
+            const std::vector<uint8_t>& gameLumpData = pair.second;
             
             save_single_gamelump(file, gameLumpID, gameLumpData);
         }
@@ -538,7 +566,7 @@ namespace BSP {
         file.write(reinterpret_cast<const char*>(src.data()), size);
     }
     
-    const std::unordered_map<int, std::unique_ptr<std::vector<uint8_t>>>&
+    const std::unordered_map<int, std::vector<uint8_t>>&
     BSP::get_extras(void) const{
         return m_extraLumps;
     }
@@ -552,10 +580,7 @@ namespace BSP {
         m_index(0),
         m_entData(entData) {}
         
-    std::unordered_map<std::string, std::string>
-    EntityParser::next_ent(void) {
-        using Ent = std::unordered_map<std::string, std::string>;
-        
+    Entity EntityParser::next_ent(void) {
         int entStart = -1;
         std::string entStr = "";
         
@@ -588,7 +613,7 @@ namespace BSP {
                 || (m_index >= m_entData.size() && entStart == -1)
         );
         
-        Ent nextEnt;
+        Entity nextEnt;
         
         if (entStr == "") {
             return nextEnt;
@@ -617,8 +642,8 @@ namespace BSP {
                         key = field;
                     }
                     else {
-                        assert(nextEnt.find(key) == nextEnt.end());
-                        nextEnt[key] = field;
+                        assert(!nextEnt.has_key(key));
+                        nextEnt.set(key, field);
                         key = "";
                     }
                 }   
@@ -635,17 +660,24 @@ namespace BSP {
      * Face Class *
      **************/
      
+    size_t Face::s_faceCount = 0;
+    
     Face::Face(
             const BSP& bsp,
             const DFace& faceData,
-            const std::vector<LightSample>& lightSamples
+            const std::vector<LightSample>& lightSamples,
+            const std::vector<TexInfo>& texInfos,
+            const std::vector<DTexData>& dTexDatas
             ) :
             m_faceData(faceData),
             m_planeData(bsp.m_planes[faceData.planeNum]),
+            m_texInfo(texInfos[faceData.texInfo]),
+            m_texData(dTexDatas[m_texInfo.texData]),
             m_lightSamples(get_lightmap_width() * get_lightmap_height()),
-            m_avgLightSample {0, 0, 0, 0} {
+            m_avgLightSample {0, 0, 0, 0},
+            id(s_faceCount++) {
             
-        const std::vector<Vec3>& vertices = bsp.m_vertices;
+        const std::vector<Vec3<float>>& vertices = bsp.m_vertices;
         const std::vector<DEdge>& dEdges = bsp.m_edges;
         const std::vector<int32_t>& surfEdges = bsp.m_surfEdges;
         
@@ -654,11 +686,14 @@ namespace BSP {
         if (!bsp.is_fullbright()) {
             load_lightsamples(lightSamples);
         }
+        
+        /* For coordinate transformation from s/t to x/y/z */
+        precalculate_st_xyz_matrix();
     }
     
     void Face::load_edges(
             const DFace& faceData,
-            const std::vector<Vec3>& vertices,
+            const std::vector<Vec3<float>>& vertices,
             const std::vector<DEdge>& dEdges,
             const std::vector<int32_t>& surfEdges
             ) {
@@ -718,8 +753,52 @@ namespace BSP {
         assert(m_lightSamples.size() == numSamples);
     }
     
+    void Face::precalculate_st_xyz_matrix(void) {
+        double sx = m_texInfo.lightmapVecs[0][0];
+        double sy = m_texInfo.lightmapVecs[0][1];
+        double sz = m_texInfo.lightmapVecs[0][2];
+        
+        double tx = m_texInfo.lightmapVecs[1][0];
+        double ty = m_texInfo.lightmapVecs[1][1];
+        double tz = m_texInfo.lightmapVecs[1][2];
+        
+        double nx = m_planeData.normal.x;
+        double ny = m_planeData.normal.y;
+        double nz = m_planeData.normal.z;
+        
+        gmtl::Matrix<double, 3, 3> A;
+        
+        A.set(
+            sx, sy, sz,
+            tx, ty, tz,
+            nx, ny, nz
+        );
+        
+        gmtl::invert(m_Ainv, A);
+    }
+    
+    const TexInfo& Face::get_texinfo(void) const {
+        return m_texInfo;
+    }
+    
+    const DTexData& Face::get_texdata(void) const {
+        return m_texData;
+    }
+    
     const DFace& Face::get_data(void) const {
         return m_faceData;
+    }
+    
+    const DPlane& Face::get_planedata(void) const {
+        return m_planeData;
+    }
+    
+    void Face::set_texinfo_index(int16_t index) {
+        m_faceData.texInfo = index;
+    }
+    
+    void Face::set_texdata_index(int32_t index) {
+        m_texInfo.texData = index;
     }
     
     const std::vector<Edge>& Face::get_edges(void) const {
@@ -768,6 +847,34 @@ namespace BSP {
         m_faceData.lightOffset = offset * sizeof(LightSample);
     }
     
+    Vec3<float> Face::xyz_from_lightmap_st(float s, float t) const {
+        double sOffset = m_texInfo.lightmapVecs[0][3];
+        double tOffset = m_texInfo.lightmapVecs[1][3];
+        
+        double sMin = static_cast<double>(
+            m_faceData.lightmapTextureMinsInLuxels[0]
+        );
+        double tMin = static_cast<double>(
+            m_faceData.lightmapTextureMinsInLuxels[1]
+        );
+        
+        gmtl::Matrix<double, 3, 1> B;
+        gmtl::Matrix<double, 3, 1> result;
+        
+        B[0][0] = s - sOffset + sMin;
+        B[1][0] = t - tOffset + tMin;
+        B[2][0] = m_planeData.dist;
+        B.mState = gmtl::Matrix<double, 3, 1>::FULL;
+        
+        gmtl::mult(result, m_Ainv, B);
+        
+        return Vec3<float> {
+            static_cast<float>(result[0][0]),
+            static_cast<float>(result[1][0]),
+            static_cast<float>(result[2][0]),
+        };
+    }
+    
     
     /***************
      * Light Class *
@@ -784,7 +891,7 @@ namespace BSP {
         return result;
     }
     
-    static Vec3 vec3_from_str(const std::string& str) {
+    static Vec3<float> vec3_from_str(const std::string& str) {
         std::stringstream stream(str);
         
         float x;
@@ -802,9 +909,10 @@ namespace BSP {
         std::getline(stream, s, ' ');
         z = convert_str<float>(s);
         
-        return Vec3 {x, y, z};
+        return Vec3<float> {x, y, z};
     }
     
+    /* Gamma-correction */
     static inline double linear_from_encoded(double encoded) {
         return pow(encoded / 255.0, GAMMA) * 255.0;
     }
@@ -813,56 +921,61 @@ namespace BSP {
         return pow(linear / 255.0, INV_GAMMA) * 255.0;
     }
     
-    static inline double attenuate(double x, double c, double l, double q) {
-        return c + l * x + q * x * x;
-    }
-    
-    Light::Light(const std::unordered_map<std::string, std::string>& entity) :
-            m_coords(vec3_from_str(entity.at("origin"))) {
+    Light::Light(const Entity& entity) :
+            m_coords(vec3_from_str(entity.get("origin"))) {
             
-        assert(entity.find("_light") != entity.end());
-        
-        std::stringstream stream(entity.at("_light"));
-        std::stringstream converter;
+        /* Parse color */
+        std::stringstream stream(entity.get("_light"));
         
         std::string s;
         
         std::getline(stream, s, ' ');
-        r = convert_str<double>(s);
+        r = linear_from_encoded(convert_str<double>(s));
         
         std::getline(stream, s, ' ');
-        g = convert_str<double>(s);
+        g = linear_from_encoded(convert_str<double>(s));
         
         std::getline(stream, s, ' ');
-        b = convert_str<double>(s);
+        b = linear_from_encoded(convert_str<double>(s));
         
         std::getline(stream, s, ' ');
         double brightness = convert_str<double>(s) / 255.0;
         
-        r = linear_from_encoded(r) * brightness;
-        g = linear_from_encoded(g) * brightness;
-        b = linear_from_encoded(b) * brightness;
+        // Note that this means we are scaling brightness linearly, rather 
+        // than perceptually.
+        r *= brightness;
+        g *= brightness;
+        b *= brightness;
         
-        double attenuation = attenuate(100.0, 0.0, 0.0, 1.0);
+        /* Parse attenuation */
+        c = convert_str<double>(entity.get("_constant_attn", "0"));
+        l = convert_str<double>(entity.get("_linear_attn", "0"));
+        q = convert_str<double>(entity.get("_quadratic_attn", "0"));
         
-        r *= attenuation;
-        g *= attenuation;
-        b *= attenuation;
+        /* Scale color intensity to 100-unit inverse distance */
+        // I don't know why we need to do this.
+        // Honestly, it doesn't really make all that much sense to me.
+        // But if we don't do it, static prop lighting looks really weird.
+        double scale = attenuate(100.0);
+        
+        r *= scale;
+        g *= scale;
+        b *= scale;
     }
     
-    const Vec3& Light::get_coords(void) const {
+    const Vec3<float>& Light::get_coords(void) const {
         return m_coords;
     }
     
     DWorldLight Light::to_worldlight(void) const {
         return DWorldLight {
             get_coords(),
-            Vec3 {
+            Vec3<float> {
                 static_cast<float>(r / 255.0),
                 static_cast<float>(g / 255.0),
                 static_cast<float>(b / 255.0),
             },
-            Vec3 {1.0, 0.0, 0.0},
+            Vec3<float> {1.0, 0.0, 0.0},
             0,
             EMIT_POINT,
             0x0,
@@ -877,5 +990,43 @@ namespace BSP {
             0,
             0,
         };
+    }
+    
+    /****************
+     * Entity Class *
+     ****************/
+    
+    Entity::Entity() {}
+    
+    const std::string& Entity::get(const std::string& key) const {
+        return m_data.at(key);
+    }
+    
+    const std::string& Entity::get(
+            const std::string& key,
+            const std::string& defaultVal
+            ) const {
+            
+        std::unordered_map<std::string, std::string>::const_iterator
+            pValue = m_data.find(key);
+            
+        if (pValue != m_data.end()) {
+            return pValue->second;
+        }
+        else {
+            return defaultVal;
+        }
+    }
+    
+    bool Entity::has_key(const std::string& key) const {
+        return m_data.find(key) != m_data.end();
+    }
+    
+    void Entity::set(const std::string& key, const std::string& value) {
+        m_data[key] = value;
+    }
+    
+    size_t Entity::size(void) const {
+        return m_data.size();
     }
 }
