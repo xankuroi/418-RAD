@@ -1,0 +1,1435 @@
+9
+6
+7
+8
+12
+10
+11
+13
+14
+14
+13
+13
+14
+14
+13
+3
+3
+3
+5
+5
+5
+2
+2
+2
+4
+4
+4
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+BSP Version 20
+Fullbright: 0
+Face 0:
+    (640, 128, 320) -> (704, 256, 320)
+    (704, 256, 320) -> (832, 192, 320)
+    (832, 192, 320) -> (768, 64, 320)
+    (768, 64, 320) -> (640, 128, 320)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 1
+    Luxels X: 13
+    Luxels Y: 13
+    169 Light Samples
+    Average Lighting: (153, 79, 43) * 2^-5
+    Texinfo Index: 9
+    Face Normal: <0, 0, 1>
+    Plane Distance: 320
+    Lightmap Mins: 36, -20
+    Lightmap S vector: <0.0625, 0, 0, -4>
+    Lightmap T vector: <0, -0.0625, 0, -4>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: -0.00390625
+    Inverted S: <16, -0, -0>
+    Inverted T: <-0, -16, -0>
+    Luxel Origin: <-64, 64, 320>
+    Texture Width: 512
+    Texture Height: 512
+Face 1:
+    (704, 448, 192) -> (704, 576, 192)
+    (704, 576, 192) -> (704, 576, 320)
+    (704, 576, 320) -> (704, 448, 320)
+    (704, 448, 320) -> (704, 448, 192)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 171
+    Luxels X: 9
+    Luxels Y: 9
+    81 Light Samples
+    Average Lighting: (110, 240, 80) * 2^0
+    Texinfo Index: 6
+    Face Normal: <-1, 0, 0>
+    Plane Distance: -704
+    Lightmap Mins: -40, -16
+    Lightmap S vector: <0, -0.0625, 0, -4>
+    Lightmap T vector: <0, 0, -0.0625, 4>
+    ST Cross: <-0.00390625, -0, -0>
+    ST Determinant: -0.00390625
+    Inverted S: <-0, -16, -0>
+    Inverted T: <-0, -0, -16>
+    Luxel Origin: <704, 64, -64>
+    Texture Width: 512
+    Texture Height: 512
+Face 2:
+    (471.426, 919.426, 192) -> (407.422, 808.566, 192)
+    (407.422, 808.566, 192) -> (407.426, 808.578, 320)
+    (407.426, 808.578, 320) -> (471.426, 919.43, 320)
+    (471.426, 919.43, 320) -> (471.426, 919.426, 192)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 253
+    Luxels X: 10
+    Luxels Y: 9
+    90 Light Samples
+    Average Lighting: (173, 110, 72) * 2^-2
+    Texinfo Index: 7
+    Face Normal: <0.866027, -0.499997, 0>
+    Plane Distance: -51.4429
+    Lightmap Mins: 56, -16
+    Lightmap S vector: <0.03125, 0.0541266, 0, -0.490703>
+    Lightmap T vector: <0, 0, -0.0625, 4>
+    ST Cross: <0.00338291, -0.00195312, 0>
+    ST Determinant: -0.00390625
+    Inverted S: <7.99996, 13.8564, 0>
+    Inverted T: <0, -0, -12>
+    Luxel Origin: <-48.4765, 18.9221, -48.0001>
+    Texture Width: 512
+    Texture Height: 512
+Face 3:
+    (320, 343.425, 232.576) -> (320, 232.574, 168.576)
+    (320, 232.574, 168.576) -> (320, 168.574, 279.426)
+    (320, 168.574, 279.426) -> (320, 279.426, 343.424)
+    (320, 279.426, 343.424) -> (320, 343.425, 232.576)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 344
+    Luxels X: 10
+    Luxels Y: 10
+    100 Light Samples
+    Average Lighting: (107, 132, 176) * 2^-2
+    Texinfo Index: 8
+    Face Normal: <1, 0, 0>
+    Plane Distance: 320
+    Lightmap Mins: 15, -17
+    Lightmap S vector: <0, 0.0541266, 0.03125, -1.85641>
+    Lightmap T vector: <0, 0.03125, -0.0541266, -6.14359>
+    ST Cross: <0.00390625, -0, 0>
+    ST Determinant: -0.00390625
+    Inverted S: <-0, 13.8564, 8.00001>
+    Inverted T: <-0, 8.00001, -13.8564>
+    Luxel Origin: <320, -74.8719, 70.2769>
+    Texture Width: 512
+    Texture Height: 512
+Face 4:
+    (320, 576, 192) -> (320, 448, 192)
+    (320, 448, 192) -> (320, 448, 320)
+    (320, 448, 320) -> (320, 576, 320)
+    (320, 576, 320) -> (320, 576, 192)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 445
+    Luxels X: 9
+    Luxels Y: 9
+    81 Light Samples
+    Average Lighting: (139, 77, 186) * 2^0
+    Texinfo Index: 12
+    Face Normal: <1, 0, 0>
+    Plane Distance: 320
+    Lightmap Mins: 24, -16
+    Lightmap S vector: <0, 0.0625, 0, -4>
+    Lightmap T vector: <0, 0, -0.0625, 4>
+    ST Cross: <0.00390625, -0, 0>
+    ST Determinant: -0.00390625
+    Inverted S: <-0, 16, -0>
+    Inverted T: <-0, -0, -16>
+    Luxel Origin: <320, -64, -64>
+    Texture Width: 512
+    Texture Height: 512
+Face 5:
+    (640, 128, 192) -> (704, 256, 192)
+    (704, 256, 192) -> (704, 256, 320)
+    (704, 256, 320) -> (640, 128, 320)
+    (640, 128, 320) -> (640, 128, 192)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 527
+    Luxels X: 9
+    Luxels Y: 9
+    81 Light Samples
+    Average Lighting: (124, 149, 159) * 2^-2
+    Texinfo Index: 10
+    Face Normal: <-0.894427, 0.447214, 0>
+    Plane Distance: -515.19
+    Lightmap Mins: 12, -16
+    Lightmap S vector: <0, 0.0625, 0, 4>
+    Lightmap T vector: <0, 0, -0.0625, 4>
+    ST Cross: <0.00390625, -0, 0>
+    ST Determinant: 0.00349386
+    Inverted S: <8, 16, 0>
+    Inverted T: <0, 0, -16>
+    Luxel Origin: <608, 64, -64>
+    Texture Width: 512
+    Texture Height: 512
+Face 6:
+    (704, 768, 192) -> (576, 768, 192)
+    (576, 768, 192) -> (576, 768, 320)
+    (576, 768, 320) -> (704, 768, 320)
+    (704, 768, 320) -> (704, 768, 192)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 609
+    Luxels X: 10
+    Luxels Y: 9
+    90 Light Samples
+    Average Lighting: (158, 131, 74) * 2^-1
+    Texinfo Index: 11
+    Face Normal: <0, -1, 0>
+    Plane Distance: -768
+    Lightmap Mins: 39, -20
+    Lightmap S vector: <0.0625, 0, 0, 3.65625>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <0, -0.00390625, 0>
+    ST Determinant: -0.00390625
+    Inverted S: <16, 0, 0>
+    Inverted T: <0, -0, -0>
+    Luxel Origin: <58.5, 768, 0>
+    Texture Width: 512
+    Texture Height: 512
+Face 7:
+    (288, 768, 0) -> (311, 759, 0)
+    (311, 759, 0) -> (311, 759, 512)
+    (311, 759, 512) -> (288, 768, 512)
+    (288, 768, 512) -> (288, 768, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 700
+    Luxels X: 3
+    Luxels Y: 33
+    99 Light Samples
+    Average Lighting: (217, 45, 11) * 2^-5
+    Texinfo Index: 13
+    Face Normal: <0.364399, 0.931243, -0>
+    Plane Distance: 820.141
+    Lightmap Mins: 18, -32
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <0, -0.00390625, 0>
+    ST Determinant: 0.00363767
+    Inverted S: <16, -6.26087, 0>
+    Inverted T: <0, -0, 0>
+    Luxel Origin: <0, 880.696, 0>
+    Texture Width: 128
+    Texture Height: 128
+Face 8:
+    (311, 759, 0) -> (320, 736, 0)
+    (320, 736, 0) -> (320, 736, 512)
+    (320, 736, 512) -> (311, 759, 512)
+    (311, 759, 512) -> (311, 759, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 800
+    Luxels X: 3
+    Luxels Y: 33
+    99 Light Samples
+    Average Lighting: (142, 75, 39) * 2^-2
+    Texinfo Index: 14
+    Face Normal: <0.931243, 0.364399, -0>
+    Plane Distance: 566.196
+    Lightmap Mins: 46, -32
+    Lightmap S vector: <0, 0.0625, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <0.00390625, -0, 0>
+    ST Determinant: -0.00363767
+    Inverted S: <-6.26087, 16, -0>
+    Inverted T: <-0, 0, -16>
+    Luxel Origin: <608, 0, 0>
+    Texture Width: 128
+    Texture Height: 128
+Face 9:
+    (320, 736, 0) -> (311, 713, 0)
+    (311, 713, 0) -> (311, 713, 512)
+    (311, 713, 512) -> (320, 736, 512)
+    (320, 736, 512) -> (320, 736, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 900
+    Luxels X: 3
+    Luxels Y: 33
+    99 Light Samples
+    Average Lighting: (237, 124, 104) * 2^-2
+    Texinfo Index: 14
+    Face Normal: <0.931243, -0.364399, 0>
+    Plane Distance: 29.7998
+    Lightmap Mins: 44, -32
+    Lightmap S vector: <0, 0.0625, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <0.00390625, -0, 0>
+    ST Determinant: -0.00363767
+    Inverted S: <6.26087, 16, 0>
+    Inverted T: <0, -0, -16>
+    Luxel Origin: <32, 0, 0>
+    Texture Width: 128
+    Texture Height: 128
+Face 10:
+    (311, 713, 0) -> (288, 704, 0)
+    (288, 704, 0) -> (288, 704, 512)
+    (288, 704, 512) -> (311, 713, 512)
+    (311, 713, 512) -> (311, 713, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 1000
+    Luxels X: 3
+    Luxels Y: 33
+    99 Light Samples
+    Average Lighting: (185, 102, 163) * 2^-2
+    Texinfo Index: 13
+    Face Normal: <0.364399, -0.931243, 0>
+    Plane Distance: -550.648
+    Lightmap Mins: 18, -32
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <0, -0.00390625, 0>
+    ST Determinant: -0.00363767
+    Inverted S: <16, 6.26087, 0>
+    Inverted T: <0, -0, -0>
+    Luxel Origin: <0, 591.304, 0>
+    Texture Width: 128
+    Texture Height: 128
+Face 11:
+    (288, 704, 0) -> (265, 713, 0)
+    (265, 713, 0) -> (265, 713, 512)
+    (265, 713, 512) -> (288, 704, 512)
+    (288, 704, 512) -> (288, 704, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 1100
+    Luxels X: 3
+    Luxels Y: 33
+    99 Light Samples
+    Average Lighting: (170, 107, 206) * 2^-3
+    Texinfo Index: 13
+    Face Normal: <-0.364399, -0.931243, 0>
+    Plane Distance: -760.542
+    Lightmap Mins: 16, -32
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <0, -0.00390625, 0>
+    ST Determinant: -0.00363767
+    Inverted S: <16, -6.26087, -0>
+    Inverted T: <0, -0, -0>
+    Luxel Origin: <0, 816.696, -0>
+    Texture Width: 128
+    Texture Height: 128
+Face 12:
+    (265, 713, 0) -> (256, 736, 0)
+    (256, 736, 0) -> (256, 736, 512)
+    (256, 736, 512) -> (265, 713, 512)
+    (265, 713, 512) -> (265, 713, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 1200
+    Luxels X: 3
+    Luxels Y: 33
+    99 Light Samples
+    Average Lighting: (136, 24, 8) * 2^-4
+    Texinfo Index: 14
+    Face Normal: <-0.931243, -0.364399, 0>
+    Plane Distance: -506.596
+    Lightmap Mins: 44, -32
+    Lightmap S vector: <0, 0.0625, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <0.00390625, -0, 0>
+    ST Determinant: 0.00363767
+    Inverted S: <-6.26087, 16, 0>
+    Inverted T: <-0, 0, -16>
+    Luxel Origin: <544, 0, 0>
+    Texture Width: 128
+    Texture Height: 128
+Face 13:
+    (256, 736, 0) -> (265, 759, 0)
+    (265, 759, 0) -> (265, 759, 512)
+    (265, 759, 512) -> (256, 736, 512)
+    (256, 736, 512) -> (256, 736, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 1300
+    Luxels X: 3
+    Luxels Y: 33
+    99 Light Samples
+    Average Lighting: (136, 22, 4) * 2^-4
+    Texinfo Index: 14
+    Face Normal: <-0.931243, 0.364399, 0>
+    Plane Distance: 29.7998
+    Lightmap Mins: 46, -32
+    Lightmap S vector: <0, 0.0625, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <0.00390625, -0, 0>
+    ST Determinant: 0.00363767
+    Inverted S: <6.26087, 16, 0>
+    Inverted T: <0, 0, -16>
+    Luxel Origin: <-32, 0, 0>
+    Texture Width: 128
+    Texture Height: 128
+Face 14:
+    (265, 759, 0) -> (288, 768, 0)
+    (288, 768, 0) -> (288, 768, 512)
+    (288, 768, 512) -> (265, 759, 512)
+    (265, 759, 512) -> (265, 759, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 1400
+    Luxels X: 3
+    Luxels Y: 33
+    99 Light Samples
+    Average Lighting: (227, 43, 9) * 2^-5
+    Texinfo Index: 13
+    Face Normal: <-0.364399, 0.931243, 0>
+    Plane Distance: 610.247
+    Lightmap Mins: 16, -32
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <0, -0.00390625, 0>
+    ST Determinant: 0.00363767
+    Inverted S: <16, 6.26087, 0>
+    Inverted T: <0, 0, -0>
+    Luxel Origin: <0, 655.304, 0>
+    Texture Width: 128
+    Texture Height: 128
+Face 15:
+    (496, 1024, 512) -> (992, 1024, 512)
+    (992, 1024, 512) -> (992, 1024, 0)
+    (992, 1024, 0) -> (496, 1024, 0)
+    (496, 1024, 0) -> (496, 1024, 512)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 1500
+    Luxels X: 32
+    Luxels Y: 33
+    1056 Light Samples
+    Average Lighting: (237, 199, 133) * 2^-4
+    Texinfo Index: 3
+    Face Normal: <0, -1, 0>
+    Plane Distance: -1024
+    Lightmap Mins: 31, -32
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <0, -0.00390625, 0>
+    ST Determinant: -0.00390625
+    Inverted S: <16, 0, 0>
+    Inverted T: <0, -0, -0>
+    Luxel Origin: <0, 1024, 0>
+    Texture Width: 512
+    Texture Height: 512
+Face 16:
+    (992, 1024, 512) -> (1024, 1024, 512)
+    (1024, 1024, 512) -> (1024, 1024, 0)
+    (1024, 1024, 0) -> (992, 1024, 0)
+    (992, 1024, 0) -> (992, 1024, 512)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 2557
+    Luxels X: 3
+    Luxels Y: 33
+    99 Light Samples
+    Average Lighting: (223, 158, 99) * 2^-4
+    Texinfo Index: 3
+    Face Normal: <0, -1, 0>
+    Plane Distance: -1024
+    Lightmap Mins: 62, -32
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <0, -0.00390625, 0>
+    ST Determinant: -0.00390625
+    Inverted S: <16, 0, 0>
+    Inverted T: <0, -0, -0>
+    Luxel Origin: <0, 1024, 0>
+    Texture Width: 512
+    Texture Height: 512
+Face 17:
+    (0, 1024, 0) -> (0, 1024, 512)
+    (0, 1024, 512) -> (496, 1024, 512)
+    (496, 1024, 512) -> (496, 1024, 0)
+    (496, 1024, 0) -> (0, 1024, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 2657
+    Luxels X: 32
+    Luxels Y: 33
+    1056 Light Samples
+    Average Lighting: (129, 74, 51) * 2^-3
+    Texinfo Index: 3
+    Face Normal: <0, -1, 0>
+    Plane Distance: -1024
+    Lightmap Mins: 0, -32
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <0, -0.00390625, 0>
+    ST Determinant: -0.00390625
+    Inverted S: <16, 0, 0>
+    Inverted T: <0, -0, -0>
+    Luxel Origin: <0, 1024, 0>
+    Texture Width: 512
+    Texture Height: 512
+Face 18:
+    (1024, 32, 0) -> (1024, 528, 0)
+    (1024, 528, 0) -> (1024, 528, 512)
+    (1024, 528, 512) -> (1024, 32, 512)
+    (1024, 32, 512) -> (1024, 32, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 3714
+    Luxels X: 32
+    Luxels Y: 33
+    1056 Light Samples
+    Average Lighting: (204, 182, 190) * 2^-4
+    Texinfo Index: 5
+    Face Normal: <-1, 0, 0>
+    Plane Distance: -1024
+    Lightmap Mins: -33, -32
+    Lightmap S vector: <0, -0.0625, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <-0.00390625, -0, -0>
+    ST Determinant: -0.00390625
+    Inverted S: <-0, -16, -0>
+    Inverted T: <-0, -0, -16>
+    Luxel Origin: <1024, 0, 0>
+    Texture Width: 512
+    Texture Height: 512
+Face 19:
+    (1024, 0, 512) -> (1024, 0, 0)
+    (1024, 0, 0) -> (1024, 32, 0)
+    (1024, 32, 0) -> (1024, 32, 512)
+    (1024, 32, 512) -> (1024, 0, 512)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 4771
+    Luxels X: 3
+    Luxels Y: 33
+    99 Light Samples
+    Average Lighting: (186, 150, 106) * 2^-4
+    Texinfo Index: 5
+    Face Normal: <-1, 0, 0>
+    Plane Distance: -1024
+    Lightmap Mins: -2, -32
+    Lightmap S vector: <0, -0.0625, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <-0.00390625, -0, -0>
+    ST Determinant: -0.00390625
+    Inverted S: <-0, -16, -0>
+    Inverted T: <-0, -0, -16>
+    Luxel Origin: <1024, 0, 0>
+    Texture Width: 512
+    Texture Height: 512
+Face 20:
+    (1024, 528, 0) -> (1024, 1024, 0)
+    (1024, 1024, 0) -> (1024, 1024, 512)
+    (1024, 1024, 512) -> (1024, 528, 512)
+    (1024, 528, 512) -> (1024, 528, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 4871
+    Luxels X: 32
+    Luxels Y: 33
+    1056 Light Samples
+    Average Lighting: (146, 71, 64) * 2^-3
+    Texinfo Index: 5
+    Face Normal: <-1, 0, 0>
+    Plane Distance: -1024
+    Lightmap Mins: -64, -32
+    Lightmap S vector: <0, -0.0625, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <-0.00390625, -0, -0>
+    ST Determinant: -0.00390625
+    Inverted S: <-0, -16, -0>
+    Inverted T: <-0, -0, -16>
+    Luxel Origin: <1024, 0, 0>
+    Texture Width: 512
+    Texture Height: 512
+Face 21:
+    (528, 0, 512) -> (496, 0, 512)
+    (496, 0, 512) -> (32, 0, 512)
+    (32, 0, 512) -> (32, 0, 0)
+    (32, 0, 0) -> (496, 0, 0)
+    (496, 0, 0) -> (528, 0, 0)
+    (528, 0, 0) -> (528, 0, 512)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 5928
+    Luxels X: 32
+    Luxels Y: 33
+    1056 Light Samples
+    Average Lighting: (133, 109, 135) * 2^-3
+    Texinfo Index: 2
+    Face Normal: <0, 1, 0>
+    Plane Distance: -0
+    Lightmap Mins: -33, -32
+    Lightmap S vector: <-0.0625, 0, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <0, 0.00390625, 0>
+    ST Determinant: -0.00390625
+    Inverted S: <-16, 0, -0>
+    Inverted T: <-0, 0, -0>
+    Luxel Origin: <-0, 0, -0>
+    Texture Width: 512
+    Texture Height: 512
+Face 22:
+    (32, 0, 512) -> (0, 0, 512)
+    (0, 0, 512) -> (0, 0, 0)
+    (0, 0, 0) -> (32, 0, 0)
+    (32, 0, 0) -> (32, 0, 512)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 6985
+    Luxels X: 3
+    Luxels Y: 33
+    99 Light Samples
+    Average Lighting: (173, 40, 24) * 2^-5
+    Texinfo Index: 2
+    Face Normal: <0, 1, 0>
+    Plane Distance: -0
+    Lightmap Mins: -2, -32
+    Lightmap S vector: <-0.0625, 0, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <0, 0.00390625, 0>
+    ST Determinant: -0.00390625
+    Inverted S: <-16, 0, -0>
+    Inverted T: <-0, 0, -0>
+    Luxel Origin: <-0, 0, -0>
+    Texture Width: 512
+    Texture Height: 512
+Face 23:
+    (1024, 0, 0) -> (1024, 0, 512)
+    (1024, 0, 512) -> (992, 0, 512)
+    (992, 0, 512) -> (528, 0, 512)
+    (528, 0, 512) -> (528, 0, 0)
+    (528, 0, 0) -> (992, 0, 0)
+    (992, 0, 0) -> (1024, 0, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 7085
+    Luxels X: 32
+    Luxels Y: 33
+    1056 Light Samples
+    Average Lighting: (230, 205, 168) * 2^-4
+    Texinfo Index: 2
+    Face Normal: <0, 1, 0>
+    Plane Distance: -0
+    Lightmap Mins: -64, -32
+    Lightmap S vector: <-0.0625, 0, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <0, 0.00390625, 0>
+    ST Determinant: -0.00390625
+    Inverted S: <-16, 0, -0>
+    Inverted T: <-0, 0, -0>
+    Luxel Origin: <-0, 0, -0>
+    Texture Width: 512
+    Texture Height: 512
+Face 24:
+    (0, 992, 0) -> (0, 528, 0)
+    (0, 528, 0) -> (0, 496, 0)
+    (0, 496, 0) -> (0, 496, 512)
+    (0, 496, 512) -> (0, 528, 512)
+    (0, 528, 512) -> (0, 992, 512)
+    (0, 992, 512) -> (0, 992, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 8142
+    Luxels X: 32
+    Luxels Y: 33
+    1056 Light Samples
+    Average Lighting: (152, 80, 45) * 2^-3
+    Texinfo Index: 4
+    Face Normal: <1, 0, 0>
+    Plane Distance: -0
+    Lightmap Mins: 31, -32
+    Lightmap S vector: <0, 0.0625, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <0.00390625, -0, 0>
+    ST Determinant: -0.00390625
+    Inverted S: <-0, 16, -0>
+    Inverted T: <-0, -0, -16>
+    Luxel Origin: <-0, 0, -0>
+    Texture Width: 512
+    Texture Height: 512
+Face 25:
+    (0, 1024, 512) -> (0, 1024, 0)
+    (0, 1024, 0) -> (0, 992, 0)
+    (0, 992, 0) -> (0, 992, 512)
+    (0, 992, 512) -> (0, 1024, 512)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 9199
+    Luxels X: 3
+    Luxels Y: 33
+    99 Light Samples
+    Average Lighting: (198, 46, 208) * 2^-5
+    Texinfo Index: 4
+    Face Normal: <1, 0, 0>
+    Plane Distance: -0
+    Lightmap Mins: 62, -32
+    Lightmap S vector: <0, 0.0625, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <0.00390625, -0, 0>
+    ST Determinant: -0.00390625
+    Inverted S: <-0, 16, -0>
+    Inverted T: <-0, -0, -16>
+    Luxel Origin: <-0, 0, -0>
+    Texture Width: 512
+    Texture Height: 512
+Face 26:
+    (0, 496, 0) -> (0, 32, 0)
+    (0, 32, 0) -> (0, 0, 0)
+    (0, 0, 0) -> (0, 0, 512)
+    (0, 0, 512) -> (0, 32, 512)
+    (0, 32, 512) -> (0, 496, 512)
+    (0, 496, 512) -> (0, 496, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 9299
+    Luxels X: 32
+    Luxels Y: 33
+    1056 Light Samples
+    Average Lighting: (134, 161, 181) * 2^-4
+    Texinfo Index: 4
+    Face Normal: <1, 0, 0>
+    Plane Distance: -0
+    Lightmap Mins: 0, -32
+    Lightmap S vector: <0, 0.0625, 0, 0>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <0.00390625, -0, 0>
+    ST Determinant: -0.00390625
+    Inverted S: <-0, 16, -0>
+    Inverted T: <-0, -0, -16>
+    Luxel Origin: <-0, 0, -0>
+    Texture Width: 512
+    Texture Height: 512
+Face 27:
+    (496, 528, 0) -> (496, 32, 0)
+    (496, 32, 0) -> (0, 32, 0)
+    (0, 32, 0) -> (0, 496, 0)
+    (0, 496, 0) -> (0, 528, 0)
+    (0, 528, 0) -> (496, 528, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 10356
+    Luxels X: 32
+    Luxels Y: 32
+    1024 Light Samples
+    Average Lighting: (145, 100, 140) * 2^-3
+    Texinfo Index: 0
+    Face Normal: <0, 0, 1>
+    Plane Distance: 0
+    Lightmap Mins: 0, -33
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, -0.0625, 0, 0>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: -0.00390625
+    Inverted S: <16, -0, -0>
+    Inverted T: <-0, -16, -0>
+    Luxel Origin: <0, 0, 0>
+    Texture Width: 128
+    Texture Height: 128
+Face 28:
+    (0, 32, 0) -> (496, 32, 0)
+    (496, 32, 0) -> (496, 0, 0)
+    (496, 0, 0) -> (32, 0, 0)
+    (32, 0, 0) -> (0, 0, 0)
+    (0, 0, 0) -> (0, 32, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 11381
+    Luxels X: 32
+    Luxels Y: 3
+    96 Light Samples
+    Average Lighting: (198, 117, 128) * 2^-4
+    Texinfo Index: 0
+    Face Normal: <0, 0, 1>
+    Plane Distance: 0
+    Lightmap Mins: 0, -2
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, -0.0625, 0, 0>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: -0.00390625
+    Inverted S: <16, -0, -0>
+    Inverted T: <-0, -16, -0>
+    Luxel Origin: <0, 0, 0>
+    Texture Width: 128
+    Texture Height: 128
+Face 29:
+    (496, 1024, 0) -> (496, 528, 0)
+    (496, 528, 0) -> (0, 528, 0)
+    (0, 528, 0) -> (0, 992, 0)
+    (0, 992, 0) -> (0, 1024, 0)
+    (0, 1024, 0) -> (496, 1024, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 11478
+    Luxels X: 32
+    Luxels Y: 32
+    1024 Light Samples
+    Average Lighting: (173, 77, 83) * 2^-3
+    Texinfo Index: 0
+    Face Normal: <0, 0, 1>
+    Plane Distance: 0
+    Lightmap Mins: 0, -64
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, -0.0625, 0, 0>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: -0.00390625
+    Inverted S: <16, -0, -0>
+    Inverted T: <-0, -16, -0>
+    Luxel Origin: <0, 0, 0>
+    Texture Width: 128
+    Texture Height: 128
+Face 30:
+    (496, 32, 0) -> (496, 528, 0)
+    (496, 528, 0) -> (992, 528, 0)
+    (992, 528, 0) -> (992, 32, 0)
+    (992, 32, 0) -> (496, 32, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 12503
+    Luxels X: 32
+    Luxels Y: 32
+    1024 Light Samples
+    Average Lighting: (147, 160, 111) * 2^-3
+    Texinfo Index: 0
+    Face Normal: <0, 0, 1>
+    Plane Distance: 0
+    Lightmap Mins: 31, -33
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, -0.0625, 0, 0>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: -0.00390625
+    Inverted S: <16, -0, -0>
+    Inverted T: <-0, -16, -0>
+    Luxel Origin: <0, 0, 0>
+    Texture Width: 128
+    Texture Height: 128
+Face 31:
+    (496, 32, 0) -> (992, 32, 0)
+    (992, 32, 0) -> (992, 0, 0)
+    (992, 0, 0) -> (528, 0, 0)
+    (528, 0, 0) -> (496, 0, 0)
+    (496, 0, 0) -> (496, 32, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 13528
+    Luxels X: 32
+    Luxels Y: 3
+    96 Light Samples
+    Average Lighting: (207, 152, 111) * 2^-4
+    Texinfo Index: 0
+    Face Normal: <0, 0, 1>
+    Plane Distance: 0
+    Lightmap Mins: 31, -2
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, -0.0625, 0, 0>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: -0.00390625
+    Inverted S: <16, -0, -0>
+    Inverted T: <-0, -16, -0>
+    Luxel Origin: <0, 0, 0>
+    Texture Width: 128
+    Texture Height: 128
+Face 32:
+    (496, 528, 0) -> (496, 1024, 0)
+    (496, 1024, 0) -> (992, 1024, 0)
+    (992, 1024, 0) -> (992, 528, 0)
+    (992, 528, 0) -> (496, 528, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 13625
+    Luxels X: 32
+    Luxels Y: 32
+    1024 Light Samples
+    Average Lighting: (190, 127, 74) * 2^-3
+    Texinfo Index: 0
+    Face Normal: <0, 0, 1>
+    Plane Distance: 0
+    Lightmap Mins: 31, -64
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, -0.0625, 0, 0>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: -0.00390625
+    Inverted S: <16, -0, -0>
+    Inverted T: <-0, -16, -0>
+    Luxel Origin: <0, 0, 0>
+    Texture Width: 128
+    Texture Height: 128
+Face 33:
+    (992, 32, 0) -> (992, 528, 0)
+    (992, 528, 0) -> (1024, 528, 0)
+    (1024, 528, 0) -> (1024, 32, 0)
+    (1024, 32, 0) -> (992, 32, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 14650
+    Luxels X: 3
+    Luxels Y: 32
+    96 Light Samples
+    Average Lighting: (185, 161, 91) * 2^-4
+    Texinfo Index: 0
+    Face Normal: <0, 0, 1>
+    Plane Distance: 0
+    Lightmap Mins: 62, -33
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, -0.0625, 0, 0>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: -0.00390625
+    Inverted S: <16, -0, -0>
+    Inverted T: <-0, -16, -0>
+    Luxel Origin: <0, 0, 0>
+    Texture Width: 128
+    Texture Height: 128
+Face 34:
+    (1024, 0, 0) -> (992, 0, 0)
+    (992, 0, 0) -> (992, 32, 0)
+    (992, 32, 0) -> (1024, 32, 0)
+    (1024, 32, 0) -> (1024, 0, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 14747
+    Luxels X: 3
+    Luxels Y: 3
+    9 Light Samples
+    Average Lighting: (150, 91, 54) * 2^-4
+    Texinfo Index: 0
+    Face Normal: <0, 0, 1>
+    Plane Distance: 0
+    Lightmap Mins: 62, -2
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, -0.0625, 0, 0>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: -0.00390625
+    Inverted S: <16, -0, -0>
+    Inverted T: <-0, -16, -0>
+    Luxel Origin: <0, 0, 0>
+    Texture Width: 128
+    Texture Height: 128
+Face 35:
+    (992, 528, 0) -> (992, 1024, 0)
+    (992, 1024, 0) -> (1024, 1024, 0)
+    (1024, 1024, 0) -> (1024, 528, 0)
+    (1024, 528, 0) -> (992, 528, 0)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 14757
+    Luxels X: 3
+    Luxels Y: 32
+    96 Light Samples
+    Average Lighting: (222, 138, 74) * 2^-4
+    Texinfo Index: 0
+    Face Normal: <0, 0, 1>
+    Plane Distance: 0
+    Lightmap Mins: 62, -64
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, -0.0625, 0, 0>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: -0.00390625
+    Inverted S: <16, -0, -0>
+    Inverted T: <-0, -16, -0>
+    Luxel Origin: <0, 0, 0>
+    Texture Width: 128
+    Texture Height: 128
+Face 36:
+    (496, 32, 512) -> (496, 528, 512)
+    (496, 528, 512) -> (0, 528, 512)
+    (0, 528, 512) -> (0, 496, 512)
+    (0, 496, 512) -> (0, 32, 512)
+    (0, 32, 512) -> (496, 32, 512)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 14854
+    Luxels X: 32
+    Luxels Y: 32
+    1024 Light Samples
+    Average Lighting: (146, 100, 140) * 2^-3
+    Texinfo Index: 0
+    Face Normal: <0, 0, -1>
+    Plane Distance: -512
+    Lightmap Mins: 0, -33
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, -0.0625, 0, 0>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: 0.00390625
+    Inverted S: <16, 0, 0>
+    Inverted T: <0, -16, 0>
+    Luxel Origin: <0, 0, 512>
+    Texture Width: 128
+    Texture Height: 128
+Face 37:
+    (0, 32, 512) -> (0, 0, 512)
+    (0, 0, 512) -> (32, 0, 512)
+    (32, 0, 512) -> (496, 0, 512)
+    (496, 0, 512) -> (496, 32, 512)
+    (496, 32, 512) -> (0, 32, 512)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 15879
+    Luxels X: 32
+    Luxels Y: 3
+    96 Light Samples
+    Average Lighting: (197, 117, 128) * 2^-4
+    Texinfo Index: 0
+    Face Normal: <0, 0, -1>
+    Plane Distance: -512
+    Lightmap Mins: 0, -2
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, -0.0625, 0, 0>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: 0.00390625
+    Inverted S: <16, 0, 0>
+    Inverted T: <0, -16, 0>
+    Luxel Origin: <0, 0, 512>
+    Texture Width: 128
+    Texture Height: 128
+Face 38:
+    (496, 1024, 512) -> (0, 1024, 512)
+    (0, 1024, 512) -> (0, 992, 512)
+    (0, 992, 512) -> (0, 528, 512)
+    (0, 528, 512) -> (496, 528, 512)
+    (496, 528, 512) -> (496, 1024, 512)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 15976
+    Luxels X: 32
+    Luxels Y: 32
+    1024 Light Samples
+    Average Lighting: (173, 77, 82) * 2^-3
+    Texinfo Index: 0
+    Face Normal: <0, 0, -1>
+    Plane Distance: -512
+    Lightmap Mins: 0, -64
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, -0.0625, 0, 0>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: 0.00390625
+    Inverted S: <16, 0, 0>
+    Inverted T: <0, -16, 0>
+    Luxel Origin: <0, 0, 512>
+    Texture Width: 128
+    Texture Height: 128
+Face 39:
+    (496, 528, 512) -> (496, 32, 512)
+    (496, 32, 512) -> (992, 32, 512)
+    (992, 32, 512) -> (992, 528, 512)
+    (992, 528, 512) -> (496, 528, 512)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 17001
+    Luxels X: 32
+    Luxels Y: 32
+    1024 Light Samples
+    Average Lighting: (149, 161, 111) * 2^-3
+    Texinfo Index: 0
+    Face Normal: <0, 0, -1>
+    Plane Distance: -512
+    Lightmap Mins: 31, -33
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, -0.0625, 0, 0>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: 0.00390625
+    Inverted S: <16, 0, 0>
+    Inverted T: <0, -16, 0>
+    Luxel Origin: <0, 0, 512>
+    Texture Width: 128
+    Texture Height: 128
+Face 40:
+    (496, 32, 512) -> (496, 0, 512)
+    (496, 0, 512) -> (528, 0, 512)
+    (528, 0, 512) -> (992, 0, 512)
+    (992, 0, 512) -> (992, 32, 512)
+    (992, 32, 512) -> (496, 32, 512)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 18026
+    Luxels X: 32
+    Luxels Y: 3
+    96 Light Samples
+    Average Lighting: (213, 153, 111) * 2^-4
+    Texinfo Index: 0
+    Face Normal: <0, 0, -1>
+    Plane Distance: -512
+    Lightmap Mins: 31, -2
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, -0.0625, 0, 0>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: 0.00390625
+    Inverted S: <16, 0, 0>
+    Inverted T: <0, -16, 0>
+    Luxel Origin: <0, 0, 512>
+    Texture Width: 128
+    Texture Height: 128
+Face 41:
+    (992, 1024, 512) -> (496, 1024, 512)
+    (496, 1024, 512) -> (496, 528, 512)
+    (496, 528, 512) -> (992, 528, 512)
+    (992, 528, 512) -> (992, 1024, 512)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 18123
+    Luxels X: 32
+    Luxels Y: 32
+    1024 Light Samples
+    Average Lighting: (190, 127, 74) * 2^-3
+    Texinfo Index: 0
+    Face Normal: <0, 0, -1>
+    Plane Distance: -512
+    Lightmap Mins: 31, -64
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, -0.0625, 0, 0>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: 0.00390625
+    Inverted S: <16, 0, 0>
+    Inverted T: <0, -16, 0>
+    Luxel Origin: <0, 0, 512>
+    Texture Width: 128
+    Texture Height: 128
+Face 42:
+    (1024, 32, 512) -> (1024, 528, 512)
+    (1024, 528, 512) -> (992, 528, 512)
+    (992, 528, 512) -> (992, 32, 512)
+    (992, 32, 512) -> (1024, 32, 512)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 19148
+    Luxels X: 3
+    Luxels Y: 32
+    96 Light Samples
+    Average Lighting: (186, 161, 91) * 2^-4
+    Texinfo Index: 0
+    Face Normal: <0, 0, -1>
+    Plane Distance: -512
+    Lightmap Mins: 62, -33
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, -0.0625, 0, 0>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: 0.00390625
+    Inverted S: <16, 0, 0>
+    Inverted T: <0, -16, 0>
+    Luxel Origin: <0, 0, 512>
+    Texture Width: 128
+    Texture Height: 128
+Face 43:
+    (1024, 0, 512) -> (1024, 32, 512)
+    (1024, 32, 512) -> (992, 32, 512)
+    (992, 32, 512) -> (992, 0, 512)
+    (992, 0, 512) -> (1024, 0, 512)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 19245
+    Luxels X: 3
+    Luxels Y: 3
+    9 Light Samples
+    Average Lighting: (151, 92, 54) * 2^-4
+    Texinfo Index: 0
+    Face Normal: <0, 0, -1>
+    Plane Distance: -512
+    Lightmap Mins: 62, -2
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, -0.0625, 0, 0>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: 0.00390625
+    Inverted S: <16, 0, 0>
+    Inverted T: <0, -16, 0>
+    Luxel Origin: <0, 0, 512>
+    Texture Width: 128
+    Texture Height: 128
+Face 44:
+    (1024, 528, 512) -> (1024, 1024, 512)
+    (1024, 1024, 512) -> (992, 1024, 512)
+    (992, 1024, 512) -> (992, 528, 512)
+    (992, 528, 512) -> (1024, 528, 512)
+    Styles:
+        0 00000000
+        1 11111111
+        2 11111111
+        3 11111111
+    Light Offset: 19255
+    Luxels X: 3
+    Luxels Y: 32
+    96 Light Samples
+    Average Lighting: (223, 137, 74) * 2^-4
+    Texinfo Index: 0
+    Face Normal: <0, 0, -1>
+    Plane Distance: -512
+    Lightmap Mins: 62, -64
+    Lightmap S vector: <0.0625, 0, 0, 0>
+    Lightmap T vector: <0, -0.0625, 0, 0>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: 0.00390625
+    Inverted S: <16, 0, 0>
+    Inverted T: <0, -16, 0>
+    Luxel Origin: <0, 0, 512>
+    Texture Width: 128
+    Texture Height: 128
+Light 0:
+    pos: (496, 576, 256)
+    r: 5e+06
+    g: 0
+    b: 0
+Light 1:
+    pos: (464, 464, 256)
+    r: 0
+    g: 0
+    b: 5e+06
+Light 2:
+    pos: (576, 496, 256)
+    r: 0
+    g: 5e+06
+    b: 0
+World Lights: 
+    World Light 0:
+        origin: (576, 496, 256)
+        intensity: (0, 19607.8, 0)
+        normal: (1, 0, 0)
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 1:
+        origin: (464, 464, 256)
+        intensity: (0, 0, 19607.8)
+        normal: (1, 0, 0)
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 2:
+        origin: (496, 576, 256)
+        intensity: (19607.8, 0, 0)
+        normal: (1, 0, 0)
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+9
+6
+7
+8
+12
+10
+11
+13
+14
+14
+13
+13
+14
+14
+13
+3
+3
+3
+5
+5
+5
+2
+2
+2
+4
+4
+4
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0

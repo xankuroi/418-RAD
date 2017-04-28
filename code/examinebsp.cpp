@@ -4,13 +4,14 @@
 #include <string>
 #include <vector>
 #include <bitset>
+#include <memory>
 
 #include <cstdlib>
 #include <cassert>
 
 #include "bsp.h"
 
-static BSP::BSP g_bsp;
+static std::unique_ptr<BSP::BSP> g_pBSP;
 
 
 int main(int argc, char** argv) {
@@ -23,18 +24,18 @@ int main(int argc, char** argv) {
     std::ifstream f(filename, std::ios::binary);
     
     try {
-        g_bsp = BSP::BSP(filename);
+        g_pBSP = std::unique_ptr<BSP::BSP>(new BSP::BSP(filename));
     }
     catch (BSP::InvalidBSP e) {
         std::cerr << e.what() << std::endl;
         return 1;
     }
     
-    std::cout << "BSP Version " << g_bsp.get_format_version() << std::endl;
-    std::cout << "Fullbright: " << g_bsp.is_fullbright() << std::endl;
+    std::cout << "BSP Version " << g_pBSP->get_format_version() << std::endl;
+    std::cout << "Fullbright: " << g_pBSP->is_fullbright() << std::endl;
     
     int i = 0;
-    for (BSP::Face& face : g_bsp.get_faces()) {
+    for (BSP::Face& face : g_pBSP->get_faces()) {
         std::cout << "Face " << i << ":" << std::endl;
         
         for (const BSP::Edge& edge : face.get_edges()) {
@@ -73,10 +74,8 @@ int main(int argc, char** argv) {
             << face.get_lightmap_height()
             << std::endl;
             
-        std::vector<BSP::LightSample>& lightSamples = face.get_lightsamples();
-        
         std::cout << "    "
-            << lightSamples.size() << " Light Samples" << std::endl;
+            << face.get_lightmap_size() << " Light Samples" << std::endl;
             
         const BSP::LightSample& avgLighting = face.get_average_lighting();
         
@@ -98,24 +97,25 @@ int main(int argc, char** argv) {
             // j++;
         // }
         
-        std::cout << "    Light Sample Coords:" << std::endl;
+        // std::cout << "    Light Sample Coords:" << std::endl;
         
-        for (size_t i=0; i<lightSamples.size(); i++) {
-            double s = static_cast<double>(i % face.get_lightmap_width());
-            double t = static_cast<double>(i / face.get_lightmap_width());
+        // for (size_t i=0; i<face.get_lightmap_size(); i++) {
+            // double s = static_cast<double>(i % face.get_lightmap_width());
+            // double t = static_cast<double>(i / face.get_lightmap_width());
             
-            BSP::Vec3<float> pos = face.xyz_from_lightmap_st(s, t);
+            // BSP::Vec3<float> pos = face.xyz_from_lightmap_st(s, t);
             
-            std::cout << "        Sample " << i << ": <"
-                << pos.x << ", "
-                << pos.y << ", "
-                << pos.z << ">" << std::endl;
-            j++;
-        }
+            // std::cout << "        Sample " << i << ": <"
+                // << pos.x << ", "
+                // << pos.y << ", "
+                // << pos.z << ">" << std::endl;
+        // }
         
         const BSP::TexInfo& texInfo = face.get_texinfo();
         const BSP::DTexData& texData = face.get_texdata();
         const BSP::DPlane& planeData = face.get_planedata();
+        
+        std::cout << "    Texinfo Index: " << faceData.texInfo << std::endl;
         
         std::cout << "    Face Normal: <"
             << planeData.normal.x << ", "
@@ -216,7 +216,7 @@ int main(int argc, char** argv) {
     }
     
     i = 0;
-    for (const BSP::Light& light : g_bsp.get_lights()) {
+    for (const BSP::Light& light : g_pBSP->get_lights()) {
         std::cout << "Light " << i << ":" << std::endl;
         
         const BSP::Vec3<float>& pos = light.get_coords();
@@ -233,12 +233,12 @@ int main(int argc, char** argv) {
     }
     
     // std::cout << "Ent Data: " << std::endl;
-    // std::cout << g_bsp.get_entdata() << std::endl;
+    // std::cout << g_pBSP->get_entdata() << std::endl;
     
     std::cout << "World Lights: " << std::endl;
     
     i = 0;
-    for (const BSP::DWorldLight& worldLight : g_bsp.get_worldlights()) {
+    for (const BSP::DWorldLight& worldLight : g_pBSP->get_worldlights()) {
         std::cout << "    World Light " << i << ":" << std::endl;
         
         std::cout << "        origin: ("
@@ -272,6 +272,11 @@ int main(int argc, char** argv) {
         
         i++;
     }
+    
+    std::cout << "Entities:" << std::endl;
+    std::cout << g_pBSP->get_entdata() << std::endl;
+    
+    g_pBSP->write("out.bsp");
     
     return 0;
 }

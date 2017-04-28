@@ -390,22 +390,46 @@ namespace BSP {
             const Vec3<float>& get_coords(void) const;
             DWorldLight to_worldlight(void) const;
     };
-    
+
+    class FaceLightSampleProxy {
+        public:
+            using Iter = std::vector<LightSample>::iterator;
+            using ConstIter = std::vector<LightSample>::const_iterator;
+
+        private:
+            Iter m_begin;
+            Iter m_end;
+
+        public:
+            FaceLightSampleProxy(
+                Iter& begin,
+                Iter& end
+            );
+
+            LightSample& operator[](size_t i);
+            const LightSample& operator[](size_t i) const;
+
+            Iter begin(void);
+            Iter end(void);
+
+    };
+
     class Face {
         private:
             static size_t s_faceCount;
             
-            DFace m_faceData;
-            DPlane m_planeData;
-            TexInfo m_texInfo;
-            DTexData m_texData;
+            BSP& m_bsp;
+
+            DFace& m_faceData;
+            DPlane& m_planeData;
+            TexInfo& m_texInfo;
+            DTexData& m_texData;
             
             gmtl::Matrix<double, 3, 3> m_Ainv;
             
             std::vector<Edge> m_edges;
-            std::vector<LightSample> m_lightSamples;
-            
-            LightSample m_avgLightSample;
+
+            //LightSample& m_avgLightSample;
             
             void load_edges(
                 const DFace& faceData,
@@ -413,21 +437,13 @@ namespace BSP {
                 const std::vector<DEdge>& dEdges,
                 const std::vector<int32_t>& surfEdges
             );
-            
-            void load_lightsamples(const std::vector<LightSample>& samples);
-            
+
             void precalculate_st_xyz_matrix(void);
             
         public:
             const size_t id;
             
-            Face(
-                const BSP& bsp,
-                const DFace& faceData,
-                const std::vector<LightSample>& lightSamples,
-                const std::vector<TexInfo>& texInfos,
-                const std::vector<DTexData>& dTexDatas
-            );
+            Face(BSP& bsp, DFace& faceData);
             
             const TexInfo& get_texinfo(void) const;
             const DTexData& get_texdata(void) const;
@@ -444,26 +460,21 @@ namespace BSP {
             
             int32_t get_lightmap_width(void) const;
             int32_t get_lightmap_height(void) const;
-            
-            std::vector<LightSample>& get_lightsamples(void);
+            size_t get_lightmap_size(void) const;
+            size_t get_lightmap_offset(void) const;
+            void set_lightmap_offset(size_t offset);
+
+            FaceLightSampleProxy get_lightsamples(void);
             
             LightSample get_average_lighting(void) const;
             void set_average_lighting(const LightSample& sample);
             
-            void set_lightlump_offset(int32_t offset);
-            
             Vec3<float> xyz_from_lightmap_st(float s, float t) const;
     };
-    
+
     class BSP {
-        friend Face::Face(
-            const BSP&,
-            const DFace&,
-            const std::vector<LightSample>&,
-            const std::vector<TexInfo>&,
-            const std::vector<DTexData>&
-        );
-        
+        friend Face::Face(BSP&, DFace&);
+
         private:
             Header m_header;
             
@@ -472,6 +483,10 @@ namespace BSP {
             std::vector<Vec3<float>> m_vertices;
             std::vector<DEdge> m_edges;
             std::vector<int32_t> m_surfEdges;
+            std::vector<DFace> m_dFaces;
+            std::vector<LightSample> m_lightSamples;
+            std::vector<TexInfo> m_texInfos;
+            std::vector<DTexData> m_texDatas;
             std::vector<Face> m_faces;
             std::vector<DLeaf> m_leaves;
             std::vector<DWorldLight> m_worldLights;
@@ -519,11 +534,11 @@ namespace BSP {
                 bool isExtraLump=false
             );
             
-            void save_faces(
-                std::ofstream& file,
-                std::unordered_map<int, std::ofstream::off_type>& offsets,
-                std::unordered_map<int, size_t>& sizes
-            );
+            //void save_faces(
+            //    std::ofstream& file,
+            //    std::unordered_map<int, std::ofstream::off_type>& offsets,
+            //    std::unordered_map<int, size_t>& sizes
+            //);
             
             void save_lights(
                 std::ofstream& file,
@@ -554,17 +569,32 @@ namespace BSP {
             BSP();
             BSP(const std::string& filename);
             BSP(std::ifstream& file);
+
+            // Disallow copy/move semantics for now, because that completely 
+            // *wrecks* all of the Face helper objects' internal references, 
+            // and I don't want to have to deal with that at the moment.
+            BSP(const BSP& other) = delete;
+            BSP& operator=(const BSP& other) = delete;
             
             int get_format_version(void) const;
             
             const Header& get_header(void) const;
             
             const std::vector<DModel>& get_models(void) const;
-            
+            const std::vector<DPlane>& get_planes(void) const;
+            const std::vector<Vec3<float>>& get_vertices(void) const;
+            const std::vector<DEdge>& get_edges(void) const;
+            const std::vector<int32_t>& get_surfedges(void) const;
+            std::vector<LightSample>& get_lightsamples(void);
+            const std::vector<TexInfo>& get_texinfos(void) const;
+            const std::vector<DTexData>& get_texdatas(void) const;
+
             std::vector<Face>& get_faces(void);
-            const std::vector<Light>& get_lights(void) const;
-            
+
+            const std::vector<DLeaf>& get_leaves(void) const;
+
             const std::vector<DWorldLight>& get_worldlights(void) const;
+            const std::vector<Light>& get_lights(void) const;
             
             const std::string& get_entdata(void);
             
@@ -585,7 +615,7 @@ namespace BSP {
     
     class EntityParser {
         private:
-            size_t m_index;
+            int m_index;
             std::string m_entData;
             
         public:

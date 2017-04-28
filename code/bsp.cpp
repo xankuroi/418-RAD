@@ -68,30 +68,41 @@ namespace BSP {
         load_lump(file, LUMP_EDGES, m_edges);
         load_lump(file, LUMP_SURFEDGES, m_surfEdges);
         
-        std::vector<DFace> dFaces;
-        load_lump(file, LUMP_FACES_HDR, dFaces);
+        load_lump(file, LUMP_FACES_HDR, m_dFaces);
         
         // The Faces HDR lump can be empty...
-        if (dFaces.size() == 0) {
-            load_lump(file, LUMP_FACES, dFaces);
+        if (m_dFaces.size() == 0) {
+            load_lump(file, LUMP_FACES, m_dFaces);
         }
         
-        std::vector<LightSample> lightSamples;
         
         if (!is_fullbright()) {
-            load_lump(file, LUMP_LIGHTING_HDR, lightSamples);
+            load_lump(file, LUMP_LIGHTING_HDR, m_lightSamples);
         }
+
+        load_lump(file, LUMP_TEXINFO, m_texInfos);
+        load_lump(file, LUMP_TEXDATA, m_texDatas);
         
-        std::vector<TexInfo> texInfos;
-        load_lump(file, LUMP_TEXINFO, texInfos);
-        
-        std::vector<DTexData> dTexDatas;
-        load_lump(file, LUMP_TEXDATA, dTexDatas);
-        
-        for (const DFace& faceData : dFaces) {
-            m_faces.push_back(
-                Face(*this, faceData, lightSamples, texInfos, dTexDatas)
-            );
+        for (DFace& faceData : m_dFaces) {
+            //std::cout << faceData.texInfo << std::endl;
+
+            m_faces.push_back(Face(*this, faceData));
+
+            Face& face = m_faces.back();
+
+            if (is_fullbright()) {
+                // Average lighting entry
+                m_lightSamples.push_back(LightSample {0, 0, 0, 0});
+
+                // The lightmap offset always points to the entry *after* the
+                // average lighting entry.
+                face.set_lightmap_offset(m_lightSamples.size());
+
+                // The rest of the lightmap
+                for (size_t i=0; i<face.get_lightmap_size(); i++) {
+                    m_lightSamples.push_back(LightSample {0, 0, 0, 0});
+                }
+            }
         }
         
         load_lump(file, LUMP_LEAVES, m_leaves);
@@ -177,7 +188,7 @@ namespace BSP {
             std::ifstream& file,
             const GameLump& gameLump,
             Container& dest
-        ) {
+            ) {
         
         std::ifstream::off_type offset = gameLump.fileOffset;
         size_t lumpSize = gameLump.fileLen;
@@ -199,14 +210,13 @@ namespace BSP {
         
         int32_t lumpCount = gameLumpHeader.lumpCount;
         
-        GameLump* pGameLumps = reinterpret_cast<GameLump*>(
-            &gameLumpHeader.firstGameLump
-        );
+        GameLump* pGameLumps = &gameLumpHeader.firstGameLump;
         
         for (int i=0; i<lumpCount; i++) {
             GameLump& gameLump = pGameLumps[i];
             
             switch (gameLump.id) {
+                case GAMELUMP_STATIC_PROPS:
                 // case GAMELUMP_STATIC_PROPS: {
                     // std::vector<>
                     
@@ -237,23 +247,55 @@ namespace BSP {
     const Header& BSP::get_header(void) const {
         return m_header;
     }
-    
+
     const std::vector<DModel>& BSP::get_models(void) const {
         return m_models;
     }
-    
+
+    const std::vector<DPlane>& BSP::get_planes(void) const {
+        return m_planes;
+    }
+
+    const std::vector<Vec3<float>>& BSP::get_vertices(void) const {
+        return m_vertices;
+    }
+
+    const std::vector<DEdge>& BSP::get_edges(void) const {
+        return m_edges;
+    }
+
+    const std::vector<int32_t>& BSP::get_surfedges(void) const {
+        return m_surfEdges;
+    }
+
+    std::vector<LightSample>& BSP::get_lightsamples(void) {
+        return m_lightSamples;
+    }
+
+    const std::vector<TexInfo>& BSP::get_texinfos(void) const {
+        return m_texInfos;
+    }
+
+    const std::vector<DTexData>& BSP::get_texdatas(void) const {
+        return m_texDatas;
+    }
+
     std::vector<Face>& BSP::get_faces(void) {
         return m_faces;
     }
-    
-    const std::vector<Light>& BSP::get_lights(void) const {
-        return m_lights;
+
+    const std::vector<DLeaf>& BSP::get_leaves(void) const {
+        return m_leaves;
     }
-    
+
     const std::vector<DWorldLight>& BSP::get_worldlights(void) const {
         return m_worldLights;
     }
-    
+
+    const std::vector<Light>& BSP::get_lights(void) const {
+        return m_lights;
+    }
+
     const std::string& BSP::get_entdata(void) {
         return m_entData;
     }
@@ -307,8 +349,60 @@ namespace BSP {
             file, LUMP_SURFEDGES, m_surfEdges,
             offsets, sizes
         );
-        
-        save_faces(file, offsets, sizes);
+
+        if (is_fullbright()) {
+            std::vector<DFace> dFaces(m_dFaces);
+
+            // Make sure the light offset is -1 for all DFace structures if 
+            // we are in fullbright mode.
+            for (DFace& dFace : dFaces) {
+                dFace.lightOffset = -1;
+            }
+
+            save_lump(
+                file, LUMP_FACES, dFaces,
+                offsets, sizes
+            );
+
+            save_lump(
+                file, LUMP_FACES_HDR, dFaces,
+                offsets, sizes
+            );
+        }
+        else {
+            //for (DFace& dFace : m_dFaces) {
+            //    std::cout << dFace.texInfo << std::endl;
+            //}
+
+            save_lump(
+                file, LUMP_FACES, m_dFaces,
+                offsets, sizes
+            );
+
+            save_lump(
+                file, LUMP_FACES_HDR, m_dFaces,
+                offsets, sizes
+            );
+        }
+
+        if (!is_fullbright()) {
+            save_lump(
+                file, LUMP_LIGHTING_HDR, m_lightSamples,
+                offsets, sizes
+            );
+        }
+
+        save_lump(
+            file, LUMP_TEXINFO, m_texInfos,
+            offsets, sizes
+        );
+
+        save_lump(
+            file, LUMP_TEXDATA, m_texDatas,
+            offsets, sizes
+        );
+
+        //save_faces(file, offsets, sizes);
         
         save_lump(
             file, LUMP_LEAVES, m_leaves,
@@ -411,70 +505,70 @@ namespace BSP {
         }
     }
     
-    void BSP::save_faces(
-            std::ofstream& file,
-            std::unordered_map<int, std::ofstream::off_type>& offsets,
-            std::unordered_map<int, size_t>& sizes
-            ) {
-            
-        std::vector<LightSample> lightSamples;
-        std::vector<DTexData> dTexDatas;
-        std::vector<TexInfo> texInfos;
-        std::vector<DFace> dFaces;
-        
-        for (Face& face : m_faces) {
-            if (!is_fullbright()) {
-                lightSamples.push_back(face.get_average_lighting());
-                
-                face.set_lightlump_offset(
-                    static_cast<int32_t>(lightSamples.size())
-                );
-                
-                for (LightSample& lightSample : face.get_lightsamples()) {
-                    lightSamples.push_back(lightSample);
-                }
-            }
-            
-            face.set_texdata_index(static_cast<int32_t>(dTexDatas.size()));
-            dTexDatas.push_back(face.get_texdata());
-            
-            face.set_texinfo_index(static_cast<int32_t>(texInfos.size()));
-            texInfos.push_back(face.get_texinfo());
-            
-            dFaces.push_back(face.get_data());
-        }
-        
-        if (!is_fullbright()) {
-            save_lump(
-                file, LUMP_LIGHTING_HDR, lightSamples,
-                offsets, sizes
-            );
-        }
-        else {
-            offsets[LUMP_LIGHTING_HDR] = 0;
-            sizes[LUMP_LIGHTING_HDR] = 0;
-        }
-        
-        save_lump(
-            file, LUMP_TEXINFO, texInfos,
-            offsets, sizes
-        );
-        
-        save_lump(
-            file, LUMP_TEXDATA, dTexDatas,
-            offsets, sizes
-        );
-        
-        save_lump(
-            file, LUMP_FACES, dFaces,
-            offsets, sizes
-        );
-        
-        save_lump(
-            file, LUMP_FACES_HDR, dFaces,
-            offsets, sizes
-        );
-    }
+    //void BSP::save_faces(
+    //        std::ofstream& file,
+    //        std::unordered_map<int, std::ofstream::off_type>& offsets,
+    //        std::unordered_map<int, size_t>& sizes
+    //        ) {
+    //        
+    //    std::vector<LightSample> lightSamples;
+    //    std::vector<DTexData> dTexDatas;
+    //    std::vector<TexInfo> texInfos;
+    //    std::vector<DFace> dFaces;
+    //    
+    //    for (Face& face : m_faces) {
+    //        if (!is_fullbright()) {
+    //            lightSamples.push_back(face.get_average_lighting());
+    //            
+    //            face.set_lightlump_offset(
+    //                static_cast<int32_t>(lightSamples.size())
+    //            );
+    //            
+    //            for (LightSample& lightSample : face.get_lightsamples()) {
+    //                lightSamples.push_back(lightSample);
+    //            }
+    //        }
+    //        
+    //        face.set_texdata_index(static_cast<int32_t>(dTexDatas.size()));
+    //        dTexDatas.push_back(face.get_texdata());
+    //        
+    //        face.set_texinfo_index(static_cast<int32_t>(texInfos.size()));
+    //        texInfos.push_back(face.get_texinfo());
+    //        
+    //        dFaces.push_back(face.get_data());
+    //    }
+    //    
+    //    if (!is_fullbright()) {
+    //        save_lump(
+    //            file, LUMP_LIGHTING_HDR, m_lightSamples,
+    //            offsets, sizes
+    //        );
+    //    }
+    //    else {
+    //        offsets[LUMP_LIGHTING_HDR] = 0;
+    //        sizes[LUMP_LIGHTING_HDR] = 0;
+    //    }
+    //    
+    //    save_lump(
+    //        file, LUMP_TEXINFO, m_texInfos,
+    //        offsets, sizes
+    //    );
+    //    
+    //    save_lump(
+    //        file, LUMP_TEXDATA, m_texDatas,
+    //        offsets, sizes
+    //    );
+    //    
+    //    save_lump(
+    //        file, LUMP_FACES, m_dFaces,
+    //        offsets, sizes
+    //    );
+    //    
+    //    save_lump(
+    //        file, LUMP_FACES_HDR, m_dFaces,
+    //        offsets, sizes
+    //    );
+    //}
     
     void BSP::save_lights(
             std::ofstream& file,
@@ -583,10 +677,10 @@ namespace BSP {
         m_entData(entData) {}
         
     Entity EntityParser::next_ent(void) {
-        size_t entStart = -1;
+        int entStart = -1;
         std::string entStr = "";
         
-        while (m_index < m_entData.size()) {
+        while (m_index < static_cast<int>(m_entData.size())) {
             char c = m_entData[m_index];
             
             switch (c) {
@@ -597,7 +691,7 @@ namespace BSP {
                     
                 case '}':
                     assert(entStart != -1);
-                    size_t count = m_index - entStart - 1;
+                    int count = m_index - entStart - 1;
                     entStr = m_entData.substr(entStart + 1, count);
                     break;
             }
@@ -612,7 +706,8 @@ namespace BSP {
         
         assert(
             entStr != ""
-                || (m_index >= m_entData.size() && entStart == -1)
+                || (m_index >= static_cast<int>(m_entData.size())
+                    && entStart == -1)
         );
         
         Entity nextEnt;
@@ -622,14 +717,14 @@ namespace BSP {
         }
         
         std::string key = "";
-        size_t fieldStart = -1;
+        int fieldStart = -1;
         
         for (size_t i=0; i<entStr.size(); i++) {
             char c = entStr[i];
             
             if (c == '"') {
                 if (fieldStart == -1) {
-                    fieldStart = i;
+                    fieldStart = static_cast<int>(i);
                 }
                 else {
                     size_t count = i - fieldStart - 1;
@@ -664,30 +759,21 @@ namespace BSP {
      
     size_t Face::s_faceCount = 0;
     
-    Face::Face(
-            const BSP& bsp,
-            const DFace& faceData,
-            const std::vector<LightSample>& lightSamples,
-            const std::vector<TexInfo>& texInfos,
-            const std::vector<DTexData>& dTexDatas
-            ) :
+    Face::Face(BSP& bsp, DFace& faceData) :
+            m_bsp(bsp),
             m_faceData(faceData),
             m_planeData(bsp.m_planes[faceData.planeNum]),
-            m_texInfo(texInfos[faceData.texInfo]),
-            m_texData(dTexDatas[m_texInfo.texData]),
-            m_lightSamples(get_lightmap_width() * get_lightmap_height()),
-            m_avgLightSample {0, 0, 0, 0},
+            m_texInfo(bsp.m_texInfos[faceData.texInfo]),
+            m_texData(bsp.m_texDatas[m_texInfo.texData]),
+            //m_avgLightSample {0, 0, 0, 0},
             id(s_faceCount++) {
             
-        const std::vector<Vec3<float>>& vertices = bsp.m_vertices;
-        const std::vector<DEdge>& dEdges = bsp.m_edges;
-        const std::vector<int32_t>& surfEdges = bsp.m_surfEdges;
+        const std::vector<Vec3<float>>& vertices = bsp.get_vertices();
+        const std::vector<DEdge>& dEdges = bsp.get_edges();
+        const std::vector<int32_t>& surfEdges = bsp.get_surfedges();
         
         load_edges(faceData, vertices, dEdges, surfEdges);
-        
-        if (!bsp.is_fullbright()) {
-            load_lightsamples(lightSamples);
-        }
+        //load_lightsamples(bsp.get_lightsamples());
         
         /* For coordinate transformation from s/t to x/y/z */
         precalculate_st_xyz_matrix();
@@ -729,32 +815,24 @@ namespace BSP {
         }
     }
     
-    void Face::load_lightsamples(const std::vector<LightSample>& samples) {
-        int32_t width = get_lightmap_width();
-        int32_t height = get_lightmap_height();
-        
-        size_t numSamples = width * height;
-        size_t sampleOffset = m_faceData.lightOffset / sizeof(LightSample);
-        
-        // This face has no lighting.
-        if (sampleOffset == 0) {
-            return;
-        }
-        
-        assert(samples.size() > 1);
-        assert(samples.size() >= numSamples + 1);
-        assert(samples.size() - sampleOffset >= numSamples);
-        
-        std::vector<LightSample>::const_iterator lightSampleStart
-            = samples.begin() + sampleOffset;
-            
-        set_average_lighting(lightSampleStart[-1]);
-        
-        m_lightSamples.assign(lightSampleStart, lightSampleStart + numSamples);
-        
-        assert(m_lightSamples.size() == numSamples);
-    }
-    
+    //void Face::load_lightsamples(
+    //        std::vector<LightSample>& lightSamples
+    //        ) {
+    //        
+    //    if (m_bsp.is_fullbright()) {
+    //        return;
+    //    }
+
+    //    assert(m_bsp.get_lightsamples().size() > 0);
+    //    assert(lightSamples.size() > 0);
+
+    //    m_lightSamplesBegin = lightSamples.begin()
+    //        + m_faceData.lightOffset / sizeof(LightSample);
+
+    //    m_lightSamplesEnd = m_lightSamplesBegin
+    //        + get_lightmap_width() * get_lightmap_height();
+    //}
+
     void Face::precalculate_st_xyz_matrix(void) {
         double sx = m_texInfo.lightmapVecs[0][0];
         double sy = m_texInfo.lightmapVecs[0][1];
@@ -833,20 +911,45 @@ namespace BSP {
         return m_faceData.lightmapTextureSizeInLuxels[1] + 1;
     }
     
-    std::vector<LightSample>& Face::get_lightsamples(void) {
-        return m_lightSamples;
+    size_t Face::get_lightmap_size(void) const {
+        return get_lightmap_width() * get_lightmap_height();
+    }
+
+    size_t Face::get_lightmap_offset(void) const {
+        return m_faceData.lightOffset / sizeof(LightSample);
+    }
+
+    void Face::set_lightmap_offset(size_t offset) {
+        m_faceData.lightOffset = static_cast<int32_t>(
+            offset * sizeof(LightSample)
+        );
+    }
+
+    FaceLightSampleProxy Face::get_lightsamples(void) {
+        std::vector<LightSample>& lightSamples = m_bsp.get_lightsamples();
+
+        assert(lightSamples.size() > get_lightmap_offset());
+
+        assert(
+            lightSamples.size()
+                >= get_lightmap_offset() + get_lightmap_size()
+        );
+        
+        std::vector<LightSample>::iterator begin
+            = lightSamples.begin() + get_lightmap_offset();
+        
+        std::vector<LightSample>::iterator end
+            = begin + get_lightmap_size();
+
+        return FaceLightSampleProxy(begin, end);
     }
     
     LightSample Face::get_average_lighting(void) const {
-        return m_avgLightSample;
+        return m_bsp.get_lightsamples().at(get_lightmap_offset() - 1);
     }
     
     void Face::set_average_lighting(const LightSample& sample) {
-        m_avgLightSample = sample;
-    }
-    
-    void Face::set_lightlump_offset(int32_t offset) {
-        m_faceData.lightOffset = offset * sizeof(LightSample);
+        m_bsp.get_lightsamples()[get_lightmap_offset() - 1] = sample;
     }
     
     Vec3<float> Face::xyz_from_lightmap_st(float s, float t) const {
@@ -877,7 +980,35 @@ namespace BSP {
         };
     }
     
+
+    /******************************
+    * FaceLightSampleProxy Class *
+    ******************************/
+
+    FaceLightSampleProxy::FaceLightSampleProxy(
+            FaceLightSampleProxy::Iter& begin,
+            FaceLightSampleProxy::Iter& end
+            ) :
+            m_begin(begin),
+            m_end(end) {}
+
+    LightSample& FaceLightSampleProxy::operator[](size_t i) {
+        return *(m_begin + i);
+    }
+
+    const LightSample& FaceLightSampleProxy::operator[](size_t i) const {
+        return *(m_begin + i);
+    }
+
+    FaceLightSampleProxy::Iter FaceLightSampleProxy::begin(void) {
+        return m_begin;
+    }
+
+    FaceLightSampleProxy::Iter FaceLightSampleProxy::end(void) {
+        return m_end;
+    }
     
+
     /***************
      * Light Class *
      ***************/
@@ -954,10 +1085,10 @@ namespace BSP {
         l = convert_str<double>(entity.get("_linear_attn", "0"));
         q = convert_str<double>(entity.get("_quadratic_attn", "0"));
         
-        /* Scale color intensity to 100-unit inverse distance */
+        /* Scale color intensity to 100-unit inverse attenuation */
         // I don't know why we need to do this.
         // Honestly, it doesn't really make all that much sense to me.
-        // But if we don't do it, static prop lighting looks really weird.
+        // But if we don't do it, everything looks way too dark.
         double scale = attenuate(100.0);
         
         r *= scale;
@@ -994,6 +1125,7 @@ namespace BSP {
         };
     }
     
+
     /****************
      * Entity Class *
      ****************/

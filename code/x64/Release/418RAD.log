@@ -1,8 +1,9 @@
 ﻿  418rad.cpp
   bsp.cpp
-bsp.cpp(227): warning C4065: switch statement contains 'default' but no 'case' labels
   Generating code
-  All 3647 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  83 of 3406 functions ( 2.4%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    30 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   418RAD.vcxproj -> C:\Users\Ryan\Dropbox\C++\RAD\code\x64\Release\418RAD.exe
   418RAD.vcxproj -> C:\Users\Ryan\Dropbox\C++\RAD\code\x64\Release\418RAD.pdb (Full PDB)
