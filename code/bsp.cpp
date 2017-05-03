@@ -92,7 +92,7 @@ namespace BSP {
 
             if (is_fullbright()) {
                 // Average lighting entry
-                m_lightSamples.push_back(LightSample {0, 0, 0, 0});
+                m_lightSamples.push_back(RGBExp32 {0, 0, 0, 0});
 
                 // The lightmap offset always points to the entry *after* the
                 // average lighting entry.
@@ -100,7 +100,7 @@ namespace BSP {
 
                 // The rest of the lightmap
                 for (size_t i=0; i<face.get_lightmap_size(); i++) {
-                    m_lightSamples.push_back(LightSample {0, 0, 0, 0});
+                    m_lightSamples.push_back(RGBExp32 {0, 0, 0, 0});
                 }
             }
         }
@@ -268,7 +268,19 @@ namespace BSP {
         return m_surfEdges;
     }
 
-    std::vector<LightSample>& BSP::get_lightsamples(void) {
+    std::vector<DFace>& BSP::get_dfaces(void) {
+        return m_dFaces;
+    }
+
+    const std::vector<DFace>& BSP::get_dfaces(void) const {
+        return m_dFaces;
+    }
+
+    std::vector<RGBExp32>& BSP::get_lightsamples(void) {
+        return m_lightSamples;
+    }
+
+    const std::vector<RGBExp32>& BSP::get_lightsamples(void) const {
         return m_lightSamples;
     }
 
@@ -281,6 +293,10 @@ namespace BSP {
     }
 
     std::vector<Face>& BSP::get_faces(void) {
+        return m_faces;
+    }
+
+    const std::vector<Face>& BSP::get_faces(void) const {
         return m_faces;
     }
 
@@ -426,7 +442,7 @@ namespace BSP {
             std::vector<DLeafAmbientLighting> ambientLighting(numLeaves);
             
             for (DLeafAmbientLighting& ambient : ambientLighting) {
-                for (LightSample& sample : ambient.cube.color) {
+                for (RGBExp32& sample : ambient.cube.color) {
                     sample.r = 0;
                     sample.g = 255;
                     sample.b = 0;
@@ -576,14 +592,12 @@ namespace BSP {
             std::unordered_map<int, size_t>& sizes
             ) {
         
-        std::vector<DWorldLight> worldLights;
-        
-        for (const Light& light : get_lights()) {
-            worldLights.push_back(light.to_worldlight());
+        if (m_worldLights.size() == 0) {
+            build_worldlights();
         }
-        
+
         save_lump(
-            file, LUMP_WORLDLIGHTS_HDR, worldLights,
+            file, LUMP_WORLDLIGHTS_HDR, m_worldLights,
             offsets, sizes
         );
     }
@@ -665,6 +679,14 @@ namespace BSP {
     const std::unordered_map<int, std::vector<uint8_t>>&
     BSP::get_extras(void) const{
         return m_extraLumps;
+    }
+
+    void BSP::build_worldlights(void) {
+        m_worldLights.clear();
+
+        for (const Light& light : get_lights()) {
+            m_worldLights.push_back(light.to_worldlight());
+        }
     }
     
     
@@ -765,18 +787,22 @@ namespace BSP {
             m_planeData(bsp.m_planes[faceData.planeNum]),
             m_texInfo(bsp.m_texInfos[faceData.texInfo]),
             m_texData(bsp.m_texDatas[m_texInfo.texData]),
-            //m_avgLightSample {0, 0, 0, 0},
             id(s_faceCount++) {
             
         const std::vector<Vec3<float>>& vertices = bsp.get_vertices();
         const std::vector<DEdge>& dEdges = bsp.get_edges();
         const std::vector<int32_t>& surfEdges = bsp.get_surfedges();
+
+        //std::cout << "Face " << id << " has lightmap size "
+        //    << get_lightmap_width() << " x "
+        //    << get_lightmap_height() << std::endl;
         
         load_edges(faceData, vertices, dEdges, surfEdges);
         //load_lightsamples(bsp.get_lightsamples());
         
         /* For coordinate transformation from s/t to x/y/z */
-        precalculate_st_xyz_matrix();
+        //precalculate_st_xyz_matrix();
+        make_st_xyz_matrix(m_Ainv);
     }
     
     void Face::load_edges(
@@ -833,7 +859,7 @@ namespace BSP {
     //        + get_lightmap_width() * get_lightmap_height();
     //}
 
-    void Face::precalculate_st_xyz_matrix(void) {
+    void Face::make_st_xyz_matrix(gmtl::Matrix<double, 3, 3>& Ainv) const {
         double sx = m_texInfo.lightmapVecs[0][0];
         double sy = m_texInfo.lightmapVecs[0][1];
         double sz = m_texInfo.lightmapVecs[0][2];
@@ -847,14 +873,14 @@ namespace BSP {
         double nz = m_planeData.normal.z;
         
         gmtl::Matrix<double, 3, 3> A;
-        
+
         A.set(
             sx, sy, sz,
             tx, ty, tz,
             nx, ny, nz
         );
         
-        gmtl::invert(m_Ainv, A);
+        gmtl::invert(Ainv, A);
     }
     
     const TexInfo& Face::get_texinfo(void) const {
@@ -916,17 +942,17 @@ namespace BSP {
     }
 
     size_t Face::get_lightmap_offset(void) const {
-        return m_faceData.lightOffset / sizeof(LightSample);
+        return m_faceData.lightOffset / sizeof(RGBExp32);
     }
 
     void Face::set_lightmap_offset(size_t offset) {
         m_faceData.lightOffset = static_cast<int32_t>(
-            offset * sizeof(LightSample)
+            offset * sizeof(RGBExp32)
         );
     }
 
     FaceLightSampleProxy Face::get_lightsamples(void) {
-        std::vector<LightSample>& lightSamples = m_bsp.get_lightsamples();
+        std::vector<RGBExp32>& lightSamples = m_bsp.get_lightsamples();
 
         assert(lightSamples.size() > get_lightmap_offset());
 
@@ -935,20 +961,20 @@ namespace BSP {
                 >= get_lightmap_offset() + get_lightmap_size()
         );
         
-        std::vector<LightSample>::iterator begin
+        FaceLightSampleProxy::Iter begin
             = lightSamples.begin() + get_lightmap_offset();
         
-        std::vector<LightSample>::iterator end
+        FaceLightSampleProxy::Iter end
             = begin + get_lightmap_size();
 
         return FaceLightSampleProxy(begin, end);
     }
     
-    LightSample Face::get_average_lighting(void) const {
+    RGBExp32 Face::get_average_lighting(void) const {
         return m_bsp.get_lightsamples().at(get_lightmap_offset() - 1);
     }
     
-    void Face::set_average_lighting(const LightSample& sample) {
+    void Face::set_average_lighting(const RGBExp32& sample) {
         m_bsp.get_lightsamples()[get_lightmap_offset() - 1] = sample;
     }
     
@@ -992,11 +1018,11 @@ namespace BSP {
             m_begin(begin),
             m_end(end) {}
 
-    LightSample& FaceLightSampleProxy::operator[](size_t i) {
+    RGBExp32& FaceLightSampleProxy::operator[](size_t i) {
         return *(m_begin + i);
     }
 
-    const LightSample& FaceLightSampleProxy::operator[](size_t i) const {
+    const RGBExp32& FaceLightSampleProxy::operator[](size_t i) const {
         return *(m_begin + i);
     }
 

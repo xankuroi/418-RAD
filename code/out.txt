@@ -1,1 +1,942 @@
-72
+BSP Version 20
+Fullbright: 0
+Face 0:
+    (640, 128, 320) -> (704, 256, 320)
+    (704, 256, 320) -> (832, 192, 320)
+    (832, 192, 320) -> (768, 64, 320)
+    (768, 64, 320) -> (640, 128, 320)
+    Styles:
+        0 00000000
+        1 00000000
+        2 00000000
+        3 00000000
+    Light Offset: 1
+    Luxels X: 13
+    Luxels Y: 13
+    169 Light Samples
+    Average Lighting: (0, 0, 0) * 2^0
+    Light Samples:
+        Sample 0: (0, 0, 0) * 2^0
+        Sample 1: (0, 0, 0) * 2^0
+        Sample 2: (0, 0, 0) * 2^0
+        Sample 3: (0, 0, 0) * 2^0
+        Sample 4: (0, 0, 0) * 2^0
+        Sample 5: (0, 0, 0) * 2^0
+        Sample 6: (0, 0, 0) * 2^0
+        Sample 7: (0, 0, 0) * 2^0
+        Sample 8: (0, 0, 0) * 2^0
+        Sample 9: (0, 0, 0) * 2^0
+        Sample 10: (0, 0, 0) * 2^0
+        Sample 11: (0, 0, 0) * 2^0
+        Sample 12: (0, 0, 0) * 2^0
+        Sample 13: (0, 0, 0) * 2^0
+        Sample 14: (0, 0, 0) * 2^0
+        Sample 15: (0, 0, 0) * 2^0
+        Sample 16: (0, 0, 0) * 2^0
+        Sample 17: (0, 0, 0) * 2^0
+        Sample 18: (0, 0, 0) * 2^0
+        Sample 19: (0, 0, 0) * 2^0
+        Sample 20: (0, 0, 0) * 2^0
+        Sample 21: (0, 0, 0) * 2^0
+        Sample 22: (0, 0, 0) * 2^0
+        Sample 23: (0, 0, 0) * 2^0
+        Sample 24: (0, 0, 0) * 2^0
+        Sample 25: (0, 0, 0) * 2^0
+        Sample 26: (0, 0, 0) * 2^0
+        Sample 27: (0, 0, 0) * 2^0
+        Sample 28: (0, 0, 0) * 2^0
+        Sample 29: (0, 0, 0) * 2^0
+        Sample 30: (0, 0, 0) * 2^0
+        Sample 31: (0, 0, 0) * 2^0
+        Sample 32: (0, 0, 0) * 2^0
+        Sample 33: (0, 0, 0) * 2^0
+        Sample 34: (0, 0, 0) * 2^0
+        Sample 35: (0, 0, 0) * 2^0
+        Sample 36: (0, 0, 0) * 2^0
+        Sample 37: (0, 0, 0) * 2^0
+        Sample 38: (0, 0, 0) * 2^0
+        Sample 39: (0, 0, 0) * 2^0
+        Sample 40: (0, 0, 0) * 2^0
+        Sample 41: (0, 0, 0) * 2^0
+        Sample 42: (0, 0, 0) * 2^0
+        Sample 43: (0, 0, 0) * 2^0
+        Sample 44: (0, 0, 0) * 2^0
+        Sample 45: (0, 0, 0) * 2^0
+        Sample 46: (0, 0, 0) * 2^0
+        Sample 47: (0, 0, 0) * 2^0
+        Sample 48: (0, 0, 0) * 2^0
+        Sample 49: (0, 0, 0) * 2^0
+        Sample 50: (0, 0, 0) * 2^0
+        Sample 51: (0, 0, 0) * 2^0
+        Sample 52: (0, 0, 0) * 2^0
+        Sample 53: (0, 0, 0) * 2^0
+        Sample 54: (0, 0, 0) * 2^0
+        Sample 55: (0, 0, 0) * 2^0
+        Sample 56: (0, 0, 0) * 2^0
+        Sample 57: (0, 0, 0) * 2^0
+        Sample 58: (0, 0, 0) * 2^0
+        Sample 59: (0, 0, 0) * 2^0
+        Sample 60: (0, 0, 0) * 2^0
+        Sample 61: (0, 0, 0) * 2^0
+        Sample 62: (0, 0, 0) * 2^0
+        Sample 63: (0, 0, 0) * 2^0
+        Sample 64: (0, 0, 0) * 2^0
+        Sample 65: (0, 0, 0) * 2^0
+        Sample 66: (0, 0, 0) * 2^0
+        Sample 67: (0, 0, 0) * 2^0
+        Sample 68: (0, 0, 0) * 2^0
+        Sample 69: (0, 0, 0) * 2^0
+        Sample 70: (0, 0, 0) * 2^0
+        Sample 71: (0, 0, 0) * 2^0
+        Sample 72: (0, 0, 0) * 2^0
+        Sample 73: (0, 0, 0) * 2^0
+        Sample 74: (0, 0, 0) * 2^0
+        Sample 75: (0, 0, 0) * 2^0
+        Sample 76: (0, 0, 0) * 2^0
+        Sample 77: (0, 0, 0) * 2^0
+        Sample 78: (0, 0, 0) * 2^0
+        Sample 79: (0, 0, 0) * 2^0
+        Sample 80: (0, 0, 0) * 2^0
+        Sample 81: (0, 0, 0) * 2^0
+        Sample 82: (0, 0, 0) * 2^0
+        Sample 83: (0, 0, 0) * 2^0
+        Sample 84: (0, 0, 0) * 2^0
+        Sample 85: (0, 0, 0) * 2^0
+        Sample 86: (0, 0, 0) * 2^0
+        Sample 87: (0, 0, 0) * 2^0
+        Sample 88: (0, 0, 0) * 2^0
+        Sample 89: (0, 0, 0) * 2^0
+        Sample 90: (0, 0, 0) * 2^0
+        Sample 91: (0, 0, 0) * 2^0
+        Sample 92: (0, 0, 0) * 2^0
+        Sample 93: (0, 0, 0) * 2^0
+        Sample 94: (0, 0, 0) * 2^0
+        Sample 95: (0, 0, 0) * 2^0
+        Sample 96: (0, 0, 0) * 2^0
+        Sample 97: (0, 0, 0) * 2^0
+        Sample 98: (0, 0, 0) * 2^0
+        Sample 99: (0, 0, 0) * 2^0
+        Sample 100: (0, 0, 0) * 2^0
+        Sample 101: (0, 0, 0) * 2^0
+        Sample 102: (0, 0, 0) * 2^0
+        Sample 103: (0, 0, 0) * 2^0
+        Sample 104: (0, 0, 0) * 2^0
+        Sample 105: (0, 0, 0) * 2^0
+        Sample 106: (0, 0, 0) * 2^0
+        Sample 107: (0, 0, 0) * 2^0
+        Sample 108: (0, 0, 0) * 2^0
+        Sample 109: (0, 0, 0) * 2^0
+        Sample 110: (0, 0, 0) * 2^0
+        Sample 111: (0, 0, 0) * 2^0
+        Sample 112: (0, 0, 0) * 2^0
+        Sample 113: (0, 0, 0) * 2^0
+        Sample 114: (0, 0, 0) * 2^0
+        Sample 115: (0, 0, 0) * 2^0
+        Sample 116: (0, 0, 0) * 2^0
+        Sample 117: (0, 0, 0) * 2^0
+        Sample 118: (0, 0, 0) * 2^0
+        Sample 119: (0, 0, 0) * 2^0
+        Sample 120: (0, 0, 0) * 2^0
+        Sample 121: (0, 0, 0) * 2^0
+        Sample 122: (0, 0, 0) * 2^0
+        Sample 123: (0, 0, 0) * 2^0
+        Sample 124: (0, 0, 0) * 2^0
+        Sample 125: (0, 0, 0) * 2^0
+        Sample 126: (0, 0, 0) * 2^0
+        Sample 127: (0, 0, 0) * 2^0
+        Sample 128: (0, 0, 0) * 2^0
+        Sample 129: (0, 0, 0) * 2^0
+        Sample 130: (0, 0, 0) * 2^0
+        Sample 131: (0, 0, 0) * 2^0
+        Sample 132: (0, 0, 0) * 2^0
+        Sample 133: (0, 0, 0) * 2^0
+        Sample 134: (0, 0, 0) * 2^0
+        Sample 135: (0, 0, 0) * 2^0
+        Sample 136: (0, 0, 0) * 2^0
+        Sample 137: (0, 0, 0) * 2^0
+        Sample 138: (0, 0, 0) * 2^0
+        Sample 139: (0, 0, 0) * 2^0
+        Sample 140: (0, 0, 0) * 2^0
+        Sample 141: (0, 0, 0) * 2^0
+        Sample 142: (0, 0, 0) * 2^0
+        Sample 143: (0, 0, 0) * 2^0
+        Sample 144: (0, 0, 0) * 2^0
+        Sample 145: (0, 0, 0) * 2^0
+        Sample 146: (0, 0, 0) * 2^0
+        Sample 147: (0, 0, 0) * 2^0
+        Sample 148: (0, 0, 0) * 2^0
+        Sample 149: (0, 0, 0) * 2^0
+        Sample 150: (0, 0, 0) * 2^0
+        Sample 151: (0, 0, 0) * 2^0
+        Sample 152: (0, 0, 0) * 2^0
+        Sample 153: (0, 0, 0) * 2^0
+        Sample 154: (0, 0, 0) * 2^0
+        Sample 155: (0, 0, 0) * 2^0
+        Sample 156: (0, 0, 0) * 2^0
+        Sample 157: (0, 0, 0) * 2^0
+        Sample 158: (0, 0, 0) * 2^0
+        Sample 159: (0, 0, 0) * 2^0
+        Sample 160: (0, 0, 0) * 2^0
+        Sample 161: (0, 0, 0) * 2^0
+        Sample 162: (0, 0, 0) * 2^0
+        Sample 163: (0, 0, 0) * 2^0
+        Sample 164: (0, 0, 0) * 2^0
+        Sample 165: (0, 0, 0) * 2^0
+        Sample 166: (0, 0, 0) * 2^0
+        Sample 167: (0, 0, 0) * 2^0
+        Sample 168: (0, 0, 0) * 2^0
+    Texinfo Index: 3
+    Plane Number: 24
+    Face Normal: <0, 0, 1>
+    Plane Distance: 320
+    Lightmap Mins: 36, -20
+    Lightmap S vector: <0.0625, 0, 0, -4>
+    Lightmap T vector: <0, -0.0625, 0, -4>
+    ST Cross: <-0, 0, 0.00390625>
+    ST Determinant: -0.00390625
+    Inverted S: <16, -0, -0>
+    Inverted T: <-0, -16, -0>
+    Luxel Origin: <-64, 64, 320>
+    Texture Width: 512
+    Texture Height: 512
+Face 1:
+    (704, 448, 192) -> (704, 576, 192)
+    (704, 576, 192) -> (704, 576, 320)
+    (704, 576, 320) -> (704, 448, 320)
+    (704, 448, 320) -> (704, 448, 192)
+    Styles:
+        0 00000000
+        1 00000000
+        2 00000000
+        3 00000000
+    Light Offset: 171
+    Luxels X: 9
+    Luxels Y: 9
+    81 Light Samples
+    Average Lighting: (99, 253, 79) * 2^0
+    Light Samples:
+        Sample 0: (105, 186, 67) * 2^0
+        Sample 1: (105, 203, 70) * 2^0
+        Sample 2: (103, 219, 73) * 2^0
+        Sample 3: (100, 232, 75) * 2^0
+        Sample 4: (97, 241, 78) * 2^0
+        Sample 5: (93, 244, 79) * 2^0
+        Sample 6: (88, 241, 80) * 2^0
+        Sample 7: (83, 232, 81) * 2^0
+        Sample 8: (78, 219, 80) * 2^0
+        Sample 9: (109, 199, 69) * 2^0
+        Sample 10: (109, 219, 72) * 2^0
+        Sample 11: (107, 238, 75) * 2^0
+        Sample 12: (104, 253, 78) * 2^0
+        Sample 13: (50, 131, 40) * 2^1
+        Sample 14: (48, 133, 41) * 2^1
+        Sample 15: (45, 131, 41) * 2^1
+        Sample 16: (86, 253, 83) * 2^0
+        Sample 17: (80, 238, 83) * 2^0
+        Sample 18: (112, 210, 70) * 2^0
+        Sample 19: (112, 232, 73) * 2^0
+        Sample 20: (110, 253, 76) * 2^0
+        Sample 21: (53, 135, 39) * 2^1
+        Sample 22: (51, 141, 41) * 2^1
+        Sample 23: (49, 143, 41) * 2^1
+        Sample 24: (46, 141, 42) * 2^1
+        Sample 25: (43, 135, 42) * 2^1
+        Sample 26: (82, 253, 84) * 2^0
+        Sample 27: (114, 217, 71) * 2^0
+        Sample 28: (114, 241, 74) * 2^0
+        Sample 29: (56, 131, 38) * 2^1
+        Sample 30: (54, 141, 40) * 2^1
+        Sample 31: (52, 147, 41) * 2^1
+        Sample 32: (50, 150, 42) * 2^1
+        Sample 33: (47, 147, 43) * 2^1
+        Sample 34: (44, 141, 43) * 2^1
+        Sample 35: (41, 131, 43) * 2^1
+        Sample 36: (115, 219, 71) * 2^0
+        Sample 37: (114, 244, 74) * 2^0
+        Sample 38: (56, 133, 39) * 2^1
+        Sample 39: (54, 143, 40) * 2^1
+        Sample 40: (52, 150, 41) * 2^1
+        Sample 41: (50, 152, 42) * 2^1
+        Sample 42: (47, 150, 43) * 2^1
+        Sample 43: (44, 143, 43) * 2^1
+        Sample 44: (41, 133, 43) * 2^1
+        Sample 45: (114, 217, 71) * 2^0
+        Sample 46: (114, 241, 74) * 2^0
+        Sample 47: (56, 131, 38) * 2^1
+        Sample 48: (54, 141, 40) * 2^1
+        Sample 49: (52, 147, 41) * 2^1
+        Sample 50: (50, 150, 42) * 2^1
+        Sample 51: (47, 147, 43) * 2^1
+        Sample 52: (44, 141, 43) * 2^1
+        Sample 53: (41, 131, 43) * 2^1
+        Sample 54: (112, 210, 70) * 2^0
+        Sample 55: (112, 232, 73) * 2^0
+        Sample 56: (110, 253, 76) * 2^0
+        Sample 57: (53, 135, 39) * 2^1
+        Sample 58: (51, 141, 41) * 2^1
+        Sample 59: (49, 143, 41) * 2^1
+        Sample 60: (46, 141, 42) * 2^1
+        Sample 61: (43, 135, 42) * 2^1
+        Sample 62: (82, 253, 84) * 2^0
+        Sample 63: (109, 199, 69) * 2^0
+        Sample 64: (109, 219, 72) * 2^0
+        Sample 65: (107, 238, 75) * 2^0
+        Sample 66: (104, 253, 78) * 2^0
+        Sample 67: (50, 131, 40) * 2^1
+        Sample 68: (48, 133, 41) * 2^1
+        Sample 69: (45, 131, 41) * 2^1
+        Sample 70: (86, 253, 83) * 2^0
+        Sample 71: (80, 238, 83) * 2^0
+        Sample 72: (105, 186, 67) * 2^0
+        Sample 73: (105, 203, 70) * 2^0
+        Sample 74: (103, 219, 73) * 2^0
+        Sample 75: (100, 232, 75) * 2^0
+        Sample 76: (97, 241, 78) * 2^0
+        Sample 77: (93, 244, 79) * 2^0
+        Sample 78: (88, 241, 80) * 2^0
+        Sample 79: (83, 232, 81) * 2^0
+        Sample 80: (78, 219, 80) * 2^0
+    Texinfo Index: 1
+    Plane Number: 29
+    Face Normal: <-1, 0, 0>
+    Plane Distance: -704
+    Lightmap Mins: -40, -16
+    Lightmap S vector: <0, -0.0625, 0, -4>
+    Lightmap T vector: <0, 0, -0.0625, 4>
+    ST Cross: <-0.00390625, -0, -0>
+    ST Determinant: -0.00390625
+    Inverted S: <-0, -16, -0>
+    Inverted T: <-0, -0, -16>
+    Luxel Origin: <704, 64, -64>
+    Texture Width: 512
+    Texture Height: 512
+Face 2:
+    (471.426, 919.426, 192) -> (407.422, 808.566, 192)
+    (407.422, 808.566, 192) -> (407.426, 808.578, 320)
+    (407.426, 808.578, 320) -> (471.426, 919.43, 320)
+    (471.426, 919.43, 320) -> (471.426, 919.426, 192)
+    Styles:
+        0 00000000
+        1 00000000
+        2 00000000
+        3 00000000
+    Light Offset: 253
+    Luxels X: 10
+    Luxels Y: 9
+    90 Light Samples
+    Average Lighting: (56, 31, 30) * 2^0
+    Light Samples:
+        Sample 0: (75, 38, 39) * 2^0
+        Sample 1: (70, 36, 37) * 2^0
+        Sample 2: (64, 34, 34) * 2^0
+        Sample 3: (59, 33, 32) * 2^0
+        Sample 4: (55, 31, 30) * 2^0
+        Sample 5: (51, 30, 28) * 2^0
+        Sample 6: (47, 28, 26) * 2^0
+        Sample 7: (43, 27, 25) * 2^0
+        Sample 8: (40, 25, 23) * 2^0
+        Sample 9: (37, 24, 22) * 2^0
+        Sample 10: (77, 38, 40) * 2^0
+        Sample 11: (71, 37, 37) * 2^0
+        Sample 12: (66, 35, 35) * 2^0
+        Sample 13: (61, 33, 32) * 2^0
+        Sample 14: (56, 31, 30) * 2^0
+        Sample 15: (52, 30, 28) * 2^0
+        Sample 16: (48, 28, 26) * 2^0
+        Sample 17: (44, 27, 25) * 2^0
+        Sample 18: (41, 25, 23) * 2^0
+        Sample 19: (38, 24, 22) * 2^0
+        Sample 20: (79, 39, 40) * 2^0
+        Sample 21: (73, 37, 37) * 2^0
+        Sample 22: (67, 35, 35) * 2^0
+        Sample 23: (62, 33, 33) * 2^0
+        Sample 24: (57, 32, 30) * 2^0
+        Sample 25: (52, 30, 28) * 2^0
+        Sample 26: (48, 29, 27) * 2^0
+        Sample 27: (45, 27, 25) * 2^0
+        Sample 28: (41, 26, 23) * 2^0
+        Sample 29: (38, 24, 22) * 2^0
+        Sample 30: (80, 39, 40) * 2^0
+        Sample 31: (74, 37, 38) * 2^0
+        Sample 32: (68, 35, 35) * 2^0
+        Sample 33: (62, 34, 33) * 2^0
+        Sample 34: (57, 32, 31) * 2^0
+        Sample 35: (53, 30, 29) * 2^0
+        Sample 36: (49, 29, 27) * 2^0
+        Sample 37: (45, 27, 25) * 2^0
+        Sample 38: (42, 26, 24) * 2^0
+        Sample 39: (39, 24, 22) * 2^0
+        Sample 40: (80, 39, 41) * 2^0
+        Sample 41: (74, 37, 38) * 2^0
+        Sample 42: (68, 35, 35) * 2^0
+        Sample 43: (63, 34, 33) * 2^0
+        Sample 44: (58, 32, 31) * 2^0
+        Sample 45: (53, 30, 29) * 2^0
+        Sample 46: (49, 29, 27) * 2^0
+        Sample 47: (45, 27, 25) * 2^0
+        Sample 48: (42, 26, 24) * 2^0
+        Sample 49: (39, 24, 22) * 2^0
+        Sample 50: (80, 39, 40) * 2^0
+        Sample 51: (74, 37, 38) * 2^0
+        Sample 52: (68, 35, 35) * 2^0
+        Sample 53: (62, 34, 33) * 2^0
+        Sample 54: (57, 32, 31) * 2^0
+        Sample 55: (53, 30, 29) * 2^0
+        Sample 56: (49, 29, 27) * 2^0
+        Sample 57: (45, 27, 25) * 2^0
+        Sample 58: (42, 26, 24) * 2^0
+        Sample 59: (39, 24, 22) * 2^0
+        Sample 60: (79, 39, 40) * 2^0
+        Sample 61: (73, 37, 37) * 2^0
+        Sample 62: (67, 35, 35) * 2^0
+        Sample 63: (62, 33, 33) * 2^0
+        Sample 64: (57, 32, 30) * 2^0
+        Sample 65: (52, 30, 28) * 2^0
+        Sample 66: (48, 29, 27) * 2^0
+        Sample 67: (45, 27, 25) * 2^0
+        Sample 68: (41, 26, 23) * 2^0
+        Sample 69: (38, 24, 22) * 2^0
+        Sample 70: (77, 38, 40) * 2^0
+        Sample 71: (71, 37, 37) * 2^0
+        Sample 72: (66, 35, 35) * 2^0
+        Sample 73: (61, 33, 32) * 2^0
+        Sample 74: (56, 31, 30) * 2^0
+        Sample 75: (52, 30, 28) * 2^0
+        Sample 76: (48, 28, 26) * 2^0
+        Sample 77: (44, 27, 25) * 2^0
+        Sample 78: (41, 25, 23) * 2^0
+        Sample 79: (38, 24, 22) * 2^0
+        Sample 80: (75, 38, 39) * 2^0
+        Sample 81: (70, 36, 37) * 2^0
+        Sample 82: (64, 34, 34) * 2^0
+        Sample 83: (59, 33, 32) * 2^0
+        Sample 84: (55, 31, 30) * 2^0
+        Sample 85: (51, 30, 28) * 2^0
+        Sample 86: (47, 28, 26) * 2^0
+        Sample 87: (43, 27, 25) * 2^0
+        Sample 88: (40, 25, 23) * 2^0
+        Sample 89: (37, 24, 22) * 2^0
+    Texinfo Index: 2
+    Plane Number: 36
+    Face Normal: <0.866027, -0.499997, 0>
+    Plane Distance: -51.4429
+    Lightmap Mins: 56, -16
+    Lightmap S vector: <0.03125, 0.0541266, 0, -0.490703>
+    Lightmap T vector: <0, 0, -0.0625, 4>
+    ST Cross: <0.00338291, -0.00195312, 0>
+    ST Determinant: -0.00390625
+    Inverted S: <7.99996, 13.8564, 0>
+    Inverted T: <0, -0, -12>
+    Luxel Origin: <-48.4765, 18.9221, -48.0001>
+    Texture Width: 512
+    Texture Height: 512
+Face 3:
+    (640, 128, 192) -> (704, 256, 192)
+    (704, 256, 192) -> (704, 256, 320)
+    (704, 256, 320) -> (640, 128, 320)
+    (640, 128, 320) -> (640, 128, 192)
+    Styles:
+        0 00000000
+        1 00000000
+        2 00000000
+        3 00000000
+    Light Offset: 344
+    Luxels X: 9
+    Luxels Y: 9
+    81 Light Samples
+    Average Lighting: (27, 49, 41) * 2^0
+    Light Samples:
+        Sample 0: (22, 34, 33) * 2^0
+        Sample 1: (23, 37, 35) * 2^0
+        Sample 2: (24, 40, 37) * 2^0
+        Sample 3: (25, 43, 39) * 2^0
+        Sample 4: (27, 47, 41) * 2^0
+        Sample 5: (28, 51, 42) * 2^0
+        Sample 6: (30, 55, 44) * 2^0
+        Sample 7: (31, 59, 46) * 2^0
+        Sample 8: (33, 64, 47) * 2^0
+        Sample 9: (22, 35, 34) * 2^0
+        Sample 10: (23, 38, 36) * 2^0
+        Sample 11: (24, 41, 37) * 2^0
+        Sample 12: (26, 44, 39) * 2^0
+        Sample 13: (27, 48, 41) * 2^0
+        Sample 14: (29, 52, 43) * 2^0
+        Sample 15: (30, 56, 45) * 2^0
+        Sample 16: (32, 60, 47) * 2^0
+        Sample 17: (33, 65, 48) * 2^0
+        Sample 18: (22, 35, 34) * 2^0
+        Sample 19: (23, 38, 36) * 2^0
+        Sample 20: (25, 41, 38) * 2^0
+        Sample 21: (26, 44, 40) * 2^0
+        Sample 22: (27, 48, 42) * 2^0
+        Sample 23: (29, 52, 44) * 2^0
+        Sample 24: (30, 57, 45) * 2^0
+        Sample 25: (32, 61, 47) * 2^0
+        Sample 26: (34, 66, 49) * 2^0
+        Sample 27: (22, 35, 34) * 2^0
+        Sample 28: (23, 38, 36) * 2^0
+        Sample 29: (25, 41, 38) * 2^0
+        Sample 30: (26, 45, 40) * 2^0
+        Sample 31: (27, 49, 42) * 2^0
+        Sample 32: (29, 53, 44) * 2^0
+        Sample 33: (31, 57, 46) * 2^0
+        Sample 34: (32, 62, 47) * 2^0
+        Sample 35: (34, 67, 49) * 2^0
+        Sample 36: (22, 35, 34) * 2^0
+        Sample 37: (23, 38, 36) * 2^0
+        Sample 38: (25, 41, 38) * 2^0
+        Sample 39: (26, 45, 40) * 2^0
+        Sample 40: (28, 49, 42) * 2^0
+        Sample 41: (29, 53, 44) * 2^0
+        Sample 42: (31, 57, 46) * 2^0
+        Sample 43: (32, 62, 48) * 2^0
+        Sample 44: (34, 67, 49) * 2^0
+        Sample 45: (22, 35, 34) * 2^0
+        Sample 46: (23, 38, 36) * 2^0
+        Sample 47: (25, 41, 38) * 2^0
+        Sample 48: (26, 45, 40) * 2^0
+        Sample 49: (27, 49, 42) * 2^0
+        Sample 50: (29, 53, 44) * 2^0
+        Sample 51: (31, 57, 46) * 2^0
+        Sample 52: (32, 62, 47) * 2^0
+        Sample 53: (34, 67, 49) * 2^0
+        Sample 54: (22, 35, 34) * 2^0
+        Sample 55: (23, 38, 36) * 2^0
+        Sample 56: (25, 41, 38) * 2^0
+        Sample 57: (26, 44, 40) * 2^0
+        Sample 58: (27, 48, 42) * 2^0
+        Sample 59: (29, 52, 44) * 2^0
+        Sample 60: (30, 57, 45) * 2^0
+        Sample 61: (32, 61, 47) * 2^0
+        Sample 62: (34, 66, 49) * 2^0
+        Sample 63: (22, 35, 34) * 2^0
+        Sample 64: (23, 38, 36) * 2^0
+        Sample 65: (24, 41, 37) * 2^0
+        Sample 66: (26, 44, 39) * 2^0
+        Sample 67: (27, 48, 41) * 2^0
+        Sample 68: (29, 52, 43) * 2^0
+        Sample 69: (30, 56, 45) * 2^0
+        Sample 70: (32, 60, 47) * 2^0
+        Sample 71: (33, 65, 48) * 2^0
+        Sample 72: (22, 34, 33) * 2^0
+        Sample 73: (23, 37, 35) * 2^0
+        Sample 74: (24, 40, 37) * 2^0
+        Sample 75: (25, 43, 39) * 2^0
+        Sample 76: (27, 47, 41) * 2^0
+        Sample 77: (28, 51, 42) * 2^0
+        Sample 78: (30, 55, 44) * 2^0
+        Sample 79: (31, 59, 46) * 2^0
+        Sample 80: (33, 64, 47) * 2^0
+    Texinfo Index: 4
+    Plane Number: 52
+    Face Normal: <-0.894427, 0.447214, 0>
+    Plane Distance: -515.19
+    Lightmap Mins: 12, -16
+    Lightmap S vector: <0, 0.0625, 0, 4>
+    Lightmap T vector: <0, 0, -0.0625, 4>
+    ST Cross: <0.00390625, -0, 0>
+    ST Determinant: 0.00349386
+    Inverted S: <8, 16, 0>
+    Inverted T: <0, 0, -16>
+    Luxel Origin: <608, 64, -64>
+    Texture Width: 512
+    Texture Height: 512
+Face 4:
+    (704, 768, 192) -> (576, 768, 192)
+    (576, 768, 192) -> (576, 768, 320)
+    (576, 768, 320) -> (704, 768, 320)
+    (704, 768, 320) -> (704, 768, 192)
+    Styles:
+        0 00000000
+        1 00000000
+        2 00000000
+        3 00000000
+    Light Offset: 426
+    Luxels X: 10
+    Luxels Y: 9
+    90 Light Samples
+    Average Lighting: (86, 61, 40) * 2^0
+    Light Samples:
+        Sample 0: (109, 63, 46) * 2^0
+        Sample 1: (103, 64, 45) * 2^0
+        Sample 2: (97, 63, 43) * 2^0
+        Sample 3: (91, 62, 42) * 2^0
+        Sample 4: (85, 61, 40) * 2^0
+        Sample 5: (78, 60, 38) * 2^0
+        Sample 6: (73, 58, 36) * 2^0
+        Sample 7: (67, 56, 35) * 2^0
+        Sample 8: (62, 54, 33) * 2^0
+        Sample 9: (57, 52, 31) * 2^0
+        Sample 10: (113, 65, 47) * 2^0
+        Sample 11: (107, 65, 46) * 2^0
+        Sample 12: (101, 65, 44) * 2^0
+        Sample 13: (94, 64, 42) * 2^0
+        Sample 14: (87, 63, 40) * 2^0
+        Sample 15: (81, 61, 39) * 2^0
+        Sample 16: (75, 59, 37) * 2^0
+        Sample 17: (69, 57, 35) * 2^0
+        Sample 18: (63, 55, 33) * 2^0
+        Sample 19: (58, 53, 32) * 2^0
+        Sample 20: (117, 66, 48) * 2^0
+        Sample 21: (110, 66, 46) * 2^0
+        Sample 22: (103, 66, 44) * 2^0
+        Sample 23: (96, 65, 43) * 2^0
+        Sample 24: (89, 64, 41) * 2^0
+        Sample 25: (83, 62, 39) * 2^0
+        Sample 26: (76, 60, 37) * 2^0
+        Sample 27: (70, 58, 35) * 2^0
+        Sample 28: (65, 56, 34) * 2^0
+        Sample 29: (59, 53, 32) * 2^0
+        Sample 30: (119, 67, 48) * 2^0
+        Sample 31: (112, 67, 46) * 2^0
+        Sample 32: (105, 66, 45) * 2^0
+        Sample 33: (98, 66, 43) * 2^0
+        Sample 34: (91, 64, 41) * 2^0
+        Sample 35: (84, 63, 39) * 2^0
+        Sample 36: (77, 61, 37) * 2^0
+        Sample 37: (71, 59, 36) * 2^0
+        Sample 38: (65, 56, 34) * 2^0
+        Sample 39: (60, 54, 32) * 2^0
+        Sample 40: (119, 67, 48) * 2^0
+        Sample 41: (113, 67, 47) * 2^0
+        Sample 42: (106, 67, 45) * 2^0
+        Sample 43: (98, 66, 43) * 2^0
+        Sample 44: (91, 65, 41) * 2^0
+        Sample 45: (84, 63, 39) * 2^0
+        Sample 46: (77, 61, 38) * 2^0
+        Sample 47: (71, 59, 36) * 2^0
+        Sample 48: (65, 56, 34) * 2^0
+        Sample 49: (60, 54, 32) * 2^0
+        Sample 50: (119, 67, 48) * 2^0
+        Sample 51: (112, 67, 46) * 2^0
+        Sample 52: (105, 66, 45) * 2^0
+        Sample 53: (98, 66, 43) * 2^0
+        Sample 54: (91, 64, 41) * 2^0
+        Sample 55: (84, 63, 39) * 2^0
+        Sample 56: (77, 61, 37) * 2^0
+        Sample 57: (71, 59, 36) * 2^0
+        Sample 58: (65, 56, 34) * 2^0
+        Sample 59: (60, 54, 32) * 2^0
+        Sample 60: (117, 66, 48) * 2^0
+        Sample 61: (110, 66, 46) * 2^0
+        Sample 62: (103, 66, 44) * 2^0
+        Sample 63: (96, 65, 43) * 2^0
+        Sample 64: (89, 64, 41) * 2^0
+        Sample 65: (83, 62, 39) * 2^0
+        Sample 66: (76, 60, 37) * 2^0
+        Sample 67: (70, 58, 35) * 2^0
+        Sample 68: (65, 56, 34) * 2^0
+        Sample 69: (59, 53, 32) * 2^0
+        Sample 70: (113, 65, 47) * 2^0
+        Sample 71: (107, 65, 46) * 2^0
+        Sample 72: (101, 65, 44) * 2^0
+        Sample 73: (94, 64, 42) * 2^0
+        Sample 74: (87, 63, 40) * 2^0
+        Sample 75: (81, 61, 39) * 2^0
+        Sample 76: (75, 59, 37) * 2^0
+        Sample 77: (69, 57, 35) * 2^0
+        Sample 78: (63, 55, 33) * 2^0
+        Sample 79: (58, 53, 32) * 2^0
+        Sample 80: (109, 63, 46) * 2^0
+        Sample 81: (103, 64, 45) * 2^0
+        Sample 82: (97, 63, 43) * 2^0
+        Sample 83: (91, 62, 42) * 2^0
+        Sample 84: (85, 61, 40) * 2^0
+        Sample 85: (78, 60, 38) * 2^0
+        Sample 86: (73, 58, 36) * 2^0
+        Sample 87: (67, 56, 35) * 2^0
+        Sample 88: (62, 54, 33) * 2^0
+        Sample 89: (57, 52, 31) * 2^0
+    Texinfo Index: 5
+    Plane Number: 71
+    Face Normal: <0, -1, 0>
+    Plane Distance: -768
+    Lightmap Mins: 39, -20
+    Lightmap S vector: <0.0625, 0, 0, 3.65625>
+    Lightmap T vector: <0, 0, -0.0625, 0>
+    ST Cross: <0, -0.00390625, 0>
+    ST Determinant: -0.00390625
+    Inverted S: <16, 0, 0>
+    Inverted T: <0, -0, -0>
+    Luxel Origin: <58.5, 768, 0>
+    Texture Width: 512
+    Texture Height: 512
+Face 5:
+    (320, 576, 192) -> (320, 448, 192)
+    (320, 448, 192) -> (320, 448, 320)
+    (320, 448, 320) -> (320, 576, 320)
+    (320, 576, 320) -> (320, 576, 192)
+    Styles:
+        0 00000000
+        1 00000000
+        2 00000000
+        3 00000000
+    Light Offset: 517
+    Luxels X: 9
+    Luxels Y: 9
+    81 Light Samples
+    Average Lighting: (132, 72, 194) * 2^0
+    Light Samples:
+        Sample 0: (97, 69, 199) * 2^0
+        Sample 1: (105, 70, 201) * 2^0
+        Sample 2: (112, 71, 199) * 2^0
+        Sample 3: (120, 71, 193) * 2^0
+        Sample 4: (127, 71, 184) * 2^0
+        Sample 5: (133, 70, 172) * 2^0
+        Sample 6: (138, 69, 160) * 2^0
+        Sample 7: (141, 67, 146) * 2^0
+        Sample 8: (142, 65, 133) * 2^0
+        Sample 9: (100, 71, 214) * 2^0
+        Sample 10: (109, 72, 217) * 2^0
+        Sample 11: (117, 73, 214) * 2^0
+        Sample 12: (126, 73, 207) * 2^0
+        Sample 13: (133, 73, 197) * 2^0
+        Sample 14: (140, 72, 184) * 2^0
+        Sample 15: (145, 71, 169) * 2^0
+        Sample 16: (149, 69, 155) * 2^0
+        Sample 17: (150, 67, 140) * 2^0
+        Sample 18: (103, 72, 227) * 2^0
+        Sample 19: (112, 73, 229) * 2^0
+        Sample 20: (121, 74, 227) * 2^0
+        Sample 21: (130, 75, 219) * 2^0
+        Sample 22: (138, 74, 207) * 2^0
+        Sample 23: (145, 73, 193) * 2^0
+        Sample 24: (151, 72, 177) * 2^0
+        Sample 25: (155, 70, 161) * 2^0
+        Sample 26: (156, 68, 145) * 2^0
+        Sample 27: (105, 73, 235) * 2^0
+        Sample 28: (114, 74, 238) * 2^0
+        Sample 29: (123, 75, 235) * 2^0
+        Sample 30: (132, 75, 227) * 2^0
+        Sample 31: (141, 75, 214) * 2^0
+        Sample 32: (149, 74, 199) * 2^0
+        Sample 33: (155, 73, 182) * 2^0
+        Sample 34: (158, 71, 165) * 2^0
+        Sample 35: (160, 69, 149) * 2^0
+        Sample 36: (105, 73, 238) * 2^0
+        Sample 37: (114, 75, 241) * 2^0
+        Sample 38: (124, 75, 238) * 2^0
+        Sample 39: (133, 76, 229) * 2^0
+        Sample 40: (142, 75, 217) * 2^0
+        Sample 41: (150, 75, 201) * 2^0
+        Sample 42: (156, 73, 184) * 2^0
+        Sample 43: (160, 71, 166) * 2^0
+        Sample 44: (161, 69, 150) * 2^0
+        Sample 45: (105, 73, 235) * 2^0
+        Sample 46: (114, 74, 238) * 2^0
+        Sample 47: (123, 75, 235) * 2^0
+        Sample 48: (132, 75, 227) * 2^0
+        Sample 49: (141, 75, 214) * 2^0
+        Sample 50: (149, 74, 199) * 2^0
+        Sample 51: (155, 73, 182) * 2^0
+        Sample 52: (158, 71, 165) * 2^0
+        Sample 53: (160, 69, 149) * 2^0
+        Sample 54: (103, 72, 227) * 2^0
+        Sample 55: (112, 73, 229) * 2^0
+        Sample 56: (121, 74, 227) * 2^0
+        Sample 57: (130, 75, 219) * 2^0
+        Sample 58: (138, 74, 207) * 2^0
+        Sample 59: (145, 73, 193) * 2^0
+        Sample 60: (151, 72, 177) * 2^0
+        Sample 61: (155, 70, 161) * 2^0
+        Sample 62: (156, 68, 145) * 2^0
+        Sample 63: (100, 71, 214) * 2^0
+        Sample 64: (109, 72, 217) * 2^0
+        Sample 65: (117, 73, 214) * 2^0
+        Sample 66: (126, 73, 207) * 2^0
+        Sample 67: (133, 73, 197) * 2^0
+        Sample 68: (140, 72, 184) * 2^0
+        Sample 69: (145, 71, 169) * 2^0
+        Sample 70: (149, 69, 155) * 2^0
+        Sample 71: (150, 67, 140) * 2^0
+        Sample 72: (97, 69, 199) * 2^0
+        Sample 73: (105, 70, 201) * 2^0
+        Sample 74: (112, 71, 199) * 2^0
+        Sample 75: (120, 71, 193) * 2^0
+        Sample 76: (127, 71, 184) * 2^0
+        Sample 77: (133, 70, 172) * 2^0
+        Sample 78: (138, 69, 160) * 2^0
+        Sample 79: (141, 67, 146) * 2^0
+        Sample 80: (142, 65, 133) * 2^0
+    Texinfo Index: 6
+    Plane Number: 72
+    Face Normal: <1, 0, 0>
+    Plane Distance: 320
+    Lightmap Mins: 24, -16
+    Lightmap S vector: <0, 0.0625, 0, -4>
+    Lightmap T vector: <0, 0, -0.0625, 4>
+    ST Cross: <0.00390625, -0, 0>
+    ST Determinant: -0.00390625
+    Inverted S: <-0, 16, -0>
+    Inverted T: <-0, -0, -16>
+    Luxel Origin: <320, -64, -64>
+    Texture Width: 512
+    Texture Height: 512
+Light 0:
+    pos: (496, 576, 256)
+    r: 5e+06
+    g: 0
+    b: 0
+Light 1:
+    pos: (464, 464, 256)
+    r: 0
+    g: 0
+    b: 5e+06
+Light 2:
+    pos: (576, 496, 256)
+    r: 0
+    g: 5e+06
+    b: 0
+World Lights: 
+    World Light 0:
+        origin: (496, 576, 256)
+        intensity: (19607.8, 0, 0)
+        normal: (1, 0, 0)
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 1:
+        origin: (464, 464, 256)
+        intensity: (0, 0, 19607.8)
+        normal: (1, 0, 0)
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 2:
+        origin: (576, 496, 256)
+        intensity: (0, 19607.8, 0)
+        normal: (1, 0, 0)
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+Entities:
+{
+"world_maxs" "832 919 320"
+"world_mins" "320 64 192"
+"underwaterparticle" "underwater_default"
+"skyname" "sky_day01_01"
+"maxpropscreenwidth" "-1"
+"detailvbsp" "detail.vbsp"
+"detailmaterial" "detail/detailsprites"
+"classname" "worldspawn"
+"mapversion" "78"
+"hammerid" "1"
+}
+{
+"origin" "496 576 256"
+"_quadratic_attn" "1"
+"_lightscaleHDR" "1"
+"_lightHDR" "-1 -1 -1 1"
+"_light" "255 0 0 500"
+"classname" "light"
+"hammerid" "38"
+}
+{
+"origin" "464 464 256"
+"_quadratic_attn" "1"
+"_lightscaleHDR" "1"
+"_lightHDR" "-1 -1 -1 1"
+"_light" "0 0 255 500"
+"classname" "light"
+"hammerid" "48"
+}
+{
+"origin" "128 128 1"
+"angles" "0 0 0"
+"classname" "info_player_start"
+"hammerid" "98"
+}
+{
+"origin" "576 496 256"
+"_quadratic_attn" "1"
+"_lightscaleHDR" "1"
+"_lightHDR" "-1 -1 -1 1"
+"_light" "0 255 0 500"
+"classname" "light"
+"hammerid" "613"
+}
+{
+"origin" "512 256.071 127.5"
+"wait" "10"
+"targetname" "viewcontrol"
+"spawnflags" "124"
+"deceleration" "500"
+"angles" "-12.5 90 0"
+"acceleration" "500"
+"classname" "point_viewcontrol"
+"hammerid" "762"
+}
+{
+"origin" "512 256 9"
+"spawnflags" "1"
+"classname" "logic_auto"
+"hammerid" "782"
+"OnMapSpawn" "viewcontrol,Enable,,0,-1"
+}
+{
+"origin" "464 464 256"
+"rendermode" "9"
+"rendercolor" "0 0 255"
+"renderamt" "255"
+"model" "sprites/glow01.spr"
+"HDRColorScale" "1.0"
+"GlowProxySize" "2.0"
+"framerate" "10.0"
+"classname" "env_sprite"
+"hammerid" "795"
+}
+{
+"origin" "496 576 256"
+"rendermode" "9"
+"rendercolor" "255 0 0"
+"renderamt" "255"
+"model" "sprites/glow01.spr"
+"HDRColorScale" "1.0"
+"GlowProxySize" "2.0"
+"framerate" "10.0"
+"classname" "env_sprite"
+"hammerid" "815"
+}
+{
+"origin" "576 496 256"
+"rendermode" "9"
+"rendercolor" "0 255 0"
+"renderamt" "255"
+"model" "sprites/glow01.spr"
+"HDRColorScale" "1.0"
+"GlowProxySize" "2.0"
+"framerate" "10.0"
+"classname" "env_sprite"
+"hammerid" "827"
+}
+ 

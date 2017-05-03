@@ -15,7 +15,10 @@
 #include <gmtl/Plane.h>
 #include <gmtl/Intersection.h>
 
+#include "cuda.h"
 #include "bsp.h"
+#include "cudabsp.h"
+#include "cudarad.h"
 
 static std::random_device g_random;
 
@@ -37,7 +40,7 @@ static inline uint8_t random_color(void) {
 }
 
 
-static BSP::LightSample lightsample_from_rgb(const RGB& color) {
+static BSP::RGBExp32 lightsample_from_rgb(const RGB& color) {
     uint32_t r = color.r;
     uint32_t g = color.g;
     uint32_t b = color.b;
@@ -56,7 +59,7 @@ static BSP::LightSample lightsample_from_rgb(const RGB& color) {
     assert(g <= 255);
     assert(b <= 255);
 
-    return BSP::LightSample {
+    return BSP::RGBExp32 {
         static_cast<uint8_t>(r),
         static_cast<uint8_t>(g),
         static_cast<uint8_t>(b),
@@ -140,10 +143,10 @@ static RGB sample_at(const BSP::Face& face, float s, float t) {
             std::vector<BSP::Vec3<float>>::reverse_iterator pVertex
                 = points.rbegin();
 
-            BSP::Vec3<float> vertex1 = *pVertex;
+            BSP::Vec3<float> vertex1 = *pVertex++;
 
             BSP::Vec3<float> vertex2;
-            BSP::Vec3<float> vertex3 = *pVertex;
+            BSP::Vec3<float> vertex3 = *pVertex++;
 
             // Line segment from the light to the sample position.
             gmtl::LineSeg<float> diffLineSeg(
@@ -280,6 +283,33 @@ static RGB sample_at(const BSP::Face& face, float s, float t) {
 }
 
 
+void print_cudainfo(void) {
+    int device;
+    cudaGetDevice(&device);
+
+    cudaDeviceProp deviceProps;
+    cudaGetDeviceProperties(&deviceProps, device);
+
+    std::cout << "CUDA Device: " << deviceProps.name << std::endl;
+    std::cout << "    Device Memory: "
+        << deviceProps.totalGlobalMem << std::endl;
+    std::cout << "    Max Threads/Block: "
+        << deviceProps.maxThreadsPerBlock << std::endl;
+    std::cout << "    Max Block Dim X: "
+        << deviceProps.maxThreadsDim[0] << std::endl;
+    std::cout << "    Max Block Dim Y: "
+        << deviceProps.maxThreadsDim[1] << std::endl;
+    std::cout << "    Max Block Dim Z: "
+        << deviceProps.maxThreadsDim[2] << std::endl;
+    std::cout << "    Max Grid Size X: "
+        << deviceProps.maxGridSize[0] << std::endl;
+    std::cout << "    Max Grid Size Y: "
+        << deviceProps.maxGridSize[1] << std::endl;
+    std::cout << "    Max Grid Size Z: "
+        << deviceProps.maxGridSize[2] << std::endl;
+}
+
+
 int main(int argc, char** argv) {
     if (argc < 2) {
         std::cerr << "Invalid arguments." << std::endl;
@@ -296,140 +326,158 @@ int main(int argc, char** argv) {
         std::cerr << e.what() << std::endl;
         return 1;
     }
+
+    g_pBSP->build_worldlights();
+
+    print_cudainfo();
+
+    std::cout << "Copy BSP to device memory..." << std::endl;
+    CUDABSP::CUDABSP* pCudaBSP = CUDABSP::make_cudabsp(*g_pBSP);
     
     std::cout << "Start RAD!" << std::endl;
     
-    /* Process the lighting for each face in the map. */
-    for (BSP::Face& face : g_pBSP->get_faces()) {
-        std::cout << "Processing Face " << face.id << "..." << std::endl;
-        
-        RGB sum {0, 0, 0};
+    std::cout << "Compute direct lighting..." << std::endl;
+    std::vector<BSP::RGBExp32> directLighting;
+    CUDARAD::compute_direct_lighting(*g_pBSP, pCudaBSP, directLighting);
 
-        size_t lightmapWidth = face.get_lightmap_width();
-        size_t lightmapHeight = face.get_lightmap_height();
-        size_t numSamples = lightmapWidth * lightmapHeight;
+    std::cout << "Compute light bounces..." << std::endl;
+    CUDARAD::bounce_lighting(*g_pBSP, pCudaBSP);
 
-        BSP::FaceLightSampleProxy samples = face.get_lightsamples();
-        
-        /* Process each lighting sample on this face. */
-        for (size_t i=0; i<numSamples; i++) {
-            // `s` is the luxel coordinate in the face's local x-direction.
-            // `t` is the luxel coordinate in the face's local y-direction.
-            float s = static_cast<float>(i % lightmapWidth);
-            float t = static_cast<float>(i / lightmapWidth);
+    ///* Process the lighting for each face in the map. */
+    //for (BSP::Face& face : g_pBSP->get_faces()) {
+    //    std::cout << "Processing Face " << face.id << "..." << std::endl;
+    //    
+    //    RGB sum {0, 0, 0};
 
-            /*
-             * Supersample 100-ish points "around" this luxel, to counteract 
-             * lightmap aliasing.
-             *
-             * Easy to implement, but SUPER SLOW AND INEFFICIENT!!!
-             * TBH, I would like to change this to FXAA at some point.
-             */
-            const int NUM_SUPERSAMPLES = 100;
-            const float SUPERSAMPLE_RADIUS = 1.0;
+    //    size_t lightmapWidth = face.get_lightmap_width();
+    //    size_t lightmapHeight = face.get_lightmap_height();
+    //    size_t numSamples = lightmapWidth * lightmapHeight;
 
-            RGB color {0, 0, 0};
+    //    BSP::FaceLightSampleProxy samples = face.get_lightsamples();
+    //    
+    //    /* Process each lighting sample on this face. */
+    //    for (size_t i=0; i<numSamples; i++) {
+    //        // `s` is the luxel coordinate in the face's local x-direction.
+    //        // `t` is the luxel coordinate in the face's local y-direction.
+    //        float s = static_cast<float>(i % lightmapWidth);
+    //        float t = static_cast<float>(i / lightmapWidth);
 
-            int sampleCount = 0;
-            for (int i=0; i<NUM_SUPERSAMPLES; i++) {
-                /*
-                 * This is random radial supersampling.
-                 * It sucks. Don't use it.
-                 */
-                //float sOffset = std::numeric_limits<float>::infinity();
-                //float tOffset = std::numeric_limits<float>::infinity();
+    //        /*
+    //         * Supersample 100-ish points "around" this luxel, to counteract 
+    //         * lightmap aliasing.
+    //         *
+    //         * Easy to implement, but SUPER SLOW AND INEFFICIENT!!!
+    //         * TBH, I would like to change this to FXAA at some point.
+    //         */
+    //        const int NUM_SUPERSAMPLES = 100;
+    //        const float SUPERSAMPLE_RADIUS = 1.0;
 
-                //while (dist(sOffset, tOffset, 0.0, 0.0) >= 1.0) {
-                //    const float min = static_cast<float>(std::random_device::min());
-                //    const float max = static_cast<float>(std::random_device::max());
-                //    const float diff = max - min;
+    //        RGB color {0, 0, 0};
 
-                //    sOffset = static_cast<float>((g_random() - min) / diff);
-                //    tOffset = static_cast<float>((g_random() - min) / diff);
-                //}
+    //        int sampleCount = 0;
+    //        for (int i=0; i<NUM_SUPERSAMPLES; i++) {
+    //            /*
+    //             * This is random radial supersampling.
+    //             * It sucks. Don't use it.
+    //             */
+    //            //float sOffset = std::numeric_limits<float>::infinity();
+    //            //float tOffset = std::numeric_limits<float>::infinity();
 
-                //assert(0.0 <= sOffset && sOffset <= 1.0);
-                //assert(0.0 <= tOffset && tOffset <= 1.0);
+    //            //while (dist(sOffset, tOffset, 0.0, 0.0) >= 1.0) {
+    //            //    const float min = static_cast<float>(std::random_device::min());
+    //            //    const float max = static_cast<float>(std::random_device::max());
+    //            //    const float diff = max - min;
 
-                //sOffset *= SUPERSAMPLE_RADIUS * 2.0;
-                //tOffset *= SUPERSAMPLE_RADIUS * 2.0;
+    //            //    sOffset = static_cast<float>((g_random() - min) / diff);
+    //            //    tOffset = static_cast<float>((g_random() - min) / diff);
+    //            //}
 
-                //sOffset -= SUPERSAMPLE_RADIUS;
-                //tOffset -= SUPERSAMPLE_RADIUS;
+    //            //assert(0.0 <= sOffset && sOffset <= 1.0);
+    //            //assert(0.0 <= tOffset && tOffset <= 1.0);
 
-                /*
-                 * This is box supersampling. It works much better.
-                 * Also, it's a lot simpler.
-                 */
-                const int SUPERSAMPLE_WIDTH
-                    = static_cast<int>(sqrt(NUM_SUPERSAMPLES));
+    //            //sOffset *= SUPERSAMPLE_RADIUS * 2.0;
+    //            //tOffset *= SUPERSAMPLE_RADIUS * 2.0;
 
-                const float SUPERSAMPLE_DIFF
-                    = SUPERSAMPLE_RADIUS * 2.0f / SUPERSAMPLE_WIDTH;
-                
-                int supersampleS = i % SUPERSAMPLE_WIDTH;
-                int supersampleT = i / SUPERSAMPLE_WIDTH;
+    //            //sOffset -= SUPERSAMPLE_RADIUS;
+    //            //tOffset -= SUPERSAMPLE_RADIUS;
 
-                float sOffset
-                    = -SUPERSAMPLE_RADIUS + SUPERSAMPLE_DIFF * supersampleS;
+    //            /*
+    //             * This is box supersampling. It works much better.
+    //             * Also, it's a lot simpler.
+    //             */
+    //            const int SUPERSAMPLE_WIDTH
+    //                = static_cast<int>(sqrt(NUM_SUPERSAMPLES));
 
-                float tOffset
-                    = -SUPERSAMPLE_RADIUS + SUPERSAMPLE_DIFF * supersampleT;
+    //            const float SUPERSAMPLE_DIFF
+    //                = SUPERSAMPLE_RADIUS * 2.0f / SUPERSAMPLE_WIDTH;
+    //            
+    //            int supersampleS = i % SUPERSAMPLE_WIDTH;
+    //            int supersampleT = i / SUPERSAMPLE_WIDTH;
 
-                //// Don't supersample anywhere that isn't within the bounds of 
-                //// this face.
-                //if (s == 0 && sOffset < 0.0
-                //        || s == lightmapWidth - 1 && sOffset > 0.0
-                //        || t == 0 && tOffset < 0.0
-                //        || t == lightmapWidth - 1 && tOffset > 0.0
-                //        ) {
-                //    continue;
-                //}
+    //            float sOffset
+    //                = -SUPERSAMPLE_RADIUS + SUPERSAMPLE_DIFF * supersampleS;
 
-                assert(
-                    -SUPERSAMPLE_RADIUS <= sOffset
-                        && sOffset <= SUPERSAMPLE_RADIUS
-                );
-                assert(
-                    -SUPERSAMPLE_RADIUS <= tOffset
-                        && tOffset <= SUPERSAMPLE_RADIUS
-                );
+    //            float tOffset
+    //                = -SUPERSAMPLE_RADIUS + SUPERSAMPLE_DIFF * supersampleT;
 
-                RGB offsetColor = sample_at(face, s + sOffset, t + tOffset);
+    //            //// Don't supersample anywhere that isn't within the bounds of 
+    //            //// this face.
+    //            //if (s == 0 && sOffset < 0.0
+    //            //        || s == lightmapWidth - 1 && sOffset > 0.0
+    //            //        || t == 0 && tOffset < 0.0
+    //            //        || t == lightmapWidth - 1 && tOffset > 0.0
+    //            //        ) {
+    //            //    continue;
+    //            //}
 
-                color.r += offsetColor.r;
-                color.g += offsetColor.g;
-                color.b += offsetColor.b;
+    //            assert(
+    //                -SUPERSAMPLE_RADIUS <= sOffset
+    //                    && sOffset <= SUPERSAMPLE_RADIUS
+    //            );
+    //            assert(
+    //                -SUPERSAMPLE_RADIUS <= tOffset
+    //                    && tOffset <= SUPERSAMPLE_RADIUS
+    //            );
 
-                sampleCount++;
-            }
+    //            RGB offsetColor = sample_at(face, s + sOffset, t + tOffset);
 
-            // The final color is the average of the supersamples.
-            color.r /= sampleCount;
-            color.g /= sampleCount;
-            color.b /= sampleCount;
+    //            color.r += offsetColor.r;
+    //            color.g += offsetColor.g;
+    //            color.b += offsetColor.b;
 
-            samples[i] = lightsample_from_rgb(color);
+    //            sampleCount++;
+    //        }
 
-            sum.r += color.r;
-            sum.g += color.g;
-            sum.b += color.b;
-        }
+    //        // The final color is the average of the supersamples.
+    //        color.r /= sampleCount;
+    //        color.g /= sampleCount;
+    //        color.b /= sampleCount;
 
-        RGB average {
-            static_cast<uint32_t>(sum.r / numSamples),
-            static_cast<uint32_t>(sum.g / numSamples),
-            static_cast<uint32_t>(sum.b / numSamples),
-        };
+    //        samples[i] = lightsample_from_rgb(color);
 
-        // The BSP format requires us to also store the average lighting 
-        // value of each face, for some reason.
-        face.set_average_lighting(lightsample_from_rgb(average));
-        
-        // Don't ask. I have no idea.
-        face.set_styles(std::vector<uint8_t> {0, 0xFF, 0xFF, 0xFF});
-    }
+    //        sum.r += color.r;
+    //        sum.g += color.g;
+    //        sum.b += color.b;
+    //    }
+
+    //    RGB average {
+    //        static_cast<uint32_t>(sum.r / numSamples),
+    //        static_cast<uint32_t>(sum.g / numSamples),
+    //        static_cast<uint32_t>(sum.b / numSamples),
+    //    };
+
+    //    // The BSP format requires us to also store the average lighting 
+    //    // value of each face, for some reason.
+    //    face.set_average_lighting(lightsample_from_rgb(average));
+    //    
+    //    // Don't ask. I have no idea.
+    //    face.set_styles(std::vector<uint8_t> {0, 0xFF, 0xFF, 0xFF});
+    //}
     
+    CUDABSP::update_bsp(*g_pBSP, pCudaBSP);
+
+    CUDABSP::destroy_cudabsp(pCudaBSP);
+
     /*
      * Mark the BSP as non-fullbright.
      *

@@ -298,7 +298,7 @@ namespace BSP {
         int32_t owner;
     };
     
-    struct LightSample {
+    struct RGBExp32 {
         uint8_t r;
         uint8_t g;
         uint8_t b;
@@ -306,7 +306,7 @@ namespace BSP {
     };
     
     struct CompressedLightCube {
-        LightSample color[6];
+        RGBExp32 color[6];
     };
     
     struct DLeafAmbientLighting {
@@ -393,8 +393,8 @@ namespace BSP {
 
     class FaceLightSampleProxy {
         public:
-            using Iter = std::vector<LightSample>::iterator;
-            using ConstIter = std::vector<LightSample>::const_iterator;
+            using Iter = std::vector<RGBExp32>::iterator;
+            using ConstIter = std::vector<RGBExp32>::const_iterator;
 
         private:
             Iter m_begin;
@@ -406,8 +406,8 @@ namespace BSP {
                 Iter& end
             );
 
-            LightSample& operator[](size_t i);
-            const LightSample& operator[](size_t i) const;
+            RGBExp32& operator[](size_t i);
+            const RGBExp32& operator[](size_t i) const;
 
             Iter begin(void);
             Iter end(void);
@@ -438,13 +438,13 @@ namespace BSP {
                 const std::vector<int32_t>& surfEdges
             );
 
-            void precalculate_st_xyz_matrix(void);
-            
         public:
             const size_t id;
             
             Face(BSP& bsp, DFace& faceData);
-            
+
+            void make_st_xyz_matrix(gmtl::Matrix<double, 3, 3>& Ainv) const;
+
             const TexInfo& get_texinfo(void) const;
             const DTexData& get_texdata(void) const;
             const DFace& get_data(void) const;
@@ -466,8 +466,8 @@ namespace BSP {
 
             FaceLightSampleProxy get_lightsamples(void);
             
-            LightSample get_average_lighting(void) const;
-            void set_average_lighting(const LightSample& sample);
+            RGBExp32 get_average_lighting(void) const;
+            void set_average_lighting(const RGBExp32& sample);
             
             Vec3<float> xyz_from_lightmap_st(float s, float t) const;
     };
@@ -484,7 +484,7 @@ namespace BSP {
             std::vector<DEdge> m_edges;
             std::vector<int32_t> m_surfEdges;
             std::vector<DFace> m_dFaces;
-            std::vector<LightSample> m_lightSamples;
+            std::vector<RGBExp32> m_lightSamples;
             std::vector<TexInfo> m_texInfos;
             std::vector<DTexData> m_texDatas;
             std::vector<Face> m_faces;
@@ -585,11 +585,15 @@ namespace BSP {
             const std::vector<Vec3<float>>& get_vertices(void) const;
             const std::vector<DEdge>& get_edges(void) const;
             const std::vector<int32_t>& get_surfedges(void) const;
-            std::vector<LightSample>& get_lightsamples(void);
+            std::vector<DFace>& get_dfaces(void);
+            const std::vector<DFace>& get_dfaces(void) const;
+            std::vector<RGBExp32>& get_lightsamples(void);
+            const std::vector<RGBExp32>& get_lightsamples(void) const;
             const std::vector<TexInfo>& get_texinfos(void) const;
             const std::vector<DTexData>& get_texdatas(void) const;
 
             std::vector<Face>& get_faces(void);
+            const std::vector<Face>& get_faces(void) const;
 
             const std::vector<DLeaf>& get_leaves(void) const;
 
@@ -601,6 +605,8 @@ namespace BSP {
             const std::unordered_map<int, std::vector<uint8_t>>&
                 get_extras(void) const;
                 
+            void build_worldlights(void);
+
             bool is_fullbright(void) const;
             void set_fullbright(bool fullbright);
             

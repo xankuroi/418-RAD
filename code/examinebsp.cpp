@@ -65,7 +65,7 @@ int main(int argc, char** argv) {
         const BSP::DFace& faceData = face.get_data();
         
         std::cout << "    Light Offset: "
-            << faceData.lightOffset / sizeof(BSP::LightSample) << std::endl;
+            << faceData.lightOffset / sizeof(BSP::RGBExp32) << std::endl;
         
         std::cout << "    Luxels X: "
             << face.get_lightmap_width()
@@ -77,7 +77,7 @@ int main(int argc, char** argv) {
         std::cout << "    "
             << face.get_lightmap_size() << " Light Samples" << std::endl;
             
-        const BSP::LightSample& avgLighting = face.get_average_lighting();
+        const BSP::RGBExp32& avgLighting = face.get_average_lighting();
         
         std::cout << "    Average Lighting: ("
             << static_cast<int>(avgLighting.r) << ", "
@@ -85,17 +85,17 @@ int main(int argc, char** argv) {
             << static_cast<int>(avgLighting.b) << ") * 2^"
             << static_cast<int>(avgLighting.exp) << std::endl;
             
-        // std::cout << "    Light Samples:" << std::endl;
+        std::cout << "    Light Samples:" << std::endl;
         
-        // j = 0;
-        // for (BSP::LightSample& lightSample : face.get_lightsamples()) {
-            // std::cout << "        Sample " << j << ": ("
-                // << static_cast<int>(lightSample.r) << ", "
-                // << static_cast<int>(lightSample.g) << ", "
-                // << static_cast<int>(lightSample.b) << ") * 2^"
-                // << static_cast<int>(lightSample.exp) << std::endl;
-            // j++;
-        // }
+        j = 0;
+        for (BSP::RGBExp32& lightSample : face.get_lightsamples()) {
+            std::cout << "        Sample " << j << ": ("
+                << static_cast<int>(lightSample.r) << ", "
+                << static_cast<int>(lightSample.g) << ", "
+                << static_cast<int>(lightSample.b) << ") * 2^"
+                << static_cast<int>(lightSample.exp) << std::endl;
+            j++;
+        }
         
         // std::cout << "    Light Sample Coords:" << std::endl;
         
@@ -116,6 +116,8 @@ int main(int argc, char** argv) {
         const BSP::DPlane& planeData = face.get_planedata();
         
         std::cout << "    Texinfo Index: " << faceData.texInfo << std::endl;
+        
+        std::cout << "    Plane Number: " << faceData.planeNum << std::endl;
         
         std::cout << "    Face Normal: <"
             << planeData.normal.x << ", "

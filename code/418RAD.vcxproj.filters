@@ -26,5 +26,25 @@
     <ClInclude Include="bsp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="cudabsp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cudarad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cudamatrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cudautils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="cudabsp.cu">
+      <Filter>Source Files</Filter>
+    </CudaCompile>
+    <CudaCompile Include="cudarad.cu">
+      <Filter>Source Files</Filter>
+    </CudaCompile>
   </ItemGroup>
 </Project>

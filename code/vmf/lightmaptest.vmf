@@ -2,7 +2,7 @@ versioninfo
 {
 	"editorversion" "400"
 	"editorbuild" "6412"
-	"mapversion" "72"
+	"mapversion" "79"
 	"formatversion" "100"
 	"prefab" "0"
 }
@@ -80,7 +80,7 @@ viewsettings
 world
 {
 	"id" "1"
-	"mapversion" "72"
+	"mapversion" "79"
 	"classname" "worldspawn"
 	"detailmaterial" "detail/detailsprites"
 	"detailvbsp" "detail.vbsp"
