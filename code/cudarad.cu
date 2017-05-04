@@ -3,6 +3,7 @@
 #include "device_atomic_functions.h"
 
 #include <iostream>
+#include <thread>
 
 #include "bsp.h"
 
@@ -14,14 +15,85 @@
 #include "cudautils.h"
 
 
-static __device__ inline float dot(float3 a, float3 b) {
+struct FaceInfo {
+    BSP::DFace face;
+    BSP::DPlane plane;
+    BSP::TexInfo texInfo;
+    CUDAMatrix::CUDAMatrix<double, 3, 3> Ainv;
+    float3 faceNorm;
+    float3 totalLight;
+    float3 avgLight;
+    size_t faceIndex;
+    size_t lightmapWidth;
+    size_t lightmapHeight;
+    size_t lightmapSize;
+    size_t lightmapStartIndex;
+};
+
+
+static __device__ inline float dot(const float3& a, const float3& b) {
     return a.x * b.x + a.y * b.y + a.z * b.z;
 }
 
 
+static __device__ inline float3 cross(const float3& a, const float3& b) {
+    return make_float3(
+        a.y * b.z - a.z * b.y,
+        a.z * b.x - a.x * b.z,
+        a.x * b.y - a.y * b.x
+    );
+}
+
+
+static __device__ inline float3 operator-(const float3& a, const float3& b) {
+    return make_float3(a.x - b.x, a.y - b.y, a.z - b.z);
+}
+
+
+static __device__ inline float3 operator+(const float3& a, const float3& b) {
+    return make_float3(a.x + b.x, a.y + b.y, a.z + b.z);
+}
+
+
+static __device__ inline float3& operator+=(float3& a, const float3& b) {
+    a.x += b.x;
+    a.y += b.y;
+    a.z += b.z;
+    return a;
+}
+
+
+static __device__ inline float3 operator*(const float3& v, float c) {
+    return make_float3(v.x * c, v.y * c, v.z * c);
+}
+
+
+static __device__ inline float3 operator/(const float3& v, float c) {
+    return v * (1.0 / c);
+}
+
+
+static __device__ inline float dist(const float3& a, const float3& b) {
+    float3 diff = b - a;
+    return sqrt(dot(diff, diff));
+}
+
+
+static __device__ inline float len(const float3& v) {
+    return dist(make_float3(0.0, 0.0, 0.0), v);
+}
+
+
+static __device__ inline float3 normalized(const float3& v) {
+    return v / len(v);
+}
+
+
 static __device__ inline float attenuate(
-        BSP::DWorldLight& light, float dist
+        BSP::DWorldLight& light,
+        float dist
         ) {
+        
     float c = light.constantAtten;
     float l = light.linearAtten;
     float q = light.quadraticAtten;
@@ -30,33 +102,11 @@ static __device__ inline float attenuate(
 }
 
 
-//static __device__ void mult(
-//        CUDAMatrix::CUDAMatrix<double, 3, 1>& result,
-//        CUDAMatrix::CUDAMatrix<double, 3, 3>& A,
-//        CUDAMatrix::CUDAMatrix<double, 3, 1>& B
-//        ) {
-//
-//    for (int resultRow=0; resultRow<3; resultRow++) {
-//        double sum = 0.0;
-//
-//        for (int i=0; i<3; i++) {
-//            sum += A[resultRow][i] * B[i][0];
-//        }
-//
-//        result[resultRow][0] = sum;
-//    }
-//}
-
-
-static __device__ float3 xyz_from_st(
-        CUDABSP::CUDABSP cudaBSP, size_t faceIndex,
-        size_t s, size_t t
-        ) {
-
-    BSP::DFace& face = cudaBSP.faces[faceIndex];
-    BSP::DPlane& plane = cudaBSP.planes[face.planeNum];
-    BSP::TexInfo& texInfo = cudaBSP.texInfos[face.texInfo];
-    CUDAMatrix::CUDAMatrix<double, 3, 3> Ainv = cudaBSP.xyzMatrices[faceIndex];
+static __device__ float3 xyz_from_st(FaceInfo& faceInfo, size_t s, size_t t) {
+    BSP::DFace& face = faceInfo.face;
+    BSP::DPlane& plane = faceInfo.plane;
+    BSP::TexInfo& texInfo = faceInfo.texInfo;
+    CUDAMatrix::CUDAMatrix<double, 3, 3>& Ainv = faceInfo.Ainv;
 
     float sOffset = texInfo.lightmapVecs[0][3];
     float tOffset = texInfo.lightmapVecs[1][3];
@@ -70,41 +120,16 @@ static __device__ float3 xyz_from_st(
     B[1][0] = t - tOffset + tMin;
     B[2][0] = plane.dist;
 
-    //mult(result, Ainv, B);
-
-    //printf(
-    //    "Face %u Ainv:\n"
-    //    "\t%f %f %f\n"
-    //    "\t%f %f %f\n"
-    //    "\t%f %f %f\n",
-    //    static_cast<unsigned int>(faceIndex),
-    //    Ainv[0][0], Ainv[0][1], Ainv[0][2],
-    //    Ainv[1][0], Ainv[1][1], Ainv[1][2],
-    //    Ainv[2][0], Ainv[2][1], Ainv[2][2]
-    //);
-
     CUDAMatrix::CUDAMatrix<double, 3, 1> result = Ainv * B;
 
-    //CUDAMatrix::CUDAMatrix<double, 3, 1> result;
-    //result[0][0]
-    //    = Ainv[0][0] * B[0][0] + Ainv[0][1] * B[1][0] + Ainv[0][2] * B[2][0];
-    //result[1][0]
-    //    = Ainv[1][0] * B[0][0] + Ainv[1][1] * B[1][0] + Ainv[1][2] * B[2][0];
-    //result[2][0]
-    //    = Ainv[2][0] * B[0][0] + Ainv[2][1] * B[1][0] + Ainv[2][2] * B[2][0];
-
-    float x = static_cast<float>(result[0][0]);
-    float y = static_cast<float>(result[1][0]);
-    float z = static_cast<float>(result[2][0]);
-
-    return make_float3(x, y, z);
+    return make_float3(result[0][0], result[1][0], result[2][0]);
 }
 
 
 static __device__ void make_points(
         CUDABSP::CUDABSP& cudaBSP,
-        BSP::DFace& face,
-        float3*& points
+        /* output */ float3* points,
+        BSP::DFace& face
         ) {
 
     for (size_t i=0; i<face.numEdges; i++) {
@@ -125,6 +150,18 @@ static __device__ void make_points(
             points[i] = cudaBSP.vertices[edge.vertex2];
         }
     }
+}
+
+
+/*  */
+static __device__ bool intersects(
+        const float3& vertex1, const float3& vertex2, const float3& vertex3,
+        const float3& startPos, const float3& endPos
+        ) {
+
+
+
+    return false;
 }
 
 
@@ -152,417 +189,361 @@ static __device__ BSP::RGBExp32 lightsample_from_rgb(float3 color) {
 
 
 namespace DirectLighting {
-    //__global__ void map_faces_LOS(
-    //        CUDABSP::CUDABSP* pCudaBSP,
-    //        size_t faceIndex
-    //        ) {
-
-    //    size_t otherFaceIndex = blockIdx.x * blockDim.x + threadIdx.x;
-
-    //    BSP::DFace& face = pCudaBSP->faces[faceIndex];
-
-    //    float3* points;
-    //    cudaMalloc(&points, sizeof(float3) * face.numEdges);
-
-    //    make_points(*pCudaBSP, face, points);
-
-
-
-    //    cudaFree(points);
-    //}
-
-    __global__ void map_worldlights(
+    __global__ void map_faces_LOS(
             CUDABSP::CUDABSP* pCudaBSP,
-            /* output */ float3* lightContributions,
+            /* output */ bool* pLightBlocked,
             size_t faceIndex,
-            float3 samplePos
+            float3 samplePos,
+            float3 lightPos
             ) {
 
-        size_t lightIndex = blockIdx.x * blockDim.x + threadIdx.x;
+        size_t otherFaceIndex = blockIdx.x * blockDim.x + threadIdx.x;
 
-        if (lightIndex >= pCudaBSP->numWorldLights) {
+        if (otherFaceIndex == faceIndex
+                || otherFaceIndex >= pCudaBSP->numFaces) {
             return;
         }
 
-        //printf(
-        //    "map lights for Face %u at (%f, %f, %f)\n",
-        //    static_cast<unsigned int>(faceIndex),
-        //    samplePos.x,
-        //    samplePos.y,
-        //    samplePos.z
-        //);
+        BSP::DFace& otherFace = pCudaBSP->faces[otherFaceIndex];
 
-        BSP::DFace& face = pCudaBSP->faces[faceIndex];
-        BSP::DPlane& plane = pCudaBSP->planes[face.planeNum];
+        float3 vertex1;
+        float3 vertex2;
+        float3 vertex3;
 
-        float3 faceNorm = make_float3(
-            plane.normal.x,
-            plane.normal.y,
-            plane.normal.z
-        );
+        for (size_t i=0; i<otherFace.numEdges; i++) {
+            int32_t surfEdge = pCudaBSP->surfEdges[otherFace.firstEdge + i];
 
-        BSP::DWorldLight& light = pCudaBSP->worldLights[lightIndex];
+            bool firstToSecond = (surfEdge >= 0);
 
-        float3 lightPos = make_float3(
-            light.origin.x,
-            light.origin.y,
-            light.origin.z
-        );
+            if (!firstToSecond) {
+                surfEdge *= -1;
+            }
 
-        float3 diff = make_float3(
-            lightPos.x - samplePos.x,
-            lightPos.y - samplePos.y,
-            lightPos.z - samplePos.z
-        );
+            BSP::DEdge& edge = pCudaBSP->edges[surfEdge];
 
-        float diffDotNormal = dot(diff, faceNorm);
+            if (i == 0) {
+                if (firstToSecond) {
+                    vertex1 = pCudaBSP->vertices[edge.vertex1];
+                }
+                else {
+                    vertex1 = pCudaBSP->vertices[edge.vertex2];
+                }
+            }
+            else if (i == 1) {
+                if (firstToSecond) {
+                    vertex3 = pCudaBSP->vertices[edge.vertex1];
+                }
+                else {
+                    vertex3 = pCudaBSP->vertices[edge.vertex2];
+                }
+            }
+            else {
+                vertex2 = vertex3;
 
-        /*
-         * This light is on the wrong side of the current face.
-         * There's no way it could possibly light this sample.
-         */
-        if (diffDotNormal < 0.0) {
-            return;
+                if (firstToSecond) {
+                    vertex3 = pCudaBSP->vertices[edge.vertex1];
+                }
+                else {
+                    vertex3 = pCudaBSP->vertices[edge.vertex2];
+                }
+
+                bool lightBlocked = intersects(
+                    vertex1, vertex2, vertex3,
+                    lightPos, samplePos
+                );
+
+                if (lightBlocked) {
+                    *pLightBlocked = true;
+                    return;
+                }
+            }
         }
-
-        //const size_t BLOCK_WIDTH = 1024;
-
-        //size_t numFaces = pCudaBSP->numFaces;
-        //size_t numBlocks = div_ceil(numFaces, BLOCK_WIDTH);
-
-        //KERNEL_LAUNCH(
-        //    map_faces_LOS,
-        //    numBlocks, numFaces,
-        //    pCudaBSP, faceIndex
-        //);
-
-        //cudaDeviceSynchronize();
-
-        //for (int i=0; i<pCudaBSP->numFaces; i++) {
-        //    BSP::DFace& otherFace = pCudaBSP->faces[i];
-
-        //    if (i == faceIndex) {
-        //        continue;
-        //    }
-
-        //    float3* points;
-        //    cudaMalloc(&points, sizeof(float3) *otherFace.numEdges);
-
-        //    make_points(*pCudaBSP, otherFace, points);
-
-        //    float3* pVertex = points + otherFace.numEdges - 1;
-
-        //    float3 vertex1 = *pVertex--;
-        //    float3 vertex2;
-        //    float3 vertex3 = *pVertex--;
-
-
-
-        //}
-
-        float dist = sqrt(
-            diff.x * diff.x +
-            diff.y * diff.y +
-            diff.z * diff.z
-        );
-
-        float attenuation = attenuate(light, dist);
-
-        float3 color;
-
-        color.x = light.intensity.x / attenuation;
-        color.y = light.intensity.y / attenuation;
-        color.z = light.intensity.z / attenuation;
-
-        lightContributions[lightIndex] = color;
     }
 
-    __global__ void map_supersamples(CUDABSP::CUDABSP* pCudaBSP) {
-
-    }
-
-    __global__ void map_luxels(
-            CUDABSP::CUDABSP* pCudaBSP,
-            /* output */ float3* pTotalLight,
-            size_t faceIndex
+    __device__ float3 sample_at(
+            CUDABSP::CUDABSP& cudaBSP,
+            FaceInfo& faceInfo,
+            size_t s, size_t t
             ) {
-
-        size_t s = blockIdx.x * blockDim.x + threadIdx.x;
-        size_t t = blockIdx.y * blockDim.y + threadIdx.y;
-
-        BSP::DFace& face = pCudaBSP->faces[faceIndex];
-
-        size_t lightmapWidth = face.lightmapTextureSizeInLuxels[0] + 1;
-        size_t lightmapHeight = face.lightmapTextureSizeInLuxels[1] + 1;
-
-        if (s >= lightmapWidth || t >= lightmapHeight) {
-            //printf(
-            //    "Early return for Face %u at (%u, %u)\n",
-            //    static_cast<unsigned int>(faceIndex),
-            //    static_cast<unsigned int>(s),
-            //    static_cast<unsigned int>(t)
-            //);
-            return;
-        }
-
-        //printf(
-        //    "map luxels for Face %u at (%u, %u)\n",
-        //    static_cast<unsigned int>(faceIndex),
-        //    static_cast<unsigned int>(s),
-        //    static_cast<unsigned int>(t)
-        //);
-
-        BSP::DPlane& plane = pCudaBSP->planes[face.planeNum];
-
-        float3 faceNorm = make_float3(
-            plane.normal.x,
-            plane.normal.y,
-            plane.normal.z
-        );
-
-        float3 samplePos = xyz_from_st(*pCudaBSP, faceIndex, s, t);
-
-        //printf(
-        //    "(%u) Sampling light for Face %u (%u, %u) at <%f, %f, %f> "
-        //    "(normal: <%f, %f, %f>, plane: %u)\n",
-        //    static_cast<unsigned int>(t * lightmapWidth + s),
-        //    static_cast<unsigned int>(faceIndex),
-        //    static_cast<unsigned int>(s),
-        //    static_cast<unsigned int>(t),
-        //    samplePos.x,
-        //    samplePos.y,
-        //    samplePos.z,
-        //    pCudaBSP->planes[face.planeNum].normal.x,
-        //    pCudaBSP->planes[face.planeNum].normal.y,
-        //    pCudaBSP->planes[face.planeNum].normal.z,
-        //    static_cast<unsigned int>(face.planeNum)
-        //);
-
-        //float3* lightContributions = new float3[pCudaBSP->numWorldLights];
-
-        //CUDA_CHECK_ERROR_DEVICE(cudaPeekAtLastError());
-
-        //const size_t BLOCK_WIDTH = 1;
-        //size_t numLights = pCudaBSP->numWorldLights;
-        //size_t numBlocks = div_ceil(numLights, BLOCK_WIDTH);
-
-        //printf(
-        //    "Number of world lights: %u\n",
-        //    static_cast<unsigned int>(pCudaBSP->numWorldLights)
-        //);
-
-        //KERNEL_LAUNCH(
-        //    map_worldlights,
-        //    numBlocks, numLights,
-        //    pCudaBSP, lightContributions, faceIndex, samplePos
-        //);
-
-        //CUDA_CHECK_ERROR_DEVICE(cudaPeekAtLastError());
-
-        //cudaDeviceSynchronize();
-
-        //CUDA_CHECK_ERROR_DEVICE(cudaPeekAtLastError());
+        
+        float3 samplePos = xyz_from_st(faceInfo, s, t);
 
         float3 result = make_float3(0.0, 0.0, 0.0);
 
-        for (size_t i=0; i<pCudaBSP->numWorldLights; i++) {
-            BSP::DWorldLight& light = pCudaBSP->worldLights[i];
+        for (size_t lightIndex=0;
+                 lightIndex<cudaBSP.numWorldLights;
+                 lightIndex++
+                 ) {
+                
+            BSP::DWorldLight& light = cudaBSP.worldLights[lightIndex];
 
-            //printf(
-            //    "Light %u -- rgb: (%f, %f, %f), c: %f, l: %f, q: %f\n",
-            //    static_cast<unsigned int>(i),
-            //    light.intensity.x,
-            //    light.intensity.y,
-            //    light.intensity.z,
-            //    light.constantAtten,
-            //    light.linearAtten,
-            //    light.quadraticAtten
-            //);
-
-            float3 diff = make_float3(
-                light.origin.x - samplePos.x,
-                light.origin.y - samplePos.y,
-                light.origin.z - samplePos.z
+            float3 lightPos = make_float3(
+                light.origin.x,
+                light.origin.y,
+                light.origin.z
             );
 
-            float diffDotNormal = dot(diff, faceNorm);
+            float3 diff = lightPos - samplePos;
 
             /*
              * This light is on the wrong side of the current face.
              * There's no way it could possibly light this sample.
              */
-            if (diffDotNormal < 0.0) {
-                //printf(
-                //    "Face %u skipped light %u due to normal <%f, %f, %f>!\n",
-                //    static_cast<unsigned int>(faceIndex),
-                //    static_cast<unsigned int>(i),
-                //    faceNorm.x,
-                //    faceNorm.y,
-                //    faceNorm.z
-                //);
-                return;
+            if (dot(diff, faceInfo.faceNorm) < 0.0) {
+                continue;
             }
 
-            float dist = sqrt(
-                diff.x * diff.x +
-                diff.y * diff.y +
-                diff.z * diff.z
-            );
+            bool* pLightBlocked = new bool;
 
+            CUDA_CHECK_ERROR_DEVICE(cudaPeekAtLastError());
+
+            //*pLightBlocked = false;
+
+            //const size_t BLOCK_WIDTH = 8;
+
+            //size_t numBlocks = div_ceil(cudaBSP.numFaces, BLOCK_WIDTH);
+
+            //KERNEL_LAUNCH_DEVICE(
+            //    map_faces_LOS,
+            //    numBlocks, BLOCK_WIDTH,
+            //    &cudaBSP, pLightBlocked, faceInfo.faceIndex,
+            //    samplePos, lightPos
+            //);
+
+            //CUDA_CHECK_ERROR_DEVICE(cudaDeviceSynchronize());
+
+            //bool lightBlocked = *pLightBlocked;
+
+            //delete pLightBlocked;
+
+            bool lightBlocked = false;
+
+            int x = 0;
+
+            for (size_t otherFaceIndex=0;
+                    otherFaceIndex<cudaBSP.numFaces;
+                    otherFaceIndex++) {
+
+                BSP::DFace& otherFace = cudaBSP.faces[otherFaceIndex];
+
+                float3 vertex1;
+                float3 vertex2;
+                float3 vertex3;
+
+                size_t startEdge = otherFace.firstEdge;
+                size_t endEdge = startEdge + otherFace.numEdges;
+
+                for (size_t i=startEdge; i<endEdge; i++) {
+                    int32_t surfEdge = cudaBSP.surfEdges[i];
+
+                    bool firstToSecond = (surfEdge >= 0);
+
+                    if (!firstToSecond) {
+                        surfEdge *= -1;
+                    }
+
+                    BSP::DEdge& edge = cudaBSP.edges[surfEdge];
+
+                    if (i == startEdge) {
+                        if (firstToSecond) {
+                            vertex1 = cudaBSP.vertices[edge.vertex1];
+                        }
+                        else {
+                            vertex1 = cudaBSP.vertices[edge.vertex2];
+                        }
+                    }
+                    else if (i == startEdge + 1) {
+                        if (firstToSecond) {
+                            vertex3 = cudaBSP.vertices[edge.vertex1];
+                        }
+                        else {
+                            vertex3 = cudaBSP.vertices[edge.vertex2];
+                        }
+                    }
+                    else {
+                        vertex2 = vertex3;
+
+                        if (firstToSecond) {
+                            vertex3 = cudaBSP.vertices[edge.vertex1];
+                        }
+                        else {
+                            vertex3 = cudaBSP.vertices[edge.vertex2];
+                        }
+
+                        //bool lightBlocked = intersects(
+                        lightBlocked = intersects(
+                            vertex1, vertex2, vertex3,
+                            lightPos, samplePos
+                        );
+
+                        if (lightBlocked) {
+                            //*pLightBlocked = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (lightBlocked) {
+                    break;
+                }
+            }
+
+            if (lightBlocked) {
+                // This light can't be seen from the position of the sample.
+                // Ignore it.
+                continue;
+            }
+
+            /* I CAN SEE THE LIGHT */
+
+            float dist = len(diff);
             float attenuation = attenuate(light, dist);
 
-            //printf("dist: %f; attenuation: %f\n", dist, attenuation);
-
-            result.x += light.intensity.x * 255.0 / attenuation;
-            result.y += light.intensity.y * 255.0 / attenuation;
-            result.z += light.intensity.z * 255.0 / attenuation;
+            result.x += light.intensity.x * 255.0 / attenuation;    // r
+            result.y += light.intensity.y * 255.0 / attenuation;    // g
+            result.z += light.intensity.z * 255.0 / attenuation;    // b
         }
 
-        size_t lightmapStartIndex = face.lightOffset / sizeof(BSP::RGBExp32);
-        size_t lightSampleIndex = t * lightmapWidth + s;
-
         //printf(
-        //    "Start Index for Face %u: %u\n",
+        //    "Sample at (%u, %u) for Face %u: (%f, %f, %f)\n",
+        //    static_cast<unsigned int>(s),
+        //    static_cast<unsigned int>(t),
         //    static_cast<unsigned int>(faceIndex),
-        //    static_cast<unsigned int>(lightmapStartIndex)
+        //    result.x, result.y, result.z
         //);
 
-        pCudaBSP->lightSamples[lightmapStartIndex + lightSampleIndex]
-            = lightsample_from_rgb(result);
-
-        // Don't worry. This will compile just fine.
-        atomicAdd(&pTotalLight->x, result.x);
-        atomicAdd(&pTotalLight->y, result.y);
-        atomicAdd(&pTotalLight->z, result.z);
-
-        //delete[] lightContributions;
+        return result;
     }
 
-    __global__ void map_faces(CUDABSP::CUDABSP* pCudaBSP) {
+    __global__ void map_faces(
+            CUDABSP::CUDABSP* pCudaBSP,
+            volatile size_t* pFacesCompleted
+            ) {
+            
+        bool primaryThread = (threadIdx.x == 0 && threadIdx.y == 0);
+
         if (pCudaBSP->tag != CUDABSP::TAG) {
-            printf("Invalid CUDABSP Tag: %x\n", pCudaBSP->tag);
+            if (primaryThread) {
+                printf("Invalid CUDABSP Tag: %x\n", pCudaBSP->tag);
+            }
             return;
         }
 
-        // Map to faces.
-        size_t faceIndex = blockIdx.x * blockDim.x + threadIdx.x;
+        //__shared__ size_t faceIndex;
+        //__shared__ BSP::DFace face;
+        //__shared__ BSP::DPlane plane;
+        //__shared__ float3 faceNorm;
+        //__shared__ size_t lightmapWidth;
+        //__shared__ size_t lightmapHeight;
+        //__shared__ size_t lightmapSize;
+        //__shared__ size_t lightmapStartIndex;
+        //__shared__ float3 totalLight;
 
-        if (faceIndex >= pCudaBSP->numFaces) {
-            return;
+        __shared__ FaceInfo faceInfo;
+
+        if (primaryThread) {
+            // Map block numbers to faces.
+            faceInfo.faceIndex = blockIdx.x;
+
+            faceInfo.face = pCudaBSP->faces[faceInfo.faceIndex];
+            faceInfo.plane = pCudaBSP->planes[faceInfo.face.planeNum];
+            faceInfo.texInfo = pCudaBSP->texInfos[faceInfo.face.texInfo];
+            faceInfo.Ainv = pCudaBSP->xyzMatrices[faceInfo.faceIndex];
+
+            BSP::DFace& face = faceInfo.face;
+            BSP::DPlane& plane = faceInfo.plane;
+            
+            faceInfo.faceNorm = make_float3(
+                plane.normal.x,
+                plane.normal.y,
+                plane.normal.z
+            );
+
+            faceInfo.lightmapWidth = face.lightmapTextureSizeInLuxels[0] + 1;
+            faceInfo.lightmapHeight = face.lightmapTextureSizeInLuxels[1] + 1;
+
+            size_t& lightmapWidth = faceInfo.lightmapWidth;
+            size_t& lightmapHeight = faceInfo.lightmapHeight;
+
+            faceInfo.lightmapSize = lightmapWidth * lightmapHeight;
+            faceInfo.lightmapStartIndex
+                = face.lightOffset / sizeof(BSP::RGBExp32);
+            faceInfo.totalLight = make_float3(0.0, 0.0, 0.0);
+
+            //printf(
+            //    "Processing Face %u...\n",
+            //    static_cast<unsigned int>(faceInfo.faceIndex)
+            //);
         }
 
-        printf("Processing Face %u...\n", faceIndex);
+        __syncthreads();
 
-        BSP::DFace& face = pCudaBSP->faces[faceIndex];
+        /* Take a sample at each lightmap luxel. */
+        for (size_t i=0; i<faceInfo.lightmapHeight; i+=blockDim.y) {
+            size_t t = i + threadIdx.y;
 
-        size_t lightmapWidth = face.lightmapTextureSizeInLuxels[0] + 1;
-        size_t lightmapHeight = face.lightmapTextureSizeInLuxels[1] + 1;
-        size_t lightmapSize = lightmapWidth * lightmapHeight;
+            if (t >= faceInfo.lightmapHeight) {
+                continue;
+            }
 
-        //printf(
-        //    "Face %u: \n"
-        //    //"\t first 8 bytes: %x %x %x %x %x %x %x %x\n"
-        //    "\t addr: %p\n"
-        //    "\t firstEdge addr: %p\n"
-        //    "\t planeNum: %u\n"
-        //    "\t side: %u\n"
-        //    "\t onNode: %u\n"
-        //    "\t firstEdge: %d\n"
-        //    "\t numEdges: %d\n"
-        //    "\t texInfo: %d\n"
-        //    "\t dispInfo: %d\n"
-        //    "\t surfaceFogVolumeID: %d\n"
-        //    "\t styles: %x, %x, %x, %x\n"
-        //    "\t lightOffset: %d\n"
-        //    "\t area: %f\n"
-        //    "\t mins: (%d, %d)\n"
-        //    "\t size: %d x %d\n"
-        //    "\t origFace: %d\n"
-        //    "\t numPrims: %u\n"
-        //    "\t firstPrimID: %u\n"
-        //    "\t smoothingGroups: %x\n",
-        //    static_cast<unsigned int>(faceIndex),
-        //    //static_cast<int>(c[0]),
-        //    //static_cast<int>(c[1]),
-        //    //static_cast<int>(c[2]),
-        //    //static_cast<int>(c[3]),
-        //    //static_cast<int>(c[4]),
-        //    //static_cast<int>(c[5]),
-        //    //static_cast<int>(c[6]),
-        //    //static_cast<int>(c[7]),
-        //    pFace,
-        //    &pFace->firstEdge,
-        //    static_cast<unsigned int>(pFace->planeNum),
-        //    static_cast<unsigned int>(pFace->side),
-        //    static_cast<unsigned int>(pFace->onNode),
-        //    static_cast<int>(pFace->firstEdge),
-        //    static_cast<int>(pFace->numEdges),
-        //    static_cast<int>(pFace->texInfo),
-        //    static_cast<int>(pFace->dispInfo),
-        //    static_cast<int>(pFace->surfaceFogVolumeID),
-        //    static_cast<int>(pFace->styles[0]),
-        //    static_cast<int>(pFace->styles[1]),
-        //    static_cast<int>(pFace->styles[2]),
-        //    static_cast<int>(pFace->styles[3]),
-        //    static_cast<int>(pFace->lightOffset),
-        //    pFace->area,
-        //    static_cast<int>(pFace->lightmapTextureMinsInLuxels[0]),
-        //    static_cast<int>(pFace->lightmapTextureMinsInLuxels[1]),
-        //    static_cast<int>(pFace->lightmapTextureSizeInLuxels[0]),
-        //    static_cast<int>(pFace->lightmapTextureSizeInLuxels[1]),
-        //    static_cast<int>(pFace->origFace),
-        //    static_cast<unsigned int>(pFace->numPrims),
-        //    static_cast<unsigned int>(pFace->firstPrimID),
-        //    static_cast<int>(pFace->smoothingGroups)
-        //);
+            for (size_t j=0; j<faceInfo.lightmapWidth; j+=blockDim.x) {
+                size_t s = j + threadIdx.x;
+                
+                if (s >= faceInfo.lightmapWidth) {
+                    continue;
+                }
 
-        float3* pTotalLight = new float3;
+                float3 color = sample_at(*pCudaBSP, faceInfo, s, t);
 
-        CUDA_CHECK_ERROR_DEVICE(cudaPeekAtLastError());
+                size_t& lightmapStartIndex = faceInfo.lightmapStartIndex;
+                size_t sampleIndex = t * faceInfo.lightmapWidth + s;
 
-        const size_t BLOCK_WIDTH = 4;
-        const size_t BLOCK_HEIGHT = 4;
+                pCudaBSP->lightSamples[lightmapStartIndex + sampleIndex]
+                    = lightsample_from_rgb(color);
 
-        dim3 gridDim(
-            div_ceil(lightmapWidth, BLOCK_WIDTH),
-            div_ceil(lightmapHeight, BLOCK_HEIGHT)
-        );
-        dim3 blockDim(BLOCK_WIDTH, BLOCK_HEIGHT);
+                atomicAdd(&faceInfo.totalLight.x, color.x);
+                atomicAdd(&faceInfo.totalLight.y, color.y);
+                atomicAdd(&faceInfo.totalLight.z, color.z);
+            }
+        }
 
-        //printf(
-        //    "Face %u/%u:\n"
-        //    "\t Lightmap Dimensions: %u x %u\n"
-        //    "\t gridDim: %u x %u\n",
-        //    static_cast<unsigned int>(faceIndex),
-        //    static_cast<unsigned int>(pCudaBSP->numFaces),
-        //    static_cast<unsigned int>(lightmapWidth),
-        //    static_cast<unsigned int>(lightmapHeight),
-        //    static_cast<unsigned int>(gridDim.x),
-        //    static_cast<unsigned int>(gridDim.y)
-        //);
+        __syncthreads();
 
-        //printf(
-        //    "Face %u launching kernel...\n",
-        //    static_cast<unsigned int>(faceIndex)
-        //);
+        //for (size_t i=0; i<lightmapSize; i++) {
+        //    size_t s = i % lightmapWidth;
+        //    size_t t = i / lightmapWidth;
 
-        KERNEL_LAUNCH_DEVICE(
-            map_luxels,
-            gridDim, blockDim,
-            pCudaBSP, pTotalLight, faceIndex
-        );
+        //    float3 color = sample_at(*pCudaBSP, faces, faceIndex, s, t);
 
-        cudaDeviceSynchronize();
+        //    pCudaBSP->lightSamples[lightmapStartIndex + i]
+        //        = lightsample_from_rgb(color);
 
-        CUDA_CHECK_ERROR_DEVICE(cudaPeekAtLastError());
+        //    totalLight += color;
+        //}
 
-        float3 avgLight = *pTotalLight;
+        if (primaryThread) {
+            faceInfo.avgLight = faceInfo.totalLight;
 
-        avgLight.x /= lightmapSize;
-        avgLight.y /= lightmapSize;
-        avgLight.z /= lightmapSize;
+            faceInfo.avgLight.x /= faceInfo.lightmapSize;
+            faceInfo.avgLight.y /= faceInfo.lightmapSize;
+            faceInfo.avgLight.z /= faceInfo.lightmapSize;
 
-        size_t lightmapStartIndex = face.lightOffset / sizeof(BSP::RGBExp32);
+            pCudaBSP->lightSamples[faceInfo.lightmapStartIndex - 1]
+                = lightsample_from_rgb(faceInfo.avgLight);
+
+            // Still have no idea how this works. But if we don't do this,
+            // EVERYTHING becomes a disaster...
+            faceInfo.face.styles[0] = 0x00;
+            faceInfo.face.styles[1] = 0xFF;
+            faceInfo.face.styles[2] = 0xFF;
+            faceInfo.face.styles[3] = 0xFF;
+
+            /* Copy our changes back to the CUDABSP. */
+            pCudaBSP->faces[faceInfo.faceIndex] = faceInfo.face;
+
+            atomicAdd(const_cast<size_t*>(pFacesCompleted), 1);
+            __threadfence_system();
+        }
 
         //printf(
         //    "Lightmap offset for face %u: %u\n",
@@ -570,17 +551,7 @@ namespace DirectLighting {
         //    static_cast<unsigned int>(lightmapStartIndex)
         //);
 
-        pCudaBSP->lightSamples[lightmapStartIndex - 1]
-            = lightsample_from_rgb(avgLight);
-
-        // Still have no idea how this works. But if we don't do this,
-        // EVERYTHING becomes a disaster...
-        face.styles[0] = 0x00;
-        face.styles[1] = 0xFF;
-        face.styles[2] = 0xFF;
-        face.styles[3] = 0xFF;
-
-        delete pTotalLight;
+        //printf("%u\n", static_cast<unsigned int>(*pFacesCompleted));
     }
 }
 
@@ -592,28 +563,85 @@ namespace CUDARAD {
             std::vector<BSP::RGBExp32>& lightSamples
             ) {
 
-        const size_t BLOCK_WIDTH = 8;
-
-        size_t numFaces = bsp.get_faces().size();
-        unsigned int numBlocks = div_ceil(
-            numFaces,
-            BLOCK_WIDTH
+        volatile size_t* pFacesCompleted;
+        CUDA_CHECK_ERROR(
+            cudaHostAlloc(
+                &pFacesCompleted, sizeof(size_t),
+                cudaHostAllocMapped
+            )
         );
 
+        *pFacesCompleted = 0;
+
+        volatile size_t* pDeviceFacesCompleted;
+        CUDA_CHECK_ERROR(
+            cudaHostGetDevicePointer(
+                const_cast<size_t**>(&pDeviceFacesCompleted),
+                const_cast<size_t*>(pFacesCompleted),
+                0
+            )
+        );
+
+        const size_t BLOCK_WIDTH = 32;
+        const size_t BLOCK_HEIGHT = 32;
+
+        size_t numFaces = bsp.get_faces().size();
+
+        dim3 blockDim(BLOCK_WIDTH, BLOCK_HEIGHT);
+
         std::cout << "Launching "
-            << numBlocks * BLOCK_WIDTH << " threads ("
+            << numFaces * BLOCK_WIDTH * BLOCK_HEIGHT << " threads ("
             << numFaces << " faces)..."
             << std::endl;
 
+        cudaEvent_t startEvent;
+        cudaEvent_t stopEvent;
+
+        CUDA_CHECK_ERROR(cudaEventCreate(&startEvent));
+        CUDA_CHECK_ERROR(cudaEventCreate(&stopEvent));
+
+        CUDA_CHECK_ERROR(cudaEventRecord(startEvent));
+
         KERNEL_LAUNCH(
             DirectLighting::map_faces,
-            numBlocks, BLOCK_WIDTH,
-            pCudaBSP
+            numFaces, blockDim,
+            pCudaBSP, pDeviceFacesCompleted
         );
 
-        cudaDeviceSynchronize();
-
         CUDA_CHECK_ERROR(cudaPeekAtLastError());
+
+        flush_wddm_queue();
+
+        size_t lastFacesCompleted = 0;
+        size_t facesCompleted;
+
+        /* Progress notification logic */
+        do {
+            CUDA_CHECK_ERROR(cudaPeekAtLastError());
+
+            facesCompleted = *pFacesCompleted;
+
+            if (facesCompleted > lastFacesCompleted) {
+                std::cout << facesCompleted << "/"
+                    << numFaces
+                    << " faces processed..." << std::endl;
+            }
+
+            lastFacesCompleted = facesCompleted;
+
+            std::this_thread::sleep_for(std::chrono::milliseconds(5));
+
+        } while (facesCompleted < numFaces);
+
+        CUDA_CHECK_ERROR(cudaEventRecord(stopEvent));
+        CUDA_CHECK_ERROR(cudaDeviceSynchronize());
+
+        float time;
+        CUDA_CHECK_ERROR(cudaEventElapsedTime(&time, startEvent, stopEvent));
+
+        std::cout << "Done! (" << time << "ms)" << std::endl;
+
+        cudaFreeHost(const_cast<size_t*>(pFacesCompleted));
     }
 
     void bounce_lighting(BSP::BSP& bsp, CUDABSP::CUDABSP* pCudaBSP) {

@@ -1,6 +1,7 @@
 #ifndef __CUDAUTILS_H_
 #define __CUDAUTILS_H_
 
+#include <iostream>
 #include <cstdlib>
 #include <cstdio>
 
@@ -9,9 +10,9 @@
 
 
 static inline void cuda_assert(
-    cudaError_t code, const char* file, int line,
-    bool abort=true
-) {
+        cudaError_t code, const char* file, int line,
+        bool abort=true
+        ) {
 
     if (code != cudaSuccess) {
         std::cerr << "cuda_assert(): "
@@ -51,14 +52,36 @@ static inline void cuda_assert(
 } while (0);
 
 
+#define KERNEL_LAUNCH_SHARED(kernel, gridDim, blockDim, shared, ...) do {\
+    kernel<<<gridDim, blockDim, shared>>>(__VA_ARGS__);\
+    CUDA_CHECK_ERROR(cudaPeekAtLastError());\
+} while (0);
+
+
 #define KERNEL_LAUNCH_DEVICE(kernel, gridDim, blockDim, ...) do {\
     kernel<<<gridDim, blockDim>>>(__VA_ARGS__);\
     CUDA_CHECK_ERROR_DEVICE(cudaPeekAtLastError());\
 } while (0);
 
 
+#define KERNEL_LAUNCH_SHARED_DEVICE(kernel, gridDim, blockDim, shared, ...) \
+do {\
+    kernel<<<gridDim, blockDim, shared>>>(__VA_ARGS__);\
+    CUDA_CHECK_ERROR_DEVICE(cudaPeekAtLastError());\
+} while (0);
+
+
 static __host__ __device__ inline size_t div_ceil(size_t a, size_t b) {
     return (a + b - 1) / b;
+}
+
+
+static __host__ inline void flush_wddm_queue(void) {
+    cudaEvent_t event;
+    CUDA_CHECK_ERROR(cudaEventCreate(&event));
+    CUDA_CHECK_ERROR(cudaEventRecord(event));
+    cudaEventQuery(event);
+    cudaGetLastError();
 }
 
 #endif

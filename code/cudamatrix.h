@@ -3,6 +3,7 @@
 
 #include <cstdlib>
 
+
 namespace CUDAMatrix {
     template<typename T, size_t M, size_t N> class CUDAMatrix;
 
@@ -61,7 +62,6 @@ namespace CUDAMatrix {
     };
 
 
-
     /**********************
      * ConstCUDAMatrixRow *
      **********************/
@@ -117,18 +117,14 @@ namespace CUDAMatrix {
 
     template<typename T, size_t M, size_t N>
     __device__ __host__ CUDAMatrixRow<T, M, N>
-    CUDAMatrix<T, M, N>::operator[](
-            size_t i
-            ) {
+    CUDAMatrix<T, M, N>::operator[](size_t i) {
         CUDAMatrix<T, M, N>& self = *this;
         return CUDAMatrixRow<T, M, N>(self, i);
     }
 
     template<typename T, size_t M, size_t N>
     const __device__ __host__ ConstCUDAMatrixRow<T, M, N>
-    CUDAMatrix<T, M, N>::operator[](
-            size_t i
-            ) const {
+    CUDAMatrix<T, M, N>::operator[](size_t i) const {
         const CUDAMatrix<T, M, N>& self = *this;
         return ConstCUDAMatrixRow<T, M, N>(self, i);
     }

@@ -383,16 +383,26 @@ C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xfacet
 C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\system_error
 C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\cerrno
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\share.h
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\thread
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\functional
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xfunctional
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\tuple
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\chrono
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\ratio
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\thr/xtimec.h
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\thr/xthrcommon.h
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\memory
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xmemory
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\thr/xthread
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\thr/xtime
+C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\thr/xthreads.h
 c:\users\ryan\dropbox\c++\rad\code\bsp.h
 C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\string
 C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\vector
-C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xmemory
 C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\unordered_set
 C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\xhash
 C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\list
 C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\unordered_map
-C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\tuple
-C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\memory
 C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\fstream
 C:\Users\Ryan\Dropbox\C++\RAD\code\include\gmtl/Matrix.h
 C:\Users\Ryan\Dropbox\C++\RAD\code\include\gmtl/Defines.h

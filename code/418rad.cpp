@@ -19,6 +19,7 @@
 #include "bsp.h"
 #include "cudabsp.h"
 #include "cudarad.h"
+#include "cudautils.h"
 
 static std::random_device g_random;
 
@@ -330,6 +331,8 @@ int main(int argc, char** argv) {
     g_pBSP->build_worldlights();
 
     print_cudainfo();
+
+    CUDA_CHECK_ERROR(cudaSetDeviceFlags(cudaDeviceMapHost));
 
     std::cout << "Copy BSP to device memory..." << std::endl;
     CUDABSP::CUDABSP* pCudaBSP = CUDABSP::make_cudabsp(*g_pBSP);
