@@ -68,6 +68,11 @@ static __device__ inline float3 operator*(const float3& v, float c) {
 }
 
 
+static __device__ inline float3 operator*(float c, const float3& v) {
+    return v * c;
+}
+
+
 static __device__ inline float3 operator/(const float3& v, float c) {
     return v * (1.0 / c);
 }
@@ -153,15 +158,53 @@ static __device__ void make_points(
 }
 
 
-/*  */
+/* Implements the M-T ray-triangle intersection algorithm. */
 static __device__ bool intersects(
         const float3& vertex1, const float3& vertex2, const float3& vertex3,
         const float3& startPos, const float3& endPos
         ) {
 
+    const float EPSILON = 1e-6;
 
+    float3 diff = endPos - startPos;
+    float dist = len(diff);
+    float3 dir = diff / dist;
 
-    return false;
+    float3 edge1 = vertex2 - vertex1;
+    float3 edge2 = vertex3 - vertex1;
+
+    float3 pVec = cross(dir, edge2);
+
+    float det = dot(edge1, pVec);
+
+    if (det < EPSILON) {
+        return false;
+    }
+
+    float3 tVec = startPos - vertex1;
+
+    float u = dot(tVec, pVec);
+    if (u < 0.0 || u > det) {
+        return false;
+    }
+
+    float3 qVec = cross(tVec, edge1);
+
+    float v = dot(dir, qVec);
+
+    if (v < 0.0 || u + v > det) {
+        return false;
+    }
+
+    float t = dot(edge2, qVec) / det;
+
+    //float invDet = 1.0 / det;
+
+    //t *= invDet;
+    //u *= invDet;
+    //v *= invDet;
+
+    return (0.0 < t && t < dist);
 }
 
 
@@ -248,7 +291,7 @@ namespace DirectLighting {
                 }
 
                 bool lightBlocked = intersects(
-                    vertex1, vertex2, vertex3,
+                    vertex3, vertex2, vertex1,
                     lightPos, samplePos
                 );
 
@@ -266,7 +309,11 @@ namespace DirectLighting {
             size_t s, size_t t
             ) {
         
+        const float EPSILON = 1e-6;
+
         float3 samplePos = xyz_from_st(faceInfo, s, t);
+
+        samplePos += faceInfo.faceNorm * 1e-3;
 
         float3 result = make_float3(0.0, 0.0, 0.0);
 
@@ -324,7 +371,18 @@ namespace DirectLighting {
                     otherFaceIndex<cudaBSP.numFaces;
                     otherFaceIndex++) {
 
+                if (otherFaceIndex == faceInfo.faceIndex) {
+                    continue;
+                }
+
                 BSP::DFace& otherFace = cudaBSP.faces[otherFaceIndex];
+                BSP::DPlane& otherPlane = cudaBSP.planes[otherFace.planeNum];
+
+                float3 otherFaceNorm = make_float3(
+                    otherPlane.normal.x,
+                    otherPlane.normal.y,
+                    otherPlane.normal.z
+                );
 
                 float3 vertex1;
                 float3 vertex2;
@@ -370,11 +428,15 @@ namespace DirectLighting {
                             vertex3 = cudaBSP.vertices[edge.vertex2];
                         }
 
-                        //bool lightBlocked = intersects(
                         lightBlocked = intersects(
-                            vertex1, vertex2, vertex3,
+                            vertex3, vertex2, vertex1,
                             lightPos, samplePos
                         );
+
+                        //printf(
+                        //    "Light blocked: %d\n",
+                        //    static_cast<int>(lightBlocked)
+                        //);
 
                         if (lightBlocked) {
                             //*pLightBlocked = true;
@@ -428,16 +490,6 @@ namespace DirectLighting {
             }
             return;
         }
-
-        //__shared__ size_t faceIndex;
-        //__shared__ BSP::DFace face;
-        //__shared__ BSP::DPlane plane;
-        //__shared__ float3 faceNorm;
-        //__shared__ size_t lightmapWidth;
-        //__shared__ size_t lightmapHeight;
-        //__shared__ size_t lightmapSize;
-        //__shared__ size_t lightmapStartIndex;
-        //__shared__ float3 totalLight;
 
         __shared__ FaceInfo faceInfo;
 
@@ -541,7 +593,11 @@ namespace DirectLighting {
             /* Copy our changes back to the CUDABSP. */
             pCudaBSP->faces[faceInfo.faceIndex] = faceInfo.face;
 
-            atomicAdd(reinterpret_cast<unsigned int*>(const_cast<size_t*>(pFacesCompleted)), 1);
+            atomicAdd(
+                reinterpret_cast<unsigned int*>(
+                    const_cast<size_t*>(pFacesCompleted)
+                ), 1
+            );
             __threadfence_system();
         }
 
@@ -582,8 +638,8 @@ namespace CUDARAD {
             )
         );
 
-        const size_t BLOCK_WIDTH = 32;
-        const size_t BLOCK_HEIGHT = 32;
+        const size_t BLOCK_WIDTH = 16;
+        const size_t BLOCK_HEIGHT = 16;
 
         size_t numFaces = bsp.get_faces().size();
 

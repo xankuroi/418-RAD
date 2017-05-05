@@ -286,10 +286,10 @@ static RGB sample_at(const BSP::Face& face, float s, float t) {
 
 void print_cudainfo(void) {
     int device;
-    cudaGetDevice(&device);
+    CUDA_CHECK_ERROR(cudaGetDevice(&device));
 
     cudaDeviceProp deviceProps;
-    cudaGetDeviceProperties(&deviceProps, device);
+    CUDA_CHECK_ERROR(cudaGetDeviceProperties(&deviceProps, device));
 
     std::cout << "CUDA Device: " << deviceProps.name << std::endl;
     std::cout << "    Device Memory: "

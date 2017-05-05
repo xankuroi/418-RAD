@@ -697,3 +697,145 @@ Level flags = 0
 Total triangle count: 2790
 Writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.bsp
 1 second elapsed
+
+
+
+[Reading texlights from 'lights.rad']
+[48 texlights parsed from 'lights.rad']
+
+Loading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.bsp
+1327 faces
+30667 square feet [4416186.00 square inches]
+0 Displacements
+0 Square Feet [0.00 Square Inches]
+3 direct lights
+0...1...2...3...4...5...6...7...8...9...10Build Patch/Sample Hash Table(s).....Done<0.0342 sec>
+0...1...2...3...4...5...6...7...8...9...10FinalLightFace Done
+0 of 0 (0% of) surface lights went in leaf ambient cubes.
+0...1...2...3...4...5...6...7...8...9...10Writing leaf ambient...done
+Ready to Finish
+
+Object names       Objects/Maxobjs  Memory / Maxmem  Fullness 
+------------       ---------------  ---------------  -------- 
+models                   1/1024           48/49152    ( 0.1%) 
+brushes                 13/8192          156/98304    ( 0.2%) 
+brushsides             100/65536         800/524288   ( 0.2%) 
+planes                 128/65536        2560/1310720  ( 0.2%) 
+vertexes              1474/65536       17688/786432   ( 2.2%) 
+nodes                    6/65536         192/2097152  ( 0.0%) 
+texinfos                15/12288        1080/884736   ( 0.1%) 
+texdata                  4/2048          128/65536    ( 0.2%) 
+dispinfos                0/0               0/0        ( 0.0%) 
+disp_verts               0/0               0/0        ( 0.0%) 
+disp_tris                0/0               0/0        ( 0.0%) 
+disp_lmsamples           0/0               0/0        ( 0.0%) 
+faces                 1327/65536       74312/3670016  ( 2.0%) 
+hdr faces             1327/65536       74312/3670016  ( 2.0%) 
+origfaces               21/65536        1176/3670016  ( 0.0%) 
+leaves                   8/65536         256/2097152  ( 0.0%) 
+leaffaces             1327/65536        2654/131072   ( 2.0%) 
+leafbrushes             13/65536          26/131072   ( 0.0%) 
+areas                    2/256            16/2048     ( 0.8%) 
+surfedges             5528/512000      22112/2048000  ( 1.1%) 
+edges                 2834/256000      11336/1024000  ( 1.1%) 
+LDR worldlights          0/8192            0/720896   ( 0.0%) 
+HDR worldlights          3/8192          264/720896   ( 0.0%) 
+leafwaterdata            0/32768           0/393216   ( 0.0%) 
+waterstrips              1/32768          10/327680   ( 0.0%) 
+waterverts               0/65536           0/786432   ( 0.0%) 
+waterindices            12/65536          24/131072   ( 0.0%) 
+cubemapsamples           0/1024            0/16384    ( 0.0%) 
+overlays                 0/512             0/180224   ( 0.0%) 
+LDR lightdata         [variable]           0/0        ( 0.0%) 
+HDR lightdata         [variable]     4738428/0        ( 0.0%) 
+visdata               [variable]          14/16777216 ( 0.0%) 
+entdata               [variable]        1814/393216   ( 0.5%) 
+LDR ambient table        8/65536          32/262144   ( 0.0%) 
+HDR ambient table        8/65536          32/262144   ( 0.0%) 
+LDR leaf ambient         8/65536         224/1835008  ( 0.0%) 
+HDR leaf ambient        16/65536         448/1835008  ( 0.0%) 
+occluders                0/0               0/0        ( 0.0%) 
+occluder polygons        0/0               0/0        ( 0.0%) 
+occluder vert ind        0/0               0/0        ( 0.0%) 
+detail props          [variable]           1/12       ( 8.3%) 
+static props          [variable]           1/206      ( 0.5%) 
+pakfile               [variable]      105703/0        ( 0.0%) 
+physics               [variable]        5536/4194304  ( 0.1%) 
+physics terrain       [variable]           2/1048576  ( 0.0%) 
+
+Level flags = 0
+
+Total triangle count: 2790
+Writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.bsp
+1 second elapsed
+
+
+
+[Reading texlights from 'lights.rad']
+[48 texlights parsed from 'lights.rad']
+
+Loading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.bsp
+1327 faces
+30667 square feet [4416186.00 square inches]
+0 Displacements
+0 Square Feet [0.00 Square Inches]
+3 direct lights
+0...1...2...3...4...5...6...7...8...9...10Build Patch/Sample Hash Table(s).....Done<0.0379 sec>
+0...1...2...3...4...5...6...7...8...9...10FinalLightFace Done
+0 of 0 (0% of) surface lights went in leaf ambient cubes.
+0...1...2...3...4...5...6...7...8...9...10Writing leaf ambient...done
+Ready to Finish
+
+Object names       Objects/Maxobjs  Memory / Maxmem  Fullness 
+------------       ---------------  ---------------  -------- 
+models                   1/1024           48/49152    ( 0.1%) 
+brushes                 13/8192          156/98304    ( 0.2%) 
+brushsides             100/65536         800/524288   ( 0.2%) 
+planes                 128/65536        2560/1310720  ( 0.2%) 
+vertexes              1474/65536       17688/786432   ( 2.2%) 
+nodes                    6/65536         192/2097152  ( 0.0%) 
+texinfos                15/12288        1080/884736   ( 0.1%) 
+texdata                  4/2048          128/65536    ( 0.2%) 
+dispinfos                0/0               0/0        ( 0.0%) 
+disp_verts               0/0               0/0        ( 0.0%) 
+disp_tris                0/0               0/0        ( 0.0%) 
+disp_lmsamples           0/0               0/0        ( 0.0%) 
+faces                 1327/65536       74312/3670016  ( 2.0%) 
+hdr faces             1327/65536       74312/3670016  ( 2.0%) 
+origfaces               21/65536        1176/3670016  ( 0.0%) 
+leaves                   8/65536         256/2097152  ( 0.0%) 
+leaffaces             1327/65536        2654/131072   ( 2.0%) 
+leafbrushes             13/65536          26/131072   ( 0.0%) 
+areas                    2/256            16/2048     ( 0.8%) 
+surfedges             5528/512000      22112/2048000  ( 1.1%) 
+edges                 2834/256000      11336/1024000  ( 1.1%) 
+LDR worldlights          0/8192            0/720896   ( 0.0%) 
+HDR worldlights          3/8192          264/720896   ( 0.0%) 
+leafwaterdata            0/32768           0/393216   ( 0.0%) 
+waterstrips              1/32768          10/327680   ( 0.0%) 
+waterverts               0/65536           0/786432   ( 0.0%) 
+waterindices            12/65536          24/131072   ( 0.0%) 
+cubemapsamples           0/1024            0/16384    ( 0.0%) 
+overlays                 0/512             0/180224   ( 0.0%) 
+LDR lightdata         [variable]           0/0        ( 0.0%) 
+HDR lightdata         [variable]     4738428/0        ( 0.0%) 
+visdata               [variable]          14/16777216 ( 0.0%) 
+entdata               [variable]        1814/393216   ( 0.5%) 
+LDR ambient table        8/65536          32/262144   ( 0.0%) 
+HDR ambient table        8/65536          32/262144   ( 0.0%) 
+LDR leaf ambient         8/65536         224/1835008  ( 0.0%) 
+HDR leaf ambient        16/65536         448/1835008  ( 0.0%) 
+occluders                0/0               0/0        ( 0.0%) 
+occluder polygons        0/0               0/0        ( 0.0%) 
+occluder vert ind        0/0               0/0        ( 0.0%) 
+detail props          [variable]           1/12       ( 8.3%) 
+static props          [variable]           1/206      ( 0.5%) 
+pakfile               [variable]      105703/0        ( 0.0%) 
+physics               [variable]        5536/4194304  ( 0.1%) 
+physics terrain       [variable]           2/1048576  ( 0.0%) 
+
+Level flags = 0
+
+Total triangle count: 2790
+Writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.bsp
+1 second elapsed
