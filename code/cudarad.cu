@@ -541,7 +541,7 @@ namespace DirectLighting {
             /* Copy our changes back to the CUDABSP. */
             pCudaBSP->faces[faceInfo.faceIndex] = faceInfo.face;
 
-            atomicAdd(const_cast<size_t*>(pFacesCompleted), 1);
+            atomicAdd(reinterpret_cast<unsigned int*>(const_cast<size_t*>(pFacesCompleted)), 1);
             __threadfence_system();
         }
 
