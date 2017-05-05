@@ -198,12 +198,6 @@ static __device__ bool intersects(
 
     float t = dot(edge2, qVec) / det;
 
-    //float invDet = 1.0 / det;
-
-    //t *= invDet;
-    //u *= invDet;
-    //v *= invDet;
-
     return (0.0 < t && t < dist);
 }
 
@@ -344,111 +338,105 @@ namespace DirectLighting {
 
             CUDA_CHECK_ERROR_DEVICE(cudaPeekAtLastError());
 
-            //*pLightBlocked = false;
+            *pLightBlocked = false;
 
-            //const size_t BLOCK_WIDTH = 8;
+            const size_t BLOCK_WIDTH = 8;
 
-            //size_t numBlocks = div_ceil(cudaBSP.numFaces, BLOCK_WIDTH);
+            size_t numBlocks = div_ceil(cudaBSP.numFaces, BLOCK_WIDTH);
 
-            //KERNEL_LAUNCH_DEVICE(
-            //    map_faces_LOS,
-            //    numBlocks, BLOCK_WIDTH,
-            //    &cudaBSP, pLightBlocked, faceInfo.faceIndex,
-            //    samplePos, lightPos
-            //);
+            KERNEL_LAUNCH_DEVICE(
+                map_faces_LOS,
+                numBlocks, BLOCK_WIDTH,
+                &cudaBSP, pLightBlocked, faceInfo.faceIndex,
+                samplePos, lightPos
+            );
 
-            //CUDA_CHECK_ERROR_DEVICE(cudaDeviceSynchronize());
+            CUDA_CHECK_ERROR_DEVICE(cudaDeviceSynchronize());
 
-            //bool lightBlocked = *pLightBlocked;
+            bool lightBlocked = *pLightBlocked;
 
-            //delete pLightBlocked;
+            delete pLightBlocked;
 
-            bool lightBlocked = false;
+            //bool lightBlocked = false;
 
-            int x = 0;
+            //int x = 0;
 
-            for (size_t otherFaceIndex=0;
-                    otherFaceIndex<cudaBSP.numFaces;
-                    otherFaceIndex++) {
+            //for (size_t otherFaceIndex=0;
+            //        otherFaceIndex<cudaBSP.numFaces;
+            //        otherFaceIndex++) {
 
-                if (otherFaceIndex == faceInfo.faceIndex) {
-                    continue;
-                }
+            //    if (otherFaceIndex == faceInfo.faceIndex) {
+            //        continue;
+            //    }
 
-                BSP::DFace& otherFace = cudaBSP.faces[otherFaceIndex];
-                BSP::DPlane& otherPlane = cudaBSP.planes[otherFace.planeNum];
+            //    BSP::DFace& otherFace = cudaBSP.faces[otherFaceIndex];
+            //    BSP::DPlane& otherPlane = cudaBSP.planes[otherFace.planeNum];
 
-                float3 otherFaceNorm = make_float3(
-                    otherPlane.normal.x,
-                    otherPlane.normal.y,
-                    otherPlane.normal.z
-                );
+            //    float3 vertex1;
+            //    float3 vertex2;
+            //    float3 vertex3;
 
-                float3 vertex1;
-                float3 vertex2;
-                float3 vertex3;
+            //    size_t startEdge = otherFace.firstEdge;
+            //    size_t endEdge = startEdge + otherFace.numEdges;
 
-                size_t startEdge = otherFace.firstEdge;
-                size_t endEdge = startEdge + otherFace.numEdges;
+            //    for (size_t i=startEdge; i<endEdge; i++) {
+            //        int32_t surfEdge = cudaBSP.surfEdges[i];
 
-                for (size_t i=startEdge; i<endEdge; i++) {
-                    int32_t surfEdge = cudaBSP.surfEdges[i];
+            //        bool firstToSecond = (surfEdge >= 0);
 
-                    bool firstToSecond = (surfEdge >= 0);
+            //        if (!firstToSecond) {
+            //            surfEdge *= -1;
+            //        }
 
-                    if (!firstToSecond) {
-                        surfEdge *= -1;
-                    }
+            //        BSP::DEdge& edge = cudaBSP.edges[surfEdge];
 
-                    BSP::DEdge& edge = cudaBSP.edges[surfEdge];
+            //        if (i == startEdge) {
+            //            if (firstToSecond) {
+            //                vertex1 = cudaBSP.vertices[edge.vertex1];
+            //            }
+            //            else {
+            //                vertex1 = cudaBSP.vertices[edge.vertex2];
+            //            }
+            //        }
+            //        else if (i == startEdge + 1) {
+            //            if (firstToSecond) {
+            //                vertex3 = cudaBSP.vertices[edge.vertex1];
+            //            }
+            //            else {
+            //                vertex3 = cudaBSP.vertices[edge.vertex2];
+            //            }
+            //        }
+            //        else {
+            //            vertex2 = vertex3;
 
-                    if (i == startEdge) {
-                        if (firstToSecond) {
-                            vertex1 = cudaBSP.vertices[edge.vertex1];
-                        }
-                        else {
-                            vertex1 = cudaBSP.vertices[edge.vertex2];
-                        }
-                    }
-                    else if (i == startEdge + 1) {
-                        if (firstToSecond) {
-                            vertex3 = cudaBSP.vertices[edge.vertex1];
-                        }
-                        else {
-                            vertex3 = cudaBSP.vertices[edge.vertex2];
-                        }
-                    }
-                    else {
-                        vertex2 = vertex3;
+            //            if (firstToSecond) {
+            //                vertex3 = cudaBSP.vertices[edge.vertex1];
+            //            }
+            //            else {
+            //                vertex3 = cudaBSP.vertices[edge.vertex2];
+            //            }
 
-                        if (firstToSecond) {
-                            vertex3 = cudaBSP.vertices[edge.vertex1];
-                        }
-                        else {
-                            vertex3 = cudaBSP.vertices[edge.vertex2];
-                        }
+            //            lightBlocked = intersects(
+            //                vertex3, vertex2, vertex1,
+            //                lightPos, samplePos
+            //            );
 
-                        lightBlocked = intersects(
-                            vertex3, vertex2, vertex1,
-                            lightPos, samplePos
-                        );
+            //            //printf(
+            //            //    "Light blocked: %d\n",
+            //            //    static_cast<int>(lightBlocked)
+            //            //);
 
-                        //printf(
-                        //    "Light blocked: %d\n",
-                        //    static_cast<int>(lightBlocked)
-                        //);
+            //            if (lightBlocked) {
+            //                //*pLightBlocked = true;
+            //                break;
+            //            }
+            //        }
+            //    }
 
-                        if (lightBlocked) {
-                            //*pLightBlocked = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (lightBlocked) {
-                    break;
-                }
-            }
+            //    if (lightBlocked) {
+            //        break;
+            //    }
+            //}
 
             if (lightBlocked) {
                 // This light can't be seen from the position of the sample.
