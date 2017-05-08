@@ -492,7 +492,7 @@ namespace RayTracer {
         while (stackSize > 0) {
             if (stackSize > 1024) {
                 printf("ALERT: Stack size too big!!!\n");
-                return;
+                return false;
             }
 
             StackEntry& entry = stack[--stackSize];
@@ -503,7 +503,6 @@ namespace RayTracer {
 
             float len = dist(start, end);
             
-            float plane = pNode->pos;
             KDNode* children = pNode->children;
 
             float t;

@@ -12,70 +12,70 @@
 #include "cudautils.h"
 
 
-static inline __device__ __host__ void print_face(
-        BSP::DFace* pFace,
-        size_t faceIndex
-        ) {
-
-    char* c = reinterpret_cast<char*>(pFace);
-
-    printf(
-        "Face %u: \n"
-        //"\t first 8 bytes: %x %x %x %x %x %x %x %x\n"
-        "\t addr: %p\n"
-        "\t firstEdge addr: %p\n"
-        "\t planeNum: %u\n"
-        "\t side: %u\n"
-        "\t onNode: %u\n"
-        "\t firstEdge: %d\n"
-        "\t numEdges: %d\n"
-        "\t texInfo: %d\n"
-        "\t dispInfo: %d\n"
-        "\t surfaceFogVolumeID: %d\n"
-        "\t styles: %x, %x, %x, %x\n"
-        "\t lightOffset: %d\n"
-        "\t area: %f\n"
-        "\t mins: (%d, %d)\n"
-        "\t size: %d x %d\n"
-        "\t origFace: %d\n"
-        "\t numPrims: %u\n"
-        "\t firstPrimID: %u\n"
-        "\t smoothingGroups: %x\n",
-        static_cast<unsigned int>(faceIndex),
-        //static_cast<int>(c[0]),
-        //static_cast<int>(c[1]),
-        //static_cast<int>(c[2]),
-        //static_cast<int>(c[3]),
-        //static_cast<int>(c[4]),
-        //static_cast<int>(c[5]),
-        //static_cast<int>(c[6]),
-        //static_cast<int>(c[7]),
-        pFace,
-        &pFace->firstEdge,
-        static_cast<unsigned int>(pFace->planeNum),
-        static_cast<unsigned int>(pFace->side),
-        static_cast<unsigned int>(pFace->onNode),
-        static_cast<int>(pFace->firstEdge),
-        static_cast<int>(pFace->numEdges),
-        static_cast<int>(pFace->texInfo),
-        static_cast<int>(pFace->dispInfo),
-        static_cast<int>(pFace->surfaceFogVolumeID),
-        static_cast<int>(pFace->styles[0]),
-        static_cast<int>(pFace->styles[1]),
-        static_cast<int>(pFace->styles[2]),
-        static_cast<int>(pFace->styles[3]),
-        static_cast<int>(pFace->lightOffset),
-        pFace->area,
-        static_cast<int>(pFace->lightmapTextureMinsInLuxels[0]),
-        static_cast<int>(pFace->lightmapTextureMinsInLuxels[1]),
-        static_cast<int>(pFace->lightmapTextureSizeInLuxels[0]),
-        static_cast<int>(pFace->lightmapTextureSizeInLuxels[1]),
-        static_cast<int>(pFace->origFace),
-        static_cast<unsigned int>(pFace->numPrims),
-        static_cast<unsigned int>(pFace->firstPrimID),
-        static_cast<int>(pFace->smoothingGroups)
-    );
-}
+//static inline __device__ __host__ void print_face(
+//        BSP::DFace* pFace,
+//        size_t faceIndex
+//        ) {
+//
+//    //char* c = reinterpret_cast<char*>(pFace);
+//
+//    printf(
+//        "Face %u: \n"
+//        //"\t first 8 bytes: %x %x %x %x %x %x %x %x\n"
+//        "\t addr: %p\n"
+//        "\t firstEdge addr: %p\n"
+//        "\t planeNum: %u\n"
+//        "\t side: %u\n"
+//        "\t onNode: %u\n"
+//        "\t firstEdge: %d\n"
+//        "\t numEdges: %d\n"
+//        "\t texInfo: %d\n"
+//        "\t dispInfo: %d\n"
+//        "\t surfaceFogVolumeID: %d\n"
+//        "\t styles: %x, %x, %x, %x\n"
+//        "\t lightOffset: %d\n"
+//        "\t area: %f\n"
+//        "\t mins: (%d, %d)\n"
+//        "\t size: %d x %d\n"
+//        "\t origFace: %d\n"
+//        "\t numPrims: %u\n"
+//        "\t firstPrimID: %u\n"
+//        "\t smoothingGroups: %x\n",
+//        static_cast<unsigned int>(faceIndex),
+//        //static_cast<int>(c[0]),
+//        //static_cast<int>(c[1]),
+//        //static_cast<int>(c[2]),
+//        //static_cast<int>(c[3]),
+//        //static_cast<int>(c[4]),
+//        //static_cast<int>(c[5]),
+//        //static_cast<int>(c[6]),
+//        //static_cast<int>(c[7]),
+//        pFace,
+//        &pFace->firstEdge,
+//        static_cast<unsigned int>(pFace->planeNum),
+//        static_cast<unsigned int>(pFace->side),
+//        static_cast<unsigned int>(pFace->onNode),
+//        static_cast<int>(pFace->firstEdge),
+//        static_cast<int>(pFace->numEdges),
+//        static_cast<int>(pFace->texInfo),
+//        static_cast<int>(pFace->dispInfo),
+//        static_cast<int>(pFace->surfaceFogVolumeID),
+//        static_cast<int>(pFace->styles[0]),
+//        static_cast<int>(pFace->styles[1]),
+//        static_cast<int>(pFace->styles[2]),
+//        static_cast<int>(pFace->styles[3]),
+//        static_cast<int>(pFace->lightOffset),
+//        pFace->area,
+//        static_cast<int>(pFace->lightmapTextureMinsInLuxels[0]),
+//        static_cast<int>(pFace->lightmapTextureMinsInLuxels[1]),
+//        static_cast<int>(pFace->lightmapTextureSizeInLuxels[0]),
+//        static_cast<int>(pFace->lightmapTextureSizeInLuxels[1]),
+//        static_cast<int>(pFace->origFace),
+//        static_cast<unsigned int>(pFace->numPrims),
+//        static_cast<unsigned int>(pFace->firstPrimID),
+//        static_cast<int>(pFace->smoothingGroups)
+//    );
+//}
 
 
 namespace CUDABSP {

@@ -365,7 +365,17 @@ namespace CUDARAD {
     }
 
     void cleanup(void) {
-        CUDA_CHECK_ERROR(cudaFree(g_pDeviceRayTracer));
+        RayTracer::CUDARayTracer* pDeviceRayTracer;
+
+        CUDA_CHECK_ERROR(
+            cudaMemcpyFromSymbol(
+                &pDeviceRayTracer, g_pDeviceRayTracer,
+                sizeof(RayTracer::CUDARayTracer*), 0,
+                cudaMemcpyDeviceToHost
+            )
+        );
+
+        CUDA_CHECK_ERROR(cudaFree(pDeviceRayTracer));
         g_pRayTracer = nullptr;
     }
 
