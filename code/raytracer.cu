@@ -8,9 +8,11 @@
 namespace RayTracer {
     /* Implements the M-T ray-triangle intersection algorithm. */
     static __device__ bool intersects(
-        const float3& vertex1, const float3& vertex2, const float3& vertex3,
-        const float3& startPos, const float3& endPos
-    ) {
+            const float3& vertex1,
+            const float3& vertex2,
+            const float3& vertex3,
+            const float3& startPos, const float3& endPos
+            ) {
 
         const float EPSILON = 1e-6;
 
@@ -508,10 +510,6 @@ namespace RayTracer {
 
             switch (pNode->type) {
                 case NODETYPE_LEAF:
-                    if (pNode->numTris <= 0) {
-                        break;
-                    }
-
                     for (size_t ti=0; ti<pNode->numTris; ti++) {
                         Triangle& tri = m_triangles[pNode->triangleIDs[ti]];
 

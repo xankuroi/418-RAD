@@ -78,34 +78,6 @@ static inline __device__ __host__ void print_face(
 }
 
 
-//__global__ void check_faces(BSP::DFace* pFaces, size_t numFaces) {
-//    size_t faceIndex = blockIdx.x * blockDim.x + threadIdx.x;
-//
-//    if (faceIndex >= numFaces) {
-//        return;
-//    }
-//
-//    BSP::DFace* pFace = &pFaces[faceIndex];
-//
-//    printf("faceIndex: %u\npFaces: %p\npFace: %p\n", faceIndex, pFaces, pFace);
-//
-//    print_face(pFace, faceIndex);
-//}
-//
-//
-//struct Test {
-//    uint16_t a;
-//    uint16_t b;
-//    uint16_t c;
-//};
-//
-//
-//__global__ void check_test(BSP::DFace* test) {
-//    char* s = reinterpret_cast<char*>(test);
-//    printf("%p: %x %x %x %x %x\n", test, s[0], s[1], s[2], s[3], s[4]);
-//}
-
-
 namespace CUDABSP {
     CUDABSP* make_cudabsp(const BSP::BSP& bsp) {
         CUDABSP cudaBSP;
@@ -192,48 +164,6 @@ namespace CUDABSP {
                 cudaMemcpyHostToDevice
             )
         );
-
-        //const size_t BLOCK_WIDTH = 1024;
-
-        //size_t numBlocks = div_ceil(cudaBSP.numFaces, BLOCK_WIDTH);
-
-        //KERNEL_LAUNCH(
-        //    check_faces,
-        //    numBlocks, BLOCK_WIDTH,
-        //    cudaBSP.faces, cudaBSP.numFaces
-        //);
-
-        //cudaDeviceSynchronize();
-
-        //CUDA_CHECK_ERROR(cudaPeekAtLastError());
-
-        //KERNEL_LAUNCH(
-        //    check_test,
-        //    1, 1,
-        //    cudaBSP.faces
-        //);
-
-        //cudaDeviceSynchronize();
-
-        //CUDA_CHECK_ERROR(cudaPeekAtLastError());
-
-        //std::cout << "Check faces on host..." << std::endl;
-
-        //BSP::DFace* dfaces = new BSP::DFace[cudaBSP.numFaces];
-
-        //CUDA_CHECK_ERROR(
-        //    cudaMemcpy(
-        //        dfaces, cudaBSP.faces, sizeof(BSP::DFace) * cudaBSP.numFaces,
-        //        cudaMemcpyDeviceToHost
-        //    )
-        //);
-
-        //for (size_t i=0; i<cudaBSP.numFaces; i++) {
-        //    BSP::DFace* pFace = &dfaces[i];
-        //    print_face(pFace, i);
-        //}
-
-        //delete[] dfaces;
 
         /* Special routine for st/xyz matrices */
         std::vector<CUDAMatrix::CUDAMatrix<double, 3, 3>> xyzMatrices;

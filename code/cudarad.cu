@@ -76,77 +76,6 @@ static __device__ float3 xyz_from_st(FaceInfo& faceInfo, size_t s, size_t t) {
 }
 
 
-static __device__ void make_points(
-        CUDABSP::CUDABSP& cudaBSP,
-        /* output */ float3* points,
-        BSP::DFace& face
-        ) {
-
-    for (size_t i=0; i<face.numEdges; i++) {
-        int32_t surfEdge = cudaBSP.surfEdges[face.firstEdge + i];
-
-        bool firstToSecond = (surfEdge >= 0);
-
-        if (!firstToSecond) {
-            surfEdge *= -1;
-        }
-
-        BSP::DEdge& edge = cudaBSP.edges[surfEdge];
-
-        if (firstToSecond) {
-            points[i] = cudaBSP.vertices[edge.vertex1];
-        }
-        else {
-            points[i] = cudaBSP.vertices[edge.vertex2];
-        }
-    }
-}
-
-
-/* Implements the M-T ray-triangle intersection algorithm. */
-static __device__ bool intersects(
-        const float3& vertex1, const float3& vertex2, const float3& vertex3,
-        const float3& startPos, const float3& endPos
-        ) {
-
-    const float EPSILON = 1e-6;
-
-    float3 diff = endPos - startPos;
-    float dist = len(diff);
-    float3 dir = diff / dist;
-
-    float3 edge1 = vertex2 - vertex1;
-    float3 edge2 = vertex3 - vertex1;
-
-    float3 pVec = cross(dir, edge2);
-
-    float det = dot(edge1, pVec);
-
-    if (det < EPSILON) {
-        return false;
-    }
-
-    float3 tVec = startPos - vertex1;
-
-    float u = dot(tVec, pVec);
-    if (u < 0.0 || u > det) {
-        return false;
-    }
-
-    float3 qVec = cross(tVec, edge1);
-
-    float v = dot(dir, qVec);
-
-    if (v < 0.0 || u + v > det) {
-        return false;
-    }
-
-    float t = dot(edge2, qVec) / det;
-
-    return (0.0 < t && t < dist);
-}
-
-
 static __device__ BSP::RGBExp32 lightsample_from_rgb(float3 color) {
     uint32_t r = static_cast<uint32_t>(color.x);
     uint32_t g = static_cast<uint32_t>(color.y);
@@ -171,77 +100,6 @@ static __device__ BSP::RGBExp32 lightsample_from_rgb(float3 color) {
 
 
 namespace DirectLighting {
-    __global__ void map_faces_LOS(
-            CUDABSP::CUDABSP* pCudaBSP,
-            /* output */ bool* pLightBlocked,
-            size_t faceIndex,
-            float3 samplePos,
-            float3 lightPos
-            ) {
-
-        size_t otherFaceIndex = blockIdx.x * blockDim.x + threadIdx.x;
-
-        if (otherFaceIndex == faceIndex
-                || otherFaceIndex >= pCudaBSP->numFaces) {
-            return;
-        }
-
-        BSP::DFace& otherFace = pCudaBSP->faces[otherFaceIndex];
-
-        float3 vertex1;
-        float3 vertex2;
-        float3 vertex3;
-
-        for (size_t i=0; i<otherFace.numEdges; i++) {
-            int32_t surfEdge = pCudaBSP->surfEdges[otherFace.firstEdge + i];
-
-            bool firstToSecond = (surfEdge >= 0);
-
-            if (!firstToSecond) {
-                surfEdge *= -1;
-            }
-
-            BSP::DEdge& edge = pCudaBSP->edges[surfEdge];
-
-            if (i == 0) {
-                if (firstToSecond) {
-                    vertex1 = pCudaBSP->vertices[edge.vertex1];
-                }
-                else {
-                    vertex1 = pCudaBSP->vertices[edge.vertex2];
-                }
-            }
-            else if (i == 1) {
-                if (firstToSecond) {
-                    vertex3 = pCudaBSP->vertices[edge.vertex1];
-                }
-                else {
-                    vertex3 = pCudaBSP->vertices[edge.vertex2];
-                }
-            }
-            else {
-                vertex2 = vertex3;
-
-                if (firstToSecond) {
-                    vertex3 = pCudaBSP->vertices[edge.vertex1];
-                }
-                else {
-                    vertex3 = pCudaBSP->vertices[edge.vertex2];
-                }
-
-                bool lightBlocked = intersects(
-                    vertex3, vertex2, vertex1,
-                    lightPos, samplePos
-                );
-
-                if (lightBlocked) {
-                    *pLightBlocked = true;
-                    return;
-                }
-            }
-        }
-    }
-
     __device__ float3 sample_at(
             CUDABSP::CUDABSP& cudaBSP,
             FaceInfo& faceInfo,
@@ -282,115 +140,6 @@ namespace DirectLighting {
             bool lightBlocked = CUDARAD::g_pDeviceRayTracer->LOS_blocked(
                 lightPos, samplePos
             );
-
-            //bool* pLightBlocked = new bool;
-
-            //CUDA_CHECK_ERROR_DEVICE(cudaPeekAtLastError());
-
-            //*pLightBlocked = false;
-
-            //const size_t BLOCK_WIDTH = 8;
-
-            //size_t numBlocks = div_ceil(cudaBSP.numFaces, BLOCK_WIDTH);
-
-            //KERNEL_LAUNCH_DEVICE(
-            //    map_faces_LOS,
-            //    numBlocks, BLOCK_WIDTH,
-            //    &cudaBSP, pLightBlocked, faceInfo.faceIndex,
-            //    samplePos, lightPos
-            //);
-
-            //CUDA_CHECK_ERROR_DEVICE(cudaDeviceSynchronize());
-
-            //bool lightBlocked = *pLightBlocked;
-
-            //delete pLightBlocked;
-
-
-            /*
-             * -------
-             */
-
-            //bool lightBlocked = false;
-
-            //int x = 0;
-
-            //for (size_t otherFaceIndex=0;
-            //        otherFaceIndex<cudaBSP.numFaces;
-            //        otherFaceIndex++) {
-
-            //    if (otherFaceIndex == faceInfo.faceIndex) {
-            //        continue;
-            //    }
-
-            //    BSP::DFace& otherFace = cudaBSP.faces[otherFaceIndex];
-            //    BSP::DPlane& otherPlane = cudaBSP.planes[otherFace.planeNum];
-
-            //    float3 vertex1;
-            //    float3 vertex2;
-            //    float3 vertex3;
-
-            //    size_t startEdge = otherFace.firstEdge;
-            //    size_t endEdge = startEdge + otherFace.numEdges;
-
-            //    for (size_t i=startEdge; i<endEdge; i++) {
-            //        int32_t surfEdge = cudaBSP.surfEdges[i];
-
-            //        bool firstToSecond = (surfEdge >= 0);
-
-            //        if (!firstToSecond) {
-            //            surfEdge *= -1;
-            //        }
-
-            //        BSP::DEdge& edge = cudaBSP.edges[surfEdge];
-
-            //        if (i == startEdge) {
-            //            if (firstToSecond) {
-            //                vertex1 = cudaBSP.vertices[edge.vertex1];
-            //            }
-            //            else {
-            //                vertex1 = cudaBSP.vertices[edge.vertex2];
-            //            }
-            //        }
-            //        else if (i == startEdge + 1) {
-            //            if (firstToSecond) {
-            //                vertex3 = cudaBSP.vertices[edge.vertex1];
-            //            }
-            //            else {
-            //                vertex3 = cudaBSP.vertices[edge.vertex2];
-            //            }
-            //        }
-            //        else {
-            //            vertex2 = vertex3;
-
-            //            if (firstToSecond) {
-            //                vertex3 = cudaBSP.vertices[edge.vertex1];
-            //            }
-            //            else {
-            //                vertex3 = cudaBSP.vertices[edge.vertex2];
-            //            }
-
-            //            lightBlocked = intersects(
-            //                vertex3, vertex2, vertex1,
-            //                lightPos, samplePos
-            //            );
-
-            //            //printf(
-            //            //    "Light blocked: %d\n",
-            //            //    static_cast<int>(lightBlocked)
-            //            //);
-
-            //            if (lightBlocked) {
-            //                //*pLightBlocked = true;
-            //                break;
-            //            }
-            //        }
-            //    }
-
-            //    if (lightBlocked) {
-            //        break;
-            //    }
-            //}
 
             if (lightBlocked) {
                 // This light can't be seen from the position of the sample.
@@ -503,18 +252,6 @@ namespace DirectLighting {
 
         __syncthreads();
 
-        //for (size_t i=0; i<lightmapSize; i++) {
-        //    size_t s = i % lightmapWidth;
-        //    size_t t = i / lightmapWidth;
-
-        //    float3 color = sample_at(*pCudaBSP, faces, faceIndex, s, t);
-
-        //    pCudaBSP->lightSamples[lightmapStartIndex + i]
-        //        = lightsample_from_rgb(color);
-
-        //    totalLight += color;
-        //}
-
         if (primaryThread) {
             faceInfo.avgLight = faceInfo.totalLight;
 
@@ -571,8 +308,6 @@ namespace CUDARAD {
             std::vector<BSP::Edge>::const_iterator pEdge
                 = face.get_edges().begin();
 
-            //std::cout << "Face " << i << std::endl;
-
             BSP::Vec3<float> vertex1 = (pEdge++)->vertex1;
             BSP::Vec3<float> vertex2;
             BSP::Vec3<float> vertex3 = (pEdge++)->vertex1;
@@ -588,18 +323,6 @@ namespace CUDARAD {
                         make_float3(vertex3.x, vertex3.y, vertex3.z),
                     },
                 };
-
-                //std::cout << "Triangle: ("
-                //    << tri.vertices[0].x << ", "
-                //    << tri.vertices[0].y << ", "
-                //    << tri.vertices[0].z << "), ("
-                //    << tri.vertices[1].x << ", "
-                //    << tri.vertices[1].y << ", "
-                //    << tri.vertices[1].z << "), ("
-                //    << tri.vertices[2].x << ", "
-                //    << tri.vertices[2].y << ", "
-                //    << tri.vertices[2].z << ")"
-                //    << std::endl;
 
                 triangles.push_back(tri);
 

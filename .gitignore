@@ -34,3 +34,6 @@
 # VS Stuff
 *.VC.opendb
 *.VC.db
+
+# Output BSPs
+out.bsp
