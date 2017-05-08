@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <thread>
+#include <chrono>
 
 #include "bsp.h"
 
@@ -11,6 +12,7 @@
 
 #include "cudabsp.h"
 #include "cudamatrix.h"
+#include "raytracer.h"
 
 #include "cudautils.h"
 
@@ -31,66 +33,9 @@ struct FaceInfo {
 };
 
 
-static __device__ inline float dot(const float3& a, const float3& b) {
-    return a.x * b.x + a.y * b.y + a.z * b.z;
-}
-
-
-static __device__ inline float3 cross(const float3& a, const float3& b) {
-    return make_float3(
-        a.y * b.z - a.z * b.y,
-        a.z * b.x - a.x * b.z,
-        a.x * b.y - a.y * b.x
-    );
-}
-
-
-static __device__ inline float3 operator-(const float3& a, const float3& b) {
-    return make_float3(a.x - b.x, a.y - b.y, a.z - b.z);
-}
-
-
-static __device__ inline float3 operator+(const float3& a, const float3& b) {
-    return make_float3(a.x + b.x, a.y + b.y, a.z + b.z);
-}
-
-
-static __device__ inline float3& operator+=(float3& a, const float3& b) {
-    a.x += b.x;
-    a.y += b.y;
-    a.z += b.z;
-    return a;
-}
-
-
-static __device__ inline float3 operator*(const float3& v, float c) {
-    return make_float3(v.x * c, v.y * c, v.z * c);
-}
-
-
-static __device__ inline float3 operator*(float c, const float3& v) {
-    return v * c;
-}
-
-
-static __device__ inline float3 operator/(const float3& v, float c) {
-    return v * (1.0 / c);
-}
-
-
-static __device__ inline float dist(const float3& a, const float3& b) {
-    float3 diff = b - a;
-    return sqrt(dot(diff, diff));
-}
-
-
-static __device__ inline float len(const float3& v) {
-    return dist(make_float3(0.0, 0.0, 0.0), v);
-}
-
-
-static __device__ inline float3 normalized(const float3& v) {
-    return v / len(v);
+namespace CUDARAD {
+    static std::unique_ptr<RayTracer::CUDARayTracer> g_pRayTracer;
+    static __device__ RayTracer::CUDARayTracer* g_pDeviceRayTracer;
 }
 
 
@@ -303,7 +248,7 @@ namespace DirectLighting {
             size_t s, size_t t
             ) {
         
-        const float EPSILON = 1e-6;
+        //const float EPSILON = 1e-6;
 
         float3 samplePos = xyz_from_st(faceInfo, s, t);
 
@@ -324,38 +269,47 @@ namespace DirectLighting {
                 light.origin.z
             );
 
-            float3 diff = lightPos - samplePos;
+            float3 diff = samplePos - lightPos;
 
             /*
              * This light is on the wrong side of the current face.
              * There's no way it could possibly light this sample.
              */
-            if (dot(diff, faceInfo.faceNorm) < 0.0) {
+            if (dot(diff, faceInfo.faceNorm) >= 0.0) {
                 continue;
             }
 
-            bool* pLightBlocked = new bool;
-
-            CUDA_CHECK_ERROR_DEVICE(cudaPeekAtLastError());
-
-            *pLightBlocked = false;
-
-            const size_t BLOCK_WIDTH = 8;
-
-            size_t numBlocks = div_ceil(cudaBSP.numFaces, BLOCK_WIDTH);
-
-            KERNEL_LAUNCH_DEVICE(
-                map_faces_LOS,
-                numBlocks, BLOCK_WIDTH,
-                &cudaBSP, pLightBlocked, faceInfo.faceIndex,
-                samplePos, lightPos
+            bool lightBlocked = CUDARAD::g_pDeviceRayTracer->LOS_blocked(
+                lightPos, samplePos
             );
 
-            CUDA_CHECK_ERROR_DEVICE(cudaDeviceSynchronize());
+            //bool* pLightBlocked = new bool;
 
-            bool lightBlocked = *pLightBlocked;
+            //CUDA_CHECK_ERROR_DEVICE(cudaPeekAtLastError());
 
-            delete pLightBlocked;
+            //*pLightBlocked = false;
+
+            //const size_t BLOCK_WIDTH = 8;
+
+            //size_t numBlocks = div_ceil(cudaBSP.numFaces, BLOCK_WIDTH);
+
+            //KERNEL_LAUNCH_DEVICE(
+            //    map_faces_LOS,
+            //    numBlocks, BLOCK_WIDTH,
+            //    &cudaBSP, pLightBlocked, faceInfo.faceIndex,
+            //    samplePos, lightPos
+            //);
+
+            //CUDA_CHECK_ERROR_DEVICE(cudaDeviceSynchronize());
+
+            //bool lightBlocked = *pLightBlocked;
+
+            //delete pLightBlocked;
+
+
+            /*
+             * -------
+             */
 
             //bool lightBlocked = false;
 
@@ -467,7 +421,7 @@ namespace DirectLighting {
 
     __global__ void map_faces(
             CUDABSP::CUDABSP* pCudaBSP,
-            volatile size_t* pFacesCompleted
+            size_t* pFacesCompleted
             ) {
             
         bool primaryThread = (threadIdx.x == 0 && threadIdx.y == 0);
@@ -581,11 +535,7 @@ namespace DirectLighting {
             /* Copy our changes back to the CUDABSP. */
             pCudaBSP->faces[faceInfo.faceIndex] = faceInfo.face;
 
-            atomicAdd(
-                reinterpret_cast<unsigned int*>(
-                    const_cast<size_t*>(pFacesCompleted)
-                ), 1
-            );
+            atomicAdd(reinterpret_cast<unsigned int*>(pFacesCompleted), 1);
             __threadfence_system();
         }
 
@@ -601,6 +551,101 @@ namespace DirectLighting {
 
 
 namespace CUDARAD {
+    void init(BSP::BSP& bsp) {
+        std::cout << "Setting up ray-trace acceleration structure... "
+            << std::flush;
+
+        using Clock = std::chrono::high_resolution_clock;
+
+        auto start = Clock::now();
+
+        g_pRayTracer = std::unique_ptr<RayTracer::CUDARayTracer>(
+            new RayTracer::CUDARayTracer()
+        );
+
+        std::vector<RayTracer::Triangle> triangles;
+
+        /* Put all of the BSP's face triangles into the ray-tracer. */
+        int i = 0;
+        for (const BSP::Face& face : bsp.get_faces()) {
+            std::vector<BSP::Edge>::const_iterator pEdge
+                = face.get_edges().begin();
+
+            //std::cout << "Face " << i << std::endl;
+
+            BSP::Vec3<float> vertex1 = (pEdge++)->vertex1;
+            BSP::Vec3<float> vertex2;
+            BSP::Vec3<float> vertex3 = (pEdge++)->vertex1;
+
+            do {
+                vertex2 = vertex3;
+                vertex3 = (pEdge++)->vertex1;
+
+                RayTracer::Triangle tri {
+                    {
+                        make_float3(vertex1.x, vertex1.y, vertex1.z),
+                        make_float3(vertex2.x, vertex2.y, vertex2.z),
+                        make_float3(vertex3.x, vertex3.y, vertex3.z),
+                    },
+                };
+
+                //std::cout << "Triangle: ("
+                //    << tri.vertices[0].x << ", "
+                //    << tri.vertices[0].y << ", "
+                //    << tri.vertices[0].z << "), ("
+                //    << tri.vertices[1].x << ", "
+                //    << tri.vertices[1].y << ", "
+                //    << tri.vertices[1].z << "), ("
+                //    << tri.vertices[2].x << ", "
+                //    << tri.vertices[2].y << ", "
+                //    << tri.vertices[2].z << ")"
+                //    << std::endl;
+
+                triangles.push_back(tri);
+
+            } while (pEdge != face.get_edges().end());
+
+            i++;
+        }
+
+        g_pRayTracer->add_triangles(triangles);
+
+        auto end = Clock::now();
+        std::chrono::milliseconds ms
+            = std::chrono::duration_cast<std::chrono::milliseconds>(
+                end - start
+            );
+
+        std::cout << "Done! (" << ms.count() << "ms)" << std::endl;
+
+        std::cout << "Moving ray-tracer to device..." << std::endl;
+
+        RayTracer::CUDARayTracer* pDeviceRayTracer;
+
+        CUDA_CHECK_ERROR(
+            cudaMalloc(&pDeviceRayTracer, sizeof(RayTracer::CUDARayTracer))
+        );
+        CUDA_CHECK_ERROR(
+            cudaMemcpy(
+                pDeviceRayTracer, g_pRayTracer.get(),
+                sizeof(RayTracer::CUDARayTracer),
+                cudaMemcpyHostToDevice
+            )
+        );
+        CUDA_CHECK_ERROR(
+            cudaMemcpyToSymbol(
+                g_pDeviceRayTracer, &pDeviceRayTracer,
+                sizeof(RayTracer::CUDARayTracer*), 0,
+                cudaMemcpyHostToDevice
+            )
+        );
+    }
+
+    void cleanup(void) {
+        CUDA_CHECK_ERROR(cudaFree(g_pDeviceRayTracer));
+        g_pRayTracer = nullptr;
+    }
+
     void compute_direct_lighting(
             BSP::BSP& bsp,
             CUDABSP::CUDABSP* pCudaBSP,
@@ -649,7 +694,7 @@ namespace CUDARAD {
         KERNEL_LAUNCH(
             DirectLighting::map_faces,
             numFaces, blockDim,
-            pCudaBSP, pDeviceFacesCompleted
+            pCudaBSP, const_cast<size_t*>(pDeviceFacesCompleted)
         );
 
         CUDA_CHECK_ERROR(cudaPeekAtLastError());
