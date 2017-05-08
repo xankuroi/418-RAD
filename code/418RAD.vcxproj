@@ -143,10 +143,12 @@
     <ClInclude Include="cudamatrix.h" />
     <ClInclude Include="cudarad.h" />
     <ClInclude Include="cudautils.h" />
+    <ClInclude Include="raytracer.h" />
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="cudabsp.cu" />
     <CudaCompile Include="cudarad.cu" />
+    <CudaCompile Include="raytracer.cu" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

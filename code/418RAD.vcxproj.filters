@@ -38,12 +38,18 @@
     <ClInclude Include="cudautils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="raytracer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="cudabsp.cu">
       <Filter>Source Files</Filter>
     </CudaCompile>
     <CudaCompile Include="cudarad.cu">
+      <Filter>Source Files</Filter>
+    </CudaCompile>
+    <CudaCompile Include="raytracer.cu">
       <Filter>Source Files</Filter>
     </CudaCompile>
   </ItemGroup>

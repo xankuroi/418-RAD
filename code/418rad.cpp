@@ -317,6 +317,8 @@ int main(int argc, char** argv) {
         return 1;
     }
     
+    std::cout << "418RAD -- 15-418 Radiosity Simulator" << std::endl;
+
     const std::string filename(argv[1]);
     std::ifstream f(filename, std::ios::binary);
     
@@ -337,6 +339,9 @@ int main(int argc, char** argv) {
     std::cout << "Copy BSP to device memory..." << std::endl;
     CUDABSP::CUDABSP* pCudaBSP = CUDABSP::make_cudabsp(*g_pBSP);
     
+    std::cout << "Initialize radiosity subsystem..." << std::endl;
+    CUDARAD::init(*g_pBSP);
+
     std::cout << "Start RAD!" << std::endl;
     
     std::cout << "Compute direct lighting..." << std::endl;
@@ -492,6 +497,9 @@ int main(int argc, char** argv) {
     g_pBSP->write("out.bsp");
     
     std::cout << "Wrote to file \"out.bsp\"." << std::endl;
+
+    /* Tear down the radiosity subsystem. */
+    CUDARAD::cleanup();
     
     return 0;
 }

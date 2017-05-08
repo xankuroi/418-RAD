@@ -839,3 +839,318 @@ Level flags = 0
 Total triangle count: 2790
 Writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.bsp
 1 second elapsed
+
+
+
+[Reading texlights from 'lights.rad']
+[48 texlights parsed from 'lights.rad']
+
+Loading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.bsp
+1327 faces
+30667 square feet [4416186.00 square inches]
+0 Displacements
+0 Square Feet [0.00 Square Inches]
+3 direct lights
+0...1...2...3...4...5...6...7...8...9...10Build Patch/Sample Hash Table(s).....Done<0.0321 sec>
+0...1...2...3...4...5...6...7...8...9...10FinalLightFace Done
+0 of 0 (0% of) surface lights went in leaf ambient cubes.
+0...1...2...3...4...5...6...7...8...9...10Writing leaf ambient...done
+Ready to Finish
+
+Object names       Objects/Maxobjs  Memory / Maxmem  Fullness 
+------------       ---------------  ---------------  -------- 
+models                   1/1024           48/49152    ( 0.1%) 
+brushes                 13/8192          156/98304    ( 0.2%) 
+brushsides             100/65536         800/524288   ( 0.2%) 
+planes                 128/65536        2560/1310720  ( 0.2%) 
+vertexes              1474/65536       17688/786432   ( 2.2%) 
+nodes                    6/65536         192/2097152  ( 0.0%) 
+texinfos                15/12288        1080/884736   ( 0.1%) 
+texdata                  4/2048          128/65536    ( 0.2%) 
+dispinfos                0/0               0/0        ( 0.0%) 
+disp_verts               0/0               0/0        ( 0.0%) 
+disp_tris                0/0               0/0        ( 0.0%) 
+disp_lmsamples           0/0               0/0        ( 0.0%) 
+faces                 1327/65536       74312/3670016  ( 2.0%) 
+hdr faces             1327/65536       74312/3670016  ( 2.0%) 
+origfaces               21/65536        1176/3670016  ( 0.0%) 
+leaves                   8/65536         256/2097152  ( 0.0%) 
+leaffaces             1327/65536        2654/131072   ( 2.0%) 
+leafbrushes             13/65536          26/131072   ( 0.0%) 
+areas                    2/256            16/2048     ( 0.8%) 
+surfedges             5528/512000      22112/2048000  ( 1.1%) 
+edges                 2834/256000      11336/1024000  ( 1.1%) 
+LDR worldlights          0/8192            0/720896   ( 0.0%) 
+HDR worldlights          3/8192          264/720896   ( 0.0%) 
+leafwaterdata            0/32768           0/393216   ( 0.0%) 
+waterstrips              1/32768          10/327680   ( 0.0%) 
+waterverts               0/65536           0/786432   ( 0.0%) 
+waterindices            12/65536          24/131072   ( 0.0%) 
+cubemapsamples           0/1024            0/16384    ( 0.0%) 
+overlays                 0/512             0/180224   ( 0.0%) 
+LDR lightdata         [variable]           0/0        ( 0.0%) 
+HDR lightdata         [variable]     4738428/0        ( 0.0%) 
+visdata               [variable]          14/16777216 ( 0.0%) 
+entdata               [variable]        1814/393216   ( 0.5%) 
+LDR ambient table        8/65536          32/262144   ( 0.0%) 
+HDR ambient table        8/65536          32/262144   ( 0.0%) 
+LDR leaf ambient         8/65536         224/1835008  ( 0.0%) 
+HDR leaf ambient        16/65536         448/1835008  ( 0.0%) 
+occluders                0/0               0/0        ( 0.0%) 
+occluder polygons        0/0               0/0        ( 0.0%) 
+occluder vert ind        0/0               0/0        ( 0.0%) 
+detail props          [variable]           1/12       ( 8.3%) 
+static props          [variable]           1/206      ( 0.5%) 
+pakfile               [variable]      105703/0        ( 0.0%) 
+physics               [variable]        5536/4194304  ( 0.1%) 
+physics terrain       [variable]           2/1048576  ( 0.0%) 
+
+Level flags = 0
+
+Total triangle count: 2790
+Writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.bsp
+1 second elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest_hires.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest_hires.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (5536 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 28 texinfos to 15
+Reduced 4 texdatas to 4 (92 bytes to 92)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest_hires.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.bsp
+0 seconds elapsed
+
+
+
+[Reading texlights from 'lights.rad']
+[48 texlights parsed from 'lights.rad']
+
+Loading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.bsp
+1327 faces
+30667 square feet [4416186.00 square inches]
+0 Displacements
+0 Square Feet [0.00 Square Inches]
+3 direct lights
+0...1...2...3...4...5...6...7...8...9...10Build Patch/Sample Hash Table(s).....Done<0.0322 sec>
+0...1...2...3...4...5...6...7...8...9...10FinalLightFace Done
+0 of 0 (0% of) surface lights went in leaf ambient cubes.
+0...1...2...3...4...5...6...7...8...9...10Writing leaf ambient...done
+Ready to Finish
+
+Object names       Objects/Maxobjs  Memory / Maxmem  Fullness 
+------------       ---------------  ---------------  -------- 
+models                   1/1024           48/49152    ( 0.1%) 
+brushes                 13/8192          156/98304    ( 0.2%) 
+brushsides             100/65536         800/524288   ( 0.2%) 
+planes                 128/65536        2560/1310720  ( 0.2%) 
+vertexes              1474/65536       17688/786432   ( 2.2%) 
+nodes                    6/65536         192/2097152  ( 0.0%) 
+texinfos                15/12288        1080/884736   ( 0.1%) 
+texdata                  4/2048          128/65536    ( 0.2%) 
+dispinfos                0/0               0/0        ( 0.0%) 
+disp_verts               0/0               0/0        ( 0.0%) 
+disp_tris                0/0               0/0        ( 0.0%) 
+disp_lmsamples           0/0               0/0        ( 0.0%) 
+faces                 1327/65536       74312/3670016  ( 2.0%) 
+hdr faces             1327/65536       74312/3670016  ( 2.0%) 
+origfaces               21/65536        1176/3670016  ( 0.0%) 
+leaves                   8/65536         256/2097152  ( 0.0%) 
+leaffaces             1327/65536        2654/131072   ( 2.0%) 
+leafbrushes             13/65536          26/131072   ( 0.0%) 
+areas                    2/256            16/2048     ( 0.8%) 
+surfedges             5528/512000      22112/2048000  ( 1.1%) 
+edges                 2834/256000      11336/1024000  ( 1.1%) 
+LDR worldlights          0/8192            0/720896   ( 0.0%) 
+HDR worldlights          3/8192          264/720896   ( 0.0%) 
+leafwaterdata            0/32768           0/393216   ( 0.0%) 
+waterstrips              1/32768          10/327680   ( 0.0%) 
+waterverts               0/65536           0/786432   ( 0.0%) 
+waterindices            12/65536          24/131072   ( 0.0%) 
+cubemapsamples           0/1024            0/16384    ( 0.0%) 
+overlays                 0/512             0/180224   ( 0.0%) 
+LDR lightdata         [variable]           0/0        ( 0.0%) 
+HDR lightdata         [variable]     4738428/0        ( 0.0%) 
+visdata               [variable]          14/16777216 ( 0.0%) 
+entdata               [variable]        1814/393216   ( 0.5%) 
+LDR ambient table        8/65536          32/262144   ( 0.0%) 
+HDR ambient table        8/65536          32/262144   ( 0.0%) 
+LDR leaf ambient         8/65536         224/1835008  ( 0.0%) 
+HDR leaf ambient        16/65536         448/1835008  ( 0.0%) 
+occluders                0/0               0/0        ( 0.0%) 
+occluder polygons        0/0               0/0        ( 0.0%) 
+occluder vert ind        0/0               0/0        ( 0.0%) 
+detail props          [variable]           1/12       ( 8.3%) 
+static props          [variable]           1/206      ( 0.5%) 
+pakfile               [variable]      105703/0        ( 0.0%) 
+physics               [variable]        5536/4194304  ( 0.1%) 
+physics terrain       [variable]           2/1048576  ( 0.0%) 
+
+Level flags = 0
+
+Total triangle count: 2790
+Writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.bsp
+1 second elapsed
+
+
+
+materialPath: D:\Steam\steamapps\common\Source SDK Base 2013 Singleplayer\BMS\materials
+Loading C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest_hires.vmf
+Could not locate 'GameData' key in d:\steam\steamapps\common\source sdk base 2013 singleplayer\bms\gameinfo.txt
+fixing up env_cubemap materials on brush sides...
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Processing areas...done (0)
+Building Faces...done (0)
+Chop Details...done (0)
+Find Visible Detail Sides...done (0)
+Merging details...done (0)
+FixTjuncs...
+PruneNodes...
+WriteBSP...
+done (0)
+writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest_hires.prt...Building visibility clusters...
+done (0)
+Creating default LDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Creating default HDR cubemaps for env_cubemap using skybox materials:
+   skybox/sky_day01_01*.vmt
+ ! Run buildcubemaps in the engine to get the correct cube maps.
+Finding displacement neighbors...
+Finding lightmap sample positions...
+Displacement Alpha : 0...1...2...3...4...5...6...7...8...9...10
+Building Physics collision data...
+done (0) (5536 bytes)
+Placing detail props : 0...1...2...3...4...5...6...7...8...9...10
+Compacting texture/material tables...
+Reduced 28 texinfos to 15
+Reduced 4 texdatas to 4 (92 bytes to 92)
+Writing C:\Users\Ryan\Dropbox\C++\RAD\code\vmf\lightmaptest_hires.bsp
+0 seconds elapsed
+
+
+
+8 threads
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.bsp
+reading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.prt
+   1 portalclusters
+   0 numportals
+0...1...2...3...4...5...6...7...8...9...100...1...2...3...4...5...6...7...8...9...10Optimized: 0 visible clusters (0.00%)
+Total clusters visible: 1
+Average clusters visible: 1
+Building PAS...
+Average clusters audible: 1
+visdatasize:14  compressed from 16
+writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.bsp
+0 seconds elapsed
+
+
+
+[Reading texlights from 'lights.rad']
+[48 texlights parsed from 'lights.rad']
+
+Loading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.bsp
+4838 faces
+30667 square feet [4416185.00 square inches]
+0 Displacements
+0 Square Feet [0.00 Square Inches]
+3 direct lights
+0...1...2...3...4...5...6...7...8...9...10Build Patch/Sample Hash Table(s).....Done<0.1358 sec>
+0...1...2...3...4...5...6...7...8...9...10FinalLightFace Done
+0 of 0 (0% of) surface lights went in leaf ambient cubes.
+0...1...2...3...4...5...6...7...8...9...10Writing leaf ambient...done
+Ready to Finish
+
+Object names       Objects/Maxobjs  Memory / Maxmem  Fullness 
+------------       ---------------  ---------------  -------- 
+models                   1/1024           48/49152    ( 0.1%) 
+brushes                 13/8192          156/98304    ( 0.2%) 
+brushsides             100/65536         800/524288   ( 0.2%) 
+planes                 128/65536        2560/1310720  ( 0.2%) 
+vertexes              5089/65536       61068/786432   ( 7.8%) 
+nodes                    6/65536         192/2097152  ( 0.0%) 
+texinfos                15/12288        1080/884736   ( 0.1%) 
+texdata                  4/2048          128/65536    ( 0.2%) 
+dispinfos                0/0               0/0        ( 0.0%) 
+disp_verts               0/0               0/0        ( 0.0%) 
+disp_tris                0/0               0/0        ( 0.0%) 
+disp_lmsamples           0/0               0/0        ( 0.0%) 
+faces                 4838/65536      270928/3670016  ( 7.4%) 
+hdr faces             4838/65536      270928/3670016  ( 7.4%) 
+origfaces               21/65536        1176/3670016  ( 0.0%) 
+leaves                   8/65536         256/2097152  ( 0.0%) 
+leaffaces             4838/65536        9676/131072   ( 7.4%) 
+leafbrushes             13/65536          26/131072   ( 0.0%) 
+areas                    2/256            16/2048     ( 0.8%) 
+surfedges            19728/512000      78912/2048000  ( 3.9%) 
+edges                 9960/256000      39840/1024000  ( 3.9%) 
+LDR worldlights          0/8192            0/720896   ( 0.0%) 
+HDR worldlights          3/8192          264/720896   ( 0.0%) 
+leafwaterdata            0/32768           0/393216   ( 0.0%) 
+waterstrips             10/32768         100/327680   ( 0.0%) 
+waterverts               0/65536           0/786432   ( 0.0%) 
+waterindices           120/65536         240/131072   ( 0.2%) 
+cubemapsamples           0/1024            0/16384    ( 0.0%) 
+overlays                 0/512             0/180224   ( 0.0%) 
+LDR lightdata         [variable]           0/0        ( 0.0%) 
+HDR lightdata         [variable]    18863772/0        ( 0.0%) 
+visdata               [variable]          14/16777216 ( 0.0%) 
+entdata               [variable]        1814/393216   ( 0.5%) 
+LDR ambient table        8/65536          32/262144   ( 0.0%) 
+HDR ambient table        8/65536          32/262144   ( 0.0%) 
+LDR leaf ambient         8/65536         224/1835008  ( 0.0%) 
+HDR leaf ambient        16/65536         448/1835008  ( 0.0%) 
+occluders                0/0               0/0        ( 0.0%) 
+occluder polygons        0/0               0/0        ( 0.0%) 
+occluder vert ind        0/0               0/0        ( 0.0%) 
+detail props          [variable]           1/12       ( 8.3%) 
+static props          [variable]           1/206      ( 0.5%) 
+pakfile               [variable]      105703/0        ( 0.0%) 
+physics               [variable]        5536/4194304  ( 0.1%) 
+physics terrain       [variable]           2/1048576  ( 0.0%) 
+
+Level flags = 0
+
+Total triangle count: 9968
+Writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.bsp
+7 seconds elapsed

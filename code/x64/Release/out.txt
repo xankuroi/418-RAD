@@ -1,0 +1,103 @@
+418RAD -- 15-418 Radiosity Simulator
+CUDA Device: GeForce GTX 850M
+    Device Memory: 2147483648
+    Max Threads/Block: 1024
+    Max Block Dim X: 1024
+    Max Block Dim Y: 1024
+    Max Block Dim Z: 64
+    Max Grid Size X: 2147483647
+    Max Grid Size Y: 65535
+    Max Grid Size Z: 65535
+Copy BSP to device memory...
+Initialize radiosity subsystem...
+Setting up ray-trace acceleration structure... Face 0
+Face 1
+Face 2
+Face 3
+Face 4
+Face 5
+Face 6
+Face 7
+Face 8
+Face 9
+Face 10
+Face 11
+Face 12
+Face 13
+Face 14
+Face 15
+Face 16
+Face 17
+Face 18
+Face 19
+Face 20
+Face 21
+Face 22
+Face 23
+Face 24
+Face 25
+Face 26
+Face 27
+Face 28
+Face 29
+Face 30
+Face 31
+Face 32
+Face 33
+Face 34
+Face 35
+Face 36
+Face 37
+Face 38
+Face 39
+Face 40
+Face 41
+Face 42
+Face 43
+Face 44
+(3) Node size: (1024.000000, 1024.000000, 512.000000)
+(3) Split at x = 512.000000
+(2) Node size: (512.000000, 1024.000000, 512.000000)
+(2) Node size: (512.000000, 1024.000000, 512.000000)
+(2) Split at y = 512.000000
+(2) Split at y = 512.000000
+Found a leaf! (39 tris)
+Found a leaf! (49 tris)
+Found a leaf! (36 tris)
+Found a leaf! (28 tris)
+Done! (3ms)
+Moving ray-tracer to device...
+Start RAD!
+Compute direct lighting...
+Launching 11520 threads (45 faces)...
+22/45 faces processed...
+43/45 faces processed...
+45/45 faces processed...
+(429) Test LOS between (576.000000, 496.000000, 256.000000) -> (0.001000, 464.000000, 256.000000)
+(429) Stack iteration 0:
+	Start: (576.000000, 496.000000, 256.000000)
+	End: (0.001000, 464.000000, 256.000000)
+	TMin: (0.000000, 0.000000, 0.000000)
+	TMax: (1024.000000, 1024.000000, 512.000000)
+	x-axis Plane: 512.000000
+(429) x-axis Clip (576.000000, 496.000000, 256.000000) -> (0.001000, 464.000000, 256.000000) to point (512.000061, 492.444427, 256.000000) (t = 64.098618, dirPositive = 0)
+(429) Stack iteration 1:
+	Start: (512.000061, 492.444427, 256.000000)
+	End: (0.001000, 464.000000, 256.000000)
+	TMin: (0.000000, 0.000000, 0.000000)
+	TMax: (512.000000, 1024.000000, 512.000000)
+	y-axis Plane: 512.000000
+Plane behind -- 0 side recursion
+(429) Stack iteration 2:
+	Start: (512.000061, 492.444427, 256.000000)
+	End: (0.001000, 464.000000, 256.000000)
+	TMin: (0.000000, 0.000000, 0.000000)
+	TMax: (512.000000, 512.000000, 512.000000)
+	x-axis Plane: 0.000000
+Intersection check between (512.000061, 492.444427, 256.000000)->(0.001000, 464.000000, 256.000000) and (320.000000, 343.425110, 232.575531), (320.000000, 232.574219, 168.576172), (320.000000, 168.574219, 279.425781)
+Intersection check between (512.000061, 492.444427, 256.000000)->(0.001000, 464.000000, 256.000000) and (320.000000, 343.425110, 232.575531), (320.000000, 168.574219, 279.425781), (320.000000, 279.425781, 343.423828)
+Intersection check between (512.000061, 492.444427, 256.000000)->(0.001000, 464.000000, 256.000000) and (320.000000, 576.000000, 192.000000), (320.000000, 448.000000, 192.000000), (320.000000, 448.000000, 320.000000)
+HIT!!! -- 2 iterations (1 leaves, 1 nonempty)
+Done! (53.8993ms)
+Compute light bounces...
+Wrote to file "out.bsp".
