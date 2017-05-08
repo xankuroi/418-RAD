@@ -1,5 +1,5 @@
-418RAD: 418rad.o bsp.o cudabsp.o cudarad.o
-	nvcc -m64 418rad.o bsp.o cudabsp.o cudarad.o -std=c++11 -o rad -g -lcudart -lcudadevrt
+418RAD: 418rad.o bsp.o cudabsp.o cudarad.o raytracer.o
+	nvcc -m64 418rad.o bsp.o cudabsp.o cudarad.o raytracer.o -std=c++11 -o rad -g -lcudart -lcudadevrt
 
 bsp.o: bsp.cpp bsp.h
 	nvcc -m64 bsp.cpp -O3 -I ./include -std=c++11 -c -g -arch=compute_35 -rdc=true
@@ -12,6 +12,9 @@ cudabsp.o: cudabsp.cu cudabsp.h
 
 cudarad.o: cudarad.cu cudarad.h
 	nvcc -m64 cudarad.cu -O3 -I ./include -std=c++11 -c -g -arch=compute_35 -rdc=true
+
+raytracer.o: raytracer.cu raytracer.h
+	nvcc -m64 raytracer.cu -O3 -I ./include -std=c++11 -c -g -arch=compute_35 -rdc=true
 
 comparelumps.o: comparelumps.cpp bsp.h
 	nvcc comparelumps.cpp -I ./include -Wall -Wextra -Wfatal-errors -std=c++11 -c -g

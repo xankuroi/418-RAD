@@ -6,11 +6,6 @@
 #include "bsp.h"
 #include "cudabsp.h"
 
-__device__ bool intersects(
-    const float3& vertex1, const float3& vertex2, const float3& vertex3,
-    const float3& startPos, const float3& endPos
-);
-
 namespace CUDARAD {
     void init(BSP::BSP& bsp);
     void cleanup(void);
