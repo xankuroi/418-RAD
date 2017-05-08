@@ -36,4 +36,4 @@
 *.VC.db
 
 # Output BSPs
-out.bsp
+**/out.bsp
