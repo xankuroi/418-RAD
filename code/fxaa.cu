@@ -2,6 +2,7 @@
 
 #include "bsp.h"
 #include "cudabsp.h"
+#include "cudarad.h"
 
 #include "cudautils.h"
 
@@ -21,7 +22,7 @@ static __device__ float3 subsample(
         float s, float t
         ) {
 
-    float3 zero = make_float3(0.0, 0.0, 0.0);
+    //float3 zero = make_float3(0.0, 0.0, 0.0);
 
     int s0 = static_cast<int>(floorf(s));
     int t0 = static_cast<int>(floorf(t));
@@ -87,14 +88,6 @@ __global__ void map_samples_fxaa(
         return;
     }
 
-    //printf(
-    //    "s: %u, t: %u; width: %u, height: %u\n",
-    //    static_cast<unsigned int>(s),
-    //    static_cast<unsigned int>(t),
-    //    static_cast<unsigned int>(width),
-    //    static_cast<unsigned int>(height)
-    //);
-
     float3 sample = samplesIn[t * width + s];
 
     float lumaCenter = luma_from_rgb(sample);
@@ -140,6 +133,10 @@ __global__ void map_samples_fxaa(
         samplesOut[t * width + s] = sample;
         return;
     }
+    //else {
+    //    samplesOut[t * width + s] = make_float3(255.0, 0.0, 0.0);
+    //    return;
+    //}
 
     /* Grab the lumas of our remaining corner neighbors. */
     float lumaUL = luma_from_rgb(
@@ -192,6 +189,14 @@ __global__ void map_samples_fxaa(
     /* Are we at a horizontal or vertical edge? */
     bool isHoriz = (gradientHoriz >= gradientVerti);
 
+    //if (isHoriz) {
+    //    samplesOut[t * width + s] = make_float3(255.0, 0.0, 0.0);
+    //}
+    //else {
+    //    samplesOut[t * width + s] = make_float3(0.0, 255.0, 0.0);
+    //}
+    //return;
+
     /* Choose two lumas in the direction opposite of the edge. */
     float luma1 = isHoriz ? lumaUp : lumaLeft;
     float luma2 = isHoriz ? lumaDown : lumaRight;
@@ -207,7 +212,7 @@ __global__ void map_samples_fxaa(
     float gradientNorm = 0.25 * fmaxf(fabsf(gradient1), fabsf(gradient2));
 
     /* Determine directional luma average. */
-    float lumaLocalAvg = 0.0;
+    float lumaLocalAvg;
 
     if (grad1Steeper) {
         lumaLocalAvg = 0.5 * (luma1 + lumaCenter);
@@ -317,6 +322,14 @@ __global__ void map_samples_fxaa(
         pixelOffset = -closerDist / edgeLen + 0.5;
     }
 
+    //printf(
+    //    "(%u, %u) %s distance: %f / %f (%f) Offset: %f\n",
+    //    static_cast<unsigned int>(s), static_cast<unsigned int>(t),
+    //    isHoriz ? "horizontal" : "vertical",
+    //    closerDist, edgeLen, closerDist / edgeLen,
+    //    pixelOffset
+    //);
+
     /*
      * Subpixel antialiasing
      */
@@ -338,7 +351,11 @@ __global__ void map_samples_fxaa(
         subpixelOffset2 * subpixelOffset2 * SUBPIXEL_QUALITY
     );
 
-    float finalOffset = fmaxf(pixelOffset, subpixelOffset);
+    float finalOffset = fmaxf(subpixelOffset, pixelOffset);
+
+    if (grad1Steeper) {
+        finalOffset = -finalOffset;
+    }
 
     /* Determine the final subsample coordinates. */
     float finalS = static_cast<float>(s);
@@ -354,8 +371,117 @@ __global__ void map_samples_fxaa(
     /* Final subsample... */
     float3 color = subsample(samplesIn, width, height, finalS, finalT);
 
+    //{
+    //    int s0 = static_cast<int>(floorf(s));
+    //    int t0 = static_cast<int>(floorf(t));
+    //    int s1 = s0 + 1;
+    //    int t1 = t0 + 1;
+
+    //    if (s0 < 0) {
+    //        s0 = 0;
+    //    }
+
+    //    if (t0 < 0) {
+    //        t0 = 0;
+    //    }
+
+    //    if (s1 >= width) {
+    //        s1 = width - 1;
+    //    }
+
+    //    if (t1 >= height) {
+    //        t1 = height - 1;
+    //    }
+
+    //    float3 sampleUL = samplesIn[t0 * width + s0];
+    //    float3 sampleUR = samplesIn[t0 * width + s1];
+    //    float3 sampleDL = samplesIn[t1 * width + s0];
+    //    float3 sampleDR = samplesIn[t1 * width + s1];
+
+    //    printf(
+    //        "(%u, %u) sampled at (%f, %f)\n"
+    //        "\tUL(%f, %f, %f) UR(%f, %f, %f)\n"
+    //        "\tDL(%f, %f, %f) DR(%f, %f, %f)\n"
+    //        "\tyields (%f, %f, %f)\n",
+    //        static_cast<unsigned int>(s), static_cast<unsigned int>(t),
+    //        finalS, finalT,
+    //        sampleUL.x, sampleUL.y, sampleUL.z,
+    //        sampleUR.x, sampleUR.y, sampleUR.z,
+    //        sampleDL.x, sampleDL.y, sampleDL.z,
+    //        sampleDR.x, sampleDR.y, sampleDR.z,
+    //        color.x, color.y, color.z
+    //    );
+    //}
+
+    //color = isHoriz ?
+    //    make_float3(color.x * 10.0, color.y, color.z) :
+    //    make_float3(color.x, color.y * 10.0, color.z);
+
     /* ... and we're done! */
     samplesOut[t * width + s] = color;
+}
+
+
+__global__ void map_samples_edgeblur(
+        CUDABSP::CUDABSP* pCudaBSP,
+        float3* samplesIn,
+        /* output */ float3* samplesOut,
+        size_t width, size_t height
+        ) {
+
+    size_t s = blockIdx.x * blockDim.x + threadIdx.x;
+    size_t t = blockIdx.y * blockDim.y + threadIdx.y;
+
+    if (s >= width || t >= height) {
+        return;
+    }
+
+    float3 sample = samplesIn[t * width + s];
+
+    float lumaCenter = luma_from_rgb(sample);
+
+    /* Grab the lumas of our four direct neighbors. */
+    float lumaUp = luma_from_rgb(
+        samplesIn[((t > 0) ? (t - 1) : t) * width + s]
+    );
+    float lumaDown = luma_from_rgb(
+        samplesIn[((t < height - 1) ? (t + 1) : t) * width + s]
+    );
+    float lumaLeft = luma_from_rgb(
+        samplesIn[t * width + ((s > 0) ? (s - 1) : s)]
+    );
+    float lumaRight = luma_from_rgb(
+        samplesIn[t * width + ((s < width - 1) ? (s + 1) : s)]
+    );
+
+    /* Determine the color contrast between ourselves and our neighbors. */
+    float lumaMin = fminf(
+        lumaCenter,
+        fminf(
+            fminf(lumaUp, lumaDown),
+            fminf(lumaLeft, lumaRight)
+        )
+    );
+
+    float lumaMax = fmaxf(
+        lumaCenter,
+        fmaxf(
+            fmaxf(lumaUp, lumaDown),
+            fmaxf(lumaLeft, lumaRight)
+        )
+    );
+
+    float lumaRange = lumaMax - lumaMin;
+
+    /*
+    * Luma contrast too low (or this is a really dark spot).
+    * Don't perform AA.
+    */
+    if (lumaRange < fmaxf(EDGE_THRESHOLD_MIN, lumaMax * EDGE_THRESHOLD)) {
+        samplesOut[t * width + s] = sample;
+        return;
+    }
+
 }
 
 

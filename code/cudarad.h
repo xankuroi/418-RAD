@@ -22,7 +22,7 @@ namespace CUDARAD {
         size_t lightmapStartIndex;
 
         __device__ FaceInfo();
-        __device__ FaceInfo(CUDABSP::CUDABSP& cudaBSP, size_t faceInfex);
+        __device__ FaceInfo(CUDABSP::CUDABSP& cudaBSP, size_t faceIndex);
 
         __device__ float3 xyz_from_st(float s, float t);
     };
