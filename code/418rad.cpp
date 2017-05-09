@@ -80,7 +80,7 @@ int main(int argc, char** argv) {
     std::cout << "Compute direct lighting..." << std::endl;
     CUDARAD::compute_direct_lighting(*pBSP, pCudaBSP);
 
-    std::cout << "Run direct lighting supersample pass..." << std::endl;
+    std::cout << "Run direct lighting antialiasing pass..." << std::endl;
     CUDARAD::antialias_direct_lighting(*pBSP, pCudaBSP);
 
     std::cout << "Compute light bounces..." << std::endl;

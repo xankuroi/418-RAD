@@ -7,7 +7,7 @@
 
 
 static __device__ inline float luma_from_rgb(float3 rgb) {
-    return sqrt(dot(rgb, make_float3(0.299, 0.587, 0.114)));
+    return sqrt(dot(rgb / 255.0, make_float3(0.299, 0.587, 0.114)));
 }
 
 
@@ -22,9 +22,6 @@ static __device__ float3 subsample(
         ) {
 
     float3 zero = make_float3(0.0, 0.0, 0.0);
-
-    float fwidth = static_cast<float>(width);
-    float fheight = static_cast<float>(height);
 
     int s0 = static_cast<int>(floorf(s));
     int t0 = static_cast<int>(floorf(t));
@@ -53,7 +50,7 @@ static __device__ float3 subsample(
     float dWeight = t - floorf(t);
     float uWeight = 1.0 - dWeight;
 
-    float3 sampleUL =samples[t0 * width + s0];
+    float3 sampleUL = samples[t0 * width + s0];
     float3 sampleUR = samples[t0 * width + s1];
     float3 sampleDL = samples[t1 * width + s0];
     float3 sampleDR = samples[t1 * width + s1];
