@@ -24,7 +24,8 @@ namespace CUDABSP {
         int32_t* surfEdges;
         BSP::DFace* faces;
         CUDAMatrix::CUDAMatrix<double, 3, 3>* xyzMatrices;
-        BSP::RGBExp32* lightSamples;
+        float3* lightSamples;
+        BSP::RGBExp32* rgbExp32LightSamples;
         BSP::TexInfo* texInfos;
         BSP::DTexData* texDatas;
         BSP::DLeaf* leaves;
@@ -48,6 +49,9 @@ namespace CUDABSP {
 
     /** Destroys the given CUDABSP located on the devices. */
     void destroy_cudabsp(CUDABSP* pCudaBSP);
+
+    /** Convert lightsamples from float3 to RGBExp32 format. */
+    void convert_lightsamples(CUDABSP* pCudaBSP);
 
     /**
     * Updates the given BSP using the information contained in the given 

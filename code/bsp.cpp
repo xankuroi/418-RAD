@@ -883,14 +883,6 @@ namespace BSP {
         gmtl::invert(Ainv, A);
     }
     
-    const TexInfo& Face::get_texinfo(void) const {
-        return m_texInfo;
-    }
-    
-    const DTexData& Face::get_texdata(void) const {
-        return m_texData;
-    }
-    
     const DFace& Face::get_data(void) const {
         return m_faceData;
     }
@@ -898,7 +890,19 @@ namespace BSP {
     const DPlane& Face::get_planedata(void) const {
         return m_planeData;
     }
-    
+
+    const TexInfo& Face::get_texinfo(void) const {
+        return m_texInfo;
+    }
+
+    const DTexData& Face::get_texdata(void) const {
+        return m_texData;
+    }
+
+    const gmtl::Matrix<double, 3, 3>& Face::get_st_xyz_matrix(void) const {
+        return m_Ainv;
+    }
+
     void Face::set_texinfo_index(int16_t index) {
         m_faceData.texInfo = index;
     }

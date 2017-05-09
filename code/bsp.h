@@ -445,10 +445,11 @@ namespace BSP {
 
             void make_st_xyz_matrix(gmtl::Matrix<double, 3, 3>& Ainv) const;
 
-            const TexInfo& get_texinfo(void) const;
-            const DTexData& get_texdata(void) const;
             const DFace& get_data(void) const;
             const DPlane& get_planedata(void) const;
+            const TexInfo& get_texinfo(void) const;
+            const DTexData& get_texdata(void) const;
+            const gmtl::Matrix<double, 3, 3>& get_st_xyz_matrix(void) const;
             
             void set_texinfo_index(int16_t index);
             void set_texdata_index(int32_t index);

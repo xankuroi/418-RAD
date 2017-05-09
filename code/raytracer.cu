@@ -5,6 +5,7 @@
 #include "raytracer.h"
 #include "cudautils.h"
 
+
 namespace RayTracer {
     /* Implements the M-T ray-triangle intersection algorithm. */
     static __device__ bool intersects(
@@ -88,7 +89,7 @@ namespace RayTracer {
 
             /* Split along the x-axis. */
 
-            nodeSize.x /= 2.0;
+            nodeSize.x *= 0.5;
             node.axis = AXIS_X;
             node.pos = node.tmin.x + nodeSize.x;
             rightTMin = node.tmin + make_float3(nodeSize.x, 0.0, 0.0);
@@ -106,7 +107,7 @@ namespace RayTracer {
 
             /* Split along the y-axis. */
 
-            nodeSize.y /= 2.0;
+            nodeSize.y *= 0.5;
             node.axis = AXIS_Y;
             node.pos = node.tmin.y + nodeSize.y;
             rightTMin = node.tmin + make_float3(0.0, nodeSize.y, 0.0);
@@ -119,7 +120,7 @@ namespace RayTracer {
         }
         else {
             /* Split along the z-axis. */
-            nodeSize.z /= 2.0;
+            nodeSize.z *= 0.5;
             node.axis = AXIS_Z;
             node.pos = node.tmin.z + nodeSize.z;
             rightTMin = node.tmin + make_float3(0.0, 0.0, nodeSize.z);
@@ -490,7 +491,7 @@ namespace RayTracer {
         };
 
         while (stackSize > 0) {
-            if (stackSize > 1024) {
+            if (stackSize >= 1024) {
                 printf("ALERT: Stack size too big!!!\n");
                 return false;
             }

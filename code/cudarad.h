@@ -10,10 +10,8 @@ namespace CUDARAD {
     void init(BSP::BSP& bsp);
     void cleanup(void);
 
-    void compute_direct_lighting(
-        BSP::BSP& bsp, CUDABSP::CUDABSP* pCudaBSP,
-        std::vector<BSP::RGBExp32>& lightSamples
-    );
+    void compute_direct_lighting(BSP::BSP& bsp, CUDABSP::CUDABSP* pCudaBSP);
+    void antialias_direct_lighting(BSP::BSP& bsp, CUDABSP::CUDABSP* pCudaBSP);
 
     void bounce_lighting(BSP::BSP& bsp, CUDABSP::CUDABSP* pCudaBSP);
 }

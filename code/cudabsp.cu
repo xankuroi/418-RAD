@@ -78,6 +78,43 @@
 //}
 
 
+__global__ void map_lightsamples(
+        float3* lightSamples,
+        BSP::RGBExp32* rgbExp32LightSamples,
+        size_t numLightSamples
+        ) {
+
+    size_t index = blockIdx.x * blockDim.x + threadIdx.x;
+
+    if (index >= numLightSamples) {
+        return;
+    }
+
+    float3 sample = lightSamples[index];
+
+    uint64_t r = static_cast<uint64_t>(sample.x);
+    uint64_t g = static_cast<uint64_t>(sample.y);
+    uint64_t b = static_cast<uint64_t>(sample.z);
+
+    int8_t exp = 0;
+
+    while (r > 255 || g > 255 || b > 255) {
+        r >>= 1;
+        g >>= 1;
+        b >>= 1;
+
+        exp++;
+    }
+
+    rgbExp32LightSamples[index] = {
+        static_cast<uint8_t>(r),
+        static_cast<uint8_t>(g),
+        static_cast<uint8_t>(b),
+        exp,
+    };
+}
+
+
 namespace CUDABSP {
     CUDABSP* make_cudabsp(const BSP::BSP& bsp) {
         CUDABSP cudaBSP;
@@ -105,6 +142,8 @@ namespace CUDABSP {
         size_t surfEdgesSize = sizeof(int32_t) * cudaBSP.numSurfEdges;
         size_t facesSize = sizeof(BSP::DFace) * cudaBSP.numFaces;
         size_t lightSamplesSize
+            = sizeof(float3) * cudaBSP.numLightSamples;
+        size_t rgbExp32LightSamplesSize
             = sizeof(BSP::RGBExp32) * cudaBSP.numLightSamples;
         size_t texInfosSize = sizeof(BSP::TexInfo) * cudaBSP.numTexInfos;
         size_t texDatasSize = sizeof(BSP::DTexData) * cudaBSP.numTexDatas;
@@ -171,11 +210,9 @@ namespace CUDABSP {
         size_t xyzMatricesSize
             = sizeof(CUDAMatrix::CUDAMatrix<double, 3, 3>) * cudaBSP.numFaces;
 
-        for (size_t i=0; i<cudaBSP.numFaces; i++) {
-            const BSP::Face& face = bsp.get_faces()[i];
-
-            gmtl::Matrix<double, 3, 3> xyzMatrix;
-            face.make_st_xyz_matrix(xyzMatrix);
+        for (const BSP::Face& face : bsp.get_faces()) {
+            const gmtl::Matrix<double, 3, 3>& xyzMatrix
+                = face.get_st_xyz_matrix();
 
             xyzMatrices.push_back(CUDAMatrix::CUDAMatrix<double, 3, 3>());
 
@@ -204,6 +241,15 @@ namespace CUDABSP {
             cudaMalloc(
                 &cudaBSP.lightSamples,
                 lightSamplesSize
+            )
+        );
+        // Don't need to copy light samples since we're computing them.
+
+
+        CUDA_CHECK_ERROR(
+            cudaMalloc(
+                &cudaBSP.rgbExp32LightSamples,
+                rgbExp32LightSamplesSize
             )
         );
         // Don't need to copy light samples since we're computing them.
@@ -268,20 +314,45 @@ namespace CUDABSP {
         );
 
         /* Free the internal arrays. */
-        cudaFree(cudaBSP.models);
-        cudaFree(cudaBSP.planes);
-        cudaFree(cudaBSP.vertices);
-        cudaFree(cudaBSP.edges);
-        cudaFree(cudaBSP.surfEdges);
-        cudaFree(cudaBSP.faces);
-        cudaFree(cudaBSP.lightSamples);
-        cudaFree(cudaBSP.texInfos);
-        cudaFree(cudaBSP.texDatas);
-        cudaFree(cudaBSP.leaves);
-        cudaFree(cudaBSP.worldLights);
+        CUDA_CHECK_ERROR(cudaFree(cudaBSP.models));
+        CUDA_CHECK_ERROR(cudaFree(cudaBSP.planes));
+        CUDA_CHECK_ERROR(cudaFree(cudaBSP.vertices));
+        CUDA_CHECK_ERROR(cudaFree(cudaBSP.edges));
+        CUDA_CHECK_ERROR(cudaFree(cudaBSP.surfEdges));
+        CUDA_CHECK_ERROR(cudaFree(cudaBSP.faces));
+        CUDA_CHECK_ERROR(cudaFree(cudaBSP.xyzMatrices));
+        CUDA_CHECK_ERROR(cudaFree(cudaBSP.lightSamples));
+        CUDA_CHECK_ERROR(cudaFree(cudaBSP.rgbExp32LightSamples));
+        CUDA_CHECK_ERROR(cudaFree(cudaBSP.texInfos));
+        CUDA_CHECK_ERROR(cudaFree(cudaBSP.texDatas));
+        CUDA_CHECK_ERROR(cudaFree(cudaBSP.leaves));
+        CUDA_CHECK_ERROR(cudaFree(cudaBSP.worldLights));
 
         /* Free the device pointer itself. */
-        cudaFree(pCudaBSP);
+        CUDA_CHECK_ERROR(cudaFree(pCudaBSP));
+    }
+
+    void convert_lightsamples(CUDABSP* pCudaBSP) {
+        CUDABSP cudaBSP;
+
+        CUDA_CHECK_ERROR(
+            cudaMemcpy(
+                &cudaBSP, pCudaBSP, sizeof(CUDABSP),
+                cudaMemcpyDeviceToHost
+            )
+        );
+
+        size_t BLOCK_WIDTH = 1024;
+        size_t numBlocks = div_ceil(cudaBSP.numLightSamples, BLOCK_WIDTH);
+
+        KERNEL_LAUNCH(
+            map_lightsamples,
+            numBlocks, BLOCK_WIDTH,
+            cudaBSP.lightSamples, cudaBSP.rgbExp32LightSamples,
+            cudaBSP.numLightSamples
+        );
+
+        CUDA_CHECK_ERROR(cudaDeviceSynchronize());
     }
 
     void update_bsp(BSP::BSP& bsp, CUDABSP* pCudaBSP) {
@@ -293,12 +364,9 @@ namespace CUDABSP {
             )
         );
 
-        //std::vector<BSP::RGBExp32> lightSamples(cudaBSP.numLightSamples);
-
         CUDA_CHECK_ERROR(
             cudaMemcpy(
-                //lightSamples.data(), cudaBSP.lightSamples,
-                bsp.get_lightsamples().data(), cudaBSP.lightSamples,
+                bsp.get_lightsamples().data(), cudaBSP.rgbExp32LightSamples,
                 sizeof(BSP::RGBExp32) * cudaBSP.numLightSamples,
                 cudaMemcpyDeviceToHost
             )
@@ -311,16 +379,5 @@ namespace CUDABSP {
                 cudaMemcpyDeviceToHost
             )
         );
-
-        //std::cout << cudaBSP.numLightSamples << std::endl;
-        //std::cout << bsp.get_lightsamples().size() << std::endl;
-
-        //for (BSP::RGBExp32& sample : bsp.get_lightsamples()) {
-        //    std::cout << "(" 
-        //        << static_cast<int>(sample.r) << ", "
-        //        << static_cast<int>(sample.g) << ", "
-        //        << static_cast<int>(sample.b) << ") * 2^"
-        //        << static_cast<int>(sample.exp) << std::endl;
-        //}
     }
 }

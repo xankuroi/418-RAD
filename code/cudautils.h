@@ -127,6 +127,14 @@ static __device__ inline float3 operator*(const float3& v, float c) {
 }
 
 
+static __device__ inline float3 operator*=(float3& a, float c) {
+    a.x *= c;
+    a.y *= c;
+    a.z *= c;
+    return a;
+}
+
+
 static __device__ inline float3 operator*(float c, const float3& v) {
     return v * c;
 }
@@ -134,6 +142,14 @@ static __device__ inline float3 operator*(float c, const float3& v) {
 
 static __device__ inline float3 operator/(const float3& v, float c) {
     return v * (1.0 / c);
+}
+
+
+static __device__ inline float3 operator/=(float3& a, float c) {
+    a.x /= c;
+    a.y /= c;
+    a.z /= c;
+    return a;
 }
 
 

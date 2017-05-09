@@ -3,22 +3,15 @@
 
 #include <string>
 #include <vector>
-#include <random>
 #include <memory>
 
-#include <cassert>
-#include <cstdlib>
-#include <cstdint>
-#include <cmath>
-
-#include <gmtl/LineSeg.h>
-#include <gmtl/Plane.h>
-#include <gmtl/Intersection.h>
-
 #include "cuda.h"
+
 #include "bsp.h"
 #include "cudabsp.h"
 #include "cudarad.h"
+#include "fxaa.h"
+
 #include "cudautils.h"
 
 
@@ -83,14 +76,23 @@ int main(int argc, char** argv) {
     CUDARAD::init(*pBSP);
 
     std::cout << "Start RAD!" << std::endl;
-    
+
     std::cout << "Compute direct lighting..." << std::endl;
-    std::vector<BSP::RGBExp32> directLighting;
-    CUDARAD::compute_direct_lighting(*pBSP, pCudaBSP, directLighting);
+    CUDARAD::compute_direct_lighting(*pBSP, pCudaBSP);
+
+    std::cout << "Run direct lighting supersample pass..." << std::endl;
+    CUDARAD::antialias_direct_lighting(*pBSP, pCudaBSP);
 
     std::cout << "Compute light bounces..." << std::endl;
     CUDARAD::bounce_lighting(*pBSP, pCudaBSP);
 
+    //std::cout << "Run light sample FXAA pass..." << std::endl;
+    //CUDAFXAA::antialias_lightsamples(*pBSP, pCudaBSP);
+
+    std::cout << "Convert light samples to RGBExp32..." << std::endl;
+    CUDABSP::convert_lightsamples(pCudaBSP);
+
+    std::cout << "Update host BSP data..." << std::endl;
     CUDABSP::update_bsp(*pBSP, pCudaBSP);
 
     CUDABSP::destroy_cudabsp(pCudaBSP);

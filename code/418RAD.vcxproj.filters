@@ -41,6 +41,9 @@
     <ClInclude Include="raytracer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="fxaa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="cudabsp.cu">
@@ -50,6 +53,9 @@
       <Filter>Source Files</Filter>
     </CudaCompile>
     <CudaCompile Include="raytracer.cu">
+      <Filter>Source Files</Filter>
+    </CudaCompile>
+    <CudaCompile Include="fxaa.cu">
       <Filter>Source Files</Filter>
     </CudaCompile>
   </ItemGroup>
