@@ -75,7 +75,7 @@ int main(int argc, char** argv) {
     std::cout << "Initialize radiosity subsystem..." << std::endl;
     CUDARAD::init(*pBSP);
 
-    std::cout << "Start RAD!" << std::endl;
+    std::cout << "*** Start RAD! ***" << std::endl;
 
     std::cout << "Compute direct lighting..." << std::endl;
     CUDARAD::compute_direct_lighting(*pBSP, pCudaBSP);

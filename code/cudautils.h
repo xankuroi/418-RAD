@@ -122,6 +122,14 @@ static __device__ inline float3& operator+=(float3& a, const float3& b) {
 }
 
 
+static __device__ inline float3& operator-=(float3& a, const float3& b) {
+    a.x -= b.x;
+    a.y -= b.y;
+    a.z -= b.z;
+    return a;
+}
+
+
 static __device__ inline float3 operator*(const float3& v, float c) {
     return make_float3(v.x * c, v.y * c, v.z * c);
 }

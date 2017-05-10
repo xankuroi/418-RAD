@@ -1537,3 +1537,18 @@ Level flags = 0
 Total triangle count: 9968
 Writing c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.bsp
 7 seconds elapsed
+
+
+
+[Reading texlights from 'lights.rad']
+[48 texlights parsed from 'lights.rad']
+
+Loading c:\users\ryan\dropbox\c++\rad\code\vmf\lightmaptest_hires.bsp
+4838 faces
+30667 square feet [4416185.00 square inches]
+0 Displacements
+0 Square Feet [0.00 Square Inches]
+4838 patches before subdivision
+612896 patches after subdivision
+3 direct lights
+0...1...2...3...4...5...6...7...8...9...100

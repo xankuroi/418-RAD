@@ -132,7 +132,7 @@ namespace DirectLighting {
             // Nudge the sample position towards the light slightly, to avoid 
             // colliding with triangles that directly contain the sample 
             // position.
-            samplePos = lightPos + dir * (dist - EPSILON);
+            samplePos -= dir * EPSILON;
 
             bool lightBlocked = CUDARAD::g_pDeviceRayTracer->LOS_blocked(
                 lightPos, samplePos

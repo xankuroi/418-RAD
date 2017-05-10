@@ -243,69 +243,6 @@ namespace RayTracer {
         }
     }
 
-    __global__ void map_triangles_LOS(
-            Triangle* triangles, size_t* triangleIDs, size_t numTriangleIDs,
-            float3 startPos, float3 endPos,
-            /* output */ bool* pLOSBlocked
-            ) {
-
-        size_t index = blockIdx.x * blockDim.x + threadIdx.x;
-
-        if (index >= numTriangleIDs) {
-            return;
-        }
-
-        Triangle& tri = triangles[triangleIDs[index]];
-
-        /*
-         * M-T ray-triangle intersection algorithm.
-         */
-
-        // M-T algo uses a CCW winding, but Source uses a CW winding.
-        // So, we need to assign the vertices in reverse.
-        float3 vertex1 = tri.vertices[2];
-        float3 vertex2 = tri.vertices[1];
-        float3 vertex3 = tri.vertices[0];
-
-        const float EPSILON = 1e-6;
-
-        float3 diff = endPos - startPos;
-        float dist = len(diff);
-        float3 dir = diff / dist;
-
-        float3 edge1 = vertex2 - vertex1;
-        float3 edge2 = vertex3 - vertex1;
-
-        float3 pVec = cross(dir, edge2);
-
-        float det = dot(edge1, pVec);
-
-        if (det < EPSILON) {
-            return;
-        }
-
-        float3 tVec = startPos - vertex1;
-
-        float u = dot(tVec, pVec);
-        if (u < 0.0 || u > det) {
-            return;
-        }
-
-        float3 qVec = cross(tVec, edge1);
-
-        float v = dot(dir, qVec);
-
-        if (v < 0.0 || u + v > det) {
-            return;
-        }
-
-        float t = dot(edge2, qVec) / det;
-
-        if (0.0 < t && t < dist) {
-            *pLOSBlocked = true;
-        }
-    }
-
 
     /***********************
      * CUDARayTracer Class *
@@ -513,6 +450,10 @@ namespace RayTracer {
                     for (size_t ti=0; ti<pNode->numTris; ti++) {
                         Triangle& tri = m_triangles[pNode->triangleIDs[ti]];
 
+                        // The M-T intersection algorithm uses CCW vertex 
+                        // winding, but Source uses CW winding. So, we need to 
+                        // pass the vertices in reverse order to get backface 
+                        // culling to work correctly.
                         bool isLOSBlocked = intersects(
                             tri.vertices[2], tri.vertices[1], tri.vertices[0],
                             startPos, endPos
