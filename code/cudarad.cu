@@ -434,6 +434,70 @@ namespace DirectLighting {
 }
 
 
+namespace BouncedLighting {
+    static __device__ const float PI = 3.14159265358979323846264;
+    static __device__ const float INV_PI = 1.0 / PI;
+
+    /**
+     * Computes the form factor from a differential patch to a convex 
+     * polygonal patch.
+     *
+     * Thankfully, Source's polygons are always convex.
+     *
+     * Formula graciously stolen from Formula 81 of this book:
+     * https://people.cs.kuleuven.be/~philip.dutre/GI/TotalCompendium.pdf
+     *
+     * ... and Formula 4.16 of this one:
+     * https://books.google.com/books?id=zALK286TFXgC&lpg=PP1&pg=PA72#v=onepage&q&f=false
+     */
+    static __device__ float ff_diff_poly(
+            float3 diffPos, float3 diffNorm,
+            float3* vertices, size_t numVertices
+            ) {
+
+        float result = 0.0;
+
+        for (size_t i=0; i<numVertices; i++) {
+            float3 vertex1 = vertices[i] - diffPos;
+            float3 vertex2 = vertices[(i + 1) % numVertices] - diffPos;
+
+            float3 vertexCross = cross(vertex1, vertex2);
+            float crossLen = len(vertexCross);
+
+            vertexCross /= crossLen;
+
+            float v1Len = len(vertex1);
+            float v2Len = len(vertex2);
+
+            float theta = asinf(crossLen / (v1Len * v2Len));
+
+            result += dot(diffNorm, vertexCross * theta);
+        }
+
+        result *= 0.5 * INV_PI;
+
+        return result;
+    }
+
+    /** Computes the form factor between two differential patches. */
+    static __device__ float ff_diff_diff(
+            float3 diff1Pos, float3 diff1Norm,
+            float3 diff2Pos, float3 diff2Norm
+            ) {
+
+        float3 delta = diff2Pos - diff1Pos;
+        float invDist = 1.0 / len(delta);
+
+        float3 dir = delta * invDist;
+
+        return (
+            dot(diff1Norm, dir) * -dot(diff2Norm, dir)
+            * INV_PI * invDist * invDist
+        );
+    }
+}
+
+
 namespace CUDARAD {
     void init(BSP::BSP& bsp) {
         std::cout << "Setting up ray-trace acceleration structure... "

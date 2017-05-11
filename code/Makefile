@@ -4,6 +4,9 @@
 bsp.o: bsp.cpp bsp.h
 	nvcc -m64 bsp.cpp -O3 -I ./include -std=c++11 -c -g -arch=compute_35 -rdc=true
 
+bsp_mingw.o: bsp.cpp bsp.h
+	g++ bsp.cpp -I ./include -Wall -Wextra -Wfatal-errors -std=c++11 -o bsp_mingw.o -c -g
+
 418rad.o: 418rad.cpp bsp.h
 	nvcc -m64 418rad.cpp -O3 -I ./include -std=c++11 -c -g -arch=compute_35 -rdc=true
 
@@ -23,10 +26,10 @@ comparelumps: comparelumps.o bsp.o
 	nvcc comparelumps.o bsp.o -Wall -Wextra -Wfatal-errors -std=c++11 -o comparelumps -g
 
 examinebsp.o: examinebsp.cpp bsp.h
-	nvcc examinebsp.cpp -I ./include -Wall -Wextra -Wfatal-errors -std=c++11 -c -g
+	g++ examinebsp.cpp -I ./include -Wall -Wextra -Wfatal-errors -std=c++11 -c -g
 
-examinebsp: examinebsp.o bsp.o
-	nvcc examinebsp.o bsp.o -Wall -Wextra -Wfatal-errors -std=c++11 -o examinebsp -g
+examinebsp: examinebsp.o bsp_mingw.o
+	g++ examinebsp.o bsp_mingw.o -Wall -Wextra -Wfatal-errors -std=c++11 -o examinebsp -g
 
 clean:
 	-rm -f *.o

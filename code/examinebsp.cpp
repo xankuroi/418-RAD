@@ -11,8 +11,6 @@
 
 #include "bsp.h"
 
-static std::unique_ptr<BSP::BSP> g_pBSP;
-
 
 int main(int argc, char** argv) {
     if (argc < 2) {
@@ -23,19 +21,21 @@ int main(int argc, char** argv) {
     const std::string filename(argv[1]);
     std::ifstream f(filename, std::ios::binary);
     
+    std::unique_ptr<BSP::BSP> pBSP;
+    
     try {
-        g_pBSP = std::unique_ptr<BSP::BSP>(new BSP::BSP(filename));
+        pBSP = std::unique_ptr<BSP::BSP>(new BSP::BSP(filename));
     }
     catch (BSP::InvalidBSP e) {
         std::cerr << e.what() << std::endl;
         return 1;
     }
     
-    std::cout << "BSP Version " << g_pBSP->get_format_version() << std::endl;
-    std::cout << "Fullbright: " << g_pBSP->is_fullbright() << std::endl;
+    std::cout << "BSP Version " << pBSP->get_format_version() << std::endl;
+    std::cout << "Fullbright: " << pBSP->is_fullbright() << std::endl;
     
     int i = 0;
-    for (BSP::Face& face : g_pBSP->get_faces()) {
+    for (BSP::Face& face : pBSP->get_faces()) {
         std::cout << "Face " << i << ":" << std::endl;
         
         for (const BSP::Edge& edge : face.get_edges()) {
@@ -85,17 +85,17 @@ int main(int argc, char** argv) {
             << static_cast<int>(avgLighting.b) << ") * 2^"
             << static_cast<int>(avgLighting.exp) << std::endl;
             
-        std::cout << "    Light Samples:" << std::endl;
+        // std::cout << "    Light Samples:" << std::endl;
         
-        j = 0;
-        for (BSP::RGBExp32& lightSample : face.get_lightsamples()) {
-            std::cout << "        Sample " << j << ": ("
-                << static_cast<int>(lightSample.r) << ", "
-                << static_cast<int>(lightSample.g) << ", "
-                << static_cast<int>(lightSample.b) << ") * 2^"
-                << static_cast<int>(lightSample.exp) << std::endl;
-            j++;
-        }
+        // j = 0;
+        // for (BSP::RGBExp32& lightSample : face.get_lightsamples()) {
+            // std::cout << "        Sample " << j << ": ("
+                // << static_cast<int>(lightSample.r) << ", "
+                // << static_cast<int>(lightSample.g) << ", "
+                // << static_cast<int>(lightSample.b) << ") * 2^"
+                // << static_cast<int>(lightSample.exp) << std::endl;
+            // j++;
+        // }
         
         // std::cout << "    Light Sample Coords:" << std::endl;
         
@@ -218,7 +218,7 @@ int main(int argc, char** argv) {
     }
     
     i = 0;
-    for (const BSP::Light& light : g_pBSP->get_lights()) {
+    for (const BSP::Light& light : pBSP->get_lights()) {
         std::cout << "Light " << i << ":" << std::endl;
         
         const BSP::Vec3<float>& pos = light.get_coords();
@@ -235,12 +235,12 @@ int main(int argc, char** argv) {
     }
     
     // std::cout << "Ent Data: " << std::endl;
-    // std::cout << g_pBSP->get_entdata() << std::endl;
+    // std::cout << pBSP->get_entdata() << std::endl;
     
     std::cout << "World Lights: " << std::endl;
     
     i = 0;
-    for (const BSP::DWorldLight& worldLight : g_pBSP->get_worldlights()) {
+    for (const BSP::DWorldLight& worldLight : pBSP->get_worldlights()) {
         std::cout << "    World Light " << i << ":" << std::endl;
         
         std::cout << "        origin: ("
@@ -276,9 +276,9 @@ int main(int argc, char** argv) {
     }
     
     std::cout << "Entities:" << std::endl;
-    std::cout << g_pBSP->get_entdata() << std::endl;
+    std::cout << pBSP->get_entdata() << std::endl;
     
-    g_pBSP->write("out.bsp");
+    pBSP->write("out.bsp");
     
     return 0;
 }
