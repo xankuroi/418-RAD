@@ -53,7 +53,7 @@ namespace CUDARAD {
     void antialias_direct_lighting(BSP::BSP& bsp, CUDABSP::CUDABSP* pCudaBSP);
 
     void bounce_lighting(BSP::BSP& bsp, CUDABSP::CUDABSP* pCudaBSP);
-    void bounce_lighting_fly(CUDABSP::CUDABSP* pCudaBSP);
+    void bounce_lighting_fly(BSP::BSP& bsp, CUDABSP::CUDABSP* pCudaBSP);
     __global__ void bounce_iteration(CUDABSP::CUDABSP* pCudaBSP, PatchInfo* patches, int totalNumPatches);
     void generate_face_info(CUDABSP::CUDABSP* pCudaBSP, CUDARAD::FaceInfo& faces);
     void generate_patch_info(CUDABSP::CUDABSP* pCudaBSP, CUDARAD::FaceInfo* faces,

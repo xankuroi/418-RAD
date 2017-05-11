@@ -976,26 +976,39 @@ namespace CUDARAD {
     void bounce_lighting(BSP::BSP& bsp, CUDABSP::CUDABSP* pCudaBSP) {
       // TODO timing
       //pCudaBSP = make_cudabsp(bsp);
-      bounce_lighting_fly(pCudaBSP);
+      using Clock = std::chrono::high_resolution_clock;
+
+      auto start = Clock::now();
+      bounce_lighting_fly(bsp, pCudaBSP);
+      auto end = Clock::now();
+      std::chrono::milliseconds ms
+        = std::chrono::duration_cast<std::chrono::milliseconds>(
+            end - start
+            );
+
+      std::cout << "Done! (" << ms.count() << "ms)" << std::endl;
       //update_bsp(bsp, pCudabsp);
     }
 
-    size_t count_patches(CUDABSP::CUDABSP* pCudaBSP, CUDARAD::FaceInfo* faces)
+//    size_t count_patches(CUDABSP::CUDABSP* pCudaBSP, CUDARAD::FaceInfo* faces)
+    size_t count_patches(BSP::BSP& bsp)
     {
       size_t count = 0;
-      for(int i = 0; i < pCudaBSP->numFaces; i++)
+      std::vector<BSP::Face> faces = bsp.get_faces();
+      for(int i = 0; i < faces.size(); i++)
       {
-        count += faces[i].lightmapSize;
+        count += faces[i].get_lightmap_size();
       }
       return count;
     }
 
-    void bounce_lighting_fly(CUDABSP::CUDABSP* pCudaBSP){
+    void bounce_lighting_fly(BSP::BSP& bsp, CUDABSP::CUDABSP* pCudaBSP){
+      size_t numFaces = bsp.get_faces().size();
       std::cout << "Beginning bounce lightning" << std::endl;
       // Calculate patches
       FaceInfo* faces;
       CUDA_CHECK_ERROR(
-          cudaMalloc(&faces, sizeof(CUDARAD::FaceInfo) * pCudaBSP->numFaces)
+          cudaMalloc(&faces, sizeof(CUDARAD::FaceInfo) * numFaces)
           );
       std::cout << "Generate FaceInfo for all faces" << std::endl;
       const size_t BLOCK_WIDTH = 16;
@@ -1003,12 +1016,12 @@ namespace CUDARAD {
       dim3 blockDim(BLOCK_WIDTH, BLOCK_HEIGHT); // TODO figure out something better
       KERNEL_LAUNCH(
           generate_face_info,
-          pCudaBSP->numFaces, blockDim,
+          numFaces, blockDim,
           pCudaBSP, faces
           );
 
       std::cout << "Generate PatchInfo" << std::endl;
-      size_t totalPatches = count_patches(pCudaBSP, faces);
+      size_t totalPatches = count_patches(bsp);
       PatchInfo* patches;
       CUDA_CHECK_ERROR(
         cudaMalloc(&patches, sizeof(CUDARAD::PatchInfo) * totalPatches)
@@ -1016,8 +1029,8 @@ namespace CUDARAD {
 
       KERNEL_LAUNCH(
           generate_patch_info,
-          pCudaBSP->numFaces, blockDim,
-          pCudaBSP, faces, pCudaBSP->numFaces, patches
+          numFaces, blockDim,
+          pCudaBSP, faces, numFaces, patches
           );
 
 
@@ -1025,7 +1038,7 @@ namespace CUDARAD {
 
       KERNEL_LAUNCH(
           bounce_iteration,
-          pCudaBSP->numFaces, blockDim,
+          numFaces, blockDim,
           pCudaBSP, patches, totalPatches
           );
 
