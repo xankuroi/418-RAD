@@ -61,6 +61,8 @@ namespace CUDARAD {
 
     float3 center(PatchInfo patch);
     static __device__ inline float distance(float3 p1, float3 p2);
+
+    void compute_ambient_lighting(BSP::BSP& bsp, CUDABSP::CUDABSP* pCudaBSP);
 }
 
 #endif

@@ -106,6 +106,20 @@ namespace BSP {
         }
         
         load_lump(file, LUMP_LEAVES, m_leaves);
+
+        if (!is_fullbright()) {
+            load_lump(
+                file,
+                LUMP_LEAF_AMBIENT_INDEX_HDR,
+                m_ambientLightIndices
+            );
+
+            load_lump(
+                file,
+                LUMP_LEAF_AMBIENT_LIGHTING_HDR,
+                m_ambientLightSamples
+            );
+        }
         
         std::vector<char> entData;
         load_lump(file, LUMP_ENTITIES, entData);
@@ -304,6 +318,24 @@ namespace BSP {
         return m_leaves;
     }
 
+    std::vector<DLeafAmbientIndex>& BSP::get_ambient_indices(void) {
+        return m_ambientLightIndices;
+    }
+
+    const std::vector<DLeafAmbientIndex>&
+    BSP::get_ambient_indices(void) const {
+        return m_ambientLightIndices;
+    }
+
+    std::vector<DLeafAmbientLighting>& BSP::get_ambient_samples(void) {
+        return m_ambientLightSamples;
+    }
+
+    const std::vector<DLeafAmbientLighting>&
+    BSP::get_ambient_samples(void) const {
+        return m_ambientLightSamples;
+    }
+
     const std::vector<DWorldLight>& BSP::get_worldlights(void) const {
         return m_worldLights;
     }
@@ -435,43 +467,53 @@ namespace BSP {
         
         if (!is_fullbright()) {
             save_lights(file, offsets, sizes);
-            
-            // Temp hack for ambient lighting
-            size_t numLeaves = m_leaves.size();
-            
-            std::vector<DLeafAmbientLighting> ambientLighting(numLeaves);
-            
-            for (DLeafAmbientLighting& ambient : ambientLighting) {
-                for (RGBExp32& sample : ambient.cube.color) {
-                    sample.r = 0;
-                    sample.g = 255;
-                    sample.b = 0;
-                    sample.exp = 0;
-                }
-                
-                ambient.x = 128;
-                ambient.y = 128;
-                ambient.z = 128;
-            }
-            
+
             save_lump(
-                file, LUMP_LEAF_AMBIENT_LIGHTING_HDR, ambientLighting,
+                file, LUMP_LEAF_AMBIENT_INDEX_HDR, m_ambientLightIndices,
                 offsets, sizes
             );
-            
-            std::vector<DLeafAmbientIndex> ambientIndices(numLeaves);
-            
-            int i = 0;
-            for (DLeafAmbientIndex& ambientIndex : ambientIndices) {
-                ambientIndex.ambientSampleCount = 1;
-                ambientIndex.firstAmbientSample = i;
-                i++;
-            }
-            
+
             save_lump(
-                file, LUMP_LEAF_AMBIENT_INDEX_HDR, ambientIndices,
+                file, LUMP_LEAF_AMBIENT_LIGHTING_HDR, m_ambientLightSamples,
                 offsets, sizes
             );
+
+            //// Temp hack for ambient lighting
+            //size_t numLeaves = m_leaves.size();
+            //
+            //std::vector<DLeafAmbientLighting> ambientLighting(numLeaves);
+            //
+            //for (DLeafAmbientLighting& ambient : ambientLighting) {
+            //    for (RGBExp32& sample : ambient.cube.color) {
+            //        sample.r = 128;
+            //        sample.g = 128;
+            //        sample.b = 128;
+            //        sample.exp = 0;
+            //    }
+            //    
+            //    ambient.x = 128;
+            //    ambient.y = 128;
+            //    ambient.z = 128;
+            //}
+            //
+            //save_lump(
+            //    file, LUMP_LEAF_AMBIENT_LIGHTING_HDR, ambientLighting,
+            //    offsets, sizes
+            //);
+            //
+            //std::vector<DLeafAmbientIndex> ambientIndices(numLeaves);
+            //
+            //int i = 0;
+            //for (DLeafAmbientIndex& ambientIndex : ambientIndices) {
+            //    ambientIndex.ambientSampleCount = 1;
+            //    ambientIndex.firstAmbientSample = i;
+            //    i++;
+            //}
+            //
+            //save_lump(
+            //    file, LUMP_LEAF_AMBIENT_INDEX_HDR, ambientIndices,
+            //    offsets, sizes
+            //);
         }
         
         save_gamelumps(file, offsets, sizes);
@@ -684,8 +726,89 @@ namespace BSP {
     void BSP::build_worldlights(void) {
         m_worldLights.clear();
 
+        int i = 0;
         for (const Light& light : get_lights()) {
+            //std::cout << "WorldLight " << i;
             m_worldLights.push_back(light.to_worldlight());
+            i++;
+        }
+    }
+
+    void BSP::init_ambient_samples(void) {
+        const float SAMPLE_SPACING_X = 256.0;
+        const float SAMPLE_SPACING_Y = 256.0;
+        const float SAMPLE_SPACING_Z = 256.0;
+
+        m_ambientLightIndices.clear();
+        m_ambientLightSamples.clear();
+
+        for (DLeaf& leaf : m_leaves) {
+            if (leaf.contents & CONTENTS_SOLID) {
+                m_ambientLightIndices.push_back(DLeafAmbientIndex {0, 0});
+                continue;
+            }
+
+            Vec3<float> leafSize {
+                leaf.maxs[0] - leaf.mins[0],
+                leaf.maxs[1] - leaf.mins[1],
+                leaf.maxs[2] - leaf.mins[2],
+            };
+
+            size_t numSamplesX = static_cast<size_t>(
+                leafSize.x / SAMPLE_SPACING_X
+            );
+            size_t numSamplesY = static_cast<size_t>(
+                leafSize.y / SAMPLE_SPACING_Y
+            );
+            size_t numSamplesZ = static_cast<size_t>(
+                leafSize.z / SAMPLE_SPACING_Z
+            );
+
+            size_t numSamples = numSamplesX * numSamplesY * numSamplesZ;
+
+            m_ambientLightIndices.push_back(
+                DLeafAmbientIndex {
+                    static_cast<uint16_t>(numSamples),
+                    static_cast<uint16_t>(m_ambientLightSamples.size()),
+                }
+            );
+
+            for (size_t i=0; i<numSamplesZ; i++) {
+                uint8_t z = static_cast<uint8_t>(
+                    (static_cast<float>(i) + 0.5)
+                    / static_cast<float>(numSamplesZ) * 255.0
+                );
+
+                for (size_t j=0; j<numSamplesY; j++) {
+                    uint8_t y = static_cast<uint8_t>(
+                        (static_cast<float>(j) + 0.5)
+                        / static_cast<float>(numSamplesY) * 255.0
+                    );
+
+                    for (size_t k=0; k<numSamplesX; k++) {
+                        uint8_t x = static_cast<uint8_t>(
+                            (static_cast<float>(k) + 0.5)
+                            / static_cast<float>(numSamplesX) * 255.0
+                        );
+
+                        m_ambientLightSamples.push_back(
+                            DLeafAmbientLighting {
+                                {
+                                    {
+                                        {0, 255, 0, 0},
+                                        {0, 255, 0, 0},
+                                        {0, 255, 0, 0},
+                                        {0, 255, 0, 0},
+                                        {0, 255, 0, 0},
+                                        {0, 255, 0, 0},
+                                    },
+                                },
+                                x, y, z, 0x0
+                            }
+                        );
+                    }
+                }
+            }
         }
     }
     
@@ -761,7 +884,7 @@ namespace BSP {
                         key = field;
                     }
                     else {
-                        assert(!nextEnt.has_key(key));
+                        //assert(!nextEnt.has_key(key));
                         nextEnt.set(key, field);
                         key = "";
                     }
@@ -1074,6 +1197,32 @@ namespace BSP {
         
         return Vec3<float> {x, y, z};
     }
+
+    static const double PI = 3.14159265358979323846264;
+
+    static inline double radians(double degrees) {
+        return degrees / 180.0 * PI;
+    }
+
+    static inline double degrees(double radians) {
+        return radians / PI * 180.0;
+    }
+
+    static Vec3<double> direction_from_angles(Vec3<double> angles) {
+        double pitch = radians(angles.x);
+        double yaw = radians(angles.y);
+
+        //std::cout << "cos(pitch = " << pitch << ") = " << cos(pitch) << std::endl;
+        //std::cout << "cos(yaw = " << yaw << ") = " << cos(yaw) << std::endl;
+        //std::cout << "sin(yaw = " << yaw << ") = " << sin(yaw) << std::endl;
+        //std::cout << "sin(pitch = " << pitch << ") = " << sin(pitch) << std::endl;
+
+        return Vec3<double> {
+            cos(pitch) * cos(yaw),
+            cos(pitch) * sin(yaw),
+            sin(pitch),
+        };
+    }
     
     /* Gamma-correction */
     static inline double linear_from_encoded(double encoded) {
@@ -1083,9 +1232,10 @@ namespace BSP {
     static inline double encoded_from_linear(double linear) {
         return pow(linear / 255.0, INV_GAMMA) * 255.0;
     }
-    
+
     Light::Light(const Entity& entity) :
-            m_coords(vec3_from_str(entity.get("origin"))) {
+            m_coords(vec3_from_str(entity.get("origin"))),
+            direction(Vec3<double> {1.0, 0.0, 0.0}) {
             
         /* Parse color */
         std::stringstream stream(entity.get("_light"));
@@ -1124,6 +1274,36 @@ namespace BSP {
         r *= scale;
         g *= scale;
         b *= scale;
+
+        std::string classname = entity.get("classname");
+
+        if (classname == "light") {
+            emitType = EMIT_POINT;
+        }
+        else if (classname == "light_spot") {
+            emitType = EMIT_SPOTLIGHT;
+
+            innerCone = convert_str<double>(entity.get("_inner_cone", "30"));
+            outerCone = convert_str<double>(entity.get("_cone", "45"));
+            
+            Vec3<float> angles = vec3_from_str(entity.get("angles"));
+
+            std::string pitchOverride = entity.get("pitch", "");
+            if (pitchOverride != "") {
+                angles.x = convert_str<float>(pitchOverride);
+            }
+
+            direction = direction_from_angles(
+                Vec3<double> {angles.x, angles.y, angles.z}
+            );
+
+            //std::cout << "Direction: <"
+            //    << direction.x << ", "
+            //    << direction.y << ", "
+            //    << direction.z << ">"
+            //    << std::endl;
+
+        }
     }
     
     const Vec3<float>& Light::get_coords(void) const {
@@ -1131,6 +1311,19 @@ namespace BSP {
     }
     
     DWorldLight Light::to_worldlight(void) const {
+        float stopdot = (emitType == EMIT_SPOTLIGHT) ?
+            cos(radians(innerCone)) :
+            0.0;
+
+        float stopdot2 = (emitType == EMIT_SPOTLIGHT) ?
+            cos(radians(outerCone)) :
+            0.0;
+
+        //std::cout << " Normal: <"
+        //    << direction.x << ", "
+        //    << direction.y << ", "
+        //    << direction.z << ">" << std::endl;
+
         return DWorldLight {
             get_coords(),
             Vec3<float> {
@@ -1138,12 +1331,16 @@ namespace BSP {
                 static_cast<float>(g / 255.0),
                 static_cast<float>(b / 255.0),
             },
-            Vec3<float> {1.0, 0.0, 0.0},
+            Vec3<float> {
+                static_cast<float>(direction.x),
+                static_cast<float>(direction.y),
+                static_cast<float>(direction.z),
+            },
             0,
-            EMIT_POINT,
+            emitType,
             0x0,
-            0.0,
-            0.0,
+            stopdot,
+            stopdot2,
             0.0,
             0.0,
             0.0,

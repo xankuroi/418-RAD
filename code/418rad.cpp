@@ -63,7 +63,18 @@ int main(int argc, char** argv) {
         return 1;
     }
 
+    /*
+    * HACK!
+    * Disable normal maps throughout the entire BSP, because I didn't 
+    * implement them and we don't have time.
+    */
+    for (const BSP::TexInfo& texInfo : pBSP->get_texinfos()) {
+        BSP::TexInfo& ti = const_cast<BSP::TexInfo&>(texInfo);
+        ti.flags &= ~BSP::SURF_BUMPLIGHT;
+    }
+
     pBSP->build_worldlights();
+    pBSP->init_ambient_samples();
 
     print_cudainfo();
 
@@ -86,6 +97,9 @@ int main(int argc, char** argv) {
     std::cout << "Compute light bounces..." << std::endl;
     CUDARAD::bounce_lighting(*pBSP, pCudaBSP);
 
+    std::cout << "Compute ambient lighting..." << std::endl;
+    CUDARAD::compute_ambient_lighting(*pBSP, pCudaBSP);
+
     //std::cout << "Run light sample FXAA pass..." << std::endl;
     //CUDAFXAA::antialias_lightsamples(*pBSP, pCudaBSP);
 
@@ -104,7 +118,7 @@ int main(int argc, char** argv) {
      * embedded in the map.
      */
     pBSP->set_fullbright(false);
-    
+
     pBSP->write("out.bsp");
     
     std::cout << "Wrote to file \"out.bsp\"." << std::endl;

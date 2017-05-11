@@ -86,18 +86,22 @@ namespace DirectLighting {
         return perceptual_from_linear(
             dot(
                 rgb / 255.0,
-                make_float3(0.299, 0.587, 0.114)
+                make_float3(1.0, 1.0, 1.0)
+                //make_float3(0.299, 0.587, 0.114)
             )
         );
     }
 
     __device__ float3 sample_at(
             CUDABSP::CUDABSP& cudaBSP,
-            CUDARAD::FaceInfo& faceInfo,
-            float s, float t
+            float3 samplePos,
+            float3 sampleNormal=make_float3(0.0, 0.0, 0.0)
             ) {
+<<<<<<< HEAD
 
         float3 samplePos = faceInfo.xyz_from_st(s, t);
+=======
+>>>>>>> 533c851478d777627bedebfc84a55e37b8d792c2
 
         //samplePos += faceInfo.faceNorm * 1e-3;
 
@@ -119,15 +123,56 @@ namespace DirectLighting {
             float3 diff = samplePos - lightPos;
 
             /*
-             * This light is on the wrong side of the current face.
-             * There's no way it could possibly light this sample.
+             * This light is on the wrong side of the current sample.
+             * There's no way it could possibly light it.
              */
-            if (dot(diff, faceInfo.faceNorm) >= 0.0) {
+            if (len(sampleNormal) > 0.0 && dot(diff, sampleNormal) >= 0.0) {
                 continue;
             }
 
             float dist = len(diff);
             float3 dir = diff / dist;
+
+            float penumbraScale = 1.0;
+
+            if (light.type == BSP::EMIT_SPOTLIGHT) {
+                float3 lightNorm = make_float3(
+                    light.normal.x,
+                    light.normal.y,
+                    light.normal.z
+                );
+
+                float lightDot = dot(dir, lightNorm);
+
+                if (lightDot < light.stopdot2) {
+                    /* This sample is outside the spotlight cone. */
+                    continue;
+                }
+                else if (lightDot < light.stopdot) {
+                    /* This sample is within the spotlight's penumbra. */
+                    penumbraScale = (
+                        (lightDot - light.stopdot2)
+                        / (light.stopdot - light.stopdot2)
+                    );
+                    //penumbraScale = 100.0;
+                }
+
+                //if (lightIndex == cudaBSP.numWorldLights - 1) {
+                //    printf(
+                //        "(%f, %f, %f) is within spotlight!\n"
+                //        "Pos: (%f, %f, %f)\n"
+                //        "Norm: <%f, %f, %f> (<%f, %f, %f>)\n"
+                //        "stopdot: %f; stopdot2: %f\n"
+                //        "Dot between light and sample: %f\n",
+                //        samplePos.x, samplePos.y, samplePos.z,
+                //        lightPos.x, lightPos.y, lightPos.z,
+                //        lightNorm.x, lightNorm.y, lightNorm.z,
+                //        light.normal.x, light.normal.y, light.normal.z,
+                //        light.stopdot, light.stopdot2,
+                //        lightDot
+                //    );
+                //}
+            }
 
             const float EPSILON = 1e-3;
 
@@ -149,9 +194,15 @@ namespace DirectLighting {
             /* I CAN SEE THE LIGHT */
             float attenuation = attenuate(light, dist);
 
-            result.x += light.intensity.x * 255.0 / attenuation;    // r
-            result.y += light.intensity.y * 255.0 / attenuation;    // g
-            result.z += light.intensity.z * 255.0 / attenuation;    // b
+            float3 lightContribution = make_float3(
+                light.intensity.x,  // r
+                light.intensity.y,  // g
+                light.intensity.z   // b
+            );
+
+            lightContribution *= penumbraScale * 255.0 / attenuation;
+
+            result += lightContribution;
         }
 
         //printf(
@@ -163,6 +214,16 @@ namespace DirectLighting {
         //);
 
         return result;
+    }
+
+    __device__ float3 sample_at(
+            CUDABSP::CUDABSP& cudaBSP,
+            CUDARAD::FaceInfo& faceInfo,
+            float s, float t
+            ) {
+
+        float3 samplePos = faceInfo.xyz_from_st(s, t);
+        return sample_at(cudaBSP, samplePos, faceInfo.faceNorm);
     }
 
     __global__ void map_faces(
@@ -257,7 +318,7 @@ namespace DirectLighting {
         //printf("%u\n", static_cast<unsigned int>(*pFacesCompleted));
     }
 
-    static __device__ const float MIN_AA_GRADIENT = 0.03125;    // 1/32
+    static __device__ const float MIN_AA_GRADIENT = 0.0625;    // 1/16
 
     __global__ void map_faces_AA(CUDABSP::CUDABSP* pCudaBSP) {
         bool primaryThread = (threadIdx.x == 0 && threadIdx.y == 0);
@@ -268,7 +329,7 @@ namespace DirectLighting {
         __shared__ size_t width;
         __shared__ size_t height;
 
-        //__shared__ float3* results;
+        __shared__ float3* results;
 
         if (primaryThread) {
             // Map block numbers to faces.
@@ -278,7 +339,7 @@ namespace DirectLighting {
             width = faceInfo.lightmapWidth;
             height = faceInfo.lightmapHeight;
 
-            //results = new float3[width * height];
+            results = new float3[width * height];
         }
 
         __syncthreads();
@@ -346,17 +407,18 @@ namespace DirectLighting {
                  * low enough.
                  */
                 if (gradient < MIN_AA_GRADIENT) {
-                    //results[sampleIndex] = sampleColor;
+                    results[sampleIndex] = sampleColor;
                     continue;
                 }
 
-                ///*
-                // * Box blur!
-                // * Really stupid and potentially ugly, but really fast!
-                // */
+                /*
+                 * Box blur!
+                 * Really stupid and potentially ugly, but really fast!
+                 */
 
-                //float3 color = make_float3(0.0, 0.0, 0.0);
+                float3 color = make_float3(0.0, 0.0, 0.0);
 
+<<<<<<< HEAD
                 //for (int tOffset=-1; tOffset<=1; tOffset++) {
                 //    float blurT = static_cast<float>(t) + tOffset;
 
@@ -388,57 +450,90 @@ namespace DirectLighting {
                 //        color += blurColor;
                 //    }
                 //}
+=======
+                for (int tOffset=-1; tOffset<=1; tOffset++) {
+                    float blurT = static_cast<float>(t) + tOffset;
+>>>>>>> 533c851478d777627bedebfc84a55e37b8d792c2
 
-                ///* Take the average of the box blur samples. */
-                //color /= 9.0;
+                    for (int sOffset=-1; sOffset<=1; sOffset++) {
+                        float blurS = static_cast<float>(s) + sOffset;
 
-                /* Perform supersampling at this point. */
-                const size_t SUPERSAMPLE_WIDTH = 4;
+                        float3 blurColor;
 
-                float sStep = 2.0 / static_cast<float>(SUPERSAMPLE_WIDTH);
-                float tStep = 2.0 / static_cast<float>(SUPERSAMPLE_WIDTH);
+                        /*
+                         * Out of range!
+                         * We have no choice but to actually take a sample.
+                         */
+                        if (!(0 <= blurS && blurS < width)
+                                || !(0 <= blurT && blurT < height)) {
+                            blurColor = sample_at(
+                                *pCudaBSP, faceInfo,
+                                blurS, blurT
+                            );
+                        }
+                        else {
+                            size_t i = static_cast<size_t>(
+                                blurT * width + blurS
+                            );
+                            blurColor = pCudaBSP->lightSamples[
+                                lightmapStart + i
+                            ];
+                        }
 
-                float3 color = make_float3(0.0, 0.0, 0.0);
-
-                for (size_t ssi=0; ssi<SUPERSAMPLE_WIDTH; ssi++) {
-                    float tOffset = tStep * ssi - 1.0;
-
-                    for (size_t ssj=0; ssj<SUPERSAMPLE_WIDTH; ssj++) {
-                        float sOffset = sStep * ssj - 1.0;
-
-                        color += sample_at(
-                            *pCudaBSP, faceInfo,
-                            s + sOffset, t + tOffset
-                        );
+                        color += blurColor;
                     }
                 }
 
-                color /= SUPERSAMPLE_WIDTH * SUPERSAMPLE_WIDTH;
+                /* Take the average of the box blur samples. */
+                color /= 9.0;
 
-                //results[sampleIndex] = color;
-                pCudaBSP->lightSamples[lightmapStart + sampleIndex] = color;
+                ///* Perform supersampling at this point. */
+                //const size_t SUPERSAMPLE_WIDTH = 4;
+
+                //float sStep = 2.0 / static_cast<float>(SUPERSAMPLE_WIDTH);
+                //float tStep = 2.0 / static_cast<float>(SUPERSAMPLE_WIDTH);
+
+                //float3 color = make_float3(0.0, 0.0, 0.0);
+
+                //for (size_t ssi=0; ssi<SUPERSAMPLE_WIDTH; ssi++) {
+                //    float tOffset = tStep * ssi - 1.0;
+
+                //    for (size_t ssj=0; ssj<SUPERSAMPLE_WIDTH; ssj++) {
+                //        float sOffset = sStep * ssj - 1.0;
+
+                //        color += sample_at(
+                //            *pCudaBSP, faceInfo,
+                //            s + sOffset, t + tOffset
+                //        );
+                //    }
+                //}
+
+                //color /= SUPERSAMPLE_WIDTH * SUPERSAMPLE_WIDTH;
+
+                results[sampleIndex] = color;
+                //pCudaBSP->lightSamples[lightmapStart + sampleIndex] = color;
             }
         }
 
-        //__syncthreads();
+        __syncthreads();
 
-        //if (primaryThread) {
-        //    /* Move the results back to the light samples array. */
-        //    memcpy(
-        //        pCudaBSP->lightSamples + faceInfo.lightmapStartIndex,
-        //        results,
-        //        sizeof(float3) * faceInfo.lightmapSize
-        //    );
+        if (primaryThread) {
+            /* Move the results back to the light samples array. */
+            memcpy(
+                pCudaBSP->lightSamples + faceInfo.lightmapStartIndex,
+                results,
+                sizeof(float3) * faceInfo.lightmapSize
+            );
 
-        //    delete[] results;
-        //}
+            delete[] results;
+        }
     }
 }
 
 
 namespace BouncedLighting {
     static __device__ const float PI = 3.14159265358979323846264;
-    static __device__ const float INV_PI = 1.0 / PI;
+    static __device__ const float INV_PI = 0.31830988618379067153715;
 
     /**
      * Computes the form factor from a differential patch to a convex
@@ -473,7 +568,7 @@ namespace BouncedLighting {
 
             float theta = asinf(crossLen / (v1Len * v2Len));
 
-            result += dot(diffNorm, vertexCross * theta);
+            result += dot(diffNorm, vertexCross) * theta;
         }
 
         result *= 0.5 * INV_PI;
@@ -500,6 +595,119 @@ namespace BouncedLighting {
 }
 
 
+namespace AmbientLighting {
+    static __device__ const float AMBIENT_SCALE = 0.0078125;    // 1/128
+
+    __global__ void map_leaves(CUDABSP::CUDABSP* pCudaBSP) {
+        size_t leafIndex = blockIdx.x;
+
+        if (leafIndex >= pCudaBSP->numLeaves) {
+            return;
+        }
+
+        BSP::DLeaf& leaf = pCudaBSP->leaves[leafIndex];
+
+        if (leaf.contents & BSP::CONTENTS_SOLID) {
+            return;
+        }
+
+        BSP::DLeafAmbientIndex& ambientIndex
+            = pCudaBSP->ambientIndices[leafIndex];
+
+        BSP::DLeafAmbientLighting* ambientSamples
+            = &pCudaBSP->ambientLightSamples[ambientIndex.firstAmbientSample];
+
+        for (size_t i=threadIdx.x;
+                i<ambientIndex.ambientSampleCount;
+                i+=blockDim.x) {
+
+            if (i >= ambientIndex.ambientSampleCount) {
+                return;
+            }
+
+            BSP::DLeafAmbientLighting& sample = ambientSamples[i];
+
+            float3 leafMins = make_float3(
+                leaf.mins[0], leaf.mins[1], leaf.mins[2]
+            );
+
+            float3 leafMaxs = make_float3(
+                leaf.maxs[0], leaf.maxs[1], leaf.maxs[2]
+            );
+
+            float3 leafSize = leafMaxs - leafMins;
+
+            float3 samplePos = leafMins + make_float3(
+                leafSize.x * static_cast<float>(sample.x) / 255.0,
+                leafSize.y * static_cast<float>(sample.y) / 255.0,
+                leafSize.z * static_cast<float>(sample.z) / 255.0
+            );
+
+            //sample.cube.color[0] = BSP::RGBExp32 {1, 1, 1, -3};
+            //sample.cube.color[1] = BSP::RGBExp32 {1, 1, 1, -3};
+            //sample.cube.color[2] = BSP::RGBExp32 {1, 1, 1, -3};
+            //sample.cube.color[3] = BSP::RGBExp32 {1, 1, 1, -3};
+            //sample.cube.color[4] = BSP::RGBExp32 {1, 1, 1, -3};
+            //sample.cube.color[5] = BSP::RGBExp32 {1, 1, 1, -3};
+
+            // +X
+            sample.cube.color[0] = CUDABSP::rgbexp32_from_float3(
+                DirectLighting::sample_at(
+                    *pCudaBSP,
+                    samplePos,
+                    make_float3(1.0, 0.0, 0.0)
+                ) * AMBIENT_SCALE
+            );
+
+            // -X
+            sample.cube.color[1] = CUDABSP::rgbexp32_from_float3(
+                DirectLighting::sample_at(
+                    *pCudaBSP,
+                    samplePos,
+                    make_float3(-1.0, 0.0, 0.0)
+                ) * AMBIENT_SCALE
+            );
+
+            // +Y
+            sample.cube.color[2] = CUDABSP::rgbexp32_from_float3(
+                DirectLighting::sample_at(
+                    *pCudaBSP,
+                    samplePos,
+                    make_float3(0.0, 1.0, 0.0)
+                ) * AMBIENT_SCALE
+            );
+
+            // -Y
+            sample.cube.color[3] = CUDABSP::rgbexp32_from_float3(
+                DirectLighting::sample_at(
+                    *pCudaBSP,
+                    samplePos,
+                    make_float3(0.0, -1.0, 0.0)
+                ) * AMBIENT_SCALE
+            );
+
+            // +Z
+            sample.cube.color[4] = CUDABSP::rgbexp32_from_float3(
+                DirectLighting::sample_at(
+                    *pCudaBSP,
+                    samplePos,
+                    make_float3(0.0, 0.0, 1.0)
+                ) * AMBIENT_SCALE
+            );
+
+            // -Z
+            sample.cube.color[5] = CUDABSP::rgbexp32_from_float3(
+                DirectLighting::sample_at(
+                    *pCudaBSP,
+                    samplePos,
+                    make_float3(0.0, 0.0, -1.0)
+                ) * AMBIENT_SCALE
+            );
+        }
+    }
+}
+
+
 namespace CUDARAD {
     void init(BSP::BSP& bsp) {
         std::cout << "Setting up ray-trace acceleration structure... "
@@ -511,12 +719,17 @@ namespace CUDARAD {
 
         g_pRayTracer = std::unique_ptr<RayTracer::CUDARayTracer>(
             new RayTracer::CUDARayTracer()
-        );
+            );
 
         std::vector<RayTracer::Triangle> triangles;
 
         /* Put all of the BSP's face triangles into the ray-tracer. */
         for (const BSP::Face& face : bsp.get_faces()) {
+            if (face.get_texinfo().flags & BSP::SURF_TRANS) {
+                // Skip translucent faces.
+                continue;
+            }
+
             std::vector<BSP::Edge>::const_iterator pEdge
                 = face.get_edges().begin();
 
@@ -547,7 +760,7 @@ namespace CUDARAD {
         std::chrono::milliseconds ms
             = std::chrono::duration_cast<std::chrono::milliseconds>(
                 end - start
-            );
+                );
 
         std::cout << "Done! (" << ms.count() << "ms)" << std::endl;
 
@@ -921,4 +1134,17 @@ namespace CUDARAD {
       faces[face_index].avgLight = sum / num_patches;
     }
 
+    void compute_ambient_lighting(BSP::BSP& bsp, CUDABSP::CUDABSP* pCudaBSP) {
+        const size_t BLOCK_WIDTH = 32;
+
+        size_t numLeaves = bsp.get_leaves().size();
+
+        KERNEL_LAUNCH(
+            AmbientLighting::map_leaves,
+            numLeaves, BLOCK_WIDTH,
+            pCudaBSP
+        );
+
+        CUDA_CHECK_ERROR(cudaDeviceSynchronize());
+    }
 }

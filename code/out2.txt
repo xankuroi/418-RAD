@@ -1,0 +1,2205 @@
+cos(pitch = 0.785398) = 0.707107
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = 0.785398) = 0.707107
+Direction: <-1.29889e-016, -0.707107, 0.707107>
+cos(pitch = 0.785398) = 0.707107
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = 0.785398) = 0.707107
+Direction: <-1.29889e-016, -0.707107, 0.707107>
+cos(pitch = 0.785398) = 0.707107
+cos(yaw = 1.5708) = 6.12303e-017
+sin(yaw = 1.5708) = 1
+sin(pitch = 0.785398) = 0.707107
+Direction: <4.32964e-017, 0.707107, 0.707107>
+cos(pitch = 0.785398) = 0.707107
+cos(yaw = 1.5708) = 6.12303e-017
+sin(yaw = 1.5708) = 1
+sin(pitch = 0.785398) = 0.707107
+Direction: <4.32964e-017, 0.707107, 0.707107>
+cos(pitch = -1.5708) = 6.12303e-017
+cos(yaw = 0) = 1
+sin(yaw = 0) = 0
+sin(pitch = -1.5708) = -1
+Direction: <6.12303e-017, 0, -1>
+cos(pitch = 0.491809) = 0.88148
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = 0.491809) = 0.472222
+Direction: <-1.6192e-016, -0.88148, 0.472222>
+cos(pitch = -0.477346) = 0.888217
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = -0.477346) = -0.459423
+Direction: <-1.63158e-016, -0.888217, -0.459423>
+cos(pitch = -0.477346) = 0.888217
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = -0.477346) = -0.459423
+Direction: <-1.63158e-016, -0.888217, -0.459423>
+cos(pitch = -0.477346) = 0.888217
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = -0.477346) = -0.459423
+Direction: <-1.63158e-016, -0.888217, -0.459423>
+cos(pitch = -0.477346) = 0.888217
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = -0.477346) = -0.459423
+Direction: <-1.63158e-016, -0.888217, -0.459423>
+cos(pitch = -0.477346) = 0.888217
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = -0.477346) = -0.459423
+Direction: <-1.63158e-016, -0.888217, -0.459423>
+cos(pitch = -0.477346) = 0.888217
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = -0.477346) = -0.459423
+Direction: <-1.63158e-016, -0.888217, -0.459423>
+cos(pitch = 0.785398) = 0.707107
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = 0.785398) = 0.707107
+Direction: <-1.29889e-016, -0.707107, 0.707107>
+cos(pitch = 0.785398) = 0.707107
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = 0.785398) = 0.707107
+Direction: <-1.29889e-016, -0.707107, 0.707107>
+cos(pitch = 0.785398) = 0.707107
+cos(yaw = 1.5708) = 6.12303e-017
+sin(yaw = 1.5708) = 1
+sin(pitch = 0.785398) = 0.707107
+Direction: <4.32964e-017, 0.707107, 0.707107>
+cos(pitch = 0.785398) = 0.707107
+cos(yaw = 1.5708) = 6.12303e-017
+sin(yaw = 1.5708) = 1
+sin(pitch = 0.785398) = 0.707107
+Direction: <4.32964e-017, 0.707107, 0.707107>
+cos(pitch = -1.5708) = 6.12303e-017
+cos(yaw = 0) = 1
+sin(yaw = 0) = 0
+sin(pitch = -1.5708) = -1
+Direction: <6.12303e-017, 0, -1>
+cos(pitch = -1.5708) = 6.12303e-017
+cos(yaw = 0) = 1
+sin(yaw = 0) = 0
+sin(pitch = -1.5708) = -1
+Direction: <6.12303e-017, 0, -1>
+cos(pitch = 0.785398) = 0.707107
+cos(yaw = 1.5708) = 6.12303e-017
+sin(yaw = 1.5708) = 1
+sin(pitch = 0.785398) = 0.707107
+Direction: <4.32964e-017, 0.707107, 0.707107>
+cos(pitch = 0.785398) = 0.707107
+cos(yaw = 1.5708) = 6.12303e-017
+sin(yaw = 1.5708) = 1
+sin(pitch = 0.785398) = 0.707107
+Direction: <4.32964e-017, 0.707107, 0.707107>
+cos(pitch = 0.785398) = 0.707107
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = 0.785398) = 0.707107
+Direction: <-1.29889e-016, -0.707107, 0.707107>
+cos(pitch = 0.785398) = 0.707107
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = 0.785398) = 0.707107
+Direction: <-1.29889e-016, -0.707107, 0.707107>
+cos(pitch = -1.36136) = 0.207912
+cos(yaw = 0) = 1
+sin(yaw = 0) = 0
+sin(pitch = -1.36136) = -0.978148
+Direction: <0.207912, 0, -0.978148>
+cos(pitch = -1.36136) = 0.207912
+cos(yaw = 0) = 1
+sin(yaw = 0) = 0
+sin(pitch = -1.36136) = -0.978148
+Direction: <0.207912, 0, -0.978148>
+cos(pitch = -1.36136) = 0.207912
+cos(yaw = 0) = 1
+sin(yaw = 0) = 0
+sin(pitch = -1.36136) = -0.978148
+Direction: <0.207912, 0, -0.978148>
+cos(pitch = -1.36136) = 0.207912
+cos(yaw = 0) = 1
+sin(yaw = 0) = 0
+sin(pitch = -1.36136) = -0.978148
+Direction: <0.207912, 0, -0.978148>
+cos(pitch = -1.5708) = 6.12303e-017
+cos(yaw = 0) = 1
+sin(yaw = 0) = 0
+sin(pitch = -1.5708) = -1
+Direction: <6.12303e-017, 0, -1>
+cos(pitch = -1.33518) = 0.233445
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = -1.33518) = -0.97237
+Direction: <-4.28818e-017, -0.233445, -0.97237>
+cos(pitch = -1.33518) = 0.233445
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = -1.33518) = -0.97237
+Direction: <-4.28818e-017, -0.233445, -0.97237>
+cos(pitch = 0.491809) = 0.88148
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = 0.491809) = 0.472222
+Direction: <-1.6192e-016, -0.88148, 0.472222>
+cos(pitch = 0.491809) = 0.88148
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = 0.491809) = 0.472222
+Direction: <-1.6192e-016, -0.88148, 0.472222>
+cos(pitch = -0.870045) = 0.644792
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = -0.870045) = -0.764358
+Direction: <-1.18443e-016, -0.644792, -0.764358>
+cos(pitch = 0.491809) = 0.88148
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = 0.491809) = 0.472222
+Direction: <-1.6192e-016, -0.88148, 0.472222>
+cos(pitch = 0.491809) = 0.88148
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = 0.491809) = 0.472222
+Direction: <-1.6192e-016, -0.88148, 0.472222>
+cos(pitch = -0.870045) = 0.644792
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = -0.870045) = -0.764358
+Direction: <-1.18443e-016, -0.644792, -0.764358>
+cos(pitch = -0.870045) = 0.644792
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = -0.870045) = -0.764358
+Direction: <-1.18443e-016, -0.644792, -0.764358>
+cos(pitch = -1.19555) = 0.366501
+cos(yaw = 3.14159) = -1
+sin(yaw = 3.14159) = 1.22461e-016
+sin(pitch = -1.19555) = -0.930418
+Direction: <-0.366501, 4.4882e-017, -0.930418>
+cos(pitch = -1.19555) = 0.366501
+cos(yaw = 3.14159) = -1
+sin(yaw = 3.14159) = 1.22461e-016
+sin(pitch = -1.19555) = -0.930418
+Direction: <-0.366501, 4.4882e-017, -0.930418>
+cos(pitch = 0.785398) = 0.707107
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = 0.785398) = 0.707107
+Direction: <-1.29889e-016, -0.707107, 0.707107>
+cos(pitch = -1.309) = 0.258819
+cos(yaw = 4.71239) = -1.83691e-016
+sin(yaw = 4.71239) = -1
+sin(pitch = -1.309) = -0.965926
+Direction: <-4.75427e-017, -0.258819, -0.965926>
+BSP Version 20
+Fullbright: 1
+Light 0:
+    pos: (304, -4336, 504)
+    r: 500000
+    g: 500000
+    b: 500000
+    Direction: <-1.29889e-016, -0.707107, 0.707107>
+    Outer Cone: 60
+    Inner Cone: 50
+Light 1:
+    pos: (336, -4336, 504)
+    r: 500000
+    g: 500000
+    b: 500000
+    Direction: <-1.29889e-016, -0.707107, 0.707107>
+    Outer Cone: 60
+    Inner Cone: 50
+Light 2:
+    pos: (304, -4496, 504)
+    r: 500000
+    g: 500000
+    b: 500000
+    Direction: <4.32964e-017, 0.707107, 0.707107>
+    Outer Cone: 60
+    Inner Cone: 50
+Light 3:
+    pos: (336, -4496, 504)
+    r: 500000
+    g: 500000
+    b: 500000
+    Direction: <4.32964e-017, 0.707107, 0.707107>
+    Outer Cone: 60
+    Inner Cone: 50
+Light 4:
+    pos: (320, -4416, 672)
+    r: 1.5e+006
+    g: 1.24159e+006
+    b: 840749
+    Direction: <6.12303e-017, 0, -1>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 5:
+    pos: (320, -4416, 640)
+    r: 100000
+    g: 82772.6
+    b: 56049.9
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 6:
+    pos: (-128, -4288, 384)
+    r: 150000
+    g: 106245
+    b: 45995.2
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 7:
+    pos: (-128, -4544, 384)
+    r: 150000
+    g: 106245
+    b: 45995.2
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 8:
+    pos: (64, -4288, 384)
+    r: 150000
+    g: 106245
+    b: 45995.2
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 9:
+    pos: (64, -4544, 384)
+    r: 150000
+    g: 106245
+    b: 45995.2
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 10:
+    pos: (64, -4156, 416)
+    r: 0
+    g: 1e+007
+    b: 1e+007
+    Direction: <-1.6192e-016, -0.88148, 0.472222>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 11:
+    pos: (64, -4152, 716)
+    r: 1.5e+006
+    g: 1.06245e+006
+    b: 459952
+    Direction: <-1.63158e-016, -0.888217, -0.459423>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 12:
+    pos: (-128, -4152, 716)
+    r: 1.5e+006
+    g: 1.06245e+006
+    b: 459952
+    Direction: <-1.63158e-016, -0.888217, -0.459423>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 13:
+    pos: (576, -4152, 716)
+    r: 1.5e+006
+    g: 1.06245e+006
+    b: 459952
+    Direction: <-1.63158e-016, -0.888217, -0.459423>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 14:
+    pos: (832, -4152, 716)
+    r: 1.5e+006
+    g: 1.06245e+006
+    b: 459952
+    Direction: <-1.63158e-016, -0.888217, -0.459423>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 15:
+    pos: (1600, -4152, 716)
+    r: 1.5e+006
+    g: 1.06245e+006
+    b: 459952
+    Direction: <-1.63158e-016, -0.888217, -0.459423>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 16:
+    pos: (1344, -4152, 716)
+    r: 1.5e+006
+    g: 1.06245e+006
+    b: 459952
+    Direction: <-1.63158e-016, -0.888217, -0.459423>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 17:
+    pos: (832, -4544, 384)
+    r: 150000
+    g: 0
+    b: 0
+    Direction: <1, 0, 0>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 18:
+    pos: (576, -4544, 384)
+    r: 150000
+    g: 0
+    b: 0
+    Direction: <1, 0, 0>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 19:
+    pos: (576, -4288, 384)
+    r: 150000
+    g: 0
+    b: 0
+    Direction: <1, 0, 0>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 20:
+    pos: (832, -4288, 384)
+    r: 150000
+    g: 0
+    b: 0
+    Direction: <1, 0, 0>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 21:
+    pos: (1600, -4544, 384)
+    r: 150000
+    g: 0
+    b: 0
+    Direction: <1, 0, 0>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 22:
+    pos: (1600, -4288, 384)
+    r: 150000
+    g: 0
+    b: 0
+    Direction: <1, 0, 0>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 23:
+    pos: (1344, -4544, 384)
+    r: 150000
+    g: 0
+    b: 0
+    Direction: <1, 0, 0>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 24:
+    pos: (1344, -4288, 384)
+    r: 150000
+    g: 0
+    b: 0
+    Direction: <1, 0, 0>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 25:
+    pos: (1856, -4544, 384)
+    r: 150000
+    g: 0
+    b: 0
+    Direction: <1, 0, 0>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 26:
+    pos: (1856, -4288, 384)
+    r: 150000
+    g: 0
+    b: 0
+    Direction: <1, 0, 0>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 27:
+    pos: (1072, -4336, 504)
+    r: 500000
+    g: 500000
+    b: 500000
+    Direction: <-1.29889e-016, -0.707107, 0.707107>
+    Outer Cone: 60
+    Inner Cone: 50
+Light 28:
+    pos: (1104, -4336, 504)
+    r: 500000
+    g: 500000
+    b: 500000
+    Direction: <-1.29889e-016, -0.707107, 0.707107>
+    Outer Cone: 60
+    Inner Cone: 50
+Light 29:
+    pos: (1072, -4496, 504)
+    r: 500000
+    g: 500000
+    b: 500000
+    Direction: <4.32964e-017, 0.707107, 0.707107>
+    Outer Cone: 60
+    Inner Cone: 50
+Light 30:
+    pos: (1104, -4496, 504)
+    r: 500000
+    g: 500000
+    b: 500000
+    Direction: <4.32964e-017, 0.707107, 0.707107>
+    Outer Cone: 60
+    Inner Cone: 50
+Light 31:
+    pos: (1088, -4416, 672)
+    r: 1.5e+006
+    g: 1.24159e+006
+    b: 840749
+    Direction: <6.12303e-017, 0, -1>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 32:
+    pos: (1088, -4416, 640)
+    r: 100000
+    g: 82772.6
+    b: 56049.9
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 33:
+    pos: (-128, -4168, 708)
+    r: 150000
+    g: 106245
+    b: 45995.2
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 34:
+    pos: (64, -4168, 708)
+    r: 150000
+    g: 106245
+    b: 45995.2
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 35:
+    pos: (64, -4184, 432)
+    r: 150000
+    g: 150000
+    b: 150000
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 36:
+    pos: (576, -4168, 708)
+    r: 150000
+    g: 106245
+    b: 45995.2
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 37:
+    pos: (832, -4168, 708)
+    r: 150000
+    g: 106245
+    b: 45995.2
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 38:
+    pos: (1600, -4168, 708)
+    r: 150000
+    g: 106245
+    b: 45995.2
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 39:
+    pos: (1344, -4168, 708)
+    r: 150000
+    g: 106245
+    b: 45995.2
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 40:
+    pos: (2080, -4416, 672)
+    r: 1.5e+006
+    g: 1.24159e+006
+    b: 840749
+    Direction: <6.12303e-017, 0, -1>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 41:
+    pos: (2080, -4416, 640)
+    r: 150000
+    g: 106245
+    b: 45995.2
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 42:
+    pos: (2064, -4496, 504)
+    r: 500000
+    g: 500000
+    b: 500000
+    Direction: <4.32964e-017, 0.707107, 0.707107>
+    Outer Cone: 60
+    Inner Cone: 50
+Light 43:
+    pos: (2096, -4496, 504)
+    r: 500000
+    g: 500000
+    b: 500000
+    Direction: <4.32964e-017, 0.707107, 0.707107>
+    Outer Cone: 60
+    Inner Cone: 50
+Light 44:
+    pos: (2096, -4336, 504)
+    r: 500000
+    g: 500000
+    b: 500000
+    Direction: <-1.29889e-016, -0.707107, 0.707107>
+    Outer Cone: 60
+    Inner Cone: 50
+Light 45:
+    pos: (2064, -4336, 504)
+    r: 500000
+    g: 500000
+    b: 500000
+    Direction: <-1.29889e-016, -0.707107, 0.707107>
+    Outer Cone: 60
+    Inner Cone: 50
+Light 46:
+    pos: (880, -4472, 736)
+    r: 5e+006
+    g: 5e+006
+    b: 5e+006
+    Direction: <0.207912, 0, -0.978148>
+    Outer Cone: 20
+    Inner Cone: 15
+Light 47:
+    pos: (880, -4360, 736)
+    r: 5e+006
+    g: 5e+006
+    b: 5e+006
+    Direction: <0.207912, 0, -0.978148>
+    Outer Cone: 20
+    Inner Cone: 15
+Light 48:
+    pos: (1776, -4360, 736)
+    r: 5e+006
+    g: 5e+006
+    b: 5e+006
+    Direction: <0.207912, 0, -0.978148>
+    Outer Cone: 20
+    Inner Cone: 15
+Light 49:
+    pos: (1776, -4472, 736)
+    r: 5e+006
+    g: 5e+006
+    b: 5e+006
+    Direction: <0.207912, 0, -0.978148>
+    Outer Cone: 20
+    Inner Cone: 15
+Light 50:
+    pos: (-264, -3904, 480)
+    r: 2e+006
+    g: 1.65545e+006
+    b: 1.121e+006
+    Direction: <6.12303e-017, 0, -1>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 51:
+    pos: (-264, -3904, 448)
+    r: 200000
+    g: 165545
+    b: 112100
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 52:
+    pos: (-128, -3808, 336)
+    r: 150000
+    g: 124159
+    b: 84074.9
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 53:
+    pos: (-32, -3904, 336)
+    r: 150000
+    g: 124159
+    b: 84074.9
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 54:
+    pos: (-160, -4064, 336)
+    r: 150000
+    g: 124159
+    b: 84074.9
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 55:
+    pos: (-608, -3936, 460)
+    r: 250000
+    g: 206931
+    b: 140125
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 56:
+    pos: (-544, -3952, 256)
+    r: 148709
+    g: 104112
+    b: 43982.4
+    Direction: <1, 0, 0>
+    Outer Cone: 35
+    Inner Cone: 25
+Light 57:
+    pos: (-352, -4062.78, 496)
+    r: 500000
+    g: 413863
+    b: 280250
+    Direction: <-4.28818e-017, -0.233445, -0.97237>
+    Outer Cone: 50
+    Inner Cone: 48
+Light 58:
+    pos: (-544, -4062.78, 496)
+    r: 500000
+    g: 413863
+    b: 280250
+    Direction: <-4.28818e-017, -0.233445, -0.97237>
+    Outer Cone: 50
+    Inner Cone: 48
+Light 59:
+    pos: (-416, -3952, 256)
+    r: 148709
+    g: 104112
+    b: 43982.4
+    Direction: <1, 0, 0>
+    Outer Cone: 50
+    Inner Cone: 48
+Light 60:
+    pos: (-544, -3856, 256)
+    r: 148709
+    g: 104112
+    b: 43982.4
+    Direction: <1, 0, 0>
+    Outer Cone: 50
+    Inner Cone: 48
+Light 61:
+    pos: (-416, -3856, 256)
+    r: 148709
+    g: 104112
+    b: 43982.4
+    Direction: <1, 0, 0>
+    Outer Cone: 50
+    Inner Cone: 48
+Light 62:
+    pos: (512, -4156, 416)
+    r: 5e+006
+    g: 5e+006
+    b: 5e+006
+    Direction: <-1.6192e-016, -0.88148, 0.472222>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 63:
+    pos: (512, -4184, 432)
+    r: 50000
+    g: 50000
+    b: 50000
+    Direction: <1, 0, 0>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 64:
+    pos: (896, -4156, 416)
+    r: 5e+006
+    g: 5e+006
+    b: 5e+006
+    Direction: <-1.6192e-016, -0.88148, 0.472222>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 65:
+    pos: (896, -4184, 432)
+    r: 50000
+    g: 50000
+    b: 50000
+    Direction: <1, 0, 0>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 66:
+    pos: (703.047, -4640, 720)
+    r: 1.5e+006
+    g: 1.5e+006
+    b: 1.5e+006
+    Direction: <-1.18443e-016, -0.644792, -0.764358>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 67:
+    pos: (1344, -4156, 416)
+    r: 5e+006
+    g: 5e+006
+    b: 5e+006
+    Direction: <-1.6192e-016, -0.88148, 0.472222>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 68:
+    pos: (1344, -4184, 432)
+    r: 50000
+    g: 50000
+    b: 50000
+    Direction: <1, 0, 0>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 69:
+    pos: (1792, -4186, 431)
+    r: 5e+006
+    g: 5e+006
+    b: 5e+006
+    Direction: <-1.6192e-016, -0.88148, 0.472222>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 70:
+    pos: (1792, -4214, 447)
+    r: 50000
+    g: 50000
+    b: 50000
+    Direction: <1, 0, 0>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 71:
+    pos: (1471.05, -4640, 720)
+    r: 1.5e+006
+    g: 1.5e+006
+    b: 1.5e+006
+    Direction: <-1.18443e-016, -0.644792, -0.764358>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 72:
+    pos: (0, -4640, 720)
+    r: 1.5e+006
+    g: 1.5e+006
+    b: 1.5e+006
+    Direction: <-1.18443e-016, -0.644792, -0.764358>
+    Outer Cone: 45
+    Inner Cone: 30
+Light 73:
+    pos: (608, -4244, 640)
+    r: 8e+006
+    g: 8e+006
+    b: 8e+006
+    Direction: <-0.366501, 4.4882e-017, -0.930418>
+    Outer Cone: 20
+    Inner Cone: 15
+Light 74:
+    pos: (1440, -4244, 640)
+    r: 8e+006
+    g: 8e+006
+    b: 8e+006
+    Direction: <-0.366501, 4.4882e-017, -0.930418>
+    Outer Cone: 20
+    Inner Cone: 15
+Light 75:
+    pos: (-160, -4152, 400)
+    r: 750045
+    g: 835034
+    b: 971903
+    Direction: <-1.29889e-016, -0.707107, 0.707107>
+    Outer Cone: 32
+    Inner Cone: 16
+Light 76:
+    pos: (-64, -4352, 672)
+    r: 8e+006
+    g: 0
+    b: 8e+006
+    Direction: <-4.75427e-017, -0.258819, -0.965926>
+    Outer Cone: 20
+    Inner Cone: 15
+WorldLight 0 Normal: <-1.29889e-016, -0.707107, 0.707107>
+WorldLight 1 Normal: <-1.29889e-016, -0.707107, 0.707107>
+WorldLight 2 Normal: <4.32964e-017, 0.707107, 0.707107>
+WorldLight 3 Normal: <4.32964e-017, 0.707107, 0.707107>
+WorldLight 4 Normal: <6.12303e-017, 0, -1>
+WorldLight 5 Normal: <1, 0, 0>
+WorldLight 6 Normal: <1, 0, 0>
+WorldLight 7 Normal: <1, 0, 0>
+WorldLight 8 Normal: <1, 0, 0>
+WorldLight 9 Normal: <1, 0, 0>
+WorldLight 10 Normal: <-1.6192e-016, -0.88148, 0.472222>
+WorldLight 11 Normal: <-1.63158e-016, -0.888217, -0.459423>
+WorldLight 12 Normal: <-1.63158e-016, -0.888217, -0.459423>
+WorldLight 13 Normal: <-1.63158e-016, -0.888217, -0.459423>
+WorldLight 14 Normal: <-1.63158e-016, -0.888217, -0.459423>
+WorldLight 15 Normal: <-1.63158e-016, -0.888217, -0.459423>
+WorldLight 16 Normal: <-1.63158e-016, -0.888217, -0.459423>
+WorldLight 17 Normal: <1, 0, 0>
+WorldLight 18 Normal: <1, 0, 0>
+WorldLight 19 Normal: <1, 0, 0>
+WorldLight 20 Normal: <1, 0, 0>
+WorldLight 21 Normal: <1, 0, 0>
+WorldLight 22 Normal: <1, 0, 0>
+WorldLight 23 Normal: <1, 0, 0>
+WorldLight 24 Normal: <1, 0, 0>
+WorldLight 25 Normal: <1, 0, 0>
+WorldLight 26 Normal: <1, 0, 0>
+WorldLight 27 Normal: <-1.29889e-016, -0.707107, 0.707107>
+WorldLight 28 Normal: <-1.29889e-016, -0.707107, 0.707107>
+WorldLight 29 Normal: <4.32964e-017, 0.707107, 0.707107>
+WorldLight 30 Normal: <4.32964e-017, 0.707107, 0.707107>
+WorldLight 31 Normal: <6.12303e-017, 0, -1>
+WorldLight 32 Normal: <1, 0, 0>
+WorldLight 33 Normal: <1, 0, 0>
+WorldLight 34 Normal: <1, 0, 0>
+WorldLight 35 Normal: <1, 0, 0>
+WorldLight 36 Normal: <1, 0, 0>
+WorldLight 37 Normal: <1, 0, 0>
+WorldLight 38 Normal: <1, 0, 0>
+WorldLight 39 Normal: <1, 0, 0>
+WorldLight 40 Normal: <6.12303e-017, 0, -1>
+WorldLight 41 Normal: <1, 0, 0>
+WorldLight 42 Normal: <4.32964e-017, 0.707107, 0.707107>
+WorldLight 43 Normal: <4.32964e-017, 0.707107, 0.707107>
+WorldLight 44 Normal: <-1.29889e-016, -0.707107, 0.707107>
+WorldLight 45 Normal: <-1.29889e-016, -0.707107, 0.707107>
+WorldLight 46 Normal: <0.207912, 0, -0.978148>
+WorldLight 47 Normal: <0.207912, 0, -0.978148>
+WorldLight 48 Normal: <0.207912, 0, -0.978148>
+WorldLight 49 Normal: <0.207912, 0, -0.978148>
+WorldLight 50 Normal: <6.12303e-017, 0, -1>
+WorldLight 51 Normal: <1, 0, 0>
+WorldLight 52 Normal: <1, 0, 0>
+WorldLight 53 Normal: <1, 0, 0>
+WorldLight 54 Normal: <1, 0, 0>
+WorldLight 55 Normal: <1, 0, 0>
+WorldLight 56 Normal: <1, 0, 0>
+WorldLight 57 Normal: <-4.28818e-017, -0.233445, -0.97237>
+WorldLight 58 Normal: <-4.28818e-017, -0.233445, -0.97237>
+WorldLight 59 Normal: <1, 0, 0>
+WorldLight 60 Normal: <1, 0, 0>
+WorldLight 61 Normal: <1, 0, 0>
+WorldLight 62 Normal: <-1.6192e-016, -0.88148, 0.472222>
+WorldLight 63 Normal: <1, 0, 0>
+WorldLight 64 Normal: <-1.6192e-016, -0.88148, 0.472222>
+WorldLight 65 Normal: <1, 0, 0>
+WorldLight 66 Normal: <-1.18443e-016, -0.644792, -0.764358>
+WorldLight 67 Normal: <-1.6192e-016, -0.88148, 0.472222>
+WorldLight 68 Normal: <1, 0, 0>
+WorldLight 69 Normal: <-1.6192e-016, -0.88148, 0.472222>
+WorldLight 70 Normal: <1, 0, 0>
+WorldLight 71 Normal: <-1.18443e-016, -0.644792, -0.764358>
+WorldLight 72 Normal: <-1.18443e-016, -0.644792, -0.764358>
+WorldLight 73 Normal: <-0.366501, 4.4882e-017, -0.930418>
+WorldLight 74 Normal: <-0.366501, 4.4882e-017, -0.930418>
+WorldLight 75 Normal: <-1.29889e-016, -0.707107, 0.707107>
+WorldLight 76 Normal: <-4.75427e-017, -0.258819, -0.965926>
+World Lights: 
+    World Light 0:
+        origin: (304, -4336, 504)
+        intensity: (1960.78, 1960.78, 1960.78)
+        normal: <-1.29889e-016, -0.707107, 0.707107>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.642788
+        stopdot2: 0.5
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 1:
+        origin: (336, -4336, 504)
+        intensity: (1960.78, 1960.78, 1960.78)
+        normal: <-1.29889e-016, -0.707107, 0.707107>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.642788
+        stopdot2: 0.5
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 2:
+        origin: (304, -4496, 504)
+        intensity: (1960.78, 1960.78, 1960.78)
+        normal: <4.32964e-017, 0.707107, 0.707107>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.642788
+        stopdot2: 0.5
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 3:
+        origin: (336, -4496, 504)
+        intensity: (1960.78, 1960.78, 1960.78)
+        normal: <4.32964e-017, 0.707107, 0.707107>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.642788
+        stopdot2: 0.5
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 4:
+        origin: (320, -4416, 672)
+        intensity: (5882.35, 4868.98, 3297.05)
+        normal: <6.12303e-017, 0, -1>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.906308
+        stopdot2: 0.819152
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 5:
+        origin: (320, -4416, 640)
+        intensity: (392.157, 324.598, 219.804)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 6:
+        origin: (-128, -4288, 384)
+        intensity: (588.235, 416.646, 180.373)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 7:
+        origin: (-128, -4544, 384)
+        intensity: (588.235, 416.646, 180.373)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 8:
+        origin: (64, -4288, 384)
+        intensity: (588.235, 416.646, 180.373)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 9:
+        origin: (64, -4544, 384)
+        intensity: (588.235, 416.646, 180.373)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 10:
+        origin: (64, -4156, 416)
+        intensity: (0, 39215.7, 39215.7)
+        normal: <-1.6192e-016, -0.88148, 0.472222>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.866025
+        stopdot2: 0.707107
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 11:
+        origin: (64, -4152, 716)
+        intensity: (5882.35, 4166.46, 1803.73)
+        normal: <-1.63158e-016, -0.888217, -0.459423>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.866025
+        stopdot2: 0.707107
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 12:
+        origin: (-128, -4152, 716)
+        intensity: (5882.35, 4166.46, 1803.73)
+        normal: <-1.63158e-016, -0.888217, -0.459423>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.866025
+        stopdot2: 0.707107
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 13:
+        origin: (576, -4152, 716)
+        intensity: (5882.35, 4166.46, 1803.73)
+        normal: <-1.63158e-016, -0.888217, -0.459423>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.866025
+        stopdot2: 0.707107
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 14:
+        origin: (832, -4152, 716)
+        intensity: (5882.35, 4166.46, 1803.73)
+        normal: <-1.63158e-016, -0.888217, -0.459423>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.866025
+        stopdot2: 0.707107
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 15:
+        origin: (1600, -4152, 716)
+        intensity: (5882.35, 4166.46, 1803.73)
+        normal: <-1.63158e-016, -0.888217, -0.459423>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.866025
+        stopdot2: 0.707107
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 16:
+        origin: (1344, -4152, 716)
+        intensity: (5882.35, 4166.46, 1803.73)
+        normal: <-1.63158e-016, -0.888217, -0.459423>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.866025
+        stopdot2: 0.707107
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 17:
+        origin: (832, -4544, 384)
+        intensity: (588.235, 0, 0)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 18:
+        origin: (576, -4544, 384)
+        intensity: (588.235, 0, 0)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 19:
+        origin: (576, -4288, 384)
+        intensity: (588.235, 0, 0)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 20:
+        origin: (832, -4288, 384)
+        intensity: (588.235, 0, 0)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 21:
+        origin: (1600, -4544, 384)
+        intensity: (588.235, 0, 0)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 22:
+        origin: (1600, -4288, 384)
+        intensity: (588.235, 0, 0)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 23:
+        origin: (1344, -4544, 384)
+        intensity: (588.235, 0, 0)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 24:
+        origin: (1344, -4288, 384)
+        intensity: (588.235, 0, 0)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 25:
+        origin: (1856, -4544, 384)
+        intensity: (588.235, 0, 0)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 26:
+        origin: (1856, -4288, 384)
+        intensity: (588.235, 0, 0)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 27:
+        origin: (1072, -4336, 504)
+        intensity: (1960.78, 1960.78, 1960.78)
+        normal: <-1.29889e-016, -0.707107, 0.707107>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.642788
+        stopdot2: 0.5
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 28:
+        origin: (1104, -4336, 504)
+        intensity: (1960.78, 1960.78, 1960.78)
+        normal: <-1.29889e-016, -0.707107, 0.707107>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.642788
+        stopdot2: 0.5
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 29:
+        origin: (1072, -4496, 504)
+        intensity: (1960.78, 1960.78, 1960.78)
+        normal: <4.32964e-017, 0.707107, 0.707107>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.642788
+        stopdot2: 0.5
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 30:
+        origin: (1104, -4496, 504)
+        intensity: (1960.78, 1960.78, 1960.78)
+        normal: <4.32964e-017, 0.707107, 0.707107>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.642788
+        stopdot2: 0.5
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 31:
+        origin: (1088, -4416, 672)
+        intensity: (5882.35, 4868.98, 3297.05)
+        normal: <6.12303e-017, 0, -1>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.906308
+        stopdot2: 0.819152
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 32:
+        origin: (1088, -4416, 640)
+        intensity: (392.157, 324.598, 219.804)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 33:
+        origin: (-128, -4168, 708)
+        intensity: (588.235, 416.646, 180.373)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 34:
+        origin: (64, -4168, 708)
+        intensity: (588.235, 416.646, 180.373)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 35:
+        origin: (64, -4184, 432)
+        intensity: (588.235, 588.235, 588.235)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 36:
+        origin: (576, -4168, 708)
+        intensity: (588.235, 416.646, 180.373)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 37:
+        origin: (832, -4168, 708)
+        intensity: (588.235, 416.646, 180.373)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 38:
+        origin: (1600, -4168, 708)
+        intensity: (588.235, 416.646, 180.373)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 39:
+        origin: (1344, -4168, 708)
+        intensity: (588.235, 416.646, 180.373)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 40:
+        origin: (2080, -4416, 672)
+        intensity: (5882.35, 4868.98, 3297.05)
+        normal: <6.12303e-017, 0, -1>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.906308
+        stopdot2: 0.819152
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 41:
+        origin: (2080, -4416, 640)
+        intensity: (588.235, 416.646, 180.373)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 42:
+        origin: (2064, -4496, 504)
+        intensity: (1960.78, 1960.78, 1960.78)
+        normal: <4.32964e-017, 0.707107, 0.707107>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.642788
+        stopdot2: 0.5
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 43:
+        origin: (2096, -4496, 504)
+        intensity: (1960.78, 1960.78, 1960.78)
+        normal: <4.32964e-017, 0.707107, 0.707107>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.642788
+        stopdot2: 0.5
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 44:
+        origin: (2096, -4336, 504)
+        intensity: (1960.78, 1960.78, 1960.78)
+        normal: <-1.29889e-016, -0.707107, 0.707107>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.642788
+        stopdot2: 0.5
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 45:
+        origin: (2064, -4336, 504)
+        intensity: (1960.78, 1960.78, 1960.78)
+        normal: <-1.29889e-016, -0.707107, 0.707107>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.642788
+        stopdot2: 0.5
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 46:
+        origin: (880, -4472, 736)
+        intensity: (19607.8, 19607.8, 19607.8)
+        normal: <0.207912, 0, -0.978148>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.965926
+        stopdot2: 0.939693
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 47:
+        origin: (880, -4360, 736)
+        intensity: (19607.8, 19607.8, 19607.8)
+        normal: <0.207912, 0, -0.978148>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.965926
+        stopdot2: 0.939693
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 48:
+        origin: (1776, -4360, 736)
+        intensity: (19607.8, 19607.8, 19607.8)
+        normal: <0.207912, 0, -0.978148>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.965926
+        stopdot2: 0.939693
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 49:
+        origin: (1776, -4472, 736)
+        intensity: (19607.8, 19607.8, 19607.8)
+        normal: <0.207912, 0, -0.978148>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.965926
+        stopdot2: 0.939693
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 50:
+        origin: (-264, -3904, 480)
+        intensity: (7843.14, 6491.97, 4396.07)
+        normal: <6.12303e-017, 0, -1>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.906308
+        stopdot2: 0.819152
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 51:
+        origin: (-264, -3904, 448)
+        intensity: (784.314, 649.197, 439.607)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 52:
+        origin: (-128, -3808, 336)
+        intensity: (588.235, 486.898, 329.705)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 53:
+        origin: (-32, -3904, 336)
+        intensity: (588.235, 486.898, 329.705)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 54:
+        origin: (-160, -4064, 336)
+        intensity: (588.235, 486.898, 329.705)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 55:
+        origin: (-608, -3936, 460)
+        intensity: (980.392, 811.496, 549.509)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 56:
+        origin: (-544, -3952, 256)
+        intensity: (583.172, 408.283, 172.48)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 57:
+        origin: (-352, -4062.78, 496)
+        intensity: (1960.78, 1622.99, 1099.02)
+        normal: <-4.28818e-017, -0.233445, -0.97237>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.669131
+        stopdot2: 0.642788
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 58:
+        origin: (-544, -4062.78, 496)
+        intensity: (1960.78, 1622.99, 1099.02)
+        normal: <-4.28818e-017, -0.233445, -0.97237>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.669131
+        stopdot2: 0.642788
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 59:
+        origin: (-416, -3952, 256)
+        intensity: (583.172, 408.283, 172.48)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 60:
+        origin: (-544, -3856, 256)
+        intensity: (583.172, 408.283, 172.48)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 61:
+        origin: (-416, -3856, 256)
+        intensity: (583.172, 408.283, 172.48)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 62:
+        origin: (512, -4156, 416)
+        intensity: (19607.8, 19607.8, 19607.8)
+        normal: <-1.6192e-016, -0.88148, 0.472222>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.866025
+        stopdot2: 0.707107
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 63:
+        origin: (512, -4184, 432)
+        intensity: (196.078, 196.078, 196.078)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 64:
+        origin: (896, -4156, 416)
+        intensity: (19607.8, 19607.8, 19607.8)
+        normal: <-1.6192e-016, -0.88148, 0.472222>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.866025
+        stopdot2: 0.707107
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 65:
+        origin: (896, -4184, 432)
+        intensity: (196.078, 196.078, 196.078)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 66:
+        origin: (703.047, -4640, 720)
+        intensity: (5882.35, 5882.35, 5882.35)
+        normal: <-1.18442e-016, -0.644792, -0.764358>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.866025
+        stopdot2: 0.707107
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 67:
+        origin: (1344, -4156, 416)
+        intensity: (19607.8, 19607.8, 19607.8)
+        normal: <-1.6192e-016, -0.88148, 0.472222>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.866025
+        stopdot2: 0.707107
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 68:
+        origin: (1344, -4184, 432)
+        intensity: (196.078, 196.078, 196.078)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 69:
+        origin: (1792, -4186, 431)
+        intensity: (19607.8, 19607.8, 19607.8)
+        normal: <-1.6192e-016, -0.88148, 0.472222>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.866025
+        stopdot2: 0.707107
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 70:
+        origin: (1792, -4214, 447)
+        intensity: (196.078, 196.078, 196.078)
+        normal: <1, 0, 0>
+        cluster: 0
+        type: 1
+        style: 0
+        stopdot: 0
+        stopdot2: 0
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 71:
+        origin: (1471.05, -4640, 720)
+        intensity: (5882.35, 5882.35, 5882.35)
+        normal: <-1.18442e-016, -0.644792, -0.764358>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.866025
+        stopdot2: 0.707107
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 72:
+        origin: (0, -4640, 720)
+        intensity: (5882.35, 5882.35, 5882.35)
+        normal: <-1.18442e-016, -0.644792, -0.764358>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.866025
+        stopdot2: 0.707107
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 73:
+        origin: (608, -4244, 640)
+        intensity: (31372.5, 31372.5, 31372.5)
+        normal: <-0.366501, 4.4882e-017, -0.930418>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.965926
+        stopdot2: 0.939693
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 74:
+        origin: (1440, -4244, 640)
+        intensity: (31372.5, 31372.5, 31372.5)
+        normal: <-0.366501, 4.4882e-017, -0.930418>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.965926
+        stopdot2: 0.939693
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 75:
+        origin: (-160, -4152, 400)
+        intensity: (2941.35, 3274.64, 3811.39)
+        normal: <-1.29889e-016, -0.707107, 0.707107>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.961262
+        stopdot2: 0.848048
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0
+    World Light 76:
+        origin: (-64, -4352, 672)
+        intensity: (31372.5, 0, 31372.5)
+        normal: <-4.75427e-017, -0.258819, -0.965926>
+        cluster: 0
+        type: 2
+        style: 0
+        stopdot: 0.965926
+        stopdot2: 0.939693
+        exponent: 0
+        radius: 0
+        const: 0
+        lin: 0
+        quad: 1
+        flags: 0
+        texinfo: 0
+        owner: 0

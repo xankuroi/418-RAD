@@ -12,6 +12,8 @@
 
 
 namespace CUDABSP {
+    __device__ BSP::RGBExp32 rgbexp32_from_float3(float3 color);
+
     const uint32_t TAG = 0xdeadbeef;
 
     struct CUDABSP {
@@ -29,6 +31,8 @@ namespace CUDABSP {
         BSP::TexInfo* texInfos;
         BSP::DTexData* texDatas;
         BSP::DLeaf* leaves;
+        BSP::DLeafAmbientIndex* ambientIndices;
+        BSP::DLeafAmbientLighting* ambientLightSamples;
         BSP::DWorldLight* worldLights;
 
         size_t numModels;
@@ -41,13 +45,14 @@ namespace CUDABSP {
         size_t numTexInfos;
         size_t numTexDatas;
         size_t numLeaves;
+        size_t numAmbientLightSamples;
         size_t numWorldLights;
     };
 
     /** Creates a new CUDABSP on the device, and returns a pointer to it. */
     CUDABSP* make_cudabsp(const BSP::BSP& bsp);
 
-    /** Destroys the given CUDABSP located on the devices. */
+    /** Destroys the given CUDABSP located on the device. */
     void destroy_cudabsp(CUDABSP* pCudaBSP);
 
     /** Convert lightsamples from float3 to RGBExp32 format. */
