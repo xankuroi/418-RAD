@@ -97,11 +97,6 @@ namespace DirectLighting {
             float3 samplePos,
             float3 sampleNormal=make_float3(0.0, 0.0, 0.0)
             ) {
-<<<<<<< HEAD
-
-        float3 samplePos = faceInfo.xyz_from_st(s, t);
-=======
->>>>>>> 533c851478d777627bedebfc84a55e37b8d792c2
 
         //samplePos += faceInfo.faceNorm * 1e-3;
 
@@ -418,7 +413,6 @@ namespace DirectLighting {
 
                 float3 color = make_float3(0.0, 0.0, 0.0);
 
-<<<<<<< HEAD
                 //for (int tOffset=-1; tOffset<=1; tOffset++) {
                 //    float blurT = static_cast<float>(t) + tOffset;
 
@@ -450,10 +444,8 @@ namespace DirectLighting {
                 //        color += blurColor;
                 //    }
                 //}
-=======
                 for (int tOffset=-1; tOffset<=1; tOffset++) {
                     float blurT = static_cast<float>(t) + tOffset;
->>>>>>> 533c851478d777627bedebfc84a55e37b8d792c2
 
                     for (int sOffset=-1; sOffset<=1; sOffset++) {
                         float blurS = static_cast<float>(s) + sOffset;
@@ -982,9 +974,10 @@ namespace CUDARAD {
 
 
     void bounce_lighting(BSP::BSP& bsp, CUDABSP::CUDABSP* pCudaBSP) {
-      // TODO set up pcudabsp
-      bound_lighting_fly(pCudaBSP);
-
+      // TODO timing
+      //pCudaBSP = make_cudabsp(bsp);
+      bounce_lighting_fly(pCudaBSP);
+      //update_bsp(bsp, pCudabsp);
     }
 
     size_t count_patches(CUDABSP::CUDABSP* pCudaBSP, CUDARAD::FaceInfo* faces)
