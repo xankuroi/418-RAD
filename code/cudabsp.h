@@ -43,7 +43,7 @@ namespace CUDABSP {
         size_t numLeaves;
         size_t numWorldLights;
     };
-    
+
     /** Creates a new CUDABSP on the device, and returns a pointer to it. */
     CUDABSP* make_cudabsp(const BSP::BSP& bsp);
 
@@ -54,7 +54,7 @@ namespace CUDABSP {
     void convert_lightsamples(CUDABSP* pCudaBSP);
 
     /**
-    * Updates the given BSP using the information contained in the given 
+    * Updates the given BSP using the information contained in the given
     * CUDABSP (which should be on the device).
     */
     void update_bsp(BSP::BSP& bsp, CUDABSP* pCudaBSP);
