@@ -78,44 +78,65 @@
 //}
 
 
-__global__ void map_lightsamples(
-        float3* lightSamples,
-        BSP::RGBExp32* rgbExp32LightSamples,
-        size_t numLightSamples
-        ) {
-
-    size_t index = blockIdx.x * blockDim.x + threadIdx.x;
-
-    if (index >= numLightSamples) {
-        return;
-    }
-
-    float3 sample = lightSamples[index];
-
-    uint64_t r = static_cast<uint64_t>(sample.x);
-    uint64_t g = static_cast<uint64_t>(sample.y);
-    uint64_t b = static_cast<uint64_t>(sample.z);
-
-    int8_t exp = 0;
-
-    while (r > 255 || g > 255 || b > 255) {
-        r >>= 1;
-        g >>= 1;
-        b >>= 1;
-
-        exp++;
-    }
-
-    rgbExp32LightSamples[index] = {
-        static_cast<uint8_t>(r),
-        static_cast<uint8_t>(g),
-        static_cast<uint8_t>(b),
-        exp,
-    };
-}
-
-
 namespace CUDABSP {
+    __device__ BSP::RGBExp32 rgbexp32_from_float3(float3 color) {
+        if (color.x < 1.0 || color.y < 1.0 || color.z < 1.0) {
+            int8_t exp = 0;
+
+            while ((color.x < 1.0 || color.y < 1.0 || color.z < 1.0)
+                    && color.x != 0.0 && color.y != 0.0 && color.z != 0.0) {
+                color *= 2.0;
+                exp--;
+            }
+
+            return BSP::RGBExp32 {
+                static_cast<uint8_t>(color.x),
+                static_cast<uint8_t>(color.y),
+                static_cast<uint8_t>(color.z),
+                exp,
+            };
+        }
+        else {
+            uint64_t r = static_cast<uint64_t>(color.x);
+            uint64_t g = static_cast<uint64_t>(color.y);
+            uint64_t b = static_cast<uint64_t>(color.z);
+
+            int8_t exp = 0;
+
+            while (r > 255 || g > 255 || b > 255) {
+                r >>= 1;
+                g >>= 1;
+                b >>= 1;
+
+                exp++;
+            }
+
+            return BSP::RGBExp32 {
+                static_cast<uint8_t>(r),
+                static_cast<uint8_t>(g),
+                static_cast<uint8_t>(b),
+                exp
+            };
+        }
+    }
+
+    __global__ void map_lightsamples(
+            float3* lightSamples,
+            BSP::RGBExp32* rgbExp32LightSamples,
+            size_t numLightSamples
+            ) {
+
+        size_t index = blockIdx.x * blockDim.x + threadIdx.x;
+
+        if (index >= numLightSamples) {
+            return;
+        }
+
+        float3 sample = lightSamples[index];
+
+        rgbExp32LightSamples[index] = rgbexp32_from_float3(sample);
+    }
+
     CUDABSP* make_cudabsp(const BSP::BSP& bsp) {
         CUDABSP cudaBSP;
         
@@ -133,6 +154,7 @@ namespace CUDABSP {
         cudaBSP.numTexInfos = bsp.get_texinfos().size();
         cudaBSP.numTexDatas = bsp.get_texdatas().size();
         cudaBSP.numLeaves = bsp.get_leaves().size();
+        cudaBSP.numAmbientLightSamples = bsp.get_ambient_samples().size();
         cudaBSP.numWorldLights = bsp.get_worldlights().size();
 
         size_t modelsSize = sizeof(BSP::DModel) * cudaBSP.numModels;
@@ -148,6 +170,11 @@ namespace CUDABSP {
         size_t texInfosSize = sizeof(BSP::TexInfo) * cudaBSP.numTexInfos;
         size_t texDatasSize = sizeof(BSP::DTexData) * cudaBSP.numTexDatas;
         size_t leavesSize = sizeof(BSP::DLeaf) * cudaBSP.numLeaves;
+        size_t ambientIndicesSize
+            = sizeof(BSP::DLeafAmbientIndex) * cudaBSP.numLeaves;
+        size_t ambientLightSamplesSize
+            = sizeof(BSP::DLeafAmbientLighting)
+                * cudaBSP.numAmbientLightSamples;
         size_t worldLightsSize
             = sizeof(BSP::DWorldLight) * cudaBSP.numWorldLights;
 
@@ -281,6 +308,28 @@ namespace CUDABSP {
             )
         );
 
+        CUDA_CHECK_ERROR(
+            cudaMalloc(&cudaBSP.ambientIndices, ambientIndicesSize)
+        );
+        CUDA_CHECK_ERROR(
+            cudaMemcpy(
+                cudaBSP.ambientIndices, bsp.get_ambient_indices().data(),
+                ambientIndicesSize,
+                cudaMemcpyHostToDevice
+            )
+        );
+
+        CUDA_CHECK_ERROR(
+            cudaMalloc(&cudaBSP.ambientLightSamples, ambientLightSamplesSize)
+        );
+        CUDA_CHECK_ERROR(
+            cudaMemcpy(
+                cudaBSP.ambientLightSamples, bsp.get_ambient_samples().data(),
+                ambientLightSamplesSize,
+                cudaMemcpyHostToDevice
+            )
+        );
+
         CUDA_CHECK_ERROR(cudaMalloc(&cudaBSP.worldLights, worldLightsSize));
         CUDA_CHECK_ERROR(
             cudaMemcpy(
@@ -326,6 +375,8 @@ namespace CUDABSP {
         CUDA_CHECK_ERROR(cudaFree(cudaBSP.texInfos));
         CUDA_CHECK_ERROR(cudaFree(cudaBSP.texDatas));
         CUDA_CHECK_ERROR(cudaFree(cudaBSP.leaves));
+        CUDA_CHECK_ERROR(cudaFree(cudaBSP.ambientIndices));
+        CUDA_CHECK_ERROR(cudaFree(cudaBSP.ambientLightSamples));
         CUDA_CHECK_ERROR(cudaFree(cudaBSP.worldLights));
 
         /* Free the device pointer itself. */
@@ -376,6 +427,15 @@ namespace CUDABSP {
             cudaMemcpy(
                 bsp.get_dfaces().data(), cudaBSP.faces,
                 sizeof(BSP::DFace) * cudaBSP.numFaces,
+                cudaMemcpyDeviceToHost
+            )
+        );
+
+        CUDA_CHECK_ERROR(
+            cudaMemcpy(
+                bsp.get_ambient_samples().data(), cudaBSP.ambientLightSamples,
+                sizeof(BSP::DLeafAmbientLighting)
+                    * cudaBSP.numAmbientLightSamples,
                 cudaMemcpyDeviceToHost
             )
         );

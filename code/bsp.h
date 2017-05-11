@@ -378,9 +378,13 @@ namespace BSP {
             double c;
             double l;
             double q;
-            
+
+            double innerCone;
+            double outerCone;
+            Vec3<double> direction;
+
             EmitType emitType;
-            
+
             Light(const Entity& entity);
             
             inline double attenuate(double distance) const {
@@ -490,6 +494,8 @@ namespace BSP {
             std::vector<DTexData> m_texDatas;
             std::vector<Face> m_faces;
             std::vector<DLeaf> m_leaves;
+            std::vector<DLeafAmbientIndex> m_ambientLightIndices;
+            std::vector<DLeafAmbientLighting> m_ambientLightSamples;
             std::vector<DWorldLight> m_worldLights;
             
             std::string m_entData;
@@ -597,6 +603,14 @@ namespace BSP {
             const std::vector<Face>& get_faces(void) const;
 
             const std::vector<DLeaf>& get_leaves(void) const;
+            
+            std::vector<DLeafAmbientIndex>& get_ambient_indices(void);
+            const std::vector<DLeafAmbientIndex>&
+                get_ambient_indices(void) const;
+
+            std::vector<DLeafAmbientLighting>& get_ambient_samples(void);
+            const std::vector<DLeafAmbientLighting>&
+                get_ambient_samples(void) const;
 
             const std::vector<DWorldLight>& get_worldlights(void) const;
             const std::vector<Light>& get_lights(void) const;
@@ -607,6 +621,7 @@ namespace BSP {
                 get_extras(void) const;
                 
             void build_worldlights(void);
+            void init_ambient_samples(void);
 
             bool is_fullbright(void) const;
             void set_fullbright(bool fullbright);
