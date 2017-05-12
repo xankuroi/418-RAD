@@ -20,6 +20,7 @@ namespace CUDARAD {
         size_t lightmapHeight;
         size_t lightmapSize;
         size_t lightmapStartIndex;
+        size_t patchStartIndex;
 
         __device__ FaceInfo();
         __device__ FaceInfo(CUDABSP::CUDABSP& cudaBSP, size_t faceIndex);
@@ -32,7 +33,9 @@ namespace CUDARAD {
       float3 totalLight;
       float3 brightness;
       float3 reflectivity;
-      float3* vertices;
+      int s;
+      int t;
+    //  float3* vertices;
     };
 }
 
@@ -59,6 +62,7 @@ namespace CUDARAD {
 
     float3 center(PatchInfo patch);
     static __device__ inline float distance(float3 p1, float3 p2);
+    static __device__ inline float3 element_wise_mult(float3 f1, float3 f2);
 
     void compute_ambient_lighting(BSP::BSP& bsp, CUDABSP::CUDABSP* pCudaBSP);
 }
