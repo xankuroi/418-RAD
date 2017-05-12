@@ -869,3 +869,75 @@ Level flags = 0
 Total triangle count: 14662
 Writing c:\users\ryan\dropbox\c++\rad\code\vmf\ljm.bsp
 19 seconds elapsed
+
+
+
+[Reading texlights from 'lights.rad']
+[48 texlights parsed from 'lights.rad']
+
+Loading c:\users\ryan\dropbox\c++\rad\code\vmf\ljm.bsp
+4816 faces
+8 degenerate faces
+159203 square feet [22925334.00 square inches]
+0 Displacements
+0 Square Feet [0.00 Square Inches]
+113 direct lights
+0...1...2...3...4...5...6...7...8...9...10Build Patch/Sample Hash Table(s).....Done<0.0133 sec>
+0...1...2...3...4...5...6...7...8...9...10FinalLightFace Done
+0 of 0 (0% of) surface lights went in leaf ambient cubes.
+0...1...2...3...4...5...6...7...8...9...10Writing leaf ambient...done
+Ready to Finish
+
+Object names       Objects/Maxobjs  Memory / Maxmem  Fullness 
+------------       ---------------  ---------------  -------- 
+models                   1/1024           48/49152    ( 0.1%) 
+brushes               1528/8192        18336/98304    (18.7%) 
+brushsides           15322/65536      122576/524288   (23.4%) 
+planes                5846/65536      116920/1310720  ( 8.9%) 
+vertexes              7988/65536       95856/786432   (12.2%) 
+nodes                  142/65536        4544/2097152  ( 0.2%) 
+texinfos              2203/12288      158616/884736   (17.9%) 
+texdata                114/2048         3648/65536    ( 5.6%) 
+dispinfos                0/0               0/0        ( 0.0%) 
+disp_verts               0/0               0/0        ( 0.0%) 
+disp_tris                0/0               0/0        ( 0.0%) 
+disp_lmsamples           0/0               0/0        ( 0.0%) 
+faces                 4816/65536      269696/3670016  ( 7.3%) 
+hdr faces             4816/65536      269696/3670016  ( 7.3%) 
+origfaces             3866/65536      216496/3670016  ( 5.9%) 
+leaves                 144/65536        4608/2097152  ( 0.2%) 
+leaffaces             5322/65536       10644/131072   ( 8.1%) 
+leafbrushes           1854/65536        3708/131072   ( 2.8%) 
+areas                    2/256            16/2048     ( 0.8%) 
+surfedges            39940/512000     159760/2048000  ( 7.8%) 
+edges                24129/256000      96516/1024000  ( 9.4%) 
+LDR worldlights          0/8192            0/720896   ( 0.0%) 
+HDR worldlights        113/8192         9944/720896   ( 1.4%) 
+leafwaterdata            0/32768           0/393216   ( 0.0%) 
+waterstrips            885/32768        8850/327680   ( 2.7%) 
+waterverts               0/65536           0/786432   ( 0.0%) 
+waterindices         17070/65536       34140/131072   (26.0%) 
+cubemapsamples          37/1024          592/16384    ( 3.6%) 
+overlays                58/512         20416/180224   (11.3%) 
+LDR lightdata         [variable]           0/0        ( 0.0%) 
+HDR lightdata         [variable]     6859344/0        ( 0.0%) 
+visdata               [variable]         841/16777216 ( 0.0%) 
+entdata               [variable]       92154/393216   (23.4%) 
+LDR ambient table      144/65536         576/262144   ( 0.2%) 
+HDR ambient table      144/65536         576/262144   ( 0.2%) 
+LDR leaf ambient       144/65536        4032/1835008  ( 0.2%) 
+HDR leaf ambient       477/65536       13356/1835008  ( 0.7%) 
+occluders                0/0               0/0        ( 0.0%) 
+occluder polygons        0/0               0/0        ( 0.0%) 
+occluder vert ind        0/0               0/0        ( 0.0%) 
+detail props          [variable]           1/12       ( 8.3%) 
+static props          [variable]           1/33240    ( 0.0%) 
+pakfile               [variable]     4039887/0        ( 0.0%) 
+physics               [variable]      565700/4194304  (13.5%) 
+physics terrain       [variable]           2/1048576  ( 0.0%) 
+
+Level flags = 0
+
+Total triangle count: 14662
+Writing c:\users\ryan\dropbox\c++\rad\code\vmf\ljm.bsp
+17 seconds elapsed
