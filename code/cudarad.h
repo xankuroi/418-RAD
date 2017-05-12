@@ -29,11 +29,9 @@ namespace CUDARAD {
 
     struct PatchInfo{
       FaceInfo face_info;
-      float3 initialLight;
       float3 totalLight;
       float3 brightness;
       float3 reflectivity;
-      float3 receivedLight;
       float3* vertices;
     };
 }

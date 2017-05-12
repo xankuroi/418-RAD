@@ -897,7 +897,7 @@ namespace CUDARAD {
             DirectLighting::map_faces_AA,
             numFaces, blockDim,
             pCudaBSP
-        );
+            );
 
         CUDA_CHECK_ERROR(cudaEventRecord(stopEvent));
 
@@ -928,44 +928,48 @@ namespace CUDARAD {
     }
 
     __global__ void generate_patch_info(CUDABSP::CUDABSP* pCudaBSP,
-                                        CUDARAD::FaceInfo* faces, size_t num_faces,
-                                        CUDARAD::PatchInfo* patches)
+        CUDARAD::FaceInfo* faces, size_t num_faces,
+        CUDARAD::PatchInfo* patches)
     {
-      int i = threadIdx.x + threadIdx.y * blockDim.x;
-      if(i > (int) num_faces - 1)
+      if(!(threadIdx.x == 0 && threadIdx.y == 0))
         return;
-
-      CUDARAD::FaceInfo face = faces[i];
-
-      int offset0 = face.lightmapStartIndex; // TODO
-      for(int j = 1; j < face.lightmapHeight; j++)
+      int patch_index = 0;
+      for(int i = 0; i < num_faces; i++)
       {
-        int offset1 = (j - 1)*face.lightmapHeight;
-        float3 reflectivity = make_float3(
-            pCudaBSP->texDatas[face.face.texInfo].reflectivity.x,
-            pCudaBSP->texDatas[face.face.texInfo].reflectivity.y,
-            pCudaBSP->texDatas[face.face.texInfo].reflectivity.z);
-        for(int k = 1; k < face.lightmapWidth; k++)
+        CUDARAD::FaceInfo face = faces[i];
+        int start = face.lightmapStartIndex; // TODO
+        for(int j = 1; j < face.lightmapHeight; j++)
         {
-          // Calculate patch light
-          int index = offset0 + offset1 + k - 1;
-          patches[offset0 + offset1 + k - 1].initialLight = (
-              pCudaBSP->lightSamples[offset0 + offset1 + face.lightmapHeight + k - 1] +
-              pCudaBSP->lightSamples[offset0 + offset1 + k - 1] +
-              pCudaBSP->lightSamples[offset0 + offset1 + face.lightmapHeight + k] +
-              pCudaBSP->lightSamples[offset0 + offset1 + k]
-              ) / 4;
-          // Calculate vertices
-          patches[index].vertices[0] = faces[i].xyz_from_st(j-1, k-1);
-          patches[index].vertices[1] = faces[i].xyz_from_st(j, k-1);
-          patches[index].vertices[2] = faces[i].xyz_from_st(j, k);
-          patches[index].vertices[3] = faces[i].xyz_from_st(j-1, k);
-          // Fill in remaining data
-          patches[index].reflectivity = reflectivity;
-          patches[index].receivedLight = make_float3(0, 0, 0);
-          patches[index].totalLight = make_float3(0, 0, 0);
-          patches[index].brightness = faces[i].totalLight;
-          patches[index].face_info = faces[i];
+          int offset1 = (j - 1)*face.lightmapWidth;
+          float3 reflectivity = make_float3(
+              pCudaBSP->texDatas[face.texInfo.texData].reflectivity.x,
+              pCudaBSP->texDatas[face.texInfo.texData].reflectivity.y,
+              pCudaBSP->texDatas[face.texInfo.texData].reflectivity.z);
+          for(int k = 1; k < face.lightmapWidth; k++)
+          {
+            // Calculate patch light
+            int index = start + offset1 + k - 1;
+            PatchInfo patch = patches[patch_index];
+            patch.totalLight = (
+                pCudaBSP->lightSamples[start + offset1 + face.lightmapWidth + k - 1] +
+                pCudaBSP->lightSamples[start + offset1 + k - 1] +
+                pCudaBSP->lightSamples[start + offset1 + face.lightmapWidth + k] +
+                pCudaBSP->lightSamples[start + offset1 + k]
+                ) / 4;
+            // Calculate vertices
+            CUDA_CHECK_ERROR_DEVICE(cudaMalloc(&patches[patch_index].vertices, sizeof(float3)*4));
+            //printf("maloc %d, (%d, %d)\n", patch_index, j, k);
+
+            patch.vertices[0] = face.xyz_from_st(j-1, k-1);
+            patch.vertices[1] = face.xyz_from_st(j, k-1);
+            patch.vertices[2] = face.xyz_from_st(j, k);
+            patch.vertices[3] = face.xyz_from_st(j-1, k);
+            // Fill in remaining data
+            patch.reflectivity = reflectivity;
+            patch.brightness = face.totalLight;
+            patch.face_info = face;
+            patch_index++;
+          }
         }
       }
 
@@ -1013,15 +1017,15 @@ namespace CUDARAD {
       std::cout << "Generate FaceInfo for all faces" << std::endl;
       const size_t BLOCK_WIDTH = 16;
       const size_t BLOCK_HEIGHT = 16;
-      dim3 blockDim(BLOCK_WIDTH, BLOCK_HEIGHT); // TODO figure out something better
+      dim3 blockDim(BLOCK_WIDTH, BLOCK_HEIGHT);
       KERNEL_LAUNCH(
           generate_face_info,
           numFaces, blockDim,
           pCudaBSP, faces
           );
 
-      std::cout << "Generate PatchInfo" << std::endl;
       size_t totalPatches = count_patches(bsp);
+      std::cout << "Generate PatchInfo; " << totalPatches << " patches" << std::endl;
       PatchInfo* patches;
       CUDA_CHECK_ERROR(
         cudaMalloc(&patches, sizeof(CUDARAD::PatchInfo) * totalPatches)
@@ -1029,10 +1033,12 @@ namespace CUDARAD {
 
       KERNEL_LAUNCH(
           generate_patch_info,
-          numFaces, blockDim,
+          1, blockDim,
           pCudaBSP, faces, numFaces, patches
           );
+      //generate_patch_info(pCudaBSP, faces, numFaces, patches);
 
+      CUDA_CHECK_ERROR(cudaDeviceSynchronize());
 
       std::cout << "Begin iteration" << std::endl;
 
@@ -1096,9 +1102,10 @@ namespace CUDARAD {
         }
         __syncthreads();
         // Update array with information
-        receiver.brightness = receiver.brightness + received_light; // TODO shuffle values
+        receiver.totalLight += received_light;
+        receiver.brightness = received_light;
         __syncthreads();
-        float const EPSILON = 0.0001; // convergeance threshold
+        const float EPSILON = 1e-3;
         if(received_light.x < EPSILON && received_light.y < EPSILON && received_light.z < EPSILON)
         {
           break;
