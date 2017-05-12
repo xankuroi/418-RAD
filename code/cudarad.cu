@@ -1253,23 +1253,33 @@ namespace CUDARAD {
       int patch_index = face.patchStartIndex;
       int width = face.lightmapWidth;
       int height = face.lightmapHeight;
-      float3 totalLight;
-      for(int j = 0; j < height - 1; j++)
+      float3 totalLight = make_float3(0, 0, 0);
+      printf("width %d | height %d | start %d | patch_index %d", width, height, start, patch_index);
+      for(int j = 0; j < height; j++)
       {
         int offset1 = j*width;
-        for(int k = 0; k < width - 1; k++)
+        for(int k = 0; k < width; k++)
         {
-          totalLight += patches[patch_index + offset1 + k].totalLight;
+//          printf("patch: %d || lightsample: %d\n", (int)(patch_index + offset1 + k),
+  //            (int)(start + offset1 + k));
+ //         printf("\t j: %d, k: %d\n", j, k);
+          float3 light = patches[patch_index + offset1 + k].totalLight;
+          totalLight += light;
+          pCudaBSP->lightSamples[start + offset1 + k] = make_float3(light.x, light.y, light.z);
+          /*
+      if(face_index == num_faces-1)
+            printf("%d R: %f, G: %f, B: %f\n", patch_index+offset1+k, (float)light.x, (float)light.y, (float)light.z);
           pCudaBSP->lightSamples[start + offset1 + width + k] = (
                patches[patch_index + offset1 + k].totalLight +
                patches[patch_index + offset1 + width + k + 1].totalLight +
                patches[patch_index + offset1 + width + k].totalLight +
                patches[patch_index + offset1 + k + 1].totalLight
-               )/4;
+               )/4; */
         }
-        totalLight += patches[patch_index + offset1 + width-1].totalLight;
+        //totalLight += patches[patch_index + offset1 + width-1].totalLight;
       }
       // Extrapolate
+      /*
       if(height > 2)
       {
         for(int i = 0; i < width; i++)
@@ -1285,7 +1295,7 @@ namespace CUDARAD {
         {
           pCudaBSP->lightSamples[start + i] = pCudaBSP->lightSamples[start + width + i];
         }
-      }
+      }*/
       face.avgLight = totalLight / face.lightmapSize;
       face.totalLight = totalLight;
       pCudaBSP->lightSamples[start-1] = face.avgLight;
@@ -1306,25 +1316,30 @@ namespace CUDARAD {
           pCudaBSP->texDatas[face.texInfo.texData].reflectivity.x,
           pCudaBSP->texDatas[face.texInfo.texData].reflectivity.y,
           pCudaBSP->texDatas[face.texInfo.texData].reflectivity.z);
-      for(int j = 0; j < face.lightmapHeight - 1; j++)
+      for(int j = 0; j < face.lightmapHeight; j++)
       {
         int offset1 = j*face.lightmapWidth;
-        for(int k = 0; k < face.lightmapWidth - 1; k++)
+        for(int k = 0; k < face.lightmapWidth; k++)
         {
           // Calculate patch light
-          PatchInfo patch = patches[patch_index];
+          PatchInfo patch = patches[patch_index + offset1 + k];
           patch.reflectivity = reflectivity;
-          patch.brightness = face.totalLight;
           patch.face_info = face;
-          patch_index++;
-          patch.totalLight = (
+          patch.totalLight = pCudaBSP->lightSamples[start + offset1 + k];//]make_float3(pCudaBSP->lightSamples[start + offset1 + k].x, pCudaBSP->lightSamples[start + offset1 + k].y, pCudaBSP->lightSamples[start + offset1 + k].z);
+          patch.brightness = patch.totalLight;
+          patches[patch_index + offset1 + k] = patch;
+          /*
+          if(face_index == num_faces - 1)
+          {
+            printf("%d R: %f, G: %f, B: %f\n", patch_index+offset1+k, patch.totalLight.x, patch.totalLight.y, patch.totalLight.z);
+          }
+          (
               pCudaBSP->lightSamples[start + offset1 + face.lightmapWidth + k] +
               pCudaBSP->lightSamples[start + offset1 + k] +
               pCudaBSP->lightSamples[start + offset1 + face.lightmapWidth + k + 1] +
               pCudaBSP->lightSamples[start + offset1 + k + 1]
               ) / 4;
           // Calculate vertices
-          /*
              CUDA_CHECK_ERROR_DEVICE(cudaMalloc(&patch.vertices, sizeof(float3)*4));
              patch.vertices[0] = face.xyz_from_st((j + 1), (k + 1));
              printf("DOOT\n");
@@ -1338,8 +1353,6 @@ namespace CUDARAD {
           //           printf("%d\n", patch_index);
           patch.s = j;
           patch.t = k;
-          if(patch_index >= face.patchStartIndex + face.lightmapSize)
-            return;
         }
       }
     }
@@ -1419,13 +1432,16 @@ namespace CUDARAD {
       std::cout << "Begin iteration" << std::endl;
 
       const size_t BLOCK_WIDTH2 = 64;
+      /*
       KERNEL_LAUNCH(
           bounce_iteration,
           div_ceil(totalPatches, BLOCK_WIDTH2), BLOCK_WIDTH2,
           pCudaBSP, patches, totalPatches
           );
+          */
 
       CUDA_CHECK_ERROR(cudaDeviceSynchronize());
+      std::cout << "Complete iterations" << std::endl;
       KERNEL_LAUNCH(
           gatherLight,
           div_ceil(numFaces, BLOCK_WIDTH), BLOCK_WIDTH,
@@ -1433,7 +1449,7 @@ namespace CUDARAD {
           );
       CUDA_CHECK_ERROR(cudaDeviceSynchronize());
 
-      std::cout << "Complete iterations" << std::endl;
+      std::cout << "Gathered light" << std::endl;
     }
 
 
@@ -1451,7 +1467,8 @@ namespace CUDARAD {
 
 
       int index = blockIdx.x * blockDim.x + threadIdx.x;
-      if(index > totalNumPatches)
+      //printf("%d, %d, %d\n", received_light.x, received_light.y, received_light.z);
+      if(index >= totalNumPatches)
         return;
       PatchInfo receiver = patches[index];
       float3 reflectivity = receiver.reflectivity;
@@ -1462,35 +1479,33 @@ namespace CUDARAD {
         {
           if(j == index)
             continue;
-          PatchInfo patch = patches[j];
+          PatchInfo emitter = patches[j];
           /* is it worth doing the memcmp?
           if(memcmp(receiver.face_info, patch.face_info, sizeof(ptr)) == 0)
             continue;
             */
           float ff;
           float3 center1 = center(receiver);
-          float3 center2 = center(patch);
+          float3 center2 = center(emitter);
           float dist = distance(center1, center2);
           // Determine whether to diff->diff or diff->poly
           //  then calculate form factor
           if(dist < 10) // distance threshold
           {
-            ff = BouncedLighting::ff_diff_poly(center2, patch.face_info.faceNorm,
-                                               patch, 4);
-            // float3 diffPos, float3 diffNOrm, float3* vertices, size_t numVertices
+            ff = BouncedLighting::ff_diff_poly(center2, receiver.face_info.faceNorm,
+                                               receiver, 4);
           }
           else
           {
             ff = BouncedLighting::ff_diff_diff(center1, receiver.face_info.faceNorm,
-                              center2, patch.face_info.faceNorm);
-            //float3 diff1Pos, float3 diff1Norm, float3 diff2Pos, float3 diff2Norm
+                              center2, emitter.face_info.faceNorm);
           }
           received_light += patches[j].brightness * ff;
         }
         __syncthreads();
         // Update array with information
         receiver.totalLight += element_wise_mult(reflectivity, received_light);
-        receiver.brightness = received_light;
+        receiver.brightness = make_float3(0, 0, 0);//received_light;
         __syncthreads();
         const float EPSILON = 1e-3;
         if(received_light.x < EPSILON && received_light.y < EPSILON && received_light.z < EPSILON)
