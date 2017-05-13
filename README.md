@@ -1,49 +1,68 @@
-# GPU-Accelerated Source Engine Radiosity Compilation
+# GPU-Accelerated Source Engine Lightmap Compilation
 **Ryan Lam (rwl) and Lucy Tan (jltan)**
 
-## CHECKPOINT
-Most of the time up to this point was spent reverse-engineering the BSP format that the Source Engine uses. Since that needs to be completed before we progress, we haven't done much else, so we're about a week behind our initially proposed schedule. The main challenge has been to figure out how to decode and encode the file format so that the engine will recognize the file for what it is and render accordingly.
-
-What remains is actually implementing and parallelizing the radiosity algorithm. We should be able to do it within the time left.
-
-Please see the [new schedule](#new-schedule) for an updated schedule.
-
 ## SUMMARY
-We are going to use GPUs to accelerate the Source Engine’s radiosity compilation.
+We accelerated lightmap compilation using the GPU. Valve's lightmap compiler, VRAD, is resource heavy and basically turns the user's computer into a potato while it processes everything, so it's a boon that 418RAD not only is on the GPU, but it's also faster. Now you can use your computer for other things while waiting for the lightmap to finish [compiling](https://imgs.xkcd.com/comics/compiling.png)!
 
 ## BACKGROUND
-The Source Engine, developed by Valve Software, is an older game engine most notably used by AAA first-person video games, such as Half-Life 2, Counter-Strike: Global Offensive, Portal, and Titanfall. An interesting feature of the Source Engine is that levels require a separate compilation phase-- from human-readable text format to binary format-- before they can be loaded into the engine. Easily the longest part of this compilation phase is the precompiled static lighting phase, in which the compile tools pre-simulate light bounces in the level geometry and bake this information into static lightmaps in the binary format itself. As a result, Source Engine level designers currently need to spend long hours waiting for the static lighting phase to complete before they can test their levels in-game, greatly hindering productivity and workflow.
+Radiosity is a global illumination algorithm which simulates the effects of real light. Real-time radiosity computations are expensive, so many game engines pre-compute radiosity and overlay the resulting lightmap across their maps to give the sense of somewhat realistic lighting. As one might expect, the computation of the lightmap is quite costly as well. When buiding in the Source Engine, the lightmap compilation can easily take hours and become a bottleneck.
 
-Currently, the standard Valve Radiosity compilation tool, VRAD, runs entirely on the CPU (hogging all available execution contexts by default, annoyingly enough), and Valve seemingly has no intention of re-writing it to be GPU-accelerated instead. At one point, they implemented their own version of an MPI protocol (“VMPI”) for distributing the lighting work among multiple workstations, but this feature has been broken for the last ten years’ worth of engine versions. So, we figure we will be helping them out a bit.
+There are a few different ways to handle radiosity. We decided to use the gathering method as opposed to the shooting method, since with gathering, the only shared update was to the gatherer, as opposed with the shooting method where an update would have to be written to all incident patches. The assumption was that we would be able to parallelize across all patches with the gathering method for good performance, as opposed to the shooting method where we could only do shots from one patch at a time. Parallelizing across the patches seemed to be the obvious answer, and terribly data-parallel. 
 
-## THE CHALLENGE
-Much of the challenge will be integrating with a system that we do not have extensive knowledge of. Some of the Source Engine’s BSP format may need to be reverse-engineered. Lighting is also a new area for the both of us.
+This algorithm took in an array of patches and updated the patches with the correct information. Creating and updating this array is highly important throughout the code, as all patch information is stored there and will eventually need to be returned. 
 
-## RESOURCES 
-Since this is an extension to the Source Engine, of course we will be referring to the source code for that. We will be testing our code on the GHC GTX 1080. There will certainly be much documentation read about the Source Engine and also radiosity.
+## APPROACH
+As this project was intended to supplement the Source Engine, much of the code is based off the Source Engine code. We decided to use CUDA since people developing for Source Engine usually have some kind of graphics card available in their machine, as the typical gamer tends to have discrete graphics cards. 
 
-## GOALS AND DELIVERABLES
-We’re hoping to speed up compilation time for the static lighting phase. We will be showing graphs to illustrate the differences in compilation times between VRAD and our compilation tool. It’s not particularly interesting to wait for the computer to finish crunching the numbers, so there will not be a live demo.
+Most of the classes were modeled after the Source Engine's since we needed to read and store data in a file format specific to the Source Engine.
 
-Ideally, our radiosity compilation tool will be significantly faster than Valve’s but we’re aiming just for a small speed up at the moment. 
+After importing all the data into the GPU, the data required for radiosity is transfered from BSP to CUDABSP. From there, various manipulations are made depending on the phase. 
+
+For the direct lighting phase, [[]]. 
+
+For the light bouncing phase, each face is first placed into an array for easy access. Then each face is divided into patches. These patches are put into a massive array, and the associated face is given a pointer to its first patch. Gathering, the parallel part of this business, begins afterwards. Each patch calculates the amount of light that is reflected to it from all other patches. It updates its color value accordingly. This repeats until the iteration cap is reached or the values converge. We parallelize over the patches, and sync between iterations. After all light data is collected, one final process takes all the data and updates CUDABSP, which will later be translated into BSP and written to file. 
 
 
-## PLATFORM CHOICE
-As most computer games, including Source Engine games, happen to be for Windows, we thought this would be the best operating system to be running on. The GTX 1080 is a relatively common GPU for a game maker to have available to them, so that’s why we’re testing on them..
 
-## SCHEDULE
-### Original Schedule
-- Week 1: Familiarize self with the engine and the format
-- Week 2: Begin porting to GPU
-- Week 3: Finish moving to GPU
-- Week 4: Optimize, make graphs
+## RESULTS 
+Our original plan was to include light bouncing radiosity computations, but unfortunately the version rolled out does not have this functionality properly implemented. However, the direct lighting implementation provides lightmaps comparable to the Source Engine's VRAD.
 
-### Completed Tasks
-- As of April 25th: file format mostly backwards-engineered
+![VRAD and 418RAD lightmaptest][pic1]
+lightmaptest comparison -- VRAD on left, 418RAD on right
 
-### New Schedule
-- April 29th: Finish with BSP (rwl), Put down a basic radiosity function (jltan)
-- May 3rd: Parallelization of radiosity (both)
-- May 7th: Further optimizations (both)
-- May 11th: Finalize Program, Complete Project Presentation (both)
-- May 12th: Project Presentation and Final Write Up (both)
+
+![VRAD and 418RAD lightmaptest_hires][pic2]
+lightmaptest_hires comparison -- VRAD on left, 418RAD on right
+
+
+![VRAD and 418RAD ljm][pic3]
+ljm comparison -- VRAD on left, 418RAD on right
+
+There are some differences in the shadows due to the differences in how geometry is interpreted in the respective lightmap generators.
+
+![Direct lighting graph comparison][graph]
+
+The baseline was performed on Ryan's laptop, which has an Intel i7 CPU, 2.4 GHZ, 4 cores (8 logical cores). The GTX 850M GPU benchmark was performed on the same machine; the GTX 1080 tests were conducted on the GHC machines. lightmaptest is a very simple map; just a room with a few objects and lights placed into it. lightmaptest_hires is the same map but with higher light sampling density, which is why the shadows are much sharper. ljm is part of a map from an actual game.
+
+As can be seen, compilation time is almost always better on GPU. The exception is with lightmaptest on the GTX 850M; we assume the lengthier time to be from overhead. Speedup varies depending on the map, as there are a multitude of factors that affect how well the lighting alogirhtm does, so it's not easy to tie the increased speed to any particular attribute, such as file size or number of models in the map. However, in general, the GTX 1080's achieve 2x speedup or better.
+
+In builds that had included the flawed bouncing light, the light bouncing computations took up the majority of the time, but with only direct lighting, 
+
+[[]]
+
+Further improvements could be made. Valve's code has a lot of indirection. Since we essentially ported Valve's classes into CUDA, our code, too, has a lot of indirection, so we are missing out on the benefits of locality.
+
+## REFERENCES
+[Source SDK Documentation](https://developer.valvesoftware.com/wiki/SDK_Docs)
+
+[SIGGRAPH Radiosity docs](https://www.siggraph.org/education/materials/HyperGraph/radiosity/radiosity.htm)
+
+## WORKSPLIT 
+Ryan: Reverse engineering file format, file read and write, direct and ambient lighting
+
+Lucy: Light bouncing
+
+[pic1]: http://imgur.com/ML0nPPC.png
+[pic2]: http://imgur.com/mOd9K3G.png
+[pic3]: http://imgur.com/vE8YAQx.png
+[graph]: http://imgur.com/xjC9zlp.png
