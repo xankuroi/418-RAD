@@ -40,7 +40,7 @@ Our original plan was to include light bouncing radiosity computations, but unfo
 ![VRAD and 418RAD ljm][pic3]
 `LJM` comparison -- VRAD on left, 418RAD on right
 
-There are some differences in the shadows due to the differences in how geometry is interpreted in the respective lightmap generators.
+There are some differences in the shadows due to minor differences in the way the level's lighting rules are interpreted by the respective lightmap generators.
 
 ![Direct lighting graph comparison][graph]
 
